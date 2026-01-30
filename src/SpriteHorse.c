@@ -42,9 +42,9 @@ typedef enum {
 #define ANIM_HORSE_FRAMES     8
 
 // define the previous and the new animation state variables
-static anim_horse_e old_anim, anim; 
+static anim_horse_e old_horse_anim, anim; 
 static UINT8 anim_frame, anim_tick;
-static UINT8 animation_speed;
+static UINT8 anim_horse_speed;
 
 // banked data loading helper function declarations
 const UINT8 * get_banked_pointer(UINT8 bank, const UINT8 * const * data);
@@ -115,8 +115,8 @@ extern INT8 is_track_ended() BANKED;
 
 void START() {
 	// initialize the animation state
-	old_anim = anim = ANIM_RIGHT_WALK;
-	animation_speed = ANIM_HORSE_SPEED;
+	old_horse_anim = anim = ANIM_RIGHT_WALK;
+	anim_horse_speed = ANIM_HORSE_SPEED;
 	// animation frame and animation tick is zero
 	anim_frame = anim_tick = 0;
 	// load the very first animation frame for the sprite
@@ -142,11 +142,11 @@ void START() {
 void UPDATE() {
     //CROSSZGB
         // save old animation state, animation state to idle (will be overwritten, if keys are pressed)
-        old_anim = anim;
+        old_horse_anim = anim;
         // if animation state variable changed, then set the new animation for the horse sprite
-        if (old_anim != anim) anim_frame = 0;
+        if (old_horse_anim != anim) anim_frame = 0;
         // tick anumation
-        if (++anim_tick >= animation_speed) {
+        if (++anim_tick >= anim_horse_speed) {
             set_sprite_native_banked_data(BANK(horse_anim), spriteIdxs[SpriteHorse], 8, get_banked_pointer(BANK(horse_anim), horse_anim + (anim << 3) + anim_frame));
             anim_tick = 0;
             if (++anim_frame == ANIM_HORSE_FRAMES) anim_frame = 0;
@@ -324,23 +324,23 @@ void UPDATE() {
             if(flag_hit == 1){
                 //SetSpriteAnim(THIS, a_horse_hit, 24u);
 				anim = ANIM_RIGHT_HIT;
-				animation_speed = 24u;
+				anim_horse_speed = 24u;
             }else{
                 //SetSpriteAnim(THIS, a_horse_h_idle, 8u);
                 //THIS->anim_speed = 8u;//stamina_current >> 5;
 				anim = ANIM_RIGHT_HIT_IDLE;
-				animation_speed = 8u;
+				anim_horse_speed = 8u;
             }
         }else{
             if(flag_hit == 1){
                 //SetSpriteAnim(THIS, a_horse_h_idle_hit, 24);
 				anim = ANIM_RIGHT_HIT_IDLE;
-				animation_speed = 24u;
+				anim_horse_speed = 24u;
             }else{
                 //SetSpriteAnim(THIS, a_horse_h, 4u);
                 //THIS->anim_speed = stamina_current >> 5;
 				anim = ANIM_RIGHT_WALK;
-				animation_speed = stamina_current >> 5;
+				anim_horse_speed = stamina_current >> 5;
             }
         }
     //ACTUAL MOVEMENT & COLLISION & OVER
