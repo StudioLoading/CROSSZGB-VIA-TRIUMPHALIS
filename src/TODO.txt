@@ -1,0 +1,115 @@
+VIA TRIUMPHALIS
+è un gioco arcade a tappe.
+ogni tappa devi arrivare in un punto facendo cose.
+il percorso ha una partenza e un arrivo e non è a circuito.
+
+AMBIENTALI
+FIAMMA      (massimizza stamina + hit graduale)
+POZZA       (da botte di -stamina ogni secondo)
+TESCHIO     (diminuisce stamina + hit singola)
+
+A CONSUMO
+GLADIO      SCUDO
+LANCIA      ELMO
+FUOCO       MANTELLO
+
+GOLDEN ITEMS
+golden whip     MISSIONROME00
+golden wheel    MISSIONROME03
+golden reins    MISSIONALPS06
+golden elm      MISSIONSEA10
+
+------------------------------------------------------------------------------------
+
+Antica Roma (strade cittadine, mercati, palazzi imperiali)
+"Consegna un messaggio segreto al senato" 
+"Evita le guardie!"
+"Sfuggi agli assassini sulla via Appia di notte."
+"Arriva sulle alpi prima dei greci"
+
+Alpi (strade romane, foreste, accampamenti)
+"Intercetta un traditore che trasporta informazioni ai barbari." (A tempo + uccidi)
+"Salva un generale romano intrappolato dietro le linee nemiche." (sfondamenti, salva generale, tempo)
+"Attraversa le gole evitando frane" (rolling stones temporizzate, scudi, schermo tremante, molti massi pochi alberi)
+"Arena"(ambush!)
+
+Costa Albanese (porti, scogliere, sentieri costieri)
+"trova la mappa per scoprire dove i selvaggi tengono nascosto Demetrio l'ambasciatore" (A tempo con clessidre in giro + mappa da trovare)
+"Salva l'ambasciatore catturato dai selvaggi senza farti scoprire" (night mode, senza tempo, come fatto in passato per non farsi beccare, usando gli sprite dei selvaggi)
+"Porta Demetrio alla nave!" entro tempo x
+"Arena"(ambush!) (night mode)
+
+Antica Grecia (templi, città-stato, foreste)
+"Trasporta una statua sacra rubata alla città di Atene." (A tempo: 3 minuti e non farti beccare!)
+"Vai ad origliare fuori dal palazzo del potere greco persone che parlano senza farti beccare" (night mode, mappona, con tempo)
+"Supera un’orda di mercenari greci che vogliono bloccarti!" (quando supero un greeksoldierrun - questo inizia a inseguirmi, devo lasciare fiamme alle mie spalle così morrà, killers)
+"Arena contro il Faraone ospite in Grecia per l'occasione" (condanna alla sconfitta, mettere 2 gladi per il gusto di colpire il faraone, la morte in questo unico caso mi porta a passare la missione)
+
+
+Deserto (oasi, dune, accampamenti nomadi)
+"Vaga da solo nel deserto, senza biga nè cavallo, in loro ricerca." (HP cala molto lentamente per la sete, più passi faccio. in giro devo trovare le oasi in cui abbeverarmi e recuperare full-HP. devo seguire le orme sulla sabbia su un sistema multimappa)
+"Trova la strada per l'Egitto" (NIGHT MODE mappa senza strada, piena di teschi)
+"Trova il beduino" (A TEMPO dico che trovo delle orme da seguire che mi porteranno certamente ad un villaggio vicino. seguendo le tracce su mappa trovo il beduino che mi porta in Egitto)
+
+Egitto (piramidi, fiumi, templi in fiamme)
+"Fuggi dal tempio incendiato con il papiro sacro." (A tempo: 3 minuti prima che il fuoco blocchi l’uscita!)
+"Raggiungi il sacerdote traditore evitando le sue guardie" (sfondamenti! il sacerdote è a fine traccia e va ucciso)
+"Last Blood" (arena, night mode, uccidi il Faraone in una lotta all'ultimo sangue. 
+Il faraone lancia una boccia incendiaria che cadendo genera una fiamma che mi può colpire, dopo lancia 3 reti, poi una boccia, e così via. Devo codare la hit del faraone.
+Se perdi, ricominci fuori dal deserto in area precedente! forse lì, tornato nel deserto, non dovrei fare trovare più i golden...?)
+
+
+-------------------------------------------------------------------------------------
+
+TODOs:
+- l'arena di Alps, StateMission07alps, se si arriva dal livello precedente, muore la scroll_target, devo debuggare la DESTROY per capire se e perché succede.
+- il THE BEDUINE ha una crono impossibile! perché l'ho fatta così?
+- sistema di punteggio highscore
+    - sprite di segnalazione +1K quando si uccide qualcuno, che significa 1kill e 1.000 punti
+    - il calcolo del danno deve essere centralizzato perché dipende dalla presenza del configuration.elm == GOLDEN
+- "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
+- Normal Mode vs Hard Mode
+    hard mode 
+        non avrà il tutorial iniziale;
+        non avrà il compass; (?)
+        avrà il faraone finale a 7 di hp;
+- test DMG
+- test SGB
+- test CGB
+- controlla le missioni di atterraggio col cheat alla start_game_cheat()
+    oppure elimina il cheat
+    oppure fallo che dia solo i gold con una combo differente
+
+-------------------------------------------------------------------------------------
+LIBRETTO:
+- lore
+- mappa dell'impero
+- biomi
+- pulsanti e sistema di guida
+- golden items
+- è su + start premuto 4 secondi. Invoca die(), quindi è un suicidio
+- sistema di punteggio: dettagli su come funziona
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+
+```C
+
+```
+
+PNG2MAP
+cd C:\ZGB-2023.0\tools\png2map\
+png2gbtiles.exe C:\ZGB-2023.0\tools\png2map\VT_titlescreen.png -gbm -g -pal=mypal.pal C:\ZGB-2023.0\tools\png2map\VT_titlescreen.gbm
+
+GIF TO PNG FRAMES
+ffmpeg -i C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\input.gif C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_%d.png
+ffmpeg -framerate 10 -i C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_%01d.png -vf format=gray C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_grayscale.gif
+
+GENERAZIONE QR CODE DA POWERSHELL
+New-QRCodeURI -URI 'https://www.kickstarter.com/projects/studioloading/flying-arrows-2-gameboy-game-save-bolognanerd' -Width 16 -OutPath 'C:\Users\checc\GB\ARROWS1\QR-kickstarter.png'
+New-QRCodeURI -URI 'https://www.notion.so/leandromacrini/28-06-2025-209ac641edda807c83eefd7ca5caecb2' -Width 15 -OutPath 'C:\Users\checc\BN\QR-riunione.png'
+New-QRCodeURI -URI 'https://www.eventbrite.it/e/biglietti-global-game-jam-2026-bologna-nerd-jam-site-1976138239671' -Width 15 -OutPath 'C:\Users\checc\BN\GGJ\QR-eventbrite.png'
+New-QRCodeURI -URI 'https://globalgamejam.org/jam-sites/2026/bologna-nerd' -Width 15 -OutPath 'C:\Users\checc\BN\GGJ\QR-jamsite.png'
+
+PDF TO PNG
+magick -density 300 input.pdf -resize 50% output.png
