@@ -77,7 +77,7 @@ void START(){
     }     
     //SPRITES
         scroll_target = SpriteManagerAdd(SpriteCamera, pos_horse_x + 8, pos_horse_y - 16);
-        s_biga = SpriteManagerAdd(SpriteBiga, pos_horse_x - 20, pos_horse_y + 9);
+        s_biga = SpriteManagerAdd(SpriteBiga, pos_horse_x - 14, pos_horse_y + 9);
         s_horse = SpriteManagerAdd(SpriteHorse, pos_horse_x, pos_horse_y);
         s_compass = SpriteManagerAdd(SpriteCompass, pos_horse_x, pos_horse_y);
         current_step = EXIT;

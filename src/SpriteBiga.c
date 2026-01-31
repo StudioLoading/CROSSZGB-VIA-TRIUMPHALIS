@@ -9,7 +9,7 @@
 
 #include "custom_datas.h"
 
-#define DISTANCE_X_POSITIVE 20
+#define DISTANCE_X_POSITIVE 30
 #define DISTANCE_X_NEGATIVE 28
 #define DELTA_DISTANCE_MAX 12
 
@@ -46,17 +46,16 @@ void START() {
     THIS->lim_x = 100;
     THIS->lim_y = 100;
     if(_cpu != CGB_TYPE){
-        OBP1_REG = PAL_DEF(0, 0, 1, 3);
         SPRITE_SET_PALETTE(THIS,1);
     }
 }
 
 void UPDATE() {
     if(flag_die){ return; }
-    UINT16 final_pos_x = s_horse->x - DISTANCE_X_POSITIVE; //if vx >= 0
-    if (turn > 63 && turn < 192){ final_pos_x = s_horse->x + DISTANCE_X_NEGATIVE;}
-    UINT16 final_pos_y = s_horse->y - 1; //if vy == 0
-    if(vy < 0){ final_pos_y = s_horse->y + 8;
+    UINT16 final_pos_x = s_horse->x + (s_horse->coll_w >> 1) - DISTANCE_X_POSITIVE; //if vx >= 0
+    if (turn > 63 && turn < 192){ final_pos_x = s_horse->x + (s_horse->coll_w >> 1) + DISTANCE_X_NEGATIVE;}
+    UINT16 final_pos_y = s_horse->y + (s_horse->coll_h >> 1) + 1; //if vy == 0
+    if(vy < 0){ final_pos_y = s_horse->y + (s_horse->coll_h >> 1)+ 8;
     }else if(vy > 0){final_pos_y = s_horse->y - 8;}
     //LIMIT X
         INT16 delta_x = s_horse->x - THIS->x;

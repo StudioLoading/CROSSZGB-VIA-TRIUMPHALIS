@@ -3,6 +3,7 @@
 #include "BankManager.h"
 #include "ZGBMain.h"
 #include "Keys.h"
+#include "Palette.h"
 #include "Scroll.h"
 #include "Sprite.h"
 #include "SpriteManager.h"
@@ -136,6 +137,7 @@ void start_common() BANKED{
 	reset_combo_counter = 0u;
 	flag_using_atk = 0u;
 	set_bgm();
+	BGP_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
 }
 
 void update_stamina() BANKED{

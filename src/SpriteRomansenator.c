@@ -16,7 +16,6 @@ void START() {
     THIS->lim_x = 10000;
     THIS->lim_y = 10000;
     if(_cpu != CGB_TYPE){
-        OBP1_REG = PAL_DEF(0, 0, 1, 3);
         SPRITE_SET_PALETTE(THIS,1);
     }
 }

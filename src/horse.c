@@ -10,7 +10,7 @@ BANKREF(horse)
 
 // CGB and SMS/GG palettes (should be different, but ok for the test
 static const palette_color_t horse_palettes[] = {
-	RGB8(101, 99, 99), RGB8(  200,  88,  0), RGB8(101, 99, 99), RGB8(255,255,255)
+	RGB8(255,255,255), RGB8(200,  88,  0), RGB8(101, 99, 99), RGB8(0, 0, 0)
 };
 
 // empty tiles just to initialize VRAM with something

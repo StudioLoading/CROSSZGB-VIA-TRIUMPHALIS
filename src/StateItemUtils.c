@@ -60,7 +60,6 @@ void item_common_start(Sprite* s_item_arg) BANKED{
     s_item_arg->lim_x = 6000;
     s_item_arg->lim_y = 4000;
     if(_cpu != CGB_TYPE){
-        OBP1_REG = PAL_DEF(0, 0, 1, 3);
         SPRITE_SET_PALETTE(THIS,1);
     }
 }

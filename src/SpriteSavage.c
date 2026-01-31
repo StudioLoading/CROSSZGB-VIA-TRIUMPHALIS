@@ -24,7 +24,6 @@ void START() {
     savage_data->configured = 0;
     savage_data->frmskip = 0;
     if(_cpu != CGB_TYPE){
-        OBP1_REG = PAL_DEF(0, 0, 1, 3);
         SPRITE_SET_PALETTE(THIS,1);
     }
 }

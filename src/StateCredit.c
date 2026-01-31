@@ -42,6 +42,9 @@ void START(){
 	if(sgb_running){
 		manage_border(current_state);
 	}
+	OBP0_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
+	OBP1_REG = DMG_PALETTE(DMG_WHITE, DMG_WHITE, DMG_DARK_GRAY, DMG_BLACK);
+	BGP_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
     credit_wait = CREDIT_WAIT_MAX;
     switch(credit_step){
         case 1:

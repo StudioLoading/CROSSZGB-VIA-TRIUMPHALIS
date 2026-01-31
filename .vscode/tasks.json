@@ -18,6 +18,23 @@
             }
         },
         {
+            "label": "ReleaseColor",
+            "type": "shell",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "isBackground": false,
+            "args": [
+                "BUILD_TYPE=ReleaseColor"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Debug",
             "type": "shell",
             "command": "make",
@@ -29,6 +46,25 @@
                 "BUILD_TYPE=Debug"
             ],
             "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "DebugColor",
+            "type": "shell",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "isBackground": false,
+            "args": [
+                "BUILD_TYPE=DebugColor"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true

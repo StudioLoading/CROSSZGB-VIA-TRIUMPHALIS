@@ -137,6 +137,9 @@ void START() {
         current_whip_power = GOLDEN_WHIP_POWER;
         whip_power_over_stamina = current_whip_power;
     }
+    /*if(_cpu != CGB_TYPE){
+        SPRITE_SET_PALETTE(THIS,0);
+    }*/
 }
 
 void UPDATE() {
@@ -324,12 +327,23 @@ void UPDATE() {
             if(flag_hit == 1){
                 //SetSpriteAnim(THIS, a_horse_hit, 24u);
 				anim = ANIM_RIGHT_HIT;
-				anim_horse_speed = 24u;
+				anim_horse_speed = 12u;
             }else{
                 //SetSpriteAnim(THIS, a_horse_h_idle, 8u);
                 //THIS->anim_speed = 8u;//stamina_current >> 5;
+				anim = ANIM_RIGHT_IDLE;
+				anim_horse_speed = 32u;
+            }
+        }else if(stamina_current < 250){
+            if(flag_hit == 1){
+                //SetSpriteAnim(THIS, a_horse_h_idle_hit, 24);
 				anim = ANIM_RIGHT_HIT_IDLE;
-				anim_horse_speed = 8u;
+				anim_horse_speed = 24u;
+            }else{
+                //SetSpriteAnim(THIS, a_horse_h, 4u);
+                //THIS->anim_speed = stamina_current >> 5;
+				anim = ANIM_RIGHT_WALK;
+ 				anim_horse_speed = stamina_current / 20;
             }
         }else{
             if(flag_hit == 1){
@@ -340,7 +354,7 @@ void UPDATE() {
                 //SetSpriteAnim(THIS, a_horse_h, 4u);
                 //THIS->anim_speed = stamina_current >> 5;
 				anim = ANIM_RIGHT_WALK;
-				anim_horse_speed = stamina_current >> 5;
+ 				anim_horse_speed = stamina_current / 90;
             }
         }
     //ACTUAL MOVEMENT & COLLISION & OVER
@@ -412,7 +426,7 @@ void UPDATE() {
                             TranslateSprite(THIS, 0, vybounce << delta_time);
                         }
                     }
-            //OVER TILE    
+            //OVER TILE
                 }else{//non collido, cerco cosa sto calpestando
                     UINT8 tile_over = GetScrollTile((THIS->x + 4) >> 3, (THIS->y+4) >> 3);
                     if(vx < 0){
@@ -495,15 +509,15 @@ void UPDATE() {
 
     //SPRITE MIRROR
         if(vx > 0){
-            //THIS->mirror = NO_MIRROR;
+            THIS->mirror = NO_MIRROR;
         }else if (vx < 0){
-            //THIS->mirror = V_MIRROR;
-            switch(anim){
+            THIS->mirror = V_MIRROR;
+            /*switch(anim){
                 case ANIM_RIGHT_HIT: anim = ANIM_LEFT_HIT; break;
                 case ANIM_RIGHT_HIT_IDLE: anim = ANIM_LEFT_HIT_IDLE; break;
                 case ANIM_RIGHT_IDLE: anim = ANIM_LEFT_IDLE; break;
                 case ANIM_RIGHT_WALK: anim = ANIM_LEFT_WALK; break;
-            }
+            }*/
         }
     
     //SPRITE COLLISION

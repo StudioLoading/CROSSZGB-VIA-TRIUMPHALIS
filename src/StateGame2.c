@@ -370,7 +370,6 @@ void night_mode() BANKED{
 	if(_cpu != CGB_TYPE){
 		BGP_REG = PAL_DEF(2, 1, 3, 3);// NIGHT MODE
 		OBP0_REG = PAL_DEF(3, 3, 1, 3);
-		//OBP1_REG = PAL_DEF(2, 1, 3, 3);
 	}else{
 		switch(current_area){
 			case AREA_ROME://(30,29,19), (30,25,14), (29,2,0), (13,12,1)
