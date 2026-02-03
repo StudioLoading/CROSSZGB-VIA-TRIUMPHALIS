@@ -74,7 +74,7 @@
         {
             "label": "CloneFolder",
             "type": "shell",
-            "command": "cp -r ${workspaceFolder}/res/metatiles/gb ${workspaceFolder}//res/metatiles/gbc",
+            "command": "cp -r ${workspaceFolder}/res/metatiles/gb/. ${workspaceFolder}/res/metatiles/gbc",
             "presentation": { "reveal": "silent" }
         },
         {

@@ -52,16 +52,12 @@ static const uint8_t horse_tiles[] = {
 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
-// metasprite of 3x3 8x8 px hardware sprites
+// metasprite of 4x1 8x16 px hardware sprites
 const metasprite_t horse_metasprite[] = {
 	METASPR_ITEM(  -8, -5,  0, S_PALETTE), 
-	METASPR_ITEM(  0,  8,  1, S_PALETTE), 
-	METASPR_ITEM(  0,  8,  2, S_PALETTE),
-	METASPR_ITEM(  0,  8,  3, S_PALETTE), 
-	METASPR_ITEM(  8,-24,  4, S_PALETTE), 
-	METASPR_ITEM(  0,  8,  5, S_PALETTE),
+	METASPR_ITEM(  0,  8,  2, S_PALETTE), 
+	METASPR_ITEM(  0,  8,  4, S_PALETTE),
 	METASPR_ITEM(  0,  8,  6, S_PALETTE),
-	METASPR_ITEM(  0,  8,  7, S_PALETTE),
 	METASPR_TERM
 };
 

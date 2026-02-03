@@ -12,6 +12,6 @@ all: $(TARGETS)
 N_BANKS = A
 
 # Default hardware sprites size: SPRITES_8x16(default) or SPRITES_8x8
-DEFAULT_SPRITES_SIZE = SPRITES_8x8
+DEFAULT_SPRITES_SIZE = SPRITES_8x16
 
 include $(subst ',,$(subst \,/,'$(ZGB_PATH)'))/src/MakefileCommon
