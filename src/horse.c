@@ -10,7 +10,7 @@ BANKREF(horse)
 
 // CGB and SMS/GG palettes (should be different, but ok for the test
 static const palette_color_t horse_palettes[] = {
-	RGB8(255,255,255), RGB8(200,  88,  0), RGB8(101, 99, 99), RGB8(0, 0, 0)
+	RGB8(255,255,255), RGB8(240, 216,  152), RGB8(200, 88, 0), RGB8(80, 40, 8)
 };
 
 // empty tiles just to initialize VRAM with something
@@ -54,7 +54,7 @@ static const uint8_t horse_tiles[] = {
 
 // metasprite of 3x3 8x8 px hardware sprites
 const metasprite_t horse_metasprite[] = {
-	METASPR_ITEM(  0,  0,  0, S_PALETTE), 
+	METASPR_ITEM(  -8, -5,  0, S_PALETTE), 
 	METASPR_ITEM(  0,  8,  1, S_PALETTE), 
 	METASPR_ITEM(  0,  8,  2, S_PALETTE),
 	METASPR_ITEM(  0,  8,  3, S_PALETTE), 
@@ -72,8 +72,8 @@ const metasprite_t* const horse_metasprites[1] = {
 
 // horse sprite descriptor structure
 const struct MetaSpriteInfo horse = {
-	.width        = 32,                // width
-	.height       = 16,                // height
+	.width        = 22,                // width
+	.height       = 7,                 // height
 	.num_tiles    = 8,                 // num tiles
 	.data         = horse_tiles,       // tiles
 	.num_palettes = 1,                 // num palettes

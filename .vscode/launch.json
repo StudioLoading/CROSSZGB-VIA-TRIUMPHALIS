@@ -19,7 +19,7 @@
             "type": "emulicious-debugger",
             "request": "launch",
             "name": "DebugColor",
-            "program": "${workspaceFolder}/obj/DebugColor/gb/rom.gb",
+            "program": "${workspaceFolder}/obj/DebugColor/gbc/rom.gbc",
             "port": 58870,
             "stopOnEntry": false,
             "additionalSrcFolders": "${env:ZGB_PATH}",

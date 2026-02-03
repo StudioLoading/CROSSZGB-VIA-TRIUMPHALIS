@@ -29,6 +29,8 @@ extern void horse_hit(INT8 arg_damage) BANKED;
 
 extern void item_gladio_anim(Sprite* s_item_arg) BANKED;
 extern void item_gladio_anim_blink(Sprite* s_item_arg) BANKED;
+extern void item_gladio_anim_inuse(Sprite* s_item_arg) BANKED;
+extern void item_gladio_anim_inuse_blink(Sprite* s_item_arg) BANKED;
 extern void item_lance_anim(Sprite* s_item_arg) BANKED;
 extern void item_lance_anim_blink(Sprite* s_item_arg) BANKED;
 extern void item_e_lance_anim(Sprite* s_item_arg) BANKED;
@@ -118,7 +120,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
         case 3://using the weapon!
             switch(item_data->itemtype){
                 case GLADIO:
-                    item_gladio_anim(s_item_arg);
+                    item_gladio_anim_inuse(s_item_arg);
                     item_data->hp = 80;
                     if(vx > 0){ item_data->vx = 1;}
                     else if(vx < 0) {item_data->vx = -1;}
@@ -194,7 +196,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
         case 5://weapon start dieing
             switch(item_data->itemtype){
                 case GLADIO:
-                    item_gladio_anim_blink(s_item_arg);
+                    item_gladio_anim_inuse_blink(s_item_arg);
                     consume_weapon_atk();
                 break;
                 case LANCE:

@@ -10,10 +10,10 @@
 #include "Print.h"
 #include "ZGBMain.h"
 
-#include "horse_anim.h"
-
 #include "CircleMath.h"
 #include "custom_datas.h"
+#include "horse_anim.h"
+
 
 #define STAMINA_MAX 960
 #define EUPHORIA_MIN 400
@@ -29,10 +29,10 @@
 typedef enum {
 	ANIM_RIGHT_WALK,
     ANIM_RIGHT_HIT,
-    ANIM_RIGHT_IDLE,
+    ANIM_RIGHT_TROT_IDLE,
     ANIM_RIGHT_HIT_IDLE,
-	ANIM_LEFT_WALK,
-    ANIM_LEFT_HIT,
+    ANIM_RIGHT_TROT,
+	ANIM_RIGHT_RUN,
     ANIM_LEFT_IDLE,
     ANIM_LEFT_HIT_IDLE,
 	N_ANIMS
@@ -138,7 +138,7 @@ void START() {
         whip_power_over_stamina = current_whip_power;
     }
     /*if(_cpu != CGB_TYPE){
-        SPRITE_SET_PALETTE(THIS,0);
+        SPRITE_SET_PALETTE(THIS,1);
     }*/
 }
 
@@ -323,39 +323,23 @@ void UPDATE() {
         UINT8 cos_idx = turn+64;
         cos = sine_wave[cos_idx];
     //SPRITE ANIMATION SPEED animation speed
-        if(stamina_current < 80){
-            if(flag_hit == 1){
-                //SetSpriteAnim(THIS, a_horse_hit, 24u);
-				anim = ANIM_RIGHT_HIT;
-				anim_horse_speed = 12u;
-            }else{
-                //SetSpriteAnim(THIS, a_horse_h_idle, 8u);
-                //THIS->anim_speed = 8u;//stamina_current >> 5;
-				anim = ANIM_RIGHT_IDLE;
-				anim_horse_speed = 32u;
-            }
-        }else if(stamina_current < 250){
-            if(flag_hit == 1){
-                //SetSpriteAnim(THIS, a_horse_h_idle_hit, 24);
-				anim = ANIM_RIGHT_HIT_IDLE;
-				anim_horse_speed = 24u;
-            }else{
-                //SetSpriteAnim(THIS, a_horse_h, 4u);
-                //THIS->anim_speed = stamina_current >> 5;
-				anim = ANIM_RIGHT_WALK;
- 				anim_horse_speed = stamina_current / 20;
-            }
+        if(stamina_current < 120){
+            anim = ANIM_RIGHT_TROT;
+            anim_horse_speed = 24u;
+        }else if(stamina_current < 240){
+            anim = ANIM_RIGHT_TROT;
+            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
         }else{
-            if(flag_hit == 1){
-                //SetSpriteAnim(THIS, a_horse_h_idle_hit, 24);
-				anim = ANIM_RIGHT_HIT_IDLE;
-				anim_horse_speed = 24u;
-            }else{
-                //SetSpriteAnim(THIS, a_horse_h, 4u);
-                //THIS->anim_speed = stamina_current >> 5;
-				anim = ANIM_RIGHT_WALK;
- 				anim_horse_speed = stamina_current / 90;
+            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
+            anim = ANIM_RIGHT_RUN;  
+            if(stamina_current >= (euphoria_min - 100)){
+                anim = ANIM_RIGHT_WALK;
             }
+        }
+    
+        if(flag_hit == 1){
+            anim = ANIM_RIGHT_HIT;
+            anim_horse_speed = 4u;
         }
     //ACTUAL MOVEMENT & COLLISION & OVER
         if(frm_skip > 0){frm_skip--;}
@@ -506,7 +490,6 @@ void UPDATE() {
                 }
             
         }
-
     //SPRITE MIRROR
         if(vx > 0){
             THIS->mirror = NO_MIRROR;

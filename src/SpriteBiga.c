@@ -54,8 +54,8 @@ void UPDATE() {
     if(flag_die){ return; }
     UINT16 final_pos_x = s_horse->x + (s_horse->coll_w >> 1) - DISTANCE_X_POSITIVE; //if vx >= 0
     if (turn > 63 && turn < 192){ final_pos_x = s_horse->x + (s_horse->coll_w >> 1) + DISTANCE_X_NEGATIVE;}
-    UINT16 final_pos_y = s_horse->y + (s_horse->coll_h >> 1) + 1; //if vy == 0
-    if(vy < 0){ final_pos_y = s_horse->y + (s_horse->coll_h >> 1)+ 8;
+    UINT16 final_pos_y = s_horse->y + (s_horse->coll_h >> 1) - 4; //if vy == 0
+    if(vy < 0){ final_pos_y = s_horse->y + (s_horse->coll_h >> 1) + 8;
     }else if(vy > 0){final_pos_y = s_horse->y - 8;}
     //LIMIT X
         INT16 delta_x = s_horse->x - THIS->x;
@@ -65,7 +65,7 @@ void UPDATE() {
             off_limit_x = 1u;
         }
         if(delta_x <= -((DISTANCE_X_NEGATIVE + DELTA_DISTANCE_MAX))){ // troppo lontano indietro a destra! metto un limite
-            THIS->x = s_horse->x + (DISTANCE_X_NEGATIVE + DELTA_DISTANCE_MAX);
+            THIS->x = s_horse->x + (DISTANCE_X_NEGATIVE + DELTA_DISTANCE_MAX) - 4;
             off_limit_x = 1;
         }
         if(off_limit_x == 0){ //se il limite non è stato infranto, mi sposto verso

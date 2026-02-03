@@ -54,9 +54,10 @@
         {
             "label": "DebugColor",
             "type": "shell",
+            "dependsOn": "CloneFolder",
             "command": "make",
             "options": {
-                "cwd": "${workspaceFolder}/src"
+                "cwd": "${workspaceFolder}/src" 
             },
             "isBackground": false,
             "args": [
@@ -69,6 +70,12 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "CloneFolder",
+            "type": "shell",
+            "command": "cp -r ${workspaceFolder}/res/metatiles/gb ${workspaceFolder}//res/metatiles/gbc",
+            "presentation": { "reveal": "silent" }
         },
         {
             "label": "Clean",

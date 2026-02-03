@@ -6,7 +6,7 @@
 #include "SpriteManager.h"
 
 #define DELTA_X_INC_CGB 2
-#define DELTA_X_INC_DMG 3
+#define DELTA_X_INC_DMG 1
 
 INT8 delta_x_inc = 0;
 
@@ -34,10 +34,10 @@ void UPDATE() {
     INT8 delta_x = 0;
     if(vx > 1){
         UINT16 final_camera_x = s_horse->x + 56;
-        UINT16 final_camera_x_min = final_camera_x -8;
-        UINT16 final_camera_x_max = final_camera_x +8;
-        if(THIS->x > final_camera_x_max){delta_x=-delta_x_inc;}
-        else if(THIS->x < final_camera_x_min){delta_x=+delta_x_inc;}
+        UINT16 final_camera_x_min = final_camera_x - 8;
+        UINT16 final_camera_x_max = final_camera_x + 8;
+        if(THIS->x > final_camera_x_max){delta_x = -delta_x_inc;}
+        else if(THIS->x < final_camera_x_min){delta_x = +delta_x_inc;}
     }
     if(vx < -1){
         UINT16 final_camera_x = s_horse->x - 40;
@@ -48,9 +48,11 @@ void UPDATE() {
     }
     if(delta_x){
         INT16 camera_horse_delta_x = THIS->x - s_horse->x;
-        if(camera_horse_delta_x < 60 && camera_horse_delta_x > -60){
+        if(camera_horse_delta_x < 10 && camera_horse_delta_x > -10){
+            THIS->x += vx + delta_x;
+        }else{
             THIS->x += delta_x;
-        }else{THIS->x += vx;}
+        }
     }
 }
 

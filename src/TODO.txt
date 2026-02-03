@@ -1,3 +1,7 @@
+PRODUZIONE:
+- animazione del trotto da sistemare per renderla perfetta
+- fix della start_game_cheat(...)
+
 VIA TRIUMPHALIS
 è un gioco arcade a tappe.
 ogni tappa devi arrivare in un punto facendo cose.
