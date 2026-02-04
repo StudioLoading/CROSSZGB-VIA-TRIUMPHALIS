@@ -22,6 +22,8 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED;
 void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
+extern void weapon_update_anim(Sprite* arg_s_weapon) BANKED;
+
 extern void hit_fantoccio(Sprite* s_fantoccio_arg) BANKED;
 extern void consume_weapon_atk() BANKED;
 extern void consume_weapon_def() BANKED;
@@ -120,7 +122,8 @@ void item_common_update(Sprite* s_item_arg) BANKED{
         case 3://using the weapon!
             switch(item_data->itemtype){
                 case GLADIO:
-                    item_gladio_anim_inuse(s_item_arg);
+                    //item_gladio_anim_inuse(s_item_arg);
+                    weapon_update_anim(s_item_arg);
                     item_data->hp = 80;
                     if(vx > 0){ item_data->vx = 1;}
                     else if(vx < 0) {item_data->vx = -1;}
@@ -182,11 +185,11 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                 case GLADIO:{
                     UINT16 attack_x = s_horse->x + 2;
                     UINT16 attack_y = s_horse->y + 8;
-                    THIS->mirror = H_MIRROR;
+                    //THIS->mirror = H_MIRROR;
                     if(s_horse->mirror == V_MIRROR){
                         attack_y = s_horse->y - 24;
                         attack_x = s_horse->x;
-                        THIS->mirror = V_MIRROR;
+                        //THIS->mirror = V_MIRROR;
                     }
                     s_item_arg->x = attack_x;
                     s_item_arg->y = attack_y;

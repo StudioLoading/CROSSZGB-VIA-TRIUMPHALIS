@@ -413,7 +413,7 @@ void use_weapon(INT8 is_defence) BANKED{
 		}
 		switch(weapon_atk){
 			case GLADIO:
-				s_weapon = SpriteManagerAdd(SpriteItemgladio, attack_x, attack_y);
+				s_weapon = SpriteManagerAdd(SpriteWeapon, attack_x, attack_y);
 			break;
 			case LANCE:
 				s_weapon = SpriteManagerAdd(SpriteItemlance, attack_x, attack_y);
@@ -434,7 +434,12 @@ void use_weapon(INT8 is_defence) BANKED{
 			weapon_data->itemtype = weapon_atk;
 			weapon_data->configured = 3;
 		}
-		consume_weapon_atk();
+		switch(weapon_atk){
+			case LANCE:
+			case FLAME:
+				consume_weapon_atk();
+			break;
+		}
 	}
 }
 
