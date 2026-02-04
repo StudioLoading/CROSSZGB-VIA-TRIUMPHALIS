@@ -52,12 +52,11 @@ static const uint8_t weapon_tiles[] = {
 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
-// metasprite of 4x2 8x16 px hardware sprites
+// metasprite of 3x1 8x16 px hardware sprites
 const metasprite_t weapon_metasprite[] = {
-	METASPR_ITEM(  -8, -8,  0, S_PALETTE), 
+	METASPR_ITEM(  -2, -2,  0, S_PALETTE), 
 	METASPR_ITEM(  0,  8,  2, S_PALETTE), 
 	METASPR_ITEM(  0,  8,  4, S_PALETTE),
-	METASPR_ITEM(  0,  8,  6, S_PALETTE),
 	METASPR_TERM
 };
 
@@ -68,9 +67,9 @@ const metasprite_t* const weapon_metasprites[1] = {
 
 // weapon sprite descriptor structure
 const struct MetaSpriteInfo weapon = {
-	.width        = 24,                // width
-	.height       = 8,                 // height
-	.num_tiles    = 8,                 // num tiles
+	.width        = 20,                // width
+	.height       = 6,                 // height
+	.num_tiles    = 6,                 // num tiles
 	.data         = weapon_tiles,       // tiles
 	.num_palettes = 1,                 // num palettes
 	.palettes     = weapon_palettes,    // CGB palette
