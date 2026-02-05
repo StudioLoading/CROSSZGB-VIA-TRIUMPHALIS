@@ -49,9 +49,9 @@ void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
     switch(item_data->itemtype){
         case GLADIO:
             anim_weapon_tick = 0;
-            anim_weapon = ANIM_GLADIO_UP;
+            anim_weapon = ANIM_GLADIO_DOWN;
             if(vx < 0){
-                anim_weapon = ANIM_GLADIO_DOWN;
+                anim_weapon = ANIM_GLADIO_UP;
             }
         break;
     }
@@ -65,7 +65,7 @@ void UPDATE(void) {
         if (old_anim_weapon != anim_weapon) anim_weapon_frame = 0;
         // tick anumation
         if (++anim_weapon_tick >= anim_weapon_speed) {
-            set_sprite_native_banked_data(BANK(weapon_anim), spriteIdxs[SpriteWeapon], 5, get_banked_pointer(BANK(weapon_anim), weapon_anim + (anim_weapon << 3) + anim_weapon_frame));
+            set_sprite_native_banked_data(BANK(weapon_anim), spriteIdxs[SpriteWeapon], 5, get_banked_pointer(BANK(weapon_anim), weapon_anim + (anim_weapon * ANIMATION_WEAPON_FRAMES) + anim_weapon_frame));
             anim_weapon_tick = 0;
             if (++anim_weapon_frame == ANIMATION_WEAPON_FRAMES) anim_weapon_frame = 0;
         }
