@@ -9,7 +9,6 @@
 
 #include "custom_datas.h"
 
-const UINT8 a_roman_blink[] = {2, 0,1};
 const UINT8 a_roman_h[] = {2, 1,2};
 const UINT8 a_roman_u[] = {2, 3,4};
 
@@ -54,9 +53,8 @@ void UPDATE() {
         break;
         case 4://activate dieing
             mission_killed++;
-            romansoldier_data->vx = 40;//usato come countdown di morte
+            romansoldier_data->vx = 20;//usato come countdown di morte
             romansoldier_data->configured = 5;
-            SetSpriteAnim(THIS, a_roman_blink, 24u);
             return;
         break;
         case 5://dieing
@@ -108,4 +106,5 @@ void UPDATE() {
 }
 
 void DESTROY() {
+    SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
 }

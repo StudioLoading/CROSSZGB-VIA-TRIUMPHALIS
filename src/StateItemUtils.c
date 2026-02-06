@@ -187,8 +187,8 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                     UINT16 attack_y = s_horse->y + 8;
                     //THIS->mirror = H_MIRROR;
                     if(s_horse->mirror == V_MIRROR){
-                        attack_y = s_horse->y - 24;
-                        attack_x = s_horse->x;
+                        attack_y = s_horse->y - 20;
+                        attack_x = s_horse->x - 4;
                         //THIS->mirror = V_MIRROR;
                     }
                     s_item_arg->x = attack_x;
@@ -287,6 +287,10 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
                     }
                 }break;
                 case SpriteBarbarianshield:{
+                    if(item_data->itemtype == GLADIO || item_data->itemtype == LANCE){
+                        SpriteManagerRemoveSprite(s_item_arg);
+                        return;
+                    }
                     struct SoldierData* barbarianshield_data = (struct SoldierData*)iispr->custom_data;
                     if(THIS->x < iispr->x){//gli sto a sinistra
                         switch(barbarianshield_data->configured){

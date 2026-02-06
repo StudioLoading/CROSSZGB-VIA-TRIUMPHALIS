@@ -23,7 +23,7 @@ void START() {
 
 void UPDATE() {
     item_common_update(THIS);
-    item_common_spritescollision(THIS);
+    //item_common_spritescollision(THIS);
 }
 
 void item_configreins_anim_blink(Sprite* s_item_arg) BANKED{

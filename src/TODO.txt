@@ -1,5 +1,11 @@
+BUG:
+- verificare il puff di quando sconfiggo un common
+- perché anche se non ho l'arma e premo il bottone, esce un gladio?
+- ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
+
 PRODUZIONE:
 - animazione del trotto da sistemare per renderla perfetta
+- il livello dell'egypt col priest potrei fare un miniboss col prete che lancia cose contro di me e che io, per eliminarlo, devo fare una certa altra cosa.
 - fix della start_game_cheat(...)
 
 VIA TRIUMPHALIS
