@@ -28,7 +28,7 @@ extern Sprite* s_horse;
 extern UINT8 flag_using_atk;
 extern void change_stamina_current(INT16 start, INT16 increase) BANKED;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_pharaonet, 12u);
     pharaonet_collided_flag = 0;
     pharaonet_frmskip_current = 0;
@@ -38,7 +38,7 @@ void START() {
     THIS->lim_y = 2000;
 }
 
-void UPDATE() {
+void UPDATE(void){
     if(pharaonet_collided_flag){
         THIS->x = s_horse->x - 1;
         THIS->y = s_horse->y - 6;
@@ -100,5 +100,5 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

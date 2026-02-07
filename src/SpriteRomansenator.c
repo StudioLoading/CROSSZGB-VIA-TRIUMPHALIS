@@ -11,7 +11,7 @@
 
 const UINT8 a_senator_h[] = {4, 1,2,2,2};
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_senator_h, 8u);
     THIS->lim_x = 10000;
     THIS->lim_y = 10000;
@@ -20,11 +20,11 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     SetSpriteAnim(THIS, a_senator_h, 8u);
     THIS->lim_x = 10000;
     THIS->lim_y = 10000;
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

@@ -28,7 +28,7 @@ Sprite* s_barbarian05 = 0;
 extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
 
-void spawn_barbarian() BANKED;
+void spawn_barbarian(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -56,17 +56,17 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 mission_killed;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void night_mode() BANKED;
-extern void die() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void night_mode(void) BANKED;
+extern void die(void) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void map_ended() BANKED;
+extern void map_ended(void) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 0;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -94,7 +94,7 @@ void START(){
         spawn_barbarian();
 }
 
-void spawn_barbarian() BANKED{
+void spawn_barbarian(void) BANKED{
     s_barbarian00 = SpriteManagerAdd(SpriteBarbarian, ((UINT16) 36u << 3), ((UINT16) 20u << 3));
     struct SoldierData* barbarian00_data = (struct SoldierData*) s_barbarian00->custom_data;
     barbarian00_data->frmskip_max = 4u;
@@ -126,7 +126,7 @@ void spawn_barbarian() BANKED{
     barbarian04_data->reward = LANCE;
 }
 
-void UPDATE(){
+void UPDATE(void){
     //NIGHT MODE
         if(flag_night_mode == 0){
             flag_night_mode = 1;

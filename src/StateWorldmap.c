@@ -34,15 +34,14 @@ MISSION current_mission = MISSIONROME00;
 INT8 world_area_map = 0;//0=worldmap, 1=areamap
 TUTORIAL_STAGE tutorial_state = TUTORIAL_STAGE_0_STRAIGHT;//TUTORIAL_STAGE_0_STRAIGHT
 
-void start_game() BANKED;
+void start_game(void) BANKED;
 void start_game_cheat(AREA arg_cheat_area) BANKED;
 
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 extern void manage_border(UINT8 my_next_state) BANKED;
-extern void check_sgb_palette(UINT8 my_next_state) BANKED;
 
 void start_game_cheat(AREA arg_cheat_area) BANKED{
-    switch(current_area){
+    switch(arg_cheat_area){
         case AREA_ALPS: current_mission = MISSIONALPS05; break;
         case AREA_SEA: current_mission = MISSIONSEA10; break;
         case AREA_GREECE: current_mission = MISSIONGREECE12; break;
@@ -53,12 +52,12 @@ void start_game_cheat(AREA arg_cheat_area) BANKED{
 	manage_border(current_state);
 }
 
-void start_game() BANKED{
+void start_game(void) BANKED{
     SetState(StateTutorialList);
 	manage_border(current_state);
 }
 
-void START() {
+void START(void){
     if(flag_border_set == 1){
         //activate flag for border management
         switch(current_mission){
@@ -146,7 +145,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     worldmap_counter--;
     if(worldmap_counter < -WORLDMAP_COUNTDOWN_MAX){ worldmap_counter = WORLDMAP_COUNTDOWN_MAX; return;}
     if(worldmap_counter > 0){

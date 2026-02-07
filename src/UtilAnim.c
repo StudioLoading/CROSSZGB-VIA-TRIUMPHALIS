@@ -65,7 +65,7 @@ void set_banked_bkg_data(UINT8 first_tile, UINT8 nb_tiles, struct TilesInfo* t, 
 	SWITCH_ROM(save);
 }
 
-void Anim_worldmap_0() BANKED{
+void Anim_worldmap_0(void) BANKED{
     set_banked_bkg_data(0, 123u, &worldmapt, BANK(worldmapt));
 }
 
@@ -92,126 +92,126 @@ void Anim_worldmap_1(AREA arg_current_area) BANKED{
     }
 }
 
-void Anim_arearome_0() BANKED{
+void Anim_arearome_0(void) BANKED{
     set_banked_bkg_data(1, 73u, &arearomet99, BANK(arearomet99));
 }
-void Anim_arearome_1() BANKED{
+void Anim_arearome_1(void) BANKED{
     set_banked_bkg_data(1, 73u, &arearomet00, BANK(arearomet00));
 }
-void Anim_arearome_2() BANKED{
+void Anim_arearome_2(void) BANKED{
     set_banked_bkg_data(1, 73u, &arearomet01, BANK(arearomet01));
 }
-void Anim_arearome_3() BANKED{
+void Anim_arearome_3(void) BANKED{
     set_banked_bkg_data(1, 73u, &arearomet02, BANK(arearomet02));
 }
 
 
-void Anim_areaalps_0() BANKED{
+void Anim_areaalps_0(void) BANKED{
     set_banked_bkg_data(1, 83u, &areaalpst99, BANK(areaalpst99));
 }
-void Anim_areaalps_1() BANKED{
+void Anim_areaalps_1(void) BANKED{
     set_banked_bkg_data(1, 83u, &areaalpst00, BANK(areaalpst00));
 }
-void Anim_areaalps_2() BANKED{
+void Anim_areaalps_2(void) BANKED{
     set_banked_bkg_data(1, 83u, &areaalpst01, BANK(areaalpst01));
 }
-void Anim_areaalps_3() BANKED{
+void Anim_areaalps_3(void) BANKED{
     set_banked_bkg_data(1, 83u, &areaalpst02, BANK(areaalpst02));
 }
-void Anim_areaalps_4() BANKED{
+void Anim_areaalps_4(void) BANKED{
     set_banked_bkg_data(1, 83u, &areaalpst03, BANK(areaalpst03));
 }
 
-void Anim_areasea_0() BANKED{
+void Anim_areasea_0(void) BANKED{
     set_banked_bkg_data(1, 111u, &areaseat99, BANK(areaseat99));
 }
-void Anim_areasea_1() BANKED{
+void Anim_areasea_1(void) BANKED{
     set_banked_bkg_data(1, 111u, &areaseat00, BANK(areaseat00));
 }
-void Anim_areasea_2() BANKED{
+void Anim_areasea_2(void) BANKED{
     set_banked_bkg_data(1, 111u, &areaseat01, BANK(areaseat01));
 }
-void Anim_areasea_3() BANKED{
+void Anim_areasea_3(void) BANKED{
     set_banked_bkg_data(1, 111u, &areaseat02, BANK(areaseat02));
 }
-void Anim_areasea_4() BANKED{
+void Anim_areasea_4(void) BANKED{
     set_banked_bkg_data(1, 111u, &areaseat03, BANK(areaseat03));
 }
 
-void Anim_areagreece_0() BANKED{
+void Anim_areagreece_0(void) BANKED{
     set_banked_bkg_data(1, 123u, &areagreecet99, BANK(areagreecet99));
 }
-void Anim_areagreece_1() BANKED{
+void Anim_areagreece_1(void) BANKED{
     set_banked_bkg_data(1, 123u, &areagreecet00, BANK(areagreecet00));
 }
-void Anim_areagreece_2() BANKED{
+void Anim_areagreece_2(void) BANKED{
     set_banked_bkg_data(1, 123u, &areagreecet01, BANK(areagreecet01));
 }
-void Anim_areagreece_3() BANKED{
+void Anim_areagreece_3(void) BANKED{
     set_banked_bkg_data(1, 123u, &areagreecet02, BANK(areagreecet02));
 }
-void Anim_areagreece_4() BANKED{
+void Anim_areagreece_4(void) BANKED{
     set_banked_bkg_data(1, 123u, &areagreecet03, BANK(areagreecet03));
 }
 
 
-void Anim_areadesert_0() BANKED{
+void Anim_areadesert_0(void) BANKED{
     set_banked_bkg_data(1, 95u, &areadesertt, BANK(areadesertt));
 }
-void Anim_areadesert_1() BANKED{
+void Anim_areadesert_1(void) BANKED{
     set_banked_bkg_data(1, 95u, &areadesertt00, BANK(areadesertt00));
 }
-void Anim_areadesert_2() BANKED{
+void Anim_areadesert_2(void) BANKED{
     set_banked_bkg_data(1, 95u, &areadesertt01, BANK(areadesertt01));
 }
-void Anim_areadesert_3() BANKED{
+void Anim_areadesert_3(void) BANKED{
     set_banked_bkg_data(1, 95u, &areadesertt02, BANK(areadesertt02));
 }
 
-void Anim_areaegypt_0() BANKED{
+void Anim_areaegypt_0(void) BANKED{
     set_banked_bkg_data(1, 95u, &areaegyptt99, BANK(areaegyptt99));
 }
-void Anim_areaegypt_1() BANKED{
+void Anim_areaegypt_1(void) BANKED{
     set_banked_bkg_data(1, 95u, &areaegyptt00, BANK(areaegyptt00));
 }
-void Anim_areaegypt_2() BANKED{
+void Anim_areaegypt_2(void) BANKED{
     set_banked_bkg_data(1, 95u, &areaegyptt01, BANK(areaegyptt01));
 }
-void Anim_areaegypt_3() BANKED{
+void Anim_areaegypt_3(void) BANKED{
     set_banked_bkg_data(1, 95u, &areaegyptt02, BANK(areaegyptt02));
 }
 
-void Anim_mapegypt_0() BANKED{
+void Anim_mapegypt_0(void) BANKED{
     set_banked_bkg_data(32, 73u, &mapegyptt, BANK(mapegyptt));
 }
-void Anim_mapegypt_1() BANKED{
+void Anim_mapegypt_1(void) BANKED{
     set_banked_bkg_data(32, 73u, &mapegyptt1, BANK(mapegyptt1));
 }
-void Anim_mapegypt_2() BANKED{
+void Anim_mapegypt_2(void) BANKED{
     set_banked_bkg_data(32, 73u, &mapegyptt2, BANK(mapegyptt2));
 }
-void Anim_mapegypt_3() BANKED{
+void Anim_mapegypt_3(void) BANKED{
     set_banked_bkg_data(32, 73u, &mapegyptt3, BANK(mapegyptt3));
 }
-void Anim_mapegypt_4() BANKED{
+void Anim_mapegypt_4(void) BANKED{
     set_banked_bkg_data(32, 73u, &mapegyptt4, BANK(mapegyptt4));
 }
-void Anim_mapegypt_5() BANKED{
+void Anim_mapegypt_5(void) BANKED{
     set_banked_bkg_data(32, 73u, &mapegyptt5, BANK(mapegyptt5));
 }
 
-void Anim_config_no() BANKED{
+void Anim_config_no(void) BANKED{
     set_banked_bkg_data(0, 167u, &configmapt, BANK(configmapt));
 }
-void Anim_config_elm() BANKED{
+void Anim_config_elm(void) BANKED{
     set_banked_bkg_data(0, 167u, &configmapt00elm, BANK(configmapt00elm));
 }
-void Anim_config_wheel() BANKED{
+void Anim_config_wheel(void) BANKED{
     set_banked_bkg_data(0, 167u, &configmapt00wheel, BANK(configmapt00wheel));
 }
-void Anim_config_reins() BANKED{
+void Anim_config_reins(void) BANKED{
     set_banked_bkg_data(0, 167u, &configmapt00briglie, BANK(configmapt00briglie));
 }
-void Anim_config_whip() BANKED{
+void Anim_config_whip(void) BANKED{
     set_banked_bkg_data(0, 167u, &configmapt00whip, BANK(configmapt00whip));
 }

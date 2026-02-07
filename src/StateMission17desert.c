@@ -44,14 +44,14 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 flag_night_mode;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
-extern void spawn_items() BANKED;
-extern void map_ended() BANKED;
-extern void night_mode() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void map_ended(void) BANKED;
+extern void night_mode(void) BANKED;
 
 
-void START(){
+void START(void){
     mission_iscrono = 0;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -76,7 +76,7 @@ void START(){
         start_common();
 }
 
-void UPDATE(){
+void UPDATE(void){
     //NIGHT MODE
         if(flag_night_mode == 0){
             flag_night_mode = 1;

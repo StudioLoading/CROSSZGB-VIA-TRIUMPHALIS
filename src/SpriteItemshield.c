@@ -21,11 +21,11 @@ extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
 extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
 
-void START() {
+void START(void){
     item_common_start(THIS);
 }
 
-void UPDATE() {
+void UPDATE(void){
     item_common_update(THIS);
     //item_common_spritescollision(THIS);
 }
@@ -38,5 +38,5 @@ void item_shield_anim(Sprite* s_item_arg) BANKED{
     SetSpriteAnim(s_item_arg, a_shield, 32);
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

@@ -15,7 +15,7 @@ extern INT8 vx;
 extern UINT8 track_ended;
 extern UINT8 flag_turn_on_tremble;
 
-void START() {
+void START(void){
     THIS->lim_x = 1000;
     THIS->lim_y = 1000;
     delta_x_inc = DELTA_X_INC_CGB;
@@ -24,7 +24,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     if(track_ended == 1){
         return;
     }
@@ -56,7 +56,7 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
     THIS->y--;
     THIS->x++;
 }

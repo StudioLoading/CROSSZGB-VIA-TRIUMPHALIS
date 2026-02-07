@@ -26,10 +26,10 @@ extern INT8 pharaonet_frmskipy_max;
 extern UINT8 pharaonet_collided_flag;
 extern UINT8 end_game;
 
-void pharaosubiga_throw_net() BANKED;
+void pharaosubiga_throw_net(void) BANKED;
 void pharaosubiga_change_status(INT8 arg_status, Sprite* arg_s_pharaosubiga) BANKED;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_pharaosubiga_down, 8u);
     THIS->lim_x = 2000;
     THIS->lim_y = 2000;
@@ -38,7 +38,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     //STATUS
         struct PharaoData* pharao_data = (struct PharaoData*) THIS->custom_data;
         if(pharao_data->hp == 0){
@@ -107,7 +107,7 @@ void pharaosubiga_change_status(INT8 arg_status, Sprite* arg_s_pharaosubiga) BAN
     pharao_data->counter = 127;
 }
 
-void pharaosubiga_throw_net() BANKED{
+void pharaosubiga_throw_net(void) BANKED{
     INT16 delta_x = s_horse->x - THIS->x;
     INT16 delta_y = s_horse->y - THIS->y;
     pharaonet_vx = 1;
@@ -133,5 +133,5 @@ void pharaosubiga_throw_net() BANKED{
     }
 
 }
-void DESTROY() {
+void DESTROY(void){
 }

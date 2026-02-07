@@ -15,7 +15,7 @@ const UINT8 a_barbarianshield_u[] = {2, 3,4};
 
 extern Sprite* s_horse;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_barbarianshield_h, 8u);
     THIS->lim_x = 3000;
     THIS->lim_y = 3000;
@@ -27,7 +27,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     struct SoldierData* barbarianshield_data = (struct SoldierData*) THIS->custom_data;
     switch(barbarianshield_data->configured){
         case 0:
@@ -82,5 +82,5 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

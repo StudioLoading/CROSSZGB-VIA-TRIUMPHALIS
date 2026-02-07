@@ -38,7 +38,7 @@ FOCUS current_focus = NO_ELM;
 struct CONFIGURATION configuration = {.elm = NORMAL, .wheel=NORMAL, .whip=NORMAL, .reins=NORMAL};
 INT8 flag_golden_found = 0u;
 
-void change_description() BANKED;
+void change_description(void) BANKED;
 void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
 
 extern Sprite* s_horse;
@@ -55,7 +55,7 @@ extern MISSION current_mission;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 
 
-void START(){
+void START(void){
     InitScroll(BANK(configmap), &configmap, 0, 0);
 	SHOW_BKG;
 	INIT_FONT(font, PRINT_BKG);
@@ -64,7 +64,7 @@ void START(){
     blink_absent = 0;
 }
 
-void UPDATE(){
+void UPDATE(void){
     if(KEY_TICKED(J_RIGHT)){
         Anim_config_no();
         if(current_focus == REINS || current_focus == NO_REINS){current_focus = ELM;}
@@ -159,7 +159,7 @@ void UPDATE(){
     }
 }
 
-void change_description() BANKED{
+void change_description(void) BANKED{
     switch(current_focus){
         case ELM:
             if(configuration.elm == NORMAL){

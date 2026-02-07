@@ -24,7 +24,7 @@ const UINT8 coll_m13_surface[] = {0u, 0};
 
 UINT8 m13_spawned_greeks_flag = 0u;
 
-void m13_spawn_greeks() BANKED;
+void m13_spawn_greeks(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -51,20 +51,20 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 flag_night_mode;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void map_ended() BANKED;
-extern void night_mode() BANKED;
+extern void map_ended(void) BANKED;
+extern void night_mode(void) BANKED;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 1;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -100,7 +100,7 @@ void START(){
         m13_spawned_greeks_flag = 0u;
 }
 
-void m13_spawn_greeks() BANKED{
+void m13_spawn_greeks(void) BANKED{
     Sprite* s_greeksoldier00 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 71u << 3), ((UINT16) 56u << 3));
     struct SoldierData* greeksoldier00_data = (struct SoldierData*) s_greeksoldier00->custom_data;
     greeksoldier00_data->frmskip_max = 8u;
@@ -132,7 +132,7 @@ void m13_spawn_greeks() BANKED{
     greeksoldier04_data->reward = NOITEM;
 }
 
-void UPDATE(){
+void UPDATE(void){
     //NIGHT MODE
         if(flag_night_mode == 0){
             flag_night_mode = 1;

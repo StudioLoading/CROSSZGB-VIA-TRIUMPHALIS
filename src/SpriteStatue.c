@@ -11,7 +11,7 @@
 
 const UINT8 a_statue_h[] = {1, 1};
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_statue_h, 1u);
     THIS->lim_x = 10000;
     THIS->lim_y = 10000;
@@ -20,8 +20,8 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

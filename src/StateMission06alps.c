@@ -66,17 +66,17 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 mission_killed;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
-extern void map_ended() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
+extern void map_ended(void) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 0;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -126,7 +126,7 @@ void roll_stone(INT8 arg_verse, UINT8 arg_max_frmskip_y) BANKED{
     rollingstone_data->max_frmskip_y = arg_max_frmskip_y;
 }
 
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //LIMIT MAP LEFT

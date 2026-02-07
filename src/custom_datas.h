@@ -213,7 +213,6 @@ struct KillerData{
     UINT8 time_visible;
     UINT8 time_blink;
     UINT8 time_attack;
-    UINT8 instant_attack;
 };
 
 struct RollingStoneData{

@@ -33,7 +33,7 @@ Sprite* s_barbarianshield06 = 0;
 Sprite* s_general = 0;
 UINT8 flag_spawn_general = 0;
 
-void spawn_barbarianshield() BANKED;
+void spawn_barbarianshield(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -60,18 +60,18 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 mission_killed;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
-extern void map_ended() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
+extern void map_ended(void) BANKED;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 1;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -109,7 +109,7 @@ void START(){
         }
 }
 
-void spawn_barbarianshield() BANKED{
+void spawn_barbarianshield(void) BANKED{
     s_barbarianshield00 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 47u << 3), ((UINT16) 10u << 3)+2u);
     s_barbarianshield00->mirror = V_MIRROR;
     struct SoldierData* barbarian00_data = (struct SoldierData*) s_barbarianshield00->custom_data;
@@ -140,7 +140,7 @@ void spawn_barbarianshield() BANKED{
     barbarian06_data->configured = 1;    
 }
 
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //LIMIT MAP LEFT

@@ -35,10 +35,10 @@ extern UINT8 stop_music_on_new_state;
 extern TUTORIAL_STAGE tutorial_state;
 
 extern void manage_border(UINT8 my_next_state) BANKED;
-extern void set_bgm() BANKED;
+extern void set_bgm(void) BANKED;
 
 
-void START(){
+void START(void){
 	if(sgb_running){
 		manage_border(current_state);
 	}
@@ -73,7 +73,7 @@ void START(){
     }
 }
 
-void UPDATE(){
+void UPDATE(void){
     if(credit_step != 2){
         credit_wait--;
     }

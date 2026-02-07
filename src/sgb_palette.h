@@ -47,20 +47,20 @@
 #define SGB_AREADESERT_DARK 	  myRGB(195, 116, 0)
 #define SGB_AREADESERT_DARKER     myRGB(0, 0, 0)
 
-void set_sgb_palette_credit_studioloading() __banked;
-void set_sgb_palette_credit_viatriumphalis() __banked;
-void set_sgb_palette_credit_titlescreen() __banked;
-void set_sgb_palette_arearome() __banked;
-void set_sgb_palette_areaalps() __banked;
-void set_sgb_palette_areasea() __banked;
-void set_sgb_palette_areagreece() __banked;
-void set_sgb_palette_areadesert() __banked;
+void set_sgb_palette_credit_studioloading(void) __banked;
+void set_sgb_palette_credit_viatriumphalis(void) __banked;
+void set_sgb_palette_credit_titlescreen(void) __banked;
+void set_sgb_palette_arearome(void) __banked;
+void set_sgb_palette_areaalps(void) __banked;
+void set_sgb_palette_areasea(void) __banked;
+void set_sgb_palette_areagreece(void) __banked;
+void set_sgb_palette_areadesert(void) __banked;
 
-void set_sgb_palette_overworldsw() __banked;
-void set_sgb_palette_2() __banked;
-void set_sgb_palette_inventory() __banked;
+void set_sgb_palette_overworldsw(void) __banked;
+void set_sgb_palette_2(void) __banked;
+void set_sgb_palette_inventory(void) __banked;
 
-void set_sgb_palette_title() __banked;
-void reset_sgb_palette_title() __banked;
-void set_sgb_palette_statusbar() __banked;
-void reset_sgb_palette_statusbar() __banked;
+void set_sgb_palette_title(void) __banked;
+void reset_sgb_palette_title(void) __banked;
+void set_sgb_palette_statusbar(void) __banked;
+void reset_sgb_palette_statusbar(void) __banked;

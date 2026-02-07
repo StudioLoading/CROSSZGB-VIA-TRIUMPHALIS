@@ -61,13 +61,13 @@ extern Sprite* s_horse;
 extern Sprite* s_pharaosubiga;
 extern UINT8 pharaonet_collided_flag;
 
-void gator_turn() BANKED;
+void gator_turn(void) BANKED;
 void gator_calculate_delta(UINT16 dest_x, UINT16 dest_y) BANKED;
 
 extern void horse_hit(INT8 arg_damage) BANKED;
 
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_gator_walk, 16u);
     gator_frmskip_max = GATOR_FRMSKIP_MID;
     gator_waypoints_current = 0;
@@ -88,7 +88,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     // CHECK PHARAO HP
         struct PharaoData* pharao_data = (struct PharaoData*) s_pharaosubiga->custom_data;
         if(pharao_data->hp <= 2 && gator_frmskip_max != GATOR_FRMSKIP_LOW){
@@ -288,7 +288,7 @@ void gator_calculate_delta(UINT16 arg_dest_x, UINT16 arg_dest_y) BANKED{
     }
 }
 
-void gator_turn() BANKED{
+void gator_turn(void) BANKED{
     if(THIS->mirror == V_MIRROR){
         THIS->mirror = NO_MIRROR;
         THIS->x -= 8u;
@@ -297,5 +297,5 @@ void gator_turn() BANKED{
         THIS->x += 8u;
     }
 }
-void DESTROY() {
+void DESTROY(void){
 }

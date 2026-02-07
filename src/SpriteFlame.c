@@ -15,7 +15,7 @@
 const UINT8 a_flame[] = {4, 0,1,2,3};
 const UINT8 a_fog[] = {4, 4,5,6,7};
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_flame, 24u);
     THIS->lim_x = 1000;
     struct FlameData* fire_data = (struct FlameData*) THIS->custom_data;
@@ -24,7 +24,7 @@ void START() {
     fire_data->dropped = -1;
 }
 
-void UPDATE() {
+void UPDATE(void){
     struct FlameData* fire_data = (struct FlameData*) THIS->custom_data;
     switch(fire_data->dropped){
         case 2://just dropped
@@ -57,5 +57,5 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

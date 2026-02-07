@@ -29,12 +29,12 @@ extern INT16 time_current;
 extern UINT8 track_ended;
 extern INT8 mission_completed;
 
-void marcus_update_anim() BANKED;
+void marcus_update_anim(void) BANKED;
 
-extern void update_hp_max() BANKED;
+extern void update_hp_max(void) BANKED;
 extern void pickup(Sprite* s_arg_item) BANKED;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_marcus_idle, 8u);
     flag_hit = 0;
     vx = 0;
@@ -46,7 +46,7 @@ void START() {
     orme_spawned = 0u;
 }
 
-void marcus_update_anim() BANKED{
+void marcus_update_anim(void) BANKED{
     if(vx == 0 && vy == 0){
         SetSpriteAnim(THIS, a_marcus_idle, 4u);
     }else{
@@ -57,7 +57,7 @@ void marcus_update_anim() BANKED{
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     INT8 new_vx = 0;
     INT8 new_vy = 0;
     if(KEY_PRESSED(J_RIGHT)){ new_vx = 1;}
@@ -138,5 +138,5 @@ void UPDATE() {
         }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

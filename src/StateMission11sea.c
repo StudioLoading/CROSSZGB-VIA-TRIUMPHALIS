@@ -22,8 +22,8 @@ const UINT8 coll_m11_tiles[] = {15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 
 
 const UINT8 coll_m11_surface[] = {0u, 0};
 
-void spawn_m11_killers() BANKED;
-void spawn_m11_savage() BANKED;
+void spawn_m11_killers(void) BANKED;
+void spawn_m11_savage(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -52,18 +52,18 @@ extern UINT8 mission_killed;
 extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void die() BANKED;
-extern void map_ended() BANKED;
+extern void die(void) BANKED;
+extern void map_ended(void) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 0;
     //timemax_current = TIME_MAX_MISSIONSEA11;
     //time_factor = TIME_FACTOR_MISSIONSEA11;
@@ -98,13 +98,13 @@ void START(){
         spawn_m11_savage();
 }
 
-void spawn_m11_killers() BANKED{
+void spawn_m11_killers(void) BANKED{
     SpriteManagerAdd(SpriteKiller, ((UINT16) 56 << 3), ((UINT16) 3 << 3));
     SpriteManagerAdd(SpriteKiller, ((UINT16) 62 << 3), ((UINT16) 4 << 3));
     SpriteManagerAdd(SpriteKiller, ((UINT16) 85 << 3), ((UINT16) 66 << 3));
 }
 
-void spawn_m11_savage() BANKED{
+void spawn_m11_savage(void) BANKED{
     Sprite* s_savage00 = SpriteManagerAdd(SpriteSavage, ((UINT16) 35 << 3), ((UINT16) 13u << 3));
     struct SoldierData* savage00_data = (struct SoldierData*) s_savage00->custom_data;
     savage00_data->frmskip_max = 12u;
@@ -124,7 +124,7 @@ void spawn_m11_savage() BANKED{
     savage02_data->reward = HP;    
 }
 
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();    
     //UPDATE TIME

@@ -33,15 +33,15 @@ extern MISSION_STEP current_step;
 extern Sprite* s_spawning_weapon;
 extern UINT8 turn;
 
-extern void update_weapon() BANKED;
-extern void update_hp_max() BANKED;
-extern void update_time_max() BANKED;
+extern void update_weapon(void) BANKED;
+extern void update_hp_max(void) BANKED;
+extern void update_time_max(void) BANKED;
 extern void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
 
 void pickup(Sprite* s_arg_item) BANKED;
 
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_biga_h, 32u);
     THIS->lim_x = 100;
     THIS->lim_y = 100;
@@ -50,7 +50,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     if(flag_die){ return; }
     UINT16 final_pos_x = s_horse->x + (s_horse->coll_w >> 1) - DISTANCE_X_POSITIVE; //if vx >= 0
     if (turn > 63 && turn < 192){ final_pos_x = s_horse->x + (s_horse->coll_w >> 1) + DISTANCE_X_NEGATIVE;}
@@ -172,5 +172,5 @@ void pickup(Sprite* s_arg_item) BANKED{
     SpriteManagerRemoveSprite(s_arg_item);
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

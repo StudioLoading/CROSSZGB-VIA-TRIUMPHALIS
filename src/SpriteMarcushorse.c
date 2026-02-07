@@ -13,14 +13,14 @@
 
 const UINT8 a_marcushorse_idle[] = {8, 0,1,2,3,0,0,1,2};
 
-void START() {
+void START(void){
     THIS->lim_x = 4000;
     THIS->lim_y = 4000;
     SetSpriteAnim(THIS, a_marcushorse_idle, 8u);
 }
 
-void UPDATE() {
+void UPDATE(void){
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

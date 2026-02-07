@@ -40,9 +40,9 @@ unsigned char m14[18];
 unsigned char EMPTY_STRING_17[18] = "                 ";
 
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
-extern void set_bgm() BANKED;
+extern void set_bgm(void) BANKED;
 
-void START(){
+void START(void){
     InitScroll(BANK(maptutoriallist), &maptutoriallist, 0, 0);
 	SHOW_BKG;
     set_bgm();
@@ -85,7 +85,7 @@ void START(){
     PRINT(3, 17, "TO BUTTON MAP");
 }
 
-void UPDATE(){
+void UPDATE(void){
     if(blink_text == BLINK_TEXT){
         PRINT(2,1,m01); 
         PRINT(2,2,m02); 

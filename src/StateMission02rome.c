@@ -49,18 +49,18 @@ extern UINT8 turn_to_load;
 extern UINT8 turn;
 extern UINT8 flag_night_mode;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void spawn_items() BANKED;
-extern void night_mode() BANKED;
-extern void map_ended() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void night_mode(void) BANKED;
+extern void map_ended(void) BANKED;
 
-void spawn_killers() BANKED;
+void spawn_killers(void) BANKED;
 
-void START(){
+void START(void){
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
     }else{//initial
@@ -86,7 +86,7 @@ void START(){
         spawn_killers();
 }
 
-void spawn_killers() BANKED{
+void spawn_killers(void) BANKED{
     s_killer00 = SpriteManagerAdd(SpriteKiller, ((UINT16) 100u << 3), ((UINT16) 75u << 3));
     s_killer01 = SpriteManagerAdd(SpriteKiller, ((UINT16) 60u << 3), ((UINT16) 75u << 3));
     s_killer02 = SpriteManagerAdd(SpriteKiller, ((UINT16) 90u << 3), ((UINT16) 56u << 3));
@@ -97,7 +97,7 @@ void spawn_killers() BANKED{
     s_killer07 = SpriteManagerAdd(SpriteKiller, ((UINT16) 25u << 3), ((UINT16) 16u << 3));
 }
 
-void UPDATE(){
+void UPDATE(void){
     //NIGHT MODE
         if(flag_night_mode == 0){
             flag_night_mode = 1;

@@ -9,7 +9,7 @@
 const UINT8 a_step[] = {1,0}; //The first number indicates the number of frames
 const UINT8 a_steponwater[] = {4,0,1,2,3}; 
 
-void START(){
+void START(void){
 	THIS->lim_x = 1u;
 	THIS->lim_y = 1u;
     SetSpriteAnim(THIS, a_step, 16u);
@@ -17,7 +17,7 @@ void START(){
 	step_data->hp = 30u;
 }
 
-void UPDATE(){
+void UPDATE(void){
 	struct ItemData* step_data = (struct ItemData*) THIS->custom_data;
 	if(step_data->configured == 1){//orme su pozza
     	SetSpriteAnim(THIS, a_steponwater, 16u);
@@ -28,6 +28,6 @@ void UPDATE(){
 	}
 }
 
-void DESTROY(){
+void DESTROY(void){
 
 }

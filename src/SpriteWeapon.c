@@ -17,7 +17,7 @@ typedef enum {
 } animation_weapon;
 
 // define the animation speed conatsnt
-#define ANIMATION_WEAPON_SPEED      3
+#define ANIMATION_WEAPON_SPEED      6
 #define ANIMATION_WEAPON_FRAMES     5
 static animation_weapon old_anim_weapon, anim_weapon; 
 static UINT8 anim_weapon_frame, anim_weapon_tick;
@@ -28,7 +28,7 @@ void set_sprite_native_banked_data(UINT8 bank, UINT8 id, UINT8 len, const UINT8 
 
 void weapon_update_anim(Sprite* arg_s_weapon) BANKED;
 
-extern INT8 vx;
+extern Sprite* s_horse;
 extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
 extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
@@ -51,7 +51,7 @@ void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
         case GLADIO:
             anim_weapon_tick = 0;
             anim_weapon = ANIM_GLADIO_DOWN;
-            if(vx < 0){
+            if(s_horse->mirror == V_MIRROR){
                 anim_weapon = ANIM_GLADIO_UP;
             }
         break;

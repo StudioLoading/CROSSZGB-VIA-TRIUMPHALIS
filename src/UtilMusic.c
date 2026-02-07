@@ -21,7 +21,7 @@ extern MISSION current_mission;
 extern INT8 credit_step;
 extern TUTORIAL_STAGE tutorial_state;
 
-void set_bgm() BANKED{
+void set_bgm(void) BANKED{
     switch(current_state){
         case StateCredit:{
             switch(credit_step){

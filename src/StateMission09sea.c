@@ -29,7 +29,7 @@ Sprite* s_savage03 = 0;
 Sprite* s_savage04 = 0;
 Sprite* s_savage05 = 0;
 
-void spawn_savages() BANKED;
+void spawn_savages(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -59,21 +59,21 @@ extern UINT8 flag_night_mode;
 extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
-extern void night_mode() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
+extern void night_mode(void) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
-extern void map_ended() BANKED;
+extern void map_ended(void) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 0;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -109,7 +109,7 @@ void START(){
         start_common();
 }
 
-void spawn_savages() BANKED{
+void spawn_savages(void) BANKED{
     
     s_savage01 = SpriteManagerAdd(SpriteSavage, ((UINT16) 91u << 3), ((UINT16) 16u << 3));
     struct SoldierData* savage01_data = (struct SoldierData*) s_savage01->custom_data;
@@ -137,7 +137,7 @@ void spawn_savages() BANKED{
 
 }
 
-void UPDATE(){
+void UPDATE(void){
     //NIGHT MODE
         if(flag_night_mode == 0){
             flag_night_mode = 1;

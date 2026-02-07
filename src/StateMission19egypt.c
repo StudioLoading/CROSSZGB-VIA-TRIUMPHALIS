@@ -49,20 +49,20 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 flag_night_mode;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void map_ended() BANKED;
-extern void night_mode() BANKED;
-extern void die() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void map_ended(void) BANKED;
+extern void night_mode(void) BANKED;
+extern void die(void) BANKED;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 
 Sprite* s_statue = 0;
 INT8 timer_tile_anim = 0;
 UINT8 idx_tile_anim = 0u;
 
-void START(){
+void START(void){
     mission_iscrono = 1;
     timemax_current = TIME_MAX_MISSION19;
     time_factor = TIME_FACTOR_MISSION19;
@@ -102,7 +102,7 @@ void START(){
         Anim_mapegypt_1();
 }
 
-void UPDATE(){
+void UPDATE(void){
     //LIMIT MAP
         if(s_horse->x < 40u){
             s_horse->x = 40u;

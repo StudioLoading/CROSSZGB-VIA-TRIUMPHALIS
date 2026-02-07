@@ -24,7 +24,7 @@ const UINT8 coll_m12_surface[] = {0u, 0};
 
 UINT8 spawned_greeks_flag = 0u;
 
-void spawn_greeks() BANKED;
+void spawn_greeks(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -50,18 +50,18 @@ extern INT16 timemax_current;
 extern INT16 time_factor;
 extern INT16 time_to_load;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void map_ended() BANKED;
+extern void map_ended(void) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 1;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -93,7 +93,7 @@ void START(){
         spawned_greeks_flag = 0u;
 }
 
-void spawn_greeks() BANKED{
+void spawn_greeks(void) BANKED{
     Sprite* s_greeksoldier00 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 43u << 3), ((UINT16) 17u << 3));
     struct SoldierData* greeksoldier00_data = (struct SoldierData*) s_greeksoldier00->custom_data;
     greeksoldier00_data->frmskip_max = 8u;
@@ -116,7 +116,7 @@ void spawn_greeks() BANKED{
     greeksoldier03_data->reward = NOITEM;
 }
 
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //SPAWN GREEKS

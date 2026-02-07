@@ -25,8 +25,8 @@ void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg
 extern void weapon_update_anim(Sprite* arg_s_weapon) BANKED;
 
 extern void hit_fantoccio(Sprite* s_fantoccio_arg) BANKED;
-extern void consume_weapon_atk() BANKED;
-extern void consume_weapon_def() BANKED;
+extern void consume_weapon_atk(void) BANKED;
+extern void consume_weapon_def(void) BANKED;
 extern void horse_hit(INT8 arg_damage) BANKED;
 
 extern void item_gladio_anim(Sprite* s_item_arg) BANKED;
@@ -183,13 +183,11 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                     }
                 }break;
                 case GLADIO:{
-                    UINT16 attack_x = s_horse->x + 2;
+                    UINT16 attack_x = s_horse->x + 8;
                     UINT16 attack_y = s_horse->y + 8;
-                    //THIS->mirror = H_MIRROR;
                     if(s_horse->mirror == V_MIRROR){
                         attack_y = s_horse->y - 20;
                         attack_x = s_horse->x - 4;
-                        //THIS->mirror = V_MIRROR;
                     }
                     s_item_arg->x = attack_x;
                     s_item_arg->y = attack_y;
@@ -319,19 +317,17 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
 
 void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED{
 	UINT8 arg_spritetype = 0u;
-    if(arg_spritetype == 0){
-		switch(arg_itemtype){
-			case GLADIO: arg_spritetype = SpriteItemgladio; break;
-			case LANCE: arg_spritetype = SpriteItemlance; break;
-			case FIRE: arg_spritetype = SpriteItemfire; break;
-			case ELMET: arg_spritetype = SpriteItemelmet; break;
-			case CAPE: arg_spritetype = SpriteItemcape; break;
-			case SHIELD: arg_spritetype = SpriteItemshield; break;
-			case HP: arg_spritetype = SpriteItemheart; break;
-			case TIME: arg_spritetype = SpriteItemglass; break;
-			case PAPYRUS: arg_spritetype = SpriteItempapirus; break;
-		}
-	}
+    switch(arg_itemtype){
+        case GLADIO: arg_spritetype = SpriteItemgladio; break;
+        case LANCE: arg_spritetype = SpriteItemlance; break;
+        case FIRE: arg_spritetype = SpriteItemfire; break;
+        case ELMET: arg_spritetype = SpriteItemelmet; break;
+        case CAPE: arg_spritetype = SpriteItemcape; break;
+        case SHIELD: arg_spritetype = SpriteItemshield; break;
+        case HP: arg_spritetype = SpriteItemheart; break;
+        case TIME: arg_spritetype = SpriteItemglass; break;
+        case PAPYRUS: arg_spritetype = SpriteItempapirus; break;
+    }
 	Sprite* s_item_spawned = SpriteManagerAdd(arg_spritetype, arg_posx, arg_posy);
 	struct ItemData* item_spawned_data = (struct ItemData*) s_item_spawned->custom_data;
 	item_spawned_data->itemtype = arg_itemtype;
@@ -341,18 +337,16 @@ void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED
 
 void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED{
     UINT8 arg_spritetype = 0u;
-    if(arg_spritetype == 0){
-		switch(arg_itemtype){
-			case GLADIO: arg_spritetype = SpriteItemgladio; break;
-			case LANCE: arg_spritetype = SpriteItemlance; break;
-			case FIRE: arg_spritetype = SpriteItemfire; break;
-			case ELMET: arg_spritetype = SpriteItemelmet; break;
-			case CAPE: arg_spritetype = SpriteItemcape; break;
-			case SHIELD: arg_spritetype = SpriteItemshield; break;
-			case HP: arg_spritetype = SpriteItemheart; break;
-			case TIME: arg_spritetype = SpriteItemglass; break;
-		}
-	}
+    switch(arg_itemtype){
+        case GLADIO: arg_spritetype = SpriteItemgladio; break;
+        case LANCE: arg_spritetype = SpriteItemlance; break;
+        case FIRE: arg_spritetype = SpriteItemfire; break;
+        case ELMET: arg_spritetype = SpriteItemelmet; break;
+        case CAPE: arg_spritetype = SpriteItemcape; break;
+        case SHIELD: arg_spritetype = SpriteItemshield; break;
+        case HP: arg_spritetype = SpriteItemheart; break;
+        case TIME: arg_spritetype = SpriteItemglass; break;
+    }
 	s_spawning_weapon = SpriteManagerAdd(arg_spritetype, arg_posx, arg_posy);
 	struct ItemData* item_spawned_data = (struct ItemData*) s_spawning_weapon->custom_data;
 	item_spawned_data->itemtype = arg_itemtype;

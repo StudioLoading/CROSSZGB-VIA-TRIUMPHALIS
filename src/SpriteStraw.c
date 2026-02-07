@@ -12,12 +12,12 @@
 #include "custom_datas.h"
 
 
-void START() {
+void START(void){
     THIS->lim_x = 1000;
 }
 
-void UPDATE() {
+void UPDATE(void){
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

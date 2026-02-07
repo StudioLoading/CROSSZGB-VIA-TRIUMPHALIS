@@ -108,12 +108,12 @@ extern INT16 pharanonet_caught_timer;
 extern void update_hp(INT8 variation) BANKED;
 extern void use_weapon(INT8 is_defence) BANKED;
 extern void pickup(Sprite* s_arg_item) BANKED;
-extern INT8 is_track_ended() BANKED;
+extern INT8 is_track_ended(void) BANKED;
 
 
 /* velocity_counter in realtà è la velocità assoluta */
 
-void START() {
+void START(void){
 	// initialize the animation state
 	old_horse_anim = anim = ANIM_RIGHT_WALK;
 	anim_horse_speed = ANIM_HORSE_SPEED;
@@ -142,7 +142,7 @@ void START() {
     }*/
 }
 
-void UPDATE() {
+void UPDATE(void){
     //CROSSZGB
         // save old animation state, animation state to idle (will be overwritten, if keys are pressed)
         old_horse_anim = anim;
@@ -633,5 +633,5 @@ void horse_hit(INT8 arg_damage) BANKED{
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

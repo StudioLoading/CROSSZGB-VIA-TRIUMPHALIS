@@ -36,10 +36,10 @@ UINT8 flag_night_mode = 0u;
 UINT8 flag_border_set = 0u;
 UINT8 flag_is_demo = 1u;
 
-void die() BANKED;
-void spawn_items() BANKED;
-void night_mode() BANKED;
-void map_ended() BANKED;
+void die(void) BANKED;
+void spawn_items(void) BANKED;
+void night_mode(void) BANKED;
+void map_ended(void) BANKED;
 void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 void manage_border(UINT8 my_next_state) BANKED;
 void check_sgb_palette(UINT8 new_state) BANKED;
@@ -67,16 +67,18 @@ extern INSTRUCTION instruction_given;
 
 extern void update_hp(INT8 variation) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
+void consume_weapon_def(void) BANKED;
+void consume_weapon_atk(void) BANKED;
 
-void START(){
+void START(void){
 
 }
 
-void UPDATE() {
+void UPDATE(void){
 	
 }
 
-void map_ended() BANKED{
+void map_ended(void) BANKED{
 	reset_sgb_palette_statusbar();
 	flag_night_mode = 0;//RESET
 	turn_to_load = turn;//missione successiva comincia nello stesso verso di dove finisce missione corrente
@@ -162,7 +164,7 @@ void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_s
 	SetState(StatePapyrus);
 }
 
-void die() BANKED{
+void die(void) BANKED{
 	reset_sgb_palette_statusbar();
 	switch(current_mission){
 		case MISSIONROME00: current_step = LOOKING_FOR_SENATOR; break;
@@ -220,11 +222,13 @@ void die() BANKED{
 	world_area_map = 0;
 	flag_night_mode = 0;//RESET
 	update_hp(16);
+	consume_weapon_atk();
+	consume_weapon_def();
 	
 	state_move_to_papyrus(DEAD, StateWorldmap);
 }
 
-void spawn_items() BANKED{
+void spawn_items(void) BANKED{
 	switch(current_mission){
 		case MISSIONROME00:
 			if(configuration.whip == NORMAL){
@@ -366,7 +370,7 @@ void spawn_items() BANKED{
 	}
 }
 
-void night_mode() BANKED{
+void night_mode(void) BANKED{
 	if(_cpu != CGB_TYPE){
 		BGP_REG = PAL_DEF(2, 1, 3, 3);// NIGHT MODE
 		OBP0_REG = PAL_DEF(3, 3, 1, 3);

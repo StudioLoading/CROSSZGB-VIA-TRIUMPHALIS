@@ -15,7 +15,7 @@ const UINT8 a_killer_hidden[] = {1, 0};
 
 extern Sprite* s_horse;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_killer_hidden, 4u);
     THIS->lim_x = 2000;
     THIS->lim_y = 2000;
@@ -28,7 +28,7 @@ void START() {
     killer_data->time_blink = 40;
 }
 
-void UPDATE() {
+void UPDATE(void){
     struct KillerData* killer_data = (struct KillerData*) THIS->custom_data;
     /*
     UINT8 configured;
@@ -71,9 +71,6 @@ void UPDATE() {
         break;
         case 2: //visible
             killer_data->timeout--;
-            if(killer_data->timeout == killer_data->instant_attack){
-                //attack! lancia lancia
-            }
             if(killer_data->timeout <= 0){
                 killer_data->timeout = killer_data->time_blink;
                 SetSpriteAnim(THIS, a_killer_v_blink, 32u);
@@ -89,5 +86,5 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

@@ -18,7 +18,7 @@ const UINT8 a_fantoccio_hit[] = {6, 0,1,2,3,4,5};
 
 void fantoccio_move(Sprite* s_fantoccio_arg) BANKED;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_fantoccio_idle, 24);
     THIS->mirror = NO_MIRROR;
     THIS->lim_x = 1000;
@@ -27,7 +27,7 @@ void START() {
     f_data->fantoccio_counter = 0;
 }
 
-void UPDATE() {
+void UPDATE(void){
     struct FantoccioData* f_data = (struct FantoccioData*) THIS->custom_data;
     if(f_data->fantoccio_counter >= 4){
         f_data->fantoccio_counter--;
@@ -38,7 +38,7 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }
 
 void fantoccio_move(Sprite* s_fantoccio_arg) BANKED{

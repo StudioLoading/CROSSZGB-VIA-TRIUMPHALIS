@@ -16,13 +16,13 @@ extern Sprite* s_horse;
 extern Sprite* s_gator;
 extern INT8 gator_vx;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_pharaobiga, 8u);
     THIS->lim_x = 2000;
     THIS->lim_y = 2000;
 }
 
-void UPDATE() {
+void UPDATE(void){
     INT16 dest_x = (INT16)s_gator->x - 10;
     if(s_gator->mirror == V_MIRROR){
         dest_x = (INT16)s_gator->x + 28u;
@@ -51,5 +51,5 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

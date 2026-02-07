@@ -24,7 +24,7 @@ const UINT8 coll_m04_surface[] = {0u, 0};
 
 Sprite* s_traitor00 = 0;
 
-void spawn_spy() BANKED;
+void spawn_spy(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -53,15 +53,15 @@ extern UINT8 mission_killed;
 extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
-extern void map_ended() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
+extern void map_ended(void) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 1;
     s_traitor00 = 0;
     timemax_current = TIME_MAX_MISSIONALPS04;
@@ -91,7 +91,7 @@ void START(){
         spawn_spy();
 }
 
-void spawn_spy() BANKED{
+void spawn_spy(void) BANKED{
     s_traitor00 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 74u << 3), ((UINT16) 9u << 3));
     struct SoldierData* traitor00_data = (struct SoldierData*) s_traitor00->custom_data;
     traitor00_data->frmskip_max = 10u;
@@ -99,7 +99,7 @@ void spawn_spy() BANKED{
     traitor00_data->reward = NOITEM;
 }
 
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //LIMIT MAP LEFT    

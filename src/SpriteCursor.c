@@ -11,12 +11,12 @@
 
 const UINT8 a_cursor[] = {2, 0,1};
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_cursor, 32u);
 }
 
-void UPDATE() {
+void UPDATE(void){
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

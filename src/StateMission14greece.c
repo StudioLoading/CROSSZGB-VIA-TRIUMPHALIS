@@ -53,23 +53,23 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 flag_night_mode;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void map_ended() BANKED;
-extern void night_mode() BANKED;
+extern void map_ended(void) BANKED;
+extern void night_mode(void) BANKED;
 
-void m14_spawn_greeks() BANKED;
-void m14_spawn_straw() BANKED;
-void m14_spawn_greeks2() BANKED;
+void m14_spawn_greeks(void) BANKED;
+void m14_spawn_straw(void) BANKED;
+void m14_spawn_greeks2(void) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 0;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
@@ -97,12 +97,12 @@ void START(){
         start_common();
 }
 
-void m14_spawn_straw() BANKED{
+void m14_spawn_straw(void) BANKED{
     SpriteManagerAdd(SpriteStraw, ((UINT16) 94u << 3) , ((UINT16) 6u << 3) + 4);
     SpriteManagerAdd(SpriteStraw, ((UINT16) 162u << 3) , ((UINT16) 7u << 3) + 4);
 }
 
-void m14_spawn_greeks() BANKED{
+void m14_spawn_greeks(void) BANKED{
     s_greeksoldier00 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 33u << 3), ((UINT16) 4u << 3));
     struct SoldierData* greeksoldier00_data = (struct SoldierData*) s_greeksoldier00->custom_data;
     greeksoldier00_data->frmskip_max = 2u;
@@ -133,7 +133,7 @@ void m14_spawn_greeks() BANKED{
 
 }
 
-void m14_spawn_greeks2() BANKED{
+void m14_spawn_greeks2(void) BANKED{
 
     SpriteManagerAdd(SpriteStraw, ((UINT16) 169u << 3) , ((UINT16) 7u << 3) + 4);
     s_greeksoldier00 = SpriteManagerAdd(SpriteKiller, ((UINT16) 159u << 3), ((UINT16) 5u << 3));
@@ -154,7 +154,7 @@ void m14_spawn_greeks2() BANKED{
     greeksoldier04_data->reward = NOITEM;
 }
 
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //FLAG 2

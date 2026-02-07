@@ -52,19 +52,19 @@ extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
 extern INT8 hp_current;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void update_time() BANKED;
-extern void spawn_items() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void update_time(void) BANKED;
+extern void spawn_items(void) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void die() BANKED;
-extern void map_ended() BANKED;
+extern void die(void) BANKED;
+extern void map_ended(void) BANKED;
 extern void update_hp(INT8 variation) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 0;
     timemax_current = TIME_MAX_MISSIONSEA16;
     time_current = timemax_current;
@@ -95,7 +95,7 @@ void START(){
 }
 
 
-void UPDATE(){
+void UPDATE(void){
     //LIMITS
         if(scroll_target->x < 2){
             scroll_target->x = 2;

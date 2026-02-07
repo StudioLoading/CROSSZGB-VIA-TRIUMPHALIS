@@ -44,17 +44,17 @@ extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
 extern UINT8 turn;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void spawn_items() BANKED;
-extern void map_ended() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void map_ended(void) BANKED;
 
-void spawn_roman_soldiers() BANKED;
+void spawn_roman_soldiers(void) BANKED;
 
-void START(){
+void START(void){
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
     }else{//initial
@@ -80,7 +80,7 @@ void START(){
 }
 
 
-void spawn_roman_soldiers() BANKED{
+void spawn_roman_soldiers(void) BANKED{
     s_romansoldier00 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 84u << 3), ((UINT16) 5u << 3));
     struct SoldierData* romansoldier00_data = (struct SoldierData*) s_romansoldier00->custom_data;
     romansoldier00_data->frmskip_max = 12u;
@@ -104,7 +104,7 @@ void spawn_roman_soldiers() BANKED{
     romansoldier03_data->configured = 2;
     romansoldier03_data->reward = NOITEM;
 }
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //LIMIT MAP LEFT

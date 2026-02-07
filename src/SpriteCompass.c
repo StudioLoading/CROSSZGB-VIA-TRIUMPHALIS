@@ -27,13 +27,13 @@ extern UINT8 track_ended;
 
 INT8 compass_counter = 0;
 
-void START() {
+void START(void){
     THIS->lim_x = 1000;
     THIS->lim_y = 1000;
     compass_counter = 0;
 }
 
-void UPDATE() {
+void UPDATE(void){
     //mettilo allo scroll_target che è SpriteCamera
         THIS->x = s_horse->x;
         THIS->y = s_horse->y - 24;
@@ -72,5 +72,5 @@ void UPDATE() {
         }
     }
 
-void DESTROY() {
+void DESTROY(void){
 }

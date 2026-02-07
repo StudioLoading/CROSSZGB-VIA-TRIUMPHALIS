@@ -47,19 +47,19 @@ extern INT16 timemax_current;
 extern INT16 time_factor;
 extern INT16 time_to_load;
 
-extern void start_common() BANKED;
-extern void update_common() BANKED;
-extern void update_time() BANKED;
+extern void start_common(void) BANKED;
+extern void update_common(void) BANKED;
+extern void update_time(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
-extern void spawn_items() BANKED;
-extern void die() BANKED;
-extern void map_ended() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
+extern void spawn_items(void) BANKED;
+extern void die(void) BANKED;
+extern void map_ended(void) BANKED;
 
-void spawn_killers() BANKED;
+void spawn_killers(void) BANKED;
 
-void START(){
+void START(void){
     mission_iscrono = 1;
     timemax_current = TIME_MAX_MISSIONROME03;
     time_factor = TIME_FACTOR_MISSIONROME03;
@@ -88,7 +88,7 @@ void START(){
 }
 
 
-void UPDATE(){
+void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //LIMIT MAP RIGHT

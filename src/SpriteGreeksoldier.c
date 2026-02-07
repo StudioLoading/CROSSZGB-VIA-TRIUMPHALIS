@@ -17,7 +17,7 @@ extern UINT8 mission_killed;
 extern Sprite* s_horse;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_greek_h, 8u);
     THIS->lim_x = 1000;
     THIS->lim_y = 1000;
@@ -29,7 +29,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     struct SoldierData* greeksoldier_data = (struct SoldierData*) THIS->custom_data;
     switch(greeksoldier_data->configured){
         case 0:
@@ -141,5 +141,5 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

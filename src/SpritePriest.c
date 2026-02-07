@@ -14,13 +14,13 @@ extern UINT8 mission_killed;
 const UINT8 a_priest_down[] = {1, 1};
 const UINT8 a_priest_blink[] = {2, 0,1};
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_priest_down, 8u);
     THIS->lim_x = 2000;
     THIS->lim_y = 2000;
 }
 
-void UPDATE() {
+void UPDATE(void){
     struct SoldierData* priest_data = (struct SoldierData*) THIS->custom_data;
     switch(priest_data->configured){
         case 0:
@@ -49,5 +49,5 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {
+void DESTROY(void){
 }

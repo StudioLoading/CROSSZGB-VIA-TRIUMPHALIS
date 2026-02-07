@@ -67,22 +67,22 @@ extern UINT8 turn_to_load;
 extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
 
-extern void start_common() BANKED;
-extern void update_stamina() BANKED;
-extern void update_compass() BANKED;
-extern void update_turning() BANKED;
-extern void update_euphoria() BANKED;
-extern void update_time() BANKED;
+extern void start_common(void) BANKED;
+extern void update_stamina(void) BANKED;
+extern void update_compass(void) BANKED;
+extern void update_turning(void) BANKED;
+extern void update_euphoria(void) BANKED;
+extern void update_time(void) BANKED;
 extern void update_hp(INT8 variation) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
-extern void check_danger() BANKED;
-extern void show_danger() BANKED;
+extern void check_danger(void) BANKED;
+extern void show_danger(void) BANKED;
 extern void fantoccio_move(Sprite* s_fantoccio_arg) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void set_bgm() BANKED;
+extern void set_bgm(void) BANKED;
 
-void START() {
+void START(void){
     fantoccio_hit = 0;
     pos_horse_x = 0;
     pos_horse_y = 0;
@@ -199,7 +199,7 @@ void START() {
         start_common();
 }
 
-void UPDATE(){
+void UPDATE(void){
 	//LIMIT MAP LEFT
         if(tutorial_state < TUTORIAL_PASSED && tutorial_state != TUTORIAL_STAGE_9_GLADIOLEFT){
             if(s_horse->x < 40u){

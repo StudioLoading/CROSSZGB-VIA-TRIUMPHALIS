@@ -43,11 +43,11 @@ extern TUTORIAL_STAGE tutorial_state;
 
 INSTRUCTION instruction_given = 0;
 
-void update_scroll() BANKED;
+void update_scroll(void) BANKED;
 
-extern void set_bgm() BANKED;
+extern void set_bgm(void) BANKED;
 
-void START(){
+void START(void){
     InitScroll(BANK(papyrusmap), &papyrusmap, 0, 0);
     SetWindowY(144);
 	SHOW_BKG;
@@ -62,7 +62,7 @@ void START(){
     }
 }
 
-void UPDATE(){
+void UPDATE(void){
     scroll_counter++;
     if(trigger_unscroll == 0){
         if(scroll_counter > SCROLL_COUNTER_MAX && scroll_step < 6){
@@ -95,7 +95,7 @@ void UPDATE(){
        
 }
 
-void update_scroll() BANKED{
+void update_scroll(void) BANKED{
     //scroll in alto
         set_bkg_tile_xy(1, 7-scroll_step-1, 0);
         set_bkg_tile_xy(2, 7-scroll_step-1, 0);

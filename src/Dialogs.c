@@ -583,7 +583,7 @@ void GetLocalizedDialog_EN(INSTRUCTION arg_instruction) BANKED{
     }
 }
 
-void reset_dn() BANKED{
+void reset_dn(void) BANKED{
     memcpy(d0, EMPTY_STRING_14, 15);
     memcpy(d1, EMPTY_STRING_14, 15);
     memcpy(d2, EMPTY_STRING_14, 15);

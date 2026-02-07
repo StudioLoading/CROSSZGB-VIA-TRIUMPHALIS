@@ -16,7 +16,7 @@ const UINT8 a_savage_u[] = {2, 3,4};
 extern UINT8 mission_killed;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
-void START() {
+void START(void){
     SetSpriteAnim(THIS, a_savage_h, 8u);
     THIS->lim_x = 1000;
     THIS->lim_y = 1000;
@@ -28,7 +28,7 @@ void START() {
     }
 }
 
-void UPDATE() {
+void UPDATE(void){
     struct SoldierData* savage_data = (struct SoldierData*) THIS->custom_data;
     switch(savage_data->configured){
         case 0:
@@ -104,7 +104,7 @@ void UPDATE() {
     }
 }
 
-void DESTROY() {    
+void DESTROY(void){    
     struct SoldierData* savage_data = (struct SoldierData*) THIS->custom_data;
     if(savage_data->reward != NOITEM){
         item_spawn(savage_data->reward, THIS->x + 2u, THIS->y);

@@ -63,24 +63,24 @@ UINT8 reset_combo_counter = 0u;
 UINT8 flag_using_atk = 0u;
 UINT8 end_game = 0u;
 
-void update_stamina() BANKED;
-void update_euphoria() BANKED;
-void update_compass() BANKED;
-void update_turning() BANKED;
+void update_stamina(void) BANKED;
+void update_euphoria(void) BANKED;
+void update_compass(void) BANKED;
+void update_turning(void) BANKED;
 void update_hp(INT8 variation) BANKED;
-void update_hp_max() BANKED;
-void update_time() BANKED;
-void update_time_max() BANKED;
-void update_weapon() BANKED;
-void consume_weapon_def() BANKED;
-void consume_weapon_atk() BANKED;
+void update_hp_max(void) BANKED;
+void update_time(void) BANKED;
+void update_time_max(void) BANKED;
+void update_weapon(void) BANKED;
+void consume_weapon_def(void) BANKED;
+void consume_weapon_atk(void) BANKED;
 void use_weapon(INT8 is_defence) BANKED;
-void start_common() BANKED;
-void update_common() BANKED;
-INT8 is_track_ended() BANKED;
+void start_common(void) BANKED;
+void update_common(void) BANKED;
+INT8 is_track_ended(void) BANKED;
 void calculate_danger(Sprite* s_danger) BANKED;
-void check_danger() BANKED;
-void show_danger() BANKED;
+void check_danger(void) BANKED;
+void show_danger(void) BANKED;
 
 extern UINT8 scroll_bottom_movement_limit;//= 100;
 
@@ -100,13 +100,13 @@ extern UINT8 turn_to_load;
 extern INT16 time_to_load;
 extern UINT8 turn;
 
-extern void die() BANKED;
-extern void set_bgm() BANKED;
+extern void die(void) BANKED;
+extern void set_bgm(void) BANKED;
 
-void START() {
+void START(void){
 }
 
-void start_common() BANKED{
+void start_common(void) BANKED{
 	set_sgb_palette_statusbar();
 	scroll_bottom_movement_limit = 40;
 	euphoria_min_current = euphoria_min;
@@ -140,7 +140,7 @@ void start_common() BANKED{
 	BGP_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
 }
 
-void update_stamina() BANKED{
+void update_stamina(void) BANKED{
 	//12 tiles di hud
 	//devo scrivere stamina_current in termini di pixels.
 	//stamina_max : stamina_current = PIXEL_STAMINA : x
@@ -163,7 +163,7 @@ void update_stamina() BANKED{
 	}
 }
 
-void update_euphoria() BANKED{
+void update_euphoria(void) BANKED{
 	//clean
 		UPDATE_HUD_TILE(6,1,1);
 		UPDATE_HUD_TILE(7,1,1);
@@ -195,7 +195,7 @@ void update_euphoria() BANKED{
 		UPDATE_HUD_TILE(7+euphoria_final,1, 10);
 }
 
-void update_compass() BANKED{
+void update_compass(void) BANKED{
 	/* LOOK AT hudmbkup.gbm
 	INT8 using_cos = cos;
 	INT8 using_sin = sin;
@@ -254,7 +254,7 @@ void update_compass() BANKED{
 	*/
 }
 
-void update_turning() BANKED{
+void update_turning(void) BANKED{
 	/* LOOK AT hudmbkup.gbm
 	if(hud_turn_cooldown > 0){
 		hud_turn_cooldown--;
@@ -268,7 +268,7 @@ void update_turning() BANKED{
 	*/
 }
 
-void update_hp_max() BANKED{
+void update_hp_max(void) BANKED{
 	hp_current = 16;
 	update_hp(16);
 }
@@ -301,7 +301,7 @@ void update_hp(INT8 variation) BANKED{
 	}
 }
 
-void update_time() BANKED{
+void update_time(void) BANKED{
 	INT16 time_hud = time_current / time_factor;
 	INT16 time_intero = time_hud / 8;
 	INT8 time_resto = time_hud % 8;
@@ -322,7 +322,7 @@ void update_time() BANKED{
 	}
 }
 
-void update_weapon() BANKED{
+void update_weapon(void) BANKED{
 	switch(weapon_atk){
 		case NONE:
 			UPDATE_HUD_TILE(5,3,20);
@@ -443,22 +443,22 @@ void use_weapon(INT8 is_defence) BANKED{
 	}
 }
 
-void update_time_max() BANKED{
+void update_time_max(void) BANKED{
 	time_current = timemax_current ;
 }
 
-void consume_weapon_atk() BANKED{
+void consume_weapon_atk(void) BANKED{
 	weapon_atk = NONE;
 	flag_using_atk = 0u;
 	update_weapon();
 }
 
-void consume_weapon_def() BANKED{
+void consume_weapon_def(void) BANKED{
 	weapon_def = NONE;
 	update_weapon();
 }
 
-INT8 is_track_ended() BANKED{// == is mission completed
+INT8 is_track_ended(void) BANKED{// == is mission completed
 	INT8 result = 0;
 	switch(current_state){
 		case StateMission00rome:
@@ -527,7 +527,7 @@ void calculate_danger(Sprite* s_danger) BANKED{
 		*/
 }
 
-void check_danger() BANKED{
+void check_danger(void) BANKED{
 	INT8 flag_danger = flag_danger_right | flag_danger_left | flag_danger_up | flag_danger_down;
 	if(flag_danger && counter_danger == 0){
 		counter_danger = COUNTER_DANGER_MAX;
@@ -537,7 +537,7 @@ void check_danger() BANKED{
 	}
 }
 
-void show_danger() BANKED{
+void show_danger(void) BANKED{
 	if(counter_danger > 0){
 		counter_danger--;
 		switch(counter_danger){
@@ -593,7 +593,7 @@ void show_danger() BANKED{
 	}
 }
 
-void update_common() BANKED{
+void update_common(void) BANKED{
     //DIEING
         if(flag_die == 1){
             die_counter--;
@@ -627,6 +627,6 @@ void update_common() BANKED{
 }
 
 
-void UPDATE() {
+void UPDATE(void){
 
 }
