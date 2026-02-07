@@ -395,6 +395,9 @@ void use_weapon(INT8 is_defence) BANKED{
 		weapon_data->configured = 3;
 		consume_weapon_def();
 	}else{//attack!
+		if(flag_using_atk){
+			return;
+		}
 		flag_using_atk = 1u;
 		UINT16 attack_x = s_horse->x;
 		UINT16 attack_y = s_horse->y + 8;
@@ -403,7 +406,7 @@ void use_weapon(INT8 is_defence) BANKED{
 			attack_x = s_horse->x - 16;
 		}
 		if(weapon_atk == LANCE){
-			attack_y = s_horse->y;
+			attack_y = s_horse->y - 8;
 		}else if(weapon_atk == FIRE){
 			attack_x = s_horse->x + 16;
 			if(s_horse->mirror == V_MIRROR){
@@ -416,7 +419,7 @@ void use_weapon(INT8 is_defence) BANKED{
 				s_weapon = SpriteManagerAdd(SpriteWeapon, attack_x, attack_y);
 			break;
 			case LANCE:
-				s_weapon = SpriteManagerAdd(SpriteItemlance, attack_x, attack_y);
+				s_weapon = SpriteManagerAdd(SpriteWeapon, attack_x, attack_y);
 				if(vx < 0){
 					s_weapon->mirror = V_MIRROR;
 				}

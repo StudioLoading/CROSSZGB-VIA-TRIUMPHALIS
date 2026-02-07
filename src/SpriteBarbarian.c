@@ -53,9 +53,8 @@ void UPDATE(void){
         break;
         case 4://activate dieing
             mission_killed++;
-            barbarian_data->vx = 40;//usato come countdown di morte
+            barbarian_data->vx = 20;//usato come countdown di morte
             barbarian_data->configured = 5;
-            SetSpriteAnim(THIS, a_barbarian_blink, 24u);
             return;
         break;
         case 5://dieing
@@ -91,8 +90,7 @@ void UPDATE(void){
     SPRITEMANAGER_ITERATE(scroll_rs_tile, rsspr) {
         if(CheckCollision(THIS, rsspr)) {
             switch(rsspr->type){
-                case SpriteItemlance:
-                case SpriteItemgladio:
+                case SpriteWeapon:
                 case SpriteFlame:
                     if(barbarian_data->configured < 4){
                         barbarian_data->configured = 4;
@@ -108,4 +106,5 @@ void DESTROY(void){
     if(barbarian_data->reward != NOITEM){
         item_spawn(barbarian_data->reward, THIS->x + 2u, THIS->y);
     }
+    SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
 }

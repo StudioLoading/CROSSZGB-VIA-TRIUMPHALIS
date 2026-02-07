@@ -55,9 +55,8 @@ void UPDATE(void){
         break;
         case 4://activate dieing
             mission_killed++;
-            greeksoldier_data->vx = 40;//usato come countdown di morte
+            greeksoldier_data->vx = 20;//usato come countdown di morte
             greeksoldier_data->configured = 5;
-            SetSpriteAnim(THIS, a_greek_blink, 24u);
             return;
         break;
         case 5://dieing
@@ -129,8 +128,7 @@ void UPDATE(void){
     SPRITEMANAGER_ITERATE(scroll_rs_tile, rsspr) {
         if(CheckCollision(THIS, rsspr)) {
             switch(rsspr->type){
-                case SpriteItemlance:
-                case SpriteItemgladio:
+                case SpriteWeapon:
                 case SpriteFlame:
                     if(greeksoldier_data->configured < 4 || greeksoldier_data->configured == 7){
                         greeksoldier_data->configured = 4;
@@ -142,4 +140,9 @@ void UPDATE(void){
 }
 
 void DESTROY(void){
+    struct SoldierData* greek_data = (struct SoldierData*) THIS->custom_data;
+    if(greek_data->reward != NOITEM){
+        item_spawn(greek_data->reward, THIS->x + 2u, THIS->y);
+    }
+    SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
 }

@@ -72,7 +72,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
 	struct ItemData* item_data = (struct ItemData*) s_item_arg->custom_data;
     switch(item_data->configured){
         case 0: return; break;
-        case 1://set animation
+        case 1://set animation and spawn
             switch(item_data->itemtype){
                 case GLADIO:
                     item_gladio_anim(s_item_arg);
@@ -130,7 +130,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                     item_data->vy = 0;
                 break;
                 case LANCE:
-                    item_lance_anim(s_item_arg);
+                    weapon_update_anim(s_item_arg);
                     item_data->vx = vx;
                     if(vx == 0){
                         if(s_horse->mirror == NO_MIRROR){
@@ -197,11 +197,11 @@ void item_common_update(Sprite* s_item_arg) BANKED{
         case 5://weapon start dieing
             switch(item_data->itemtype){
                 case GLADIO:
-                    item_gladio_anim_inuse_blink(s_item_arg);
+                    //item_gladio_anim_inuse_blink(s_item_arg);
                     consume_weapon_atk();
                 break;
                 case LANCE:
-                    item_lance_anim_blink(s_item_arg);
+                    //item_lance_anim_blink(s_item_arg);
                     consume_weapon_atk();
                 break;
                 case ENEMY_LANCE:

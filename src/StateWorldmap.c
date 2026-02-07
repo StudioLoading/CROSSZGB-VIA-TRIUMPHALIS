@@ -43,7 +43,7 @@ extern void manage_border(UINT8 my_next_state) BANKED;
 void start_game_cheat(AREA arg_cheat_area) BANKED{
     switch(arg_cheat_area){
         case AREA_ALPS: current_mission = MISSIONALPS05; break;
-        case AREA_SEA: current_mission = MISSIONSEA10; break;
+        case AREA_SEA: current_mission = MISSIONSEA11; break;
         case AREA_GREECE: current_mission = MISSIONGREECE12; break;
         case AREA_DESERT: current_mission = MISSIONDESERT16; break;
         case AREA_EGYPT: current_mission = MISSIONEGYPT20; break;

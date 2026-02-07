@@ -93,8 +93,7 @@ void UPDATE(void){
     SPRITEMANAGER_ITERATE(scroll_rs_tile, rsspr) {
         if(CheckCollision(THIS, rsspr)) {
             switch(rsspr->type){
-                case SpriteItemlance:
-                case SpriteItemgladio:
+                case SpriteWeapon:
                 case SpriteFlame:
                     if(romansoldier_data->configured < 4){
                         romansoldier_data->configured = 4;
@@ -106,5 +105,9 @@ void UPDATE(void){
 }
 
 void DESTROY(void){
+    struct SoldierData* soldier_data = (struct SoldierData*) THIS->custom_data;
+    if(soldier_data->reward != NOITEM){
+        item_spawn(soldier_data->reward, THIS->x + 2u, THIS->y);
+    }
     SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
 }

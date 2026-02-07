@@ -20,7 +20,6 @@ void item_gladio_anim_inuse_blink(Sprite* s_item_arg) BANKED;
 
 extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
-extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
 
 void START(void){
     item_common_start(THIS);
@@ -28,7 +27,6 @@ void START(void){
 
 void UPDATE(void){
     item_common_update(THIS);
-    //item_common_spritescollision(THIS);
 }
 
 void item_gladio_anim_blink(Sprite* s_item_arg) BANKED{

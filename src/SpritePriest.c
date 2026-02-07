@@ -14,6 +14,8 @@ extern UINT8 mission_killed;
 const UINT8 a_priest_down[] = {1, 1};
 const UINT8 a_priest_blink[] = {2, 0,1};
 
+extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
+
 void START(void){
     SetSpriteAnim(THIS, a_priest_down, 8u);
     THIS->lim_x = 2000;
@@ -33,10 +35,9 @@ void UPDATE(void){
             return;
         break;
         case 4://activate dieing
-            priest_data->vx = 40;//usato come countdown di morte
+            priest_data->vx = 20;//usato come countdown di morte
             priest_data->configured = 5;
             mission_killed++;
-            SetSpriteAnim(THIS, a_priest_blink, 24u);
             return;
         break;
         case 5://dieing
@@ -50,4 +51,9 @@ void UPDATE(void){
 }
 
 void DESTROY(void){
+    struct SoldierData* greek_data = (struct SoldierData*) THIS->custom_data;
+    if(greek_data->reward != NOITEM){
+        item_spawn(greek_data->reward, THIS->x + 2u, THIS->y);
+    }
+    SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
 }

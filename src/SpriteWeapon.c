@@ -13,6 +13,7 @@ typedef enum {
     ANIM_GLADIO_HIDDEN = 0,
 	ANIM_GLADIO_DOWN,
 	ANIM_GLADIO_UP,
+	ANIM_LANCE,
 	N_ANIMS
 } animation_weapon;
 
@@ -29,6 +30,7 @@ void set_sprite_native_banked_data(UINT8 bank, UINT8 id, UINT8 len, const UINT8 
 void weapon_update_anim(Sprite* arg_s_weapon) BANKED;
 
 extern Sprite* s_horse;
+extern UINT8 flag_using_atk;
 extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
 extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
@@ -54,6 +56,11 @@ void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
             if(s_horse->mirror == V_MIRROR){
                 anim_weapon = ANIM_GLADIO_UP;
             }
+        break;
+        case LANCE:
+            anim_weapon_tick = 0;
+            anim_weapon = ANIM_LANCE;
+            arg_s_weapon->mirror = s_horse->mirror;
         break;
     }
 }
@@ -81,7 +88,8 @@ void UPDATE(void) {
     struct ItemData* item_data = (struct ItemData*) THIS->custom_data;
     switch(item_data->configured){
         case 4: //in use
-            if(one_cycle_anim_completed){
+            if(item_data->itemtype == GLADIO && one_cycle_anim_completed){
+                flag_using_atk = 0u;
                 SpriteManagerRemoveSprite(THIS);
             }
         break;
