@@ -53,18 +53,11 @@ void UPDATE(void){
         break;
         case 4://activate dieing
             mission_killed++;
-            romansoldier_data->vx = 20;//usato come countdown di morte
             romansoldier_data->configured = 5;
-            return;
-        break;
-        case 5://dieing
-            romansoldier_data->vx--;
-            if(romansoldier_data->vx <= 0){
-                if(romansoldier_data->reward != NOITEM){
-                    item_spawn(romansoldier_data->reward, THIS->x + 2u, THIS->y);
-                }
-                SpriteManagerRemoveSprite(THIS);
+            if(romansoldier_data->reward != NOITEM){
+                item_spawn(romansoldier_data->reward, THIS->x + 2u, THIS->y);
             }
+            SpriteManagerRemoveSprite(THIS);
             return;
         break;
     }

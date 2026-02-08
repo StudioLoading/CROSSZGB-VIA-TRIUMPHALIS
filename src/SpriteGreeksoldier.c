@@ -55,18 +55,11 @@ void UPDATE(void){
         break;
         case 4://activate dieing
             mission_killed++;
-            greeksoldier_data->vx = 20;//usato come countdown di morte
             greeksoldier_data->configured = 5;
-            return;
-        break;
-        case 5://dieing
-            greeksoldier_data->vx--;
-            if(greeksoldier_data->vx <= 0){
-                if(greeksoldier_data->reward != NOITEM){
-                    item_spawn(greeksoldier_data->reward, THIS->x + 2u, THIS->y);
-                }
-                SpriteManagerRemoveSprite(THIS);
+            if(greeksoldier_data->reward != NOITEM){
+                item_spawn(greeksoldier_data->reward, THIS->x + 2u, THIS->y);
             }
+            SpriteManagerRemoveSprite(THIS);
             return;
         break;
         case 6://horizontal runner

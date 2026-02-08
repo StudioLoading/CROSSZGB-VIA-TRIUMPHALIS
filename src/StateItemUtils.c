@@ -197,18 +197,16 @@ void item_common_update(Sprite* s_item_arg) BANKED{
         case 5://weapon start dieing
             switch(item_data->itemtype){
                 case GLADIO:
-                    //item_gladio_anim_inuse_blink(s_item_arg);
                     consume_weapon_atk();
                 break;
                 case LANCE:
-                    //item_lance_anim_blink(s_item_arg);
                     consume_weapon_atk();
                 break;
                 case ENEMY_LANCE:
                     item_e_lance_anim_blink(s_item_arg);
                 break;
             }
-            item_data->hp = 20;
+            //item_data->hp = 20;
             item_data->configured = 6;
         break;
         case 6://weapon dieing
@@ -219,10 +217,10 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                 case GLADIO:
                 case LANCE:
                 case ENEMY_LANCE:
-                    item_data->hp--;
-                    if(item_data->hp <= 0){
+                    //item_data->hp--;
+                    //if(item_data->hp <= 0){
                         SpriteManagerRemoveSprite(s_item_arg);
-                    }
+                    //}
                 break;
             }
         break;

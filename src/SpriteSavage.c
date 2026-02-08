@@ -54,15 +54,11 @@ void UPDATE(void){
         break;
         case 4://activate dieing
             mission_killed++;
-            savage_data->vx = 20;//usato come countdown di morte
             savage_data->configured = 5;
-            return;
-        break;
-        case 5://dieing
-            savage_data->vx--;
-            if(savage_data->vx <= 0){
-                SpriteManagerRemoveSprite(THIS);
+            if(savage_data->reward != NOITEM){
+                item_spawn(savage_data->reward, THIS->x + 2u, THIS->y);
             }
+            SpriteManagerRemoveSprite(THIS);
             return;
         break;
     }
