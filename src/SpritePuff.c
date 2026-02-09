@@ -15,7 +15,7 @@ typedef enum {
 } animation_puff;
 
 // define the animation speed conatsnt
-#define ANIMATION_PUFF_SPEED      3
+#define ANIMATION_PUFF_SPEED      4
 #define ANIMATION_PUFF_FRAMES     6
 static animation_puff old_anim_puff, anim_puff; 
 static UINT8 anim_puff_frame, anim_puff_tick;

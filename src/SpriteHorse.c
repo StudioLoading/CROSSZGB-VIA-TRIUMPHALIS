@@ -418,7 +418,6 @@ void UPDATE(void){
                     }
                     switch(tile_over){
                         case 3: //ghiaia: incrementa il frameskip
-                        //case 2: case 4: case 5: case 6: 
                             if(onfire_countdown == -1 && configuration.wheel == NORMAL){//non sta impazzendo
                                 frm_skip+=4;
                             }

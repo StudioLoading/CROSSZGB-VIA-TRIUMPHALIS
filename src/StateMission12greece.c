@@ -12,8 +12,8 @@
 #include "Dialogs.h"
 #include "custom_datas.h"
 
-#define TIME_MAX_MISSION12 960 //32 fattore 1, 320 fattore 10, 640 fattore 20, ...
-#define TIME_FACTOR_MISSION12 30
+#define TIME_MAX_MISSION12 1280 //32 fattore 1, 320 fattore 10, 640 fattore 20, ...
+#define TIME_FACTOR_MISSION12 40
 
 IMPORT_MAP(hudm);
 IMPORT_MAP(mapmission12);

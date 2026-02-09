@@ -1,6 +1,5 @@
 BUG:
-- verificare il puff di quando sconfiggo un common
-- perché anche se non ho l'arma e premo il bottone, esce un gladio?
+- test di longplay
 - ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
 
 PRODUZIONE:

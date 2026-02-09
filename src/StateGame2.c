@@ -34,7 +34,7 @@ static const palette_color_t palette_data_desert_02[] = {RGB(14,7,1),RGB(0,0,0),
 
 UINT8 flag_night_mode = 0u;
 UINT8 flag_border_set = 0u;
-UINT8 flag_is_demo = 1u;
+UINT8 flag_is_demo = 0u;
 
 void die(void) BANKED;
 void spawn_items(void) BANKED;

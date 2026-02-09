@@ -111,29 +111,23 @@ void START(void){
 
 void spawn_savages(void) BANKED{
     
-    s_savage01 = SpriteManagerAdd(SpriteSavage, ((UINT16) 91u << 3), ((UINT16) 16u << 3));
+    s_savage01 = SpriteManagerAdd(SpriteSavage, ((UINT16) 91u << 3), ((UINT16) 18u << 3));
     struct SoldierData* savage01_data = (struct SoldierData*) s_savage01->custom_data;
     savage01_data->frmskip_max = 8u;
     savage01_data->configured = 2;
     savage01_data->reward = NOITEM;
 
-    s_savage02 = SpriteManagerAdd(SpriteSavage, ((UINT16) 133u << 3), ((UINT16) 17u << 3) + 2);
+    s_savage02 = SpriteManagerAdd(SpriteSavage, ((UINT16) 134u << 3), ((UINT16) 18u << 3) + 2);
     struct SoldierData* savage02_data = (struct SoldierData*) s_savage02->custom_data;
     savage02_data->frmskip_max = 8u;
     savage02_data->configured = 2;
     savage02_data->reward = HP;
     
-    s_savage03 = SpriteManagerAdd(SpriteSavage, ((UINT16) 63u << 3), ((UINT16) 15u << 3) + 2);
+    s_savage03 = SpriteManagerAdd(SpriteSavage, ((UINT16) 63u << 3), ((UINT16) 17u << 3) + 2);
     struct SoldierData* savage03_data = (struct SoldierData*) s_savage03->custom_data;
     savage03_data->frmskip_max = 10u;
     savage03_data->configured = 2;
     savage03_data->reward = GLADIO;
-    
-    s_savage04 = SpriteManagerAdd(SpriteSavage, ((UINT16) 22u << 3), ((UINT16) 11u << 3) + 2);
-    struct SoldierData* savage04_data = (struct SoldierData*) s_savage04->custom_data;
-    savage04_data->frmskip_max = 6u;
-    savage04_data->configured = 2;
-    savage04_data->reward = NOITEM;
 
 }
 
@@ -171,7 +165,7 @@ void UPDATE(void){
             time_to_load = time_current;
             state_move_to_papyrus(MISSION09_SAVED_AMBASSADOR, StateMission09sea);
         }
-        if(mission_killed >= 4 && mission_completed == 0){
+        if(mission_killed >= 3 && mission_completed == 0){
             mission_completed = 1;
         }
     //CALCULATE DANGER
