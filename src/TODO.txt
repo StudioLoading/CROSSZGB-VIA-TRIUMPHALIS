@@ -1,11 +1,28 @@
 BUG:
-- test di longplay
+- il THE BEDUINE ha una crono impossibile! perché l'ho fatta così?
+- sistema di punteggio highscore
+    - sprite di segnalazione +1K quando si uccide qualcuno, che significa 1kill e 1.000 punti
+    - il calcolo del danno deve essere centralizzato perché dipende dalla presenza del configuration.elm == GOLDEN
+- "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
 - ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
-
-PRODUZIONE:
+- Normal Mode vs Hard Mode
+    normal mode
+        rendere il tutorial opzionale Yes/No
+    hard mode 
+        non avrà il tutorial iniziale;
+        non avrà il compass; (?)
+        avrà il faraone finale a 7 di hp;
+- animazione cavallo a Stamina==0 che scodinzola e ogni anto abbassa la testa
 - animazione del trotto da sistemare per renderla perfetta
 - il livello dell'egypt col priest potrei fare un miniboss col prete che lancia cose contro di me e che io, per eliminarlo, devo fare una certa altra cosa.
-- fix della start_game_cheat(...)
+- test longplay DMG
+- test longplay SGB
+- test longplay CGB
+- controlla le missioni di atterraggio col cheat alla start_game_cheat()
+    oppure elimina il cheat
+    oppure fallo che dia solo i gold con una combo differente
+
+----------------------------------------------------------------------------
 
 VIA TRIUMPHALIS
 è un gioco arcade a tappe.
@@ -70,26 +87,6 @@ Se perdi, ricominci fuori dal deserto in area precedente! forse lì, tornato nel
 
 -------------------------------------------------------------------------------------
 
-TODOs:
-- l'arena di Alps, StateMission07alps, se si arriva dal livello precedente, muore la scroll_target, devo debuggare la DESTROY per capire se e perché succede.
-- il THE BEDUINE ha una crono impossibile! perché l'ho fatta così?
-- sistema di punteggio highscore
-    - sprite di segnalazione +1K quando si uccide qualcuno, che significa 1kill e 1.000 punti
-    - il calcolo del danno deve essere centralizzato perché dipende dalla presenza del configuration.elm == GOLDEN
-- "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
-- Normal Mode vs Hard Mode
-    hard mode 
-        non avrà il tutorial iniziale;
-        non avrà il compass; (?)
-        avrà il faraone finale a 7 di hp;
-- test DMG
-- test SGB
-- test CGB
-- controlla le missioni di atterraggio col cheat alla start_game_cheat()
-    oppure elimina il cheat
-    oppure fallo che dia solo i gold con una combo differente
-
--------------------------------------------------------------------------------------
 LIBRETTO:
 - lore
 - mappa dell'impero

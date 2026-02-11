@@ -198,16 +198,6 @@ void change_description(void) BANKED{
 }
 
 void pickup_config(ITEM_TYPE arg_pickedup) BANKED{
-    pos_horse_x = s_horse->x;
-    pos_horse_y = s_horse->y;
-    mirror_horse = s_horse->mirror;
-    if(current_mission == MISSIONDESERT16){
-        pos_horse_x = scroll_target->x;
-        pos_horse_y = scroll_target->y;
-        mirror_horse = scroll_target->mirror;
-    }
-    turn_to_load = turn;
-    time_to_load = time_current;
     INSTRUCTION instruction_to_give = 0;
     switch(arg_pickedup){
         case GOLDEN_WHIP:
@@ -227,6 +217,18 @@ void pickup_config(ITEM_TYPE arg_pickedup) BANKED{
             instruction_to_give = DESCRIPTION_GOLDEN_ELM;
         break;
     }
-    flag_golden_found = 1;
-    state_move_to_papyrus(instruction_to_give, 0);
+    if(current_state != StateCredit){//activating cheating from titlescreen
+        flag_golden_found = 1;
+        time_to_load = time_current;
+        pos_horse_x = s_horse->x;
+        pos_horse_y = s_horse->y;
+        mirror_horse = s_horse->mirror;
+        if(current_mission == MISSIONDESERT16){
+            pos_horse_x = scroll_target->x;
+            pos_horse_y = scroll_target->y;
+            mirror_horse = scroll_target->mirror;
+        }
+        turn_to_load = turn;
+        state_move_to_papyrus(instruction_to_give, 0);
+    }
 }

@@ -36,6 +36,7 @@ extern TUTORIAL_STAGE tutorial_state;
 
 extern void manage_border(UINT8 my_next_state) BANKED;
 extern void set_bgm(void) BANKED;
+extern void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
 
 
 void START(void){
@@ -85,6 +86,10 @@ void UPDATE(void){
                 if(cheat_counter > 4){
                     cheat_activated = 1u;
                     tutorial_state = TUTORIAL_PASSED;
+                    pickup_config(GOLDEN_ELM);
+                    pickup_config(GOLDEN_REINS);
+                    pickup_config(GOLDEN_WHEEL);
+                    pickup_config(GOLDEN_WHIP);
                     PRINT(13, 1, "CHEATER!");
                     return;
                 }

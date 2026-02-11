@@ -57,6 +57,5 @@ void UPDATE(void){
 }
 
 void DESTROY(void){
-    THIS->y--;
-    THIS->x++;
+    flag_turn_on_tremble = 0;
 }
