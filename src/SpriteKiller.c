@@ -17,25 +17,12 @@ extern Sprite* s_horse;
 
 void START(void){
     SetSpriteAnim(THIS, a_killer_hidden, 4u);
-    THIS->lim_x = 2000;
-    THIS->lim_y = 2000;
-    struct KillerData* killer_data = (struct KillerData*) THIS->custom_data;
-    killer_data->configured = 99;
-    killer_data->timeout = 1;
-    killer_data->time_hidden = 100;
-    killer_data->time_visible = 120;
-    killer_data->time_attack = 60;
-    killer_data->time_blink = 40;
+    THIS->lim_x = 200;
+    THIS->lim_y = 200;
 }
 
 void UPDATE(void){
     struct KillerData* killer_data = (struct KillerData*) THIS->custom_data;
-    /*
-    UINT8 configured;
-    UINT8 timeout;
-    UINT8 time_hidden;
-    UINT8 time_visible;
-    UINT8 time_attack;*/
     switch(killer_data->configured){
         case 99:{
             INT16 distance_delta_x = THIS->x - s_horse->x;
@@ -80,7 +67,7 @@ void UPDATE(void){
         case 3: //blink
             killer_data->timeout--;
             if(killer_data->timeout <= 0){
-                SpriteManagerRemoveSprite(THIS);
+                //SpriteManagerRemoveSprite(THIS);
             }
         break;
     }

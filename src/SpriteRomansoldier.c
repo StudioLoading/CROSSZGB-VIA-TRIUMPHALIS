@@ -14,11 +14,13 @@ const UINT8 a_roman_u[] = {2, 3,4};
 
 extern UINT8 mission_killed;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
+extern Sprite* spawn_points(UINT8 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
+
 
 void START(void){
     SetSpriteAnim(THIS, a_roman_h, 8u);
-    THIS->lim_x = 1000;
-    THIS->lim_y = 1000;
+    THIS->lim_x = 200;
+    THIS->lim_y = 200;
     struct SoldierData* romansoldier_data = (struct SoldierData*) THIS->custom_data;
     romansoldier_data->configured = 0;
     romansoldier_data->frmskip = 0;
@@ -103,4 +105,5 @@ void DESTROY(void){
         item_spawn(soldier_data->reward, THIS->x + 2u, THIS->y);
     }
     SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
+    spawn_points(soldier_data->points, THIS->x, THIS->y);
 }

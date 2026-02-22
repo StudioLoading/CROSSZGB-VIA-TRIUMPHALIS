@@ -1,8 +1,15 @@
 BUG:
-- il THE BEDUINE ha una crono impossibile! perché l'ho fatta così?
+- politica di spawning dei nemici
+    - potrei lanciare il check_spawning alla translateSprite dell'horse piuttosto che sulla UPDATE degli state?
+- spostare il Calculate Danger? al momento è nella UPDATE ed è eseguito sempre
 - sistema di punteggio highscore
-    - sprite di segnalazione +1K quando si uccide qualcuno, che significa 1kill e 1.000 punti
-    - il calcolo del danno deve essere centralizzato perché dipende dalla presenza del configuration.elm == GOLDEN
+    - sprite di segnalazione +100 quando si uccide qualcuno, che significa 1kill e 1.000 punti
+    - a fine livello calcolo di quanta HP gli avanza e, se crono, quanto TIME gli avanza
+    - potrei calcolare anche il Tempo di Euphoria
+    - punti per l'aver trovato un golden item
+    - punti penalità se subisco danno
+- il lancio della fiaschetta vorrei abbia la direzione della bussola e faccia una quantità X;Y proporzionale alla velocità sugli assi
+- il calcolo del danno deve essere centralizzato perché dipende dalla presenza del configuration.elm == GOLDEN
 - "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
 - ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
 - Normal Mode vs Hard Mode

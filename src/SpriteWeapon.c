@@ -17,7 +17,7 @@ typedef enum {
 	N_ANIMS
 } animation_weapon;
 
-// define the animation speed conatsnt
+// define the animation speed constant
 #define ANIMATION_WEAPON_SPEED      6
 #define ANIMATION_WEAPON_FRAMES     5
 static animation_weapon old_anim_weapon, anim_weapon; 

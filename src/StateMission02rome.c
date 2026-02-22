@@ -83,18 +83,6 @@ void START(void){
 		SetWindowY(104);
         start_common();
         spawn_items();
-        spawn_killers();
-}
-
-void spawn_killers(void) BANKED{
-    s_killer00 = SpriteManagerAdd(SpriteKiller, ((UINT16) 100u << 3), ((UINT16) 75u << 3));
-    s_killer01 = SpriteManagerAdd(SpriteKiller, ((UINT16) 60u << 3), ((UINT16) 75u << 3));
-    s_killer02 = SpriteManagerAdd(SpriteKiller, ((UINT16) 90u << 3), ((UINT16) 56u << 3));
-    s_killer03 = SpriteManagerAdd(SpriteKiller, ((UINT16) 151u << 3), ((UINT16) 28u << 3));
-    s_killer04 = SpriteManagerAdd(SpriteKiller, ((UINT16) 64u << 3), ((UINT16) 3u << 3));
-    s_killer05 = SpriteManagerAdd(SpriteKiller, ((UINT16) 84u << 3), ((UINT16) 3u << 3));
-    s_killer06 = SpriteManagerAdd(SpriteKiller, ((UINT16) 104u << 3), ((UINT16) 3u << 3));
-    s_killer07 = SpriteManagerAdd(SpriteKiller, ((UINT16) 25u << 3), ((UINT16) 16u << 3));
 }
 
 void UPDATE(void){

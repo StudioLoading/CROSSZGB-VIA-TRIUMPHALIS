@@ -97,6 +97,7 @@ void spawn_spy(void) BANKED{
     traitor00_data->frmskip_max = 10u;
     traitor00_data->configured = 1;
     traitor00_data->reward = NOITEM;
+    traitor00_data->points = 100u;
 }
 
 void UPDATE(void){

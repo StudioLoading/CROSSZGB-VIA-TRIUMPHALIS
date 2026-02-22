@@ -32,14 +32,14 @@ void UPDATE(void){
         THIS->y = s_horse->y - 18;
     }
     INT8 delta_x = 0;
-    if(vx > 1){
-        UINT16 final_camera_x = s_horse->x + 56;
+    if(s_horse->mirror == NO_MIRROR){
+        UINT16 final_camera_x = s_horse->x + 64;
         UINT16 final_camera_x_min = final_camera_x - 8;
         UINT16 final_camera_x_max = final_camera_x + 8;
         if(THIS->x > final_camera_x_max){delta_x = -delta_x_inc;}
         else if(THIS->x < final_camera_x_min){delta_x = +delta_x_inc;}
     }
-    if(vx < -1){
+    if(s_horse->mirror == V_MIRROR){
         UINT16 final_camera_x = s_horse->x - 40;
         UINT16 final_camera_x_min = final_camera_x -8;
         UINT16 final_camera_x_max = final_camera_x +8;

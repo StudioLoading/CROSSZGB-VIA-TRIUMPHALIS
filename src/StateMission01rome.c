@@ -43,16 +43,17 @@ extern INT8 flag_golden_found;
 extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
 extern UINT8 turn;
+extern INT8 spawning_weapon_counter;
+extern Sprite* s_spawning_weapon;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
 extern void calculate_danger(Sprite* s_danger) BANKED;
 extern void check_danger(void) BANKED;
 extern void show_danger(void) BANKED;
-extern void spawn_items(void) BANKED;
 extern void map_ended(void) BANKED;
+extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
-void spawn_roman_soldiers(void) BANKED;
 
 void START(void){
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
@@ -75,35 +76,9 @@ void START(void){
 		INIT_HUD(hudm);
 		SetWindowY(104);
         start_common();
-        spawn_items();
-        spawn_roman_soldiers();
 }
 
 
-void spawn_roman_soldiers(void) BANKED{
-    s_romansoldier00 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 84u << 3), ((UINT16) 5u << 3));
-    struct SoldierData* romansoldier00_data = (struct SoldierData*) s_romansoldier00->custom_data;
-    romansoldier00_data->frmskip_max = 12u;
-    romansoldier00_data->configured = 2;
-    romansoldier00_data->reward = NOITEM;
-    s_romansoldier01 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 132u << 3), ((UINT16) 17u << 3));
-    struct SoldierData* romansoldier01_data = (struct SoldierData*) s_romansoldier01->custom_data;
-    romansoldier01_data->frmskip_max = 12u;
-    romansoldier01_data->configured = 2;
-    romansoldier00_data->reward = HP;
-    
-    s_romansoldier02 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 104u << 3), ((UINT16) 51u << 3));
-    struct SoldierData* romansoldier02_data = (struct SoldierData*) s_romansoldier02->custom_data;
-    romansoldier02_data->frmskip_max = 12u;
-    romansoldier02_data->configured = 2;
-    romansoldier02_data->reward = NOITEM;
-
-    s_romansoldier03 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 154u << 3), ((UINT16) 48u << 3));
-    struct SoldierData* romansoldier03_data = (struct SoldierData*) s_romansoldier03->custom_data;
-    romansoldier03_data->frmskip_max = 12u;
-    romansoldier03_data->configured = 2;
-    romansoldier03_data->reward = NOITEM;
-}
 void UPDATE(void){
     //COMMON UPDATE
         update_common();
@@ -111,18 +86,21 @@ void UPDATE(void){
         if(s_horse->x < 40u){
             s_horse->x = 40u;
         }
-        /*if(s_horse->x > ((UINT16) 200u << 3)){
-            if(current_step < EXIT){
-                s_horse->x = ((UINT16) 200u << 3);
-            }
-        }*/
     //CALCULATE DANGER
         calculate_danger(s_romansoldier00);
         calculate_danger(s_romansoldier01);
         calculate_danger(s_romansoldier02);
         calculate_danger(s_romansoldier03);
         check_danger();
-        show_danger();
+        show_danger();    
+    //CONTINUOUS SPAWNING WEAPON
+        if(s_spawning_weapon == 0){
+            spawning_weapon_counter++;
+            if(spawning_weapon_counter < 0){
+                spawning_weapon_counter = 0;
+                item_spawn_continuously(LANCE, ((UINT16) 39u << 3), ((UINT16) 34u << 3));
+            }
+        }
     //MISSION STEP
         /*if(current_step == SENATOR_COLLIDED){
             pos_horse_x = s_horse->x;

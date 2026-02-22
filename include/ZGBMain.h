@@ -39,6 +39,7 @@ STATE_DEF_END
 _SPRITE(SpriteHorse, horse, FLIP_NONE)\
 _SPRITE(SpriteWeapon, weapon, FLIP_NONE)\
 _SPRITE(SpritePuff, puff, FLIP_NONE)\
+_SPRITE(SpritePoints, points, FLIP_NONE)\
 _SPRITE_DMG(SpritePlayer, player)\
 _SPRITE_DMG(SpriteStep, step)\
 _SPRITE_DMG(SpriteBiga, biga)\

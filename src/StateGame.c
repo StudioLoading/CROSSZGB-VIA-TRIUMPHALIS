@@ -102,6 +102,8 @@ extern UINT8 turn;
 
 extern void die(void) BANKED;
 extern void set_bgm(void) BANKED;
+extern void init_enemies_map(void) BANKED;
+extern void spawn_enemies(void) BANKED;
 
 void START(void){
 }
@@ -138,6 +140,7 @@ void start_common(void) BANKED{
 	flag_using_atk = 0u;
 	set_bgm();
 	BGP_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
+	init_enemies_map();
 }
 
 void update_stamina(void) BANKED{
@@ -627,6 +630,8 @@ void update_common(void) BANKED{
 				die();
 			}
 		}
+	//SPAWN ENEMIES
+		spawn_enemies();
 }
 
 

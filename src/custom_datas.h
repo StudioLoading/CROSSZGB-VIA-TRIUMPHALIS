@@ -191,6 +191,12 @@ struct CONFIGURATION{
     ITEM_CONFIGURATION reins;
 };
 
+struct PointsData{
+    UINT8 configured;
+    UINT16 points;
+    INT8 hp; 
+};
+
 struct PharaoData {
     INT8 status;//0:normal; 1:hit; 2:dead;
     INT8 hp;
@@ -204,6 +210,7 @@ struct SoldierData{
     UINT8 frmskip_max;
     INT8 configured;//0:unconfigured; 1:horizontal; 2:vertical; 3:walking, 4:dieing
     ITEM_TYPE reward;
+    UINT8 points;
 };
 
 struct KillerData{
@@ -219,6 +226,22 @@ struct RollingStoneData{
     INT8 verse_x;
     INT8 frmskip_y;
     UINT8 max_frmskip_y;
+};
+
+struct SpawningMapRect{
+    UINT16 box_x;
+    UINT16 box_y;
+    UINT8 box_width;
+    UINT8 box_height;
+    UINT8 box_flag_spawned;
+    //struct SoldierData box_soldierdata;
+    union {
+        struct SoldierData soldier;
+        struct KillerData killer;
+    } box_data;
+    UINT16 spawn_x;
+    UINT16 spawn_y;
+    SPRITE_TYPE type;
 };
 
 
