@@ -38,7 +38,7 @@ static const uint8_t puff_tiles[] = {
 const metasprite_t puff_metasprite[] = {
 	METASPR_ITEM(  -2, -2,  0, S_PALETTE), 
 	METASPR_ITEM(  0,  8,  2, S_PALETTE), 
-	METASPR_ITEM(  0,  8,  4, S_PALETTE),
+	//METASPR_ITEM(  0,  8,  4, S_PALETTE),
 	METASPR_TERM
 };
 

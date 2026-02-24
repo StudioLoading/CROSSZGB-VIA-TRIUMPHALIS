@@ -88,17 +88,8 @@ void START(void){
 		SetWindowY(104);
         spawn_items();
         start_common();
-        spawn_spy();
 }
 
-void spawn_spy(void) BANKED{
-    s_traitor00 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 74u << 3), ((UINT16) 9u << 3));
-    struct SoldierData* traitor00_data = (struct SoldierData*) s_traitor00->custom_data;
-    traitor00_data->frmskip_max = 10u;
-    traitor00_data->configured = 1;
-    traitor00_data->reward = NOITEM;
-    traitor00_data->points = 100u;
-}
 
 void UPDATE(void){
     //COMMON UPDATE

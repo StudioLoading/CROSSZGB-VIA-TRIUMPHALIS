@@ -216,7 +216,6 @@ struct SoldierData{
 struct KillerData{
     UINT8 configured;//99: wait, 0: hidden, 1:blink, 2: visible, 3: blink&disappear
     INT8 timeout;
-    UINT8 time_hidden;
     UINT8 time_visible;
     UINT8 time_blink;
     UINT8 time_attack;
@@ -231,8 +230,8 @@ struct RollingStoneData{
 struct SpawningMapRect{
     UINT16 box_x;
     UINT16 box_y;
-    UINT8 box_width;
-    UINT8 box_height;
+    UINT16 box_width;
+    UINT16 box_height;
     UINT8 box_flag_spawned;
     //struct SoldierData box_soldierdata;
     union {

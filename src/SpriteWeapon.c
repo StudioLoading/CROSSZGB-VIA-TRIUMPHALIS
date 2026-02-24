@@ -14,6 +14,7 @@ typedef enum {
 	ANIM_GLADIO_DOWN,
 	ANIM_GLADIO_UP,
 	ANIM_LANCE,
+	ANIM_FIRE,
 	N_ANIMS
 } animation_weapon;
 
@@ -34,6 +35,22 @@ extern UINT8 flag_using_atk;
 extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
 extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
+
+typedef struct {
+    uint8_t active;
+    int16_t x, y;       // Posizione logica
+    int8_t dx;          // Velocità orizzontale
+    int8_t dy;          // Velocità verticale (per la parabola)
+    int8_t altitude;    // L'altezza "visiva" dell'oggetto
+    uint8_t frame;      // Timer per la parabola
+} Projectile;
+Projectile boccetta = {0};
+
+extern INT8 vx;
+extern INT8 vy;
+
+void update_boccetta(Projectile *p) BANKED;
+void lancia_boccetta(Projectile *p, UINT16 horseX, UINT16 horseY, INT8 horseSpeed) BANKED;
 
 void START(void) {
 	// initialize the animation state
@@ -62,6 +79,11 @@ void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
             anim_weapon = ANIM_LANCE;
             arg_s_weapon->mirror = s_horse->mirror;
         break;
+        case FIRE:
+            anim_weapon_tick = 0;
+            anim_weapon = ANIM_FIRE;
+            arg_s_weapon->mirror = s_horse->mirror;
+        break;
     }
 }
 
@@ -83,16 +105,68 @@ void UPDATE(void) {
         }
 
     item_common_update(THIS);
-    item_common_spritescollision(THIS);
 
     struct ItemData* item_data = (struct ItemData*) THIS->custom_data;
+    if(item_data->itemtype == FIRE && item_data->configured == 3){
+        lancia_boccetta(&boccetta, s_horse->x, s_horse->y - 16u, vx);//configured verrà messa a 4 qui sotto nella item_common_spritescollision(...)
+    }
+    item_common_spritescollision(THIS);
+
     switch(item_data->configured){
         case 4: //in use
-            if(item_data->itemtype == GLADIO && one_cycle_anim_completed){
-                flag_using_atk = 0u;
-                SpriteManagerRemoveSprite(THIS);
+            switch(item_data->itemtype){
+                case GLADIO:
+                    if(one_cycle_anim_completed){
+                        flag_using_atk = 0u;
+                        SpriteManagerRemoveSprite(THIS);
+                    }
+                break;
+                case FIRE:
+                    update_boccetta(&boccetta);
+                break;
             }
         break;
+    }
+}
+
+void lancia_boccetta(Projectile *p, UINT16 horseX, UINT16 horseY, INT8 horseSpeed) BANKED {
+    p->active = 1;
+    p->x = horseX;
+    p->y = horseY;
+    
+    // Spinta in avanti: velocità del cavallo + una spinta fissa per coprire i 40px
+    p->dx = horseSpeed + 2;
+    if(s_horse->mirror == V_MIRROR){
+        p->dx = -p->dx;
+    }
+    
+    // Forza del lancio verso l'alto (valore negativo sale in alto se Y=0 è il top)
+    p->dy = -8; 
+    p->altitude = 0;
+    p->frame = 0;
+}
+
+void update_boccetta(Projectile *p) BANKED{
+    if (!p->active) return;
+
+    // 1. Movimento orizzontale costante rispetto al lancio
+    p->x += p->dx;
+
+    // 2. Simulazione gravità sulla parabola
+    p->altitude += p->dy; // Applichiamo la velocità verticale all'altezza
+    p->dy += 1;           // La gravità "tira giù" la boccetta (aumenta dy)
+
+    // 3. Controllo impatto al suolo
+    // Se l'altitudine torna a 0 (o maggiore), la boccetta tocca terra
+    if (p->altitude >= 0) {
+        p->altitude = 0;
+        p->active = 0;
+        /*TODO 
+        Sprite* s_fire = SpriteManagerAdd(SpriteFlame,. ..)
+        struct FlameData* fire_data = (struct FlameData*) s_fire->custom_data;
+        fire_data->hp = 100;
+        fire_data->dropped = 1;
+        */
     }
 }
 

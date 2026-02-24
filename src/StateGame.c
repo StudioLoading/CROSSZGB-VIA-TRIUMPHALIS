@@ -103,7 +103,6 @@ extern UINT8 turn;
 extern void die(void) BANKED;
 extern void set_bgm(void) BANKED;
 extern void init_enemies_map(void) BANKED;
-extern void spawn_enemies(void) BANKED;
 
 void START(void){
 }
@@ -428,11 +427,7 @@ void use_weapon(INT8 is_defence) BANKED{
 				}
 			break;
 			case FIRE:
-				Sprite* s_fire = SpriteManagerAdd(SpriteFlame, attack_x, attack_y);
-				struct FlameData* fire_data = (struct FlameData*) s_fire->custom_data;
-				fire_data->vx = vx;
-				fire_data->hp = 20;
-				fire_data->dropped = 2;
+				s_weapon = SpriteManagerAdd(SpriteWeapon, attack_x, attack_y);
 			break;
 		}
 		if(s_weapon != 0){
@@ -630,8 +625,6 @@ void update_common(void) BANKED{
 				die();
 			}
 		}
-	//SPAWN ENEMIES
-		spawn_enemies();
 }
 
 

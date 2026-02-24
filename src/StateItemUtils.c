@@ -141,6 +141,9 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                     }
                     item_data->vy = 0;
                 break;
+                case FIRE:
+                    weapon_update_anim(s_item_arg);
+                break;
                 case ELMET:
                     item_elmet_anim_blink(s_item_arg);
                     item_data->hp = 80;
@@ -203,7 +206,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                     consume_weapon_atk();
                 break;
                 case ENEMY_LANCE:
-                    item_e_lance_anim_blink(s_item_arg);
+                    SpriteManagerRemoveSprite(s_item_arg);
                 break;
             }
             //item_data->hp = 20;
@@ -217,10 +220,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                 case GLADIO:
                 case LANCE:
                 case ENEMY_LANCE:
-                    //item_data->hp--;
-                    //if(item_data->hp <= 0){
-                        SpriteManagerRemoveSprite(s_item_arg);
-                    //}
+                    SpriteManagerRemoveSprite(s_item_arg);
                 break;
             }
         break;
@@ -305,6 +305,7 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
                 case SpriteBiga:{
                     struct ItemData* weapon_data = (struct ItemData*) s_item_arg->custom_data;
                     if(weapon_data->itemtype == ENEMY_LANCE){
+                        SpriteManagerRemoveSprite(s_item_arg);
                         horse_hit(-6);
                     }
                 }break;

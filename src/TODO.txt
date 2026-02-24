@@ -1,6 +1,7 @@
 BUG:
 - politica di spawning dei nemici
     - potrei lanciare il check_spawning alla translateSprite dell'horse piuttosto che sulla UPDATE degli state?
+- lo scrolling su SGB e DMG non è fluido
 - spostare il Calculate Danger? al momento è nella UPDATE ed è eseguito sempre
 - sistema di punteggio highscore
     - sprite di segnalazione +100 quando si uccide qualcuno, che significa 1kill e 1.000 punti
@@ -112,7 +113,7 @@ LIBRETTO:
 
 PNG2MAP
 cd C:\ZGB-2023.0\tools\png2map\
-png2gbtiles.exe C:\ZGB-2023.0\tools\png2map\VT_titlescreen.png -gbm -g -pal=mypal.pal C:\ZGB-2023.0\tools\png2map\VT_titlescreen.gbm
+png2gbtiles.exe C:\CrossZGB\ZGB\CROSSZGB-DOCTORGAME\map.png -gbm -g -pal=mypal.pal C:\CrossZGB\ZGB\CROSSZGB-DOCTORGAME\map.gbm
 
 GIF TO PNG FRAMES
 ffmpeg -i C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\input.gif C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_%d.png

@@ -109,7 +109,7 @@ extern void update_hp(INT8 variation) BANKED;
 extern void use_weapon(INT8 is_defence) BANKED;
 extern void pickup(Sprite* s_arg_item) BANKED;
 extern INT8 is_track_ended(void) BANKED;
-
+extern void spawn_enemies(void) BANKED;	
 
 /* velocity_counter in realtà è la velocità assoluta */
 
@@ -393,6 +393,9 @@ void UPDATE(void){
                     vy = 0;
                 }
                 UINT8 horse_coll = TranslateSprite(THIS, vx << delta_time, vy << delta_time);
+                if(vx || vy){
+                    spawn_enemies();
+                }
             //COLLISIONI TILE
                 if(horse_coll){//collido con tile ambiente di collisione
                     if(horse_coll == 118 || horse_coll == 119 || horse_coll == 120 || horse_coll == 121){//FINE TRACCIA!!
@@ -629,6 +632,7 @@ void horse_hit(INT8 arg_damage) BANKED{
         update_hp(arg_damage);
         flag_hit = 1;
         counter_hit = COUNTER_HIT_MAX;
+        change_stamina_current(stamina_current, -whip_power_over_stamina);
     }
 }
 

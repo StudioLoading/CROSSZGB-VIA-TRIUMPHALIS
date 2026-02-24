@@ -47,11 +47,11 @@ void START(void){
 	// animation frame and animation tick is zero
 	anim_points_frame = anim_points_tick = 0;
 	// load the very first animation frame for the sprite
-	set_sprite_native_banked_data(BANK(points_anim), spriteIdxs[SpritePoints], 2, get_banked_pointer(BANK(points_anim), points_anim + anim_points_frame));
+	set_sprite_native_banked_data(BANK(points_anim), spriteIdxs[SpritePoints], 8, get_banked_pointer(BANK(points_anim), points_anim + anim_points_frame));
 }
 
 void points_update_anim(Sprite* arg_s_points) BANKED{
-    struct PointsData* points_data = (struct PointsData*) THIS->custom_data;
+    struct PointsData* points_data = (struct PointsData*) arg_s_points->custom_data;
     switch(points_data->points){
         case 100u:
             anim_points_tick = 0;
@@ -80,7 +80,7 @@ void UPDATE(void){
         if (old_anim_points != anim_points) anim_points_frame = 0;
         // tick anumation
         if (++anim_points_tick >= anim_points_speed) {
-            set_sprite_native_banked_data(BANK(points_anim), spriteIdxs[SpritePoints], 2, get_banked_pointer(BANK(points_anim), points_anim + (anim_points * ANIMATION_POINTS_FRAMES) + anim_points_frame));
+            set_sprite_native_banked_data(BANK(points_anim), spriteIdxs[SpritePoints], 8, get_banked_pointer(BANK(points_anim), points_anim + (anim_points * ANIMATION_POINTS_FRAMES) + anim_points_frame));
             anim_points_tick = 0;
             if (++anim_points_frame == ANIMATION_POINTS_FRAMES){
                 anim_points_frame = 0;

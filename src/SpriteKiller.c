@@ -24,16 +24,6 @@ void START(void){
 void UPDATE(void){
     struct KillerData* killer_data = (struct KillerData*) THIS->custom_data;
     switch(killer_data->configured){
-        case 99:{
-            INT16 distance_delta_x = THIS->x - s_horse->x;
-            if(distance_delta_x < 0){ distance_delta_x = -distance_delta_x;}
-            if(distance_delta_x < 160){
-                INT16 distance_delta_y = s_horse->y - THIS->y;
-                if(distance_delta_y > 16 && distance_delta_y < 60){//gli è poco sotto
-                    killer_data->configured = 0;
-                }
-            }
-        }break;
         case 0: //hidden
             killer_data->timeout--;
             if(killer_data->timeout <= 0){
@@ -51,6 +41,7 @@ void UPDATE(void){
                 struct ItemData* killer_weapon_data = (struct ItemData*) s_killer_weapon->custom_data;
                 killer_weapon_data->itemtype = ENEMY_LANCE;
                 killer_weapon_data->vx = 0;
+                killer_weapon_data->flag_continuous_spawning = 0;
                 killer_weapon_data->vy = 1;
                 killer_weapon_data->configured = 3;
                 killer_data->configured = 2u;
@@ -59,7 +50,7 @@ void UPDATE(void){
         case 2: //visible
             killer_data->timeout--;
             if(killer_data->timeout <= 0){
-                killer_data->timeout = killer_data->time_blink;
+                killer_data->timeout = killer_data->time_blink >> 1;
                 SetSpriteAnim(THIS, a_killer_v_blink, 32u);
                 killer_data->configured = 3u;
             }
@@ -67,7 +58,7 @@ void UPDATE(void){
         case 3: //blink
             killer_data->timeout--;
             if(killer_data->timeout <= 0){
-                //SpriteManagerRemoveSprite(THIS);
+                SpriteManagerRemoveSprite(THIS);
             }
         break;
     }

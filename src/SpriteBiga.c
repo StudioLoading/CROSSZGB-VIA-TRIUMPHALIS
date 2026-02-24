@@ -13,10 +13,10 @@
 #define DISTANCE_X_NEGATIVE 28
 #define DELTA_DISTANCE_MAX 12
 
-const UINT8 a_biga_h[] = {3, 5,1,2};
+const UINT8 a_biga_h[] = {3, 7,1,2};
 const UINT8 a_biga_hit[] = {6, 0,5,0,1,0,2};
-const UINT8 a_biga_down[] = {1, 3};
-const UINT8 a_biga_up[] = {1, 4};
+const UINT8 a_biga_down[] = {2, 3,4};
+const UINT8 a_biga_up[] = {2, 5,6};
 
 extern Sprite* s_horse;
 extern INT16 stamina_current;
@@ -53,7 +53,7 @@ void START(void){
 void UPDATE(void){
     if(flag_die){ return; }
     UINT16 final_pos_x = s_horse->x + (s_horse->coll_w >> 1) - DISTANCE_X_POSITIVE; //if vx >= 0
-    if (turn > 63 && turn < 192){ final_pos_x = s_horse->x + (s_horse->coll_w >> 1) + DISTANCE_X_NEGATIVE;}
+    if (s_horse->mirror == V_MIRROR){ final_pos_x = s_horse->x + (s_horse->coll_w >> 1) + DISTANCE_X_NEGATIVE;}
     UINT16 final_pos_y = s_horse->y + (s_horse->coll_h >> 1) - 4; //if vy == 0
     if(vy < 0){ final_pos_y = s_horse->y + (s_horse->coll_h >> 1) + 8;
     }else if(vy > 0){final_pos_y = s_horse->y - 8;}
@@ -99,9 +99,9 @@ void UPDATE(void){
         }
         if(stamina_current < euphoria_max && stamina_current > euphoria_min){
             if(vy > 1){ //sto andando in giù
-                SetSpriteAnim(THIS, a_biga_down, 12);
+                SetSpriteAnim(THIS, a_biga_down, 16);
             }else if (vy < -1){//sto andando in su
-                SetSpriteAnim(THIS, a_biga_up, 12);
+                SetSpriteAnim(THIS, a_biga_up, 16);
             }
         }
     //SPRITE COLLISION
