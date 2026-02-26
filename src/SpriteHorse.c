@@ -133,10 +133,11 @@ void START(void){
     vy = 0;
     force_updown_counter = 0u;
     counter_hit = COUNTER_HIT_MAX;
+    current_whip_power = WHIP_POWER;
     if(configuration.whip == GOLDEN){
         current_whip_power = GOLDEN_WHIP_POWER;
-        whip_power_over_stamina = current_whip_power;
     }
+    whip_power_over_stamina = current_whip_power;
     /*if(_cpu != CGB_TYPE){
         SPRITE_SET_PALETTE(THIS,1);
     }*/
@@ -188,6 +189,8 @@ void UPDATE(void){
         }
     //IF TRACK ENDED, GO ON UNTILL THE END OF THE SCREEN
         if(track_ended == 1u){
+            if(vx > 0){ vx = 3;}
+            if(vx < 0){ vx = -3;}
             THIS->x += vx;
             return;
         }
@@ -328,9 +331,9 @@ void UPDATE(void){
             anim_horse_speed = 24u;
         }else if(stamina_current < 240){
             anim = ANIM_RIGHT_TROT;
-            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
+            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 7;
         }else{
-            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
+            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 7;
             anim = ANIM_RIGHT_RUN;  
             if(stamina_current >= (euphoria_min - 100)){
                 anim = ANIM_RIGHT_WALK;
@@ -343,7 +346,7 @@ void UPDATE(void){
         }
     //ACTUAL MOVEMENT & COLLISION & OVER
         if(frm_skip > 0){frm_skip--;}
-        if(frm_skip == 0){
+        if(frm_skip <= 0){
             frm_skip = velocity_counter;
             //VX col coseno
                 //cos max = tutto su asse x
@@ -357,8 +360,11 @@ void UPDATE(void){
                     vx = 1;
                 }else if(cos > 65 && cos < 110){// tratto come se stesse andando a 33 gradi
                     vx = 2;
+                    if(sin > -30 && sin <= 30){//tratto come se stesse andando orizzontale
+                        vx = 3;
+                    }
                 }else if(cos > 110){ // tratto come se stesse andando orizzontale destra
-                    vx = 3;
+                    vx = 2;
                 }else if(cos < 0 && cos > -30){//tratto come se stesse andando verticale
                     vx = 0;
                 }else if(cos < -30 && cos > -65){// tratto come se stesse andando a 66 gradi sinistra
@@ -366,7 +372,10 @@ void UPDATE(void){
                 }else if(cos < -65 && cos > -110){// tratto come se stesse andando a 33 gradi sinistra
                     vx = -2;
                 }else if(cos < 0 && cos < -110){ // tratto come se stesse andando orizzontale sinistra
-                    vx = -3;
+                    vx = -2;                    
+                    if(sin > -30 && sin <= 30){//tratto come se stesse andando orizzontale
+                        vx = -3;
+                    }
                 }
             //VY col seno
                 if(sin >= 0 && sin <= 30){//tratto come se stesse andando orizzontale

@@ -49,7 +49,6 @@ extern UINT8 turn;
 extern UINT8 prev_state;
 extern INT8 mission_completed;
 extern MISSION current_mission;
-extern struct CONFIGURATION configuration;
 extern INT8 flag_golden_found;
 extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
@@ -104,40 +103,6 @@ void START(void){
 		SetWindowY(104);
         spawn_items();
         start_common();
-        if(current_step == LOOKING_FOR_SENATOR){
-            spawn_barbarianshield();
-        }
-}
-
-void spawn_barbarianshield(void) BANKED{
-    s_barbarianshield00 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 47u << 3), ((UINT16) 10u << 3)+2u);
-    s_barbarianshield00->mirror = V_MIRROR;
-    struct SoldierData* barbarian00_data = (struct SoldierData*) s_barbarianshield00->custom_data;
-    barbarian00_data->configured = 1;
-    s_barbarianshield01 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 46u << 3), ((UINT16) 11u << 3));
-    s_barbarianshield01->mirror = V_MIRROR;
-    struct SoldierData* barbarian01_data = (struct SoldierData*) s_barbarianshield01->custom_data;
-    barbarian01_data->configured = 2;
-    
-    s_barbarianshield02 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 87 << 3), ((UINT16) 9u << 3));
-    struct SoldierData* barbarian02_data = (struct SoldierData*) s_barbarianshield02->custom_data;
-    barbarian02_data->configured = 1;
-
-    s_barbarianshield03 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 68u << 3), ((UINT16) 22u << 3));
-    struct SoldierData* barbarian03_data = (struct SoldierData*) s_barbarianshield03->custom_data;
-    barbarian03_data->configured = 2;
-
-    s_barbarianshield04 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 47u << 3), ((UINT16) 44u << 3));
-    struct SoldierData* barbarian04_data = (struct SoldierData*) s_barbarianshield04->custom_data;
-    barbarian04_data->configured = 1;
-
-    s_barbarianshield05 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 57u << 3) + 7u, ((UINT16) 45u << 3) +2u);
-    struct SoldierData* barbarian05_data = (struct SoldierData*) s_barbarianshield05->custom_data;
-    barbarian05_data->configured = 2;
-    
-    s_barbarianshield06 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 46u << 3), ((UINT16) 58u << 3));
-    struct SoldierData* barbarian06_data = (struct SoldierData*) s_barbarianshield06->custom_data;
-    barbarian06_data->configured = 1;    
 }
 
 void UPDATE(void){

@@ -6,7 +6,7 @@
 #include "SpriteManager.h"
 
 #define DELTA_X_INC_CGB 2
-#define DELTA_X_INC_DMG 1
+#define DELTA_X_INC_DMG 2
 
 INT8 delta_x_inc = 0;
 

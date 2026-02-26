@@ -1,5 +1,7 @@
 BUG:
 - politica di spawning dei nemici
+    - alps05
+        dare armi prima dei nemici
     - potrei lanciare il check_spawning alla translateSprite dell'horse piuttosto che sulla UPDATE degli state?
 - lo scrolling su SGB e DMG non è fluido
 - la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo schermo

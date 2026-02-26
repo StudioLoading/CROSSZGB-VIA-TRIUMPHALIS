@@ -69,7 +69,6 @@ const struct SpawningMapRect spawning_map_mission01[4] = {
         .type = SpriteRomansoldier
     }
 };
-
 const struct SpawningMapRect spawning_map_mission02[7] = {
     {
         .spawn_x = ((UINT16) 110u << 3) - 2u,
@@ -177,15 +176,6 @@ const struct SpawningMapRect spawning_map_mission02[7] = {
         .type = SpriteKiller
     }
 };
-/*
-    s_traitor00 = SpriteManagerAdd(SpriteRomansoldier, ((UINT16) 70u << 3), ((UINT16) 14u << 3));
-    struct SoldierData* traitor00_data = (struct SoldierData*) s_traitor00->custom_data;
-    traitor00_data->frmskip_max = 10u;
-    traitor00_data->configured = 1;
-    traitor00_data->reward = NOITEM;
-    traitor00_data->points = 100u;
- */
-
 const struct SpawningMapRect spawning_map_mission04[1] = {
     {
         .spawn_x = ((UINT16) 70u << 3),
@@ -200,6 +190,100 @@ const struct SpawningMapRect spawning_map_mission04[1] = {
             .configured = 1, .reward = 0, .points = 100 
         },
         .type = SpriteRomansoldier
+    }
+};
+/*
+    s_barbarianshield05 = SpriteManagerAdd(SpriteBarbarianshield, ;
+    struct SoldierData* barbarian05_data = (struct SoldierData*) s_barbarianshield05->custom_data;
+    barbarian05_data->configured = 2;
+    
+    s_barbarianshield06 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 46u << 3), ((UINT16) 58u << 3));
+    struct SoldierData* barbarian06_data = (struct SoldierData*) s_barbarianshield06->custom_data;
+    barbarian06_data->configured = 1;  */
+const struct SpawningMapRect spawning_map_mission05[7] = {
+    {
+        .spawn_x = ((UINT16) 47u << 3),
+        .spawn_y = ((UINT16) 10u << 3)+2u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 32u << 3),
+        .box_y = ((UINT16) 8u << 3),
+        .box_width =  ((UINT16) 30u << 3),
+        .box_height =  ((UINT16) 15u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 1, .reward = 0, .points = 10 
+        },
+        .type = SpriteBarbarianshield
+    },
+    {
+        .spawn_x = ((UINT16) 46u << 3),
+        .spawn_y = ((UINT16) 11u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 32u << 3),
+        .box_y = ((UINT16) 8u << 3),
+        .box_width =  ((UINT16) 30u << 3),
+        .box_height =  ((UINT16) 15u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 2, .reward = 0, .points = 10 
+        },
+        .type = SpriteBarbarianshield
+    },
+    {
+        .spawn_x = ((UINT16) 87u << 3),
+        .spawn_y = ((UINT16) 9u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 69u << 3),
+        .box_y = ((UINT16) 6u << 3),
+        .box_width =  ((UINT16) 36u << 3),
+        .box_height =  ((UINT16) 14u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 1, .reward = 0, .points = 10 
+        },
+        .type = SpriteBarbarianshield
+    },
+    {
+        .spawn_x = ((UINT16) 68u << 3),
+        .spawn_y = ((UINT16) 22u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 58u << 3),
+        .box_y = ((UINT16) 20u << 3),
+        .box_width =  ((UINT16) 20u << 3),
+        .box_height =  ((UINT16) 10u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 2, .reward = 0, .points = 10 
+        },
+        .type = SpriteBarbarianshield
+    },
+    {
+        .spawn_x = ((UINT16) 47u << 3),
+        .spawn_y = ((UINT16) 44u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 34u << 3),
+        .box_y = ((UINT16) 41u << 3),
+        .box_width =  ((UINT16) 26u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 2, .reward = 0, .points = 10 
+        },
+        .type = SpriteBarbarianshield
+    },
+    {da qui
+        .spawn_x = ((UINT16) 57u << 3) + 7u,
+        .spawn_y = ((UINT16) 45u << 3) + 2u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 34u << 3),
+        .box_y = ((UINT16) 41u << 3),
+        .box_width =  ((UINT16) 26u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 2, .reward = 0, .points = 10 
+        },
+        .type = SpriteBarbarianshield
     }
 };
 
