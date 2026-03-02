@@ -48,7 +48,9 @@ void UPDATE(void){
     }
     if(delta_x){
         INT16 camera_horse_delta_x = THIS->x - s_horse->x;
-        if(camera_horse_delta_x < 10 && camera_horse_delta_x > -10){
+        if(camera_horse_delta_x < 16 && camera_horse_delta_x > -16){
+            THIS->x += vx + vx + delta_x;
+        }else if(camera_horse_delta_x < 10 && camera_horse_delta_x > -10){
             THIS->x += vx + delta_x;
         }else{
             THIS->x += delta_x;

@@ -258,6 +258,9 @@ void spawn_items(void) BANKED{
 			item_spawn(FIRE, ((UINT16) 62u << 3), ((UINT16) 18u << 3));
 		break;
 		case MISSIONALPS05:
+			item_spawn(FIRE, ((UINT16) 22u << 3), ((UINT16) 10u << 3));
+			//item_spawn(GLADIO, ((UINT16) 26u << 3), ((UINT16) 11u << 3));
+			item_spawn(FIRE, ((UINT16) 104u << 3), ((UINT16) 20u << 3));
 			item_spawn(LANCE, ((UINT16) 26u << 3), ((UINT16) 41u << 3));
 			item_spawn(LANCE, ((UINT16) 79u << 3), ((UINT16) 56u << 3));
 		break;

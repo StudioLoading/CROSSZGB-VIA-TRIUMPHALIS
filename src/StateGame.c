@@ -14,8 +14,6 @@
 
 #define PIXEL_STAMINA 96
 #define ENDED_TRACK_COOLDOWN 80
-#define DIE_COUNTER_MAX 80
-#define COUNTER_DANGER_MAX 60
 
 IMPORT_MAP(hudm);
 IMPORT_MAP(map);
@@ -50,9 +48,6 @@ MirrorMode mirror_horse = NO_MIRROR;
 UINT8 turn_to_load = 0;
 INT16 time_to_load = 0;
 INT8 flag_die = 0;
-INT8 die_counter = DIE_COUNTER_MAX;
-INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down = 0;
-INT8 counter_danger = 0;
 INT8 flag_exclamation = 0;
 INT8 mission_iscrono = 0;
 MISSION_STEP current_step = LOOKING_FOR_SENATOR;
@@ -62,6 +57,8 @@ INT8 spawning_weapon_counter;
 UINT8 reset_combo_counter = 0u;
 UINT8 flag_using_atk = 0u;
 UINT8 end_game = 0u;
+
+#define DIE_COUNTER_MAX 80
 
 void update_stamina(void) BANKED;
 void update_euphoria(void) BANKED;
@@ -78,7 +75,6 @@ void use_weapon(INT8 is_defence) BANKED;
 void start_common(void) BANKED;
 void update_common(void) BANKED;
 INT8 is_track_ended(void) BANKED;
-void calculate_danger(Sprite* s_danger) BANKED;
 void check_danger(void) BANKED;
 void show_danger(void) BANKED;
 
@@ -99,7 +95,9 @@ extern UINT8 prev_state;
 extern UINT8 turn_to_load;
 extern INT16 time_to_load;
 extern UINT8 turn;
-
+extern INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down;
+extern INT8 die_counter;
+extern INT8 counter_danger;
 extern void die(void) BANKED;
 extern void set_bgm(void) BANKED;
 extern void init_enemies_map(void) BANKED;
@@ -500,97 +498,6 @@ INT8 is_track_ended(void) BANKED{// == is mission completed
 		break;
 	}
 	return result;
-}
-
-void calculate_danger(Sprite* s_danger) BANKED{
-	INT16 distance_x = s_danger->x - s_horse->x;
-	INT16 distance_y = s_danger->y - s_horse->y;
-	if(distance_y < 0){distance_y = -distance_y;}
-	if(distance_y > 32){ return;}
-	INT8 flag_danger = flag_danger_right | flag_danger_left | flag_danger_up | flag_danger_down;
-	if(flag_danger){return;}
-	if(distance_x > 120 && distance_x < 200){//s_danger più a dx di s_horse
-		flag_danger_right = 1;
-	}
-	if(distance_x > -200 && distance_x < -120){//s_danger più a sx di s_horse
-		flag_danger_left = 1;
-	}
-	/*
-	}else{
-		if(distance_y > 80){//s_danger più sotto di s_horse
-			flag_danger_down = 1;
-		}
-		if(distance_y < -80){//s_danger più sopra di s_horse
-			flag_danger_up = 1;
-		}
-	}
-		*/
-}
-
-void check_danger(void) BANKED{
-	INT8 flag_danger = flag_danger_right | flag_danger_left | flag_danger_up | flag_danger_down;
-	if(flag_danger && counter_danger == 0){
-		counter_danger = COUNTER_DANGER_MAX;
-		UPDATE_HUD_TILE(7,2,67);
-		UPDATE_HUD_TILE(8,2,68);
-		UPDATE_HUD_TILE(9,2,69);		
-	}
-}
-
-void show_danger(void) BANKED{
-	if(counter_danger > 0){
-		counter_danger--;
-		switch(counter_danger){
-			case 58:
-				if(flag_danger_right && vx > 0){
-					UPDATE_HUD_TILE(8,3,70);
-					UPDATE_HUD_TILE(9,3,1);
-					UPDATE_HUD_TILE(10,3,1);
-				}
-				if(flag_danger_left && vx < 0){
-					UPDATE_HUD_TILE(8,3,1);
-					UPDATE_HUD_TILE(9,3,1);
-					UPDATE_HUD_TILE(10,3,72);
-				}
-			break;
-			case 40:
-				if(flag_danger_right && vx > 0){
-					UPDATE_HUD_TILE(8,3,1);
-					UPDATE_HUD_TILE(9,3,70);
-					UPDATE_HUD_TILE(10,3,1);
-				}
-				if(flag_danger_left && vx < 0){
-					UPDATE_HUD_TILE(8,3,1);
-					UPDATE_HUD_TILE(9,3,72);
-					UPDATE_HUD_TILE(10,3,1);
-				}
-			break;
-			case 20:
-				if(flag_danger_right && vx > 0){
-					UPDATE_HUD_TILE(8,3,1);
-					UPDATE_HUD_TILE(9,3,1);
-					UPDATE_HUD_TILE(10,3,70);
-				}
-				if(flag_danger_left && vx < 0){
-					UPDATE_HUD_TILE(8,3,72);
-					UPDATE_HUD_TILE(9,3,1);
-					UPDATE_HUD_TILE(10,3,1);
-				}
-			break;
-		}
-		if(counter_danger <= 0){//azzera i flag
-			UPDATE_HUD_TILE(7,2,1);
-			UPDATE_HUD_TILE(8,2,1);
-			UPDATE_HUD_TILE(9,2,1);
-			UPDATE_HUD_TILE(8,3,1);
-			UPDATE_HUD_TILE(9,3,1);
-			UPDATE_HUD_TILE(10,3,1);
-			flag_danger_right = 0;
-			flag_danger_left = 0;
-			flag_danger_up = 0;
-			flag_danger_down = 0;
-		}
-	}
 }
 
 void update_common(void) BANKED{

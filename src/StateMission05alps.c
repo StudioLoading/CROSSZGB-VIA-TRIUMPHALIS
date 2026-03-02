@@ -126,15 +126,6 @@ void UPDATE(void){
             time_to_load = time_current;
             state_move_to_papyrus(MISSION05_SAVED_GENERAL, StateMission05alps);
         }
-    //CALCULATE DANGER
-        calculate_danger(s_barbarianshield00);
-        calculate_danger(s_barbarianshield01);
-        calculate_danger(s_barbarianshield02);
-        calculate_danger(s_barbarianshield03);
-        calculate_danger(s_barbarianshield05);
-        calculate_danger(s_barbarianshield06);
-        check_danger();
-        show_danger();
     //IS MISSION COMPLETED?
         if(mission_completed && track_ended){
             track_ended_cooldown--;

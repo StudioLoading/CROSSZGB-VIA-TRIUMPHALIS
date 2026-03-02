@@ -167,10 +167,6 @@ void update_boccetta(Sprite* arg_s_boccetta) BANKED{
     INT16 boccetta_vx = (INT16)new_posx - (INT16)arg_s_boccetta->x;
     INT16 boccetta_vy = (INT16)new_posy - (INT16)arg_s_boccetta->y;
     UINT8 boccetta_coll_tile = TranslateSprite(arg_s_boccetta, boccetta_vx << delta_time, boccetta_vy << delta_time);
-    if(boccetta_coll_tile){
-        THIS->x += boccetta_vx;
-        THIS->y += boccetta_vy; 
-    }
     if(boccetta.clockwise){//CLOCKWISE
         boccetta.circle_index = boccetta.circle_index + boccetta.v_round;
         if(boccetta.circle_index > 250u){
