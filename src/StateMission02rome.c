@@ -19,15 +19,6 @@ const UINT8 coll_m02_tiles[] = {15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 
 
 const UINT8 coll_m02_surface[] = {0u, 0};
 
-Sprite* s_killer00 = 0;
-Sprite* s_killer01 = 0;
-Sprite* s_killer02 = 0;
-Sprite* s_killer03 = 0;
-Sprite* s_killer04 = 0;
-Sprite* s_killer05 = 0;
-Sprite* s_killer06 = 0;
-Sprite* s_killer07 = 0;
-
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
 extern UINT16 pos_horse_y;
@@ -96,17 +87,6 @@ void UPDATE(void){
         if(s_horse->x > ((UINT16) 175u << 3)){
             s_horse->x = ((UINT16) 175u << 3);
         }
-    //CALCULATE DANGER
-        calculate_danger(s_killer00);
-        calculate_danger(s_killer01);
-        calculate_danger(s_killer02);
-        calculate_danger(s_killer03);
-        calculate_danger(s_killer04);
-        calculate_danger(s_killer05);
-        calculate_danger(s_killer06);
-        calculate_danger(s_killer07);
-        check_danger();
-        show_danger();
     //MISSION STEP
         /*if(current_step == SENATOR_COLLIDED){
             pos_horse_x = s_horse->x;

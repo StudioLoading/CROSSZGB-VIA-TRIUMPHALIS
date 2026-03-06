@@ -24,21 +24,12 @@ extern INT8 vx;
 extern INT8 vy;
 extern UINT16 euphoria_min;
 extern UINT16 euphoria_max;
-extern ITEM_TYPE weapon_atk;
-extern ITEM_TYPE weapon_def;
 extern INT8 flag_die;
 extern MISSION current_mission;
-extern INT8 mission_completed;
 extern MISSION_STEP current_step;
-extern Sprite* s_spawning_weapon;
 extern UINT8 turn;
 
-extern void update_weapon(void) BANKED;
-extern void update_hp_max(void) BANKED;
-extern void update_time_max(void) BANKED;
-extern void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
-
-void pickup(Sprite* s_arg_item) BANKED;
+extern void pickup(Sprite* s_arg_item) BANKED;
 
 
 void START(void){
@@ -131,45 +122,6 @@ void UPDATE(void){
                 }
             }
         }
-}
-
-void pickup(Sprite* s_arg_item) BANKED{
-    struct ItemData* item_data = (struct ItemData*) s_arg_item->custom_data;
-    switch(item_data->itemtype){
-        case GLADIO: case LANCE: case FIRE:
-            weapon_atk = item_data->itemtype;
-            update_weapon();
-        break;
-        case ELMET: case SHIELD: case CAPE:
-            weapon_def = item_data->itemtype;
-            update_weapon();
-        break;
-        case HP:
-            update_hp_max();
-        break;
-        case TIME:
-            update_time_max();
-        break;
-        case GOLDEN_ELM:
-        case GOLDEN_WHEEL:
-        case GOLDEN_WHIP:
-        case GOLDEN_REINS:
-            pickup_config(item_data->itemtype);
-        break;
-        case PAPYRUS:
-            if(current_mission == MISSIONSEA08 || current_mission == MISSIONGREECE12){
-                current_step = EXIT;
-                mission_completed = 1;
-            }
-            if(current_mission == MISSIONGREECE13){
-                current_step = SENATOR_COLLIDED;
-            }
-        break;
-    }    
-    if(item_data->flag_continuous_spawning == 1){
-        s_spawning_weapon = 0;
-    }
-    SpriteManagerRemoveSprite(s_arg_item);
 }
 
 void DESTROY(void){

@@ -80,7 +80,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                 case LANCE:
                     item_lance_anim(s_item_arg);
                 break;
-                case FIRE:
+                case FLAME:
                     item_fire_anim(s_item_arg);
                 break;
                 case ELMET:
@@ -141,7 +141,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                     }
                     item_data->vy = 0;
                 break;
-                case FIRE:
+                case FLAME:
                     weapon_update_anim(s_item_arg);
                 break;
                 case ELMET:
@@ -217,7 +217,7 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                 s_spawning_weapon = 0;
             }
             switch(item_data->itemtype){
-                case GLADIO:
+                //case GLADIO: deleted in SpriteWeapon UPDATE() CROSSZGB block
                 case LANCE:
                 case ENEMY_LANCE:
                     SpriteManagerRemoveSprite(s_item_arg);
@@ -283,23 +283,18 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
                     }
                 }break;
                 case SpriteBarbarianshield:{
-                    if(item_data->itemtype == GLADIO || item_data->itemtype == LANCE){
-                        SpriteManagerRemoveSprite(s_item_arg);
-                        return;
-                    }
                     struct SoldierData* barbarianshield_data = (struct SoldierData*)iispr->custom_data;
-                    if(THIS->x < iispr->x){//gli sto a sinistra
-                        switch(barbarianshield_data->configured){
-                            case 1: barbarianshield_data->configured = 4; break;
-                            case 2: barbarianshield_data->configured = 6; break;
-                        }
-                    }else{//gli sto a destra
-                        switch(barbarianshield_data->configured){
-                            case 1: barbarianshield_data->configured = 3; break;
-                            case 2: barbarianshield_data->configured = 5; break;
-                        }
+                    switch(item_data->itemtype){
+                        case GLADIO:
+                        case LANCE:
+                            item_data->configured = 5;
+                        //case FLAME:
+                            s_item_arg->x = iispr->x;
+                            s_item_arg->y = iispr->y;
+                            barbarianshield_data->configured = 9;
+                            SpriteManagerRemoveSprite(s_item_arg);
+                        break;
                     }
-                    item_data->configured = 5;
                 }break;
                 case SpriteHorse:
                 case SpriteBiga:{
@@ -319,13 +314,14 @@ void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED
     switch(arg_itemtype){
         case GLADIO: arg_spritetype = SpriteItemgladio; break;
         case LANCE: arg_spritetype = SpriteItemlance; break;
-        case FIRE: arg_spritetype = SpriteItemfire; break;
+        case FLAME: arg_spritetype = SpriteItemfire; break;
         case ELMET: arg_spritetype = SpriteItemelmet; break;
         case CAPE: arg_spritetype = SpriteItemcape; break;
         case SHIELD: arg_spritetype = SpriteItemshield; break;
         case HP: arg_spritetype = SpriteItemheart; break;
         case TIME: arg_spritetype = SpriteItemglass; break;
         case PAPYRUS: arg_spritetype = SpriteItempapirus; break;
+        default: return; break;
     }
 	Sprite* s_item_spawned = SpriteManagerAdd(arg_spritetype, arg_posx, arg_posy);
 	struct ItemData* item_spawned_data = (struct ItemData*) s_item_spawned->custom_data;
@@ -339,7 +335,7 @@ void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg
     switch(arg_itemtype){
         case GLADIO: arg_spritetype = SpriteItemgladio; break;
         case LANCE: arg_spritetype = SpriteItemlance; break;
-        case FIRE: arg_spritetype = SpriteItemfire; break;
+        case FLAME: arg_spritetype = SpriteItemfire; break;
         case ELMET: arg_spritetype = SpriteItemelmet; break;
         case CAPE: arg_spritetype = SpriteItemcape; break;
         case SHIELD: arg_spritetype = SpriteItemshield; break;

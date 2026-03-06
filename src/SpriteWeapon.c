@@ -48,6 +48,8 @@ typedef struct {
     INT8 circle_center_vy;
     UINT8 clockwise;
     INT8 v_round;
+    INT8 frmskip_x;
+    INT8 frmskip_x_max;
 } Projectile;
 Projectile boccetta = {0};
 
@@ -65,8 +67,11 @@ void START(void) {
 	anim_weapon_frame = anim_weapon_tick = 0;
 	// load the very first animation frame for the sprite
 	set_sprite_native_banked_data(BANK(weapon_anim), spriteIdxs[SpriteWeapon], 6, get_banked_pointer(BANK(weapon_anim), weapon_anim + anim_weapon_frame));
+
     
     item_common_start(THIS);
+    THIS->lim_x = 80u;
+    THIS->lim_y = 80u;
 }
 
 void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
@@ -84,7 +89,7 @@ void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
             anim_weapon = ANIM_LANCE;
             arg_s_weapon->mirror = s_horse->mirror;
         break;
-        case FIRE:
+        case FLAME:
             anim_weapon_tick = 0;
             anim_weapon = ANIM_FIRE;
             arg_s_weapon->mirror = s_horse->mirror;
@@ -94,6 +99,8 @@ void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
 
 void UPDATE(void) {
     UINT8 one_cycle_anim_completed = 0u;
+    struct ItemData* item_data = (struct ItemData*) THIS->custom_data;
+
     //CROSSZGB
         // save old animation state, animation state to idle (will be overwritten, if keys are pressed)
         old_anim_weapon = anim_weapon;
@@ -112,7 +119,6 @@ void UPDATE(void) {
     item_common_update(THIS);
     item_common_spritescollision(THIS);
     
-    struct ItemData* item_data = (struct ItemData*) THIS->custom_data;
     switch(item_data->configured){
         case 4: //in use
             switch(item_data->itemtype){
@@ -122,8 +128,18 @@ void UPDATE(void) {
                         SpriteManagerRemoveSprite(THIS);
                     }
                 break;
-                case FIRE:
+                case FLAME:
                     update_boccetta(THIS);
+                break;
+            }
+        break;
+        case 6:
+            switch(item_data->itemtype){
+                case GLADIO:
+                    if(one_cycle_anim_completed){
+                        flag_using_atk = 0u;
+                        SpriteManagerRemoveSprite(THIS);
+                    }
                 break;
             }
         break;
@@ -131,6 +147,7 @@ void UPDATE(void) {
 }
 
 void lancia_boccetta(INT8 arg_horse_vx, INT8 arg_horse_vy) BANKED {
+    if(boccetta.active){ return; }
     boccetta.active = 1;
     // Spinta in avanti: velocità del cavallo + una spinta fissa per coprire i 40px
     INT8 initial_dx = 1;
@@ -141,17 +158,20 @@ void lancia_boccetta(INT8 arg_horse_vx, INT8 arg_horse_vy) BANKED {
     
     // Forza del lancio verso l'alto (valore negativo sale in alto se Y=0 è il top)
     boccetta.dy = -1 + arg_horse_vy; 
-    boccetta.circle_index = 155u;
     boccetta.circle_center_y = s_horse->y;
     boccetta.clockwise = s_horse->mirror == NO_MIRROR;
     if(boccetta.clockwise){
+        boccetta.circle_index = 155u;
         boccetta.circle_center_x = s_horse->x + 32u;
     }else{
-        boccetta.circle_center_x = s_horse->x - 28u;
+        boccetta.circle_index = 210u;
+        boccetta.circle_center_x = s_horse->x - 8u;
     }
     boccetta.v_round = 4;
     boccetta.circle_center_vx = arg_horse_vx;
     boccetta.circle_center_vy = arg_horse_vy;
+    boccetta.frmskip_x_max = 6;
+    boccetta.frmskip_x = 0;
 }
 
 void update_boccetta(Sprite* arg_s_boccetta) BANKED{
@@ -159,33 +179,41 @@ void update_boccetta(Sprite* arg_s_boccetta) BANKED{
     UINT16 new_posx = boccetta.circle_center_x + ((sine_wave[cos_position]) / 4);
     UINT16 new_posy = boccetta.circle_center_y + ((sine_wave[boccetta.circle_index]) / 4);
     if(boccetta.circle_center_vx){
-        new_posx += boccetta.circle_center_vx;
+        boccetta.circle_center_x += boccetta.circle_center_vx;
+    }else{
+        if(++boccetta.frmskip_x > boccetta.frmskip_x_max){
+            boccetta.frmskip_x = 0;
+            if(s_horse->mirror == NO_MIRROR){
+                boccetta.circle_center_x++;
+            }else{
+                boccetta.circle_center_x--;
+            }
+        }
     }
-    if(boccetta.circle_center_vy){
-        new_posy += boccetta.circle_center_vy;
-    }
+    /*if(boccetta.circle_center_vy){
+        boccetta.circle_center_y += boccetta.circle_center_vy;
+    }*/
     INT16 boccetta_vx = (INT16)new_posx - (INT16)arg_s_boccetta->x;
     INT16 boccetta_vy = (INT16)new_posy - (INT16)arg_s_boccetta->y;
     UINT8 boccetta_coll_tile = TranslateSprite(arg_s_boccetta, boccetta_vx << delta_time, boccetta_vy << delta_time);
     if(boccetta.clockwise){//CLOCKWISE
-        boccetta.circle_index = boccetta.circle_index + boccetta.v_round;
+        boccetta.circle_index += boccetta.v_round;
         if(boccetta.circle_index > 250u){
-            boccetta.active = 0;
             SpriteManagerRemoveSprite(arg_s_boccetta);
         }
     }else{//COUNTERCLOCK
-        boccetta.circle_index = boccetta.circle_index - boccetta.v_round;
-        if(boccetta.circle_index < 180u){
-            boccetta.active = 0;
+        boccetta.circle_index -= boccetta.v_round;
+        if(boccetta.circle_index < 130u){
             SpriteManagerRemoveSprite(arg_s_boccetta);
         }
     }
 }
 
 void DESTROY(void) {
+    boccetta.active = 0;
     struct ItemData* item_data = (struct ItemData*) THIS->custom_data;
     switch(item_data->itemtype){
-        case FIRE:
+        case FLAME:
             UINT16 puff_spawn_x = THIS->x;
             if(!boccetta.clockwise){puff_spawn_x = THIS->x + 4u;}
             SpriteManagerAdd(SpritePuff, puff_spawn_x, THIS->y + 2u);

@@ -343,7 +343,7 @@ void update_weapon(void) BANKED{
 			UPDATE_HUD_TILE(6,3,34);
 			UPDATE_HUD_TILE(6,4,35);
 		break;
-		case FIRE:
+		case FLAME:
 			UPDATE_HUD_TILE(5,3,36);
 			UPDATE_HUD_TILE(5,4,37);
 			UPDATE_HUD_TILE(6,3,38);
@@ -417,7 +417,7 @@ void use_weapon(INT8 is_defence) BANKED{
 					s_weapon->mirror = V_MIRROR;
 				}
 			break;
-			case FIRE:
+			case FLAME:
 				attack_x = s_horse->x + 16;
 				if(s_horse->mirror == V_MIRROR){
 					attack_x = s_horse->x;
@@ -432,7 +432,7 @@ void use_weapon(INT8 is_defence) BANKED{
 			weapon_data->configured = 3;
 		}
 		switch(weapon_atk){
-			case FIRE:
+			case FLAME:
 				lancia_boccetta(vx, vy);
 			case LANCE:
 				consume_weapon_atk();

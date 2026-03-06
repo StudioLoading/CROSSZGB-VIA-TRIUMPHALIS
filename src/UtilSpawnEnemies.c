@@ -10,6 +10,8 @@
 
 extern Sprite* s_horse;
 extern INT8 vx;
+extern MISSION_STEP current_step;
+extern UINT8 spawned_greeks_flag;
 
 UINT8 current_enemies_total_count = 0u;
 INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down = 0;
@@ -200,7 +202,7 @@ const struct SpawningMapRect spawning_map_mission05[7] = {
         .spawn_x = ((UINT16) 47u << 3),
         .spawn_y = ((UINT16) 10u << 3)+2u,
         .box_flag_spawned = 0u,
-        .box_x = ((UINT16) 32u << 3),
+        .box_x = ((UINT16) 28u << 3),
         .box_y = ((UINT16) 8u << 3),
         .box_width =  ((UINT16) 30u << 3),
         .box_height =  ((UINT16) 15u << 3),
@@ -214,7 +216,7 @@ const struct SpawningMapRect spawning_map_mission05[7] = {
         .spawn_x = ((UINT16) 46u << 3),
         .spawn_y = ((UINT16) 11u << 3),
         .box_flag_spawned = 0u,
-        .box_x = ((UINT16) 32u << 3),
+        .box_x = ((UINT16) 28u << 3),
         .box_y = ((UINT16) 8u << 3),
         .box_width =  ((UINT16) 30u << 3),
         .box_height =  ((UINT16) 15u << 3),
@@ -228,7 +230,7 @@ const struct SpawningMapRect spawning_map_mission05[7] = {
         .spawn_x = ((UINT16) 87u << 3),
         .spawn_y = ((UINT16) 9u << 3),
         .box_flag_spawned = 0u,
-        .box_x = ((UINT16) 69u << 3),
+        .box_x = ((UINT16) 80u << 3),
         .box_y = ((UINT16) 6u << 3),
         .box_width =  ((UINT16) 36u << 3),
         .box_height =  ((UINT16) 14u << 3),
@@ -295,6 +297,419 @@ const struct SpawningMapRect spawning_map_mission05[7] = {
         .type = SpriteBarbarianshield
     }
 };
+const struct SpawningMapRect spawning_map_mission07[5] = {
+    {
+        .spawn_x = ((UINT16) 36u << 3),
+        .spawn_y = ((UINT16) 20u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 21u << 3),
+        .box_y = ((UINT16) 17u << 3),
+        .box_width =  ((UINT16) 30u << 3),
+        .box_height =  ((UINT16) 13u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 4, 
+            .configured = 1, .reward = HP, .points = 10 
+        },
+        .type = SpriteBarbarian
+    },{
+        .spawn_x = ((UINT16) 30u << 3),
+        .spawn_y = ((UINT16) 22u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 16u << 3),
+        .box_y = ((UINT16) 17u << 3),
+        .box_width =  ((UINT16) 28u << 3),
+        .box_height =  ((UINT16) 12u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 6, 
+            .configured = 1, .reward = GLADIO, .points = 10 
+        },
+        .type = SpriteBarbarian
+    },{
+        .spawn_x = ((UINT16) 41u << 3),
+        .spawn_y = ((UINT16) 38u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 34u << 3),
+        .box_y = ((UINT16) 29u << 3),
+        .box_width =  ((UINT16) 28u << 3),
+        .box_height =  ((UINT16) 12u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 2, 
+            .configured = 2, .reward = LANCE, .points = 10 
+        },
+        .type = SpriteBarbarian
+    },{
+        .spawn_x = ((UINT16) 55u << 3),
+        .spawn_y = ((UINT16) 36u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 44u << 3),
+        .box_y = ((UINT16) 30u << 3),
+        .box_width =  ((UINT16) 25u << 3),
+        .box_height =  ((UINT16) 12u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 4, 
+            .configured = 2, .reward = HP, .points = 10 
+        },
+        .type = SpriteBarbarian
+    },{
+        .spawn_x = ((UINT16) 35u << 3),
+        .spawn_y = ((UINT16) 10u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 23u << 3),
+        .box_y = ((UINT16) 8u << 3),
+        .box_width =  ((UINT16) 25u << 3),
+        .box_height =  ((UINT16) 10u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 6, 
+            .configured = 2, .reward = LANCE, .points = 10 
+        },
+        .type = SpriteBarbarian
+    }
+};
+const struct SpawningMapRect spawning_map_mission09[4] = {
+    {
+        .spawn_x = ((UINT16) 91u << 3),
+        .spawn_y = ((UINT16) 18u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 90u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 30u << 3),
+        .box_height =  ((UINT16) 12u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 8, 
+            .configured = 2, .reward = FLAME, .points = 20
+        },
+        .type = SpriteSavage
+    },{
+        .spawn_x = ((UINT16) 134u << 3),
+        .spawn_y = ((UINT16) 18u << 3) + 2u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 111u << 3),
+        .box_y = ((UINT16) 16u << 3),
+        .box_width =  ((UINT16) 40u << 3),
+        .box_height =  ((UINT16) 10u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 8, 
+            .configured = 2, .reward = HP, .points = 20
+        },
+        .type = SpriteSavage
+    },{
+        .spawn_x = ((UINT16) 63u << 3),
+        .spawn_y = ((UINT16) 17u << 3) + 2u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 46u << 3),
+        .box_y = ((UINT16) 11u << 3),
+        .box_width =  ((UINT16) 40u << 3),
+        .box_height =  ((UINT16) 15u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 2, .reward = GLADIO, .points = 20
+        },
+        .type = SpriteSavage
+    },{
+        .spawn_x = ((UINT16) 123u << 3),
+        .spawn_y = ((UINT16) 17u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 106u << 3),
+        .box_y = ((UINT16) 16u << 3),
+        .box_width =  ((UINT16) 38u << 3),
+        .box_height =  ((UINT16) 10u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 2, .reward = FLAME, .points = 20
+        },
+        .type = SpriteSavage
+    }
+};
+const struct SpawningMapRect spawning_map_mission11[4] = {
+    {
+        .spawn_x = ((UINT16) 35u << 3),
+        .spawn_y = ((UINT16) 13u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 29u << 3),
+        .box_y = ((UINT16) 13u << 3),
+        .box_width =  ((UINT16) 30u << 3),
+        .box_height =  ((UINT16) 8u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 12, 
+            .configured = 1, .reward = FLAME, .points = 20
+        },
+        .type = SpriteSavage
+    },{
+        .spawn_x = ((UINT16) 60u << 3),
+        .spawn_y = ((UINT16) 16u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 49u << 3),
+        .box_y = ((UINT16) 12u << 3),
+        .box_width =  ((UINT16) 30u << 3),
+        .box_height =  ((UINT16) 14u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 6, 
+            .configured = 2, .reward = LANCE, .points = 20
+        },
+        .type = SpriteSavage
+    },{
+        .spawn_x = ((UINT16) 34u << 3),
+        .spawn_y = ((UINT16) 39u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 7u << 3),
+        .box_y = ((UINT16) 27u << 3),
+        .box_width =  ((UINT16) 30u << 3),
+        .box_height =  ((UINT16) 20u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 12, 
+            .configured = 1, .reward = HP, .points = 20
+        },
+        .type = SpriteSavage
+    },{
+        .spawn_x = ((UINT16) 19u << 3),
+        .spawn_y = ((UINT16) 75u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 12u << 3),
+        .box_y = ((UINT16) 63u << 3),
+        .box_width =  ((UINT16) 34u << 3),
+        .box_height =  ((UINT16) 20u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 14, 
+            .configured = 1, .reward = FLAME, .points = 20
+        },
+        .type = SpriteSavage
+    }
+};
+const struct SpawningMapRect spawning_map_mission12[5] = {
+    {
+        .spawn_x = ((UINT16) 43u << 3),
+        .spawn_y = ((UINT16) 17u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 28u << 3),
+        .box_y = ((UINT16) 22u << 3),
+        .box_width =  ((UINT16) 8u << 3),
+        .box_height =  ((UINT16) 8u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 8, 
+            .configured = 2, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 54u << 3),
+        .spawn_y = ((UINT16) 10u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 43u << 3),
+        .box_y = ((UINT16) 15u << 3),
+        .box_width =  ((UINT16) 8u << 3),
+        .box_height =  ((UINT16) 8u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 1, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 99u << 3),
+        .spawn_y = ((UINT16) 9u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 79u << 3),
+        .box_y = ((UINT16) 14u << 3),
+        .box_width =  ((UINT16) 8u << 3),
+        .box_height =  ((UINT16) 8u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 14, 
+            .configured = 2, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 126u << 3),
+        .spawn_y = ((UINT16) 11u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 115u << 3),
+        .box_y = ((UINT16) 5u << 3),
+        .box_width =  ((UINT16) 8u << 3),
+        .box_height =  ((UINT16) 8u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 6, 
+            .configured = 1, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 116u << 3),
+        .spawn_y = ((UINT16) 8u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 101u << 3),
+        .box_y = ((UINT16) 6u << 3),
+        .box_width =  ((UINT16) 6u << 3),
+        .box_height =  ((UINT16) 12u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 4, 
+            .configured = 2, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    }
+};
+const struct SpawningMapRect spawning_map_mission13[5] = {
+    {
+        .spawn_x = ((UINT16) 71u << 3),
+        .spawn_y = ((UINT16) 56u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 82u << 3),
+        .box_y = ((UINT16) 56u << 3),
+        .box_width =  ((UINT16) 6u << 3),
+        .box_height =  ((UINT16) 10u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 8, 
+            .configured = 1, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 66u << 3),
+        .spawn_y = ((UINT16) 46u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 75u << 3),
+        .box_y = ((UINT16) 48u << 3),
+        .box_width =  ((UINT16) 6u << 3),
+        .box_height =  ((UINT16) 20u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 2, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 54u << 3),
+        .spawn_y = ((UINT16) 41u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 56u << 3),
+        .box_y = ((UINT16) 44u << 3),
+        .box_width =  ((UINT16) 10u << 3),
+        .box_height =  ((UINT16) 11 << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
+            .configured = 1, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 49u << 3),
+        .spawn_y = ((UINT16) 7u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 59u << 3),
+        .box_y = ((UINT16) 8u << 3),
+        .box_width =  ((UINT16) 12u << 3),
+        .box_height =  ((UINT16) 10 << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 6, 
+            .configured = 2, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 69u << 3),
+        .spawn_y = ((UINT16) 12u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 67u << 3),
+        .box_y = ((UINT16) 17u << 3),
+        .box_width =  ((UINT16) 9u << 3),
+        .box_height =  ((UINT16) 6 << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 6, 
+            .configured = 1, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    }
+};
+
+const struct SpawningMapRect spawning_map_mission14[7] = {
+    {
+        .spawn_x = ((UINT16) 33u << 3),
+        .spawn_y = ((UINT16) 4u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 20u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 8u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 2, 
+            .configured = 6, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 40u << 3),
+        .spawn_y = ((UINT16) 8u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 27u << 3),
+        .box_y = ((UINT16) 6u << 3),
+        .box_width =  ((UINT16) 3u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 3, 
+            .configured = 6, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 114u << 3),
+        .spawn_y = ((UINT16) 5u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 99u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 3u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.killer = {
+            .configured = 0,//99: wait, 0: hidden, 1:blink, 2: visible, 3: blink&disappear
+            .timeout = 1, .time_visible = 120,
+            .time_blink = 60, .time_attack = 60
+        },
+        .type = SpriteKiller
+    },{
+        .spawn_x = ((UINT16) 120u << 3),
+        .spawn_y = ((UINT16) 5u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 101u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 3u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.killer = {
+            .configured = 0,//99: wait, 0: hidden, 1:blink, 2: visible, 3: blink&disappear
+            .timeout = 1, .time_visible = 120,
+            .time_blink = 60, .time_attack = 60
+        },
+        .type = SpriteKiller
+    },{
+        .spawn_x = ((UINT16) 132u << 3),
+        .spawn_y = ((UINT16) 5u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 110u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 3u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.killer = {
+            .configured = 0,//99: wait, 0: hidden, 1:blink, 2: visible, 3: blink&disappear
+            .timeout = 1, .time_visible = 120,
+            .time_blink = 60, .time_attack = 60
+        },
+        .type = SpriteKiller
+    },{
+        .spawn_x = ((UINT16) 141u << 3),
+        .spawn_y = ((UINT16) 4u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 124u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 3u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 2, 
+            .configured = 6, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 142u << 3),
+        .spawn_y = ((UINT16) 10u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 124u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 3u << 3),
+        .box_height =  ((UINT16) 7u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 2, 
+            .configured = 6, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    }
+};
+
 
 #define DIE_COUNTER_MAX 80
 #define COUNTER_DANGER_MAX 60
@@ -362,6 +777,65 @@ void init_enemies_map(void) BANKED{//invoked on START of a StateMission
             current_spawning_map[6] = spawning_map_mission05[6];
 
             current_enemies_total_count = 7;
+        break;
+        case StateMission07alps:
+            current_spawning_map[0] = spawning_map_mission07[0];
+            current_spawning_map[1] = spawning_map_mission07[1];
+            current_spawning_map[2] = spawning_map_mission07[2];
+            current_spawning_map[3] = spawning_map_mission07[3];
+            current_spawning_map[4] = spawning_map_mission07[4];
+            current_enemies_total_count = 5;
+        break;
+        case StateMission09sea:
+            if(current_step == EXIT){
+                current_spawning_map[0] = spawning_map_mission09[0];
+                current_spawning_map[1] = spawning_map_mission09[1];
+                current_spawning_map[2] = spawning_map_mission09[2];
+                current_spawning_map[3] = spawning_map_mission09[3];
+
+                current_enemies_total_count = 4;
+            }
+        break;
+        case StateMission11sea:
+            current_spawning_map[0] = spawning_map_mission11[0];
+            current_spawning_map[1] = spawning_map_mission11[1];
+            current_spawning_map[2] = spawning_map_mission11[2];
+            current_spawning_map[3] = spawning_map_mission11[3];
+
+            current_enemies_total_count = 4;
+        break;
+        case StateMission12greece:
+            current_spawning_map[0] = spawning_map_mission12[0];
+            current_spawning_map[1] = spawning_map_mission12[1];
+            current_spawning_map[2] = spawning_map_mission12[2];
+            current_spawning_map[3] = spawning_map_mission12[3];
+            current_spawning_map[4] = spawning_map_mission12[4];
+
+            current_enemies_total_count = 5;
+        break;
+        case StateMission13greece:
+            if(current_step == EXIT){
+                current_spawning_map[0] = spawning_map_mission13[0];
+                current_spawning_map[1] = spawning_map_mission13[1];
+                current_spawning_map[2] = spawning_map_mission13[2];
+                current_spawning_map[3] = spawning_map_mission13[3];
+                current_spawning_map[4] = spawning_map_mission13[4];
+                    
+                current_enemies_total_count = 5;
+            }
+        break;
+        case StateMission14greece:
+            if(current_step == EXIT){
+                current_spawning_map[0] = spawning_map_mission14[0];
+                current_spawning_map[1] = spawning_map_mission14[1];
+                current_spawning_map[2] = spawning_map_mission14[2];
+                current_spawning_map[3] = spawning_map_mission14[3];
+                current_spawning_map[4] = spawning_map_mission14[4];
+                current_spawning_map[5] = spawning_map_mission14[5];
+                current_spawning_map[6] = spawning_map_mission14[6];
+                    
+                current_enemies_total_count = 7;
+            }
         break;
     }
 }

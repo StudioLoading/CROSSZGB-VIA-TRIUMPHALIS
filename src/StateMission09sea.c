@@ -22,15 +22,6 @@ const UINT8 coll_m09_surface[] = {0u, 0};
 
 Sprite* s_ambassador = 0;
 
-Sprite* s_savage00 = 0;
-Sprite* s_savage01 = 0;
-Sprite* s_savage02 = 0;
-Sprite* s_savage03 = 0;
-Sprite* s_savage04 = 0;
-Sprite* s_savage05 = 0;
-
-void spawn_savages(void) BANKED;
-
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
 extern UINT16 pos_horse_y;
@@ -95,7 +86,6 @@ void START(void){
             current_step = EXIT;
             s_ambassador = 0;
             mission_killed = 0;
-            spawn_savages();
         }
     //COMMONS & START
         night_mode();
@@ -106,28 +96,6 @@ void START(void){
             spawn_items();
         }
         start_common();
-}
-
-void spawn_savages(void) BANKED{
-    
-    s_savage01 = SpriteManagerAdd(SpriteSavage, ((UINT16) 91u << 3), ((UINT16) 18u << 3));
-    struct SoldierData* savage01_data = (struct SoldierData*) s_savage01->custom_data;
-    savage01_data->frmskip_max = 8u;
-    savage01_data->configured = 2;
-    savage01_data->reward = NOITEM;
-
-    s_savage02 = SpriteManagerAdd(SpriteSavage, ((UINT16) 134u << 3), ((UINT16) 18u << 3) + 2);
-    struct SoldierData* savage02_data = (struct SoldierData*) s_savage02->custom_data;
-    savage02_data->frmskip_max = 8u;
-    savage02_data->configured = 2;
-    savage02_data->reward = HP;
-    
-    s_savage03 = SpriteManagerAdd(SpriteSavage, ((UINT16) 63u << 3), ((UINT16) 17u << 3) + 2);
-    struct SoldierData* savage03_data = (struct SoldierData*) s_savage03->custom_data;
-    savage03_data->frmskip_max = 10u;
-    savage03_data->configured = 2;
-    savage03_data->reward = GLADIO;
-
 }
 
 void UPDATE(void){

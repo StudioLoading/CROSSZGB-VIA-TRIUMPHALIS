@@ -19,22 +19,12 @@ const UINT8 coll_m07_tiles[] = {15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27, 28, 
 
 const UINT8 coll_m07_surface[] = {0u, 0};
 
-Sprite* s_barbarian00 = 0;
-Sprite* s_barbarian01 = 0;
-Sprite* s_barbarian02 = 0;
-Sprite* s_barbarian03 = 0;
-Sprite* s_barbarian04 = 0;
-Sprite* s_barbarian05 = 0;
 extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
-
-void spawn_barbarian(void) BANKED;
-
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
 extern UINT16 pos_horse_y;
 extern MISSION_STEP current_step;
-
 extern Sprite* s_biga;
 extern Sprite* s_horse;
 extern Sprite* s_compass;
@@ -90,39 +80,6 @@ void START(void){
 		SetWindowY(104);
         spawn_items();
         start_common();
-        spawn_barbarian();
-}
-
-void spawn_barbarian(void) BANKED{
-    s_barbarian00 = SpriteManagerAdd(SpriteBarbarian, ((UINT16) 36u << 3), ((UINT16) 20u << 3));
-    struct SoldierData* barbarian00_data = (struct SoldierData*) s_barbarian00->custom_data;
-    barbarian00_data->frmskip_max = 4u;
-    barbarian00_data->configured = 1;
-    barbarian00_data->reward = HP;
-    
-    s_barbarian01 = SpriteManagerAdd(SpriteBarbarian, ((UINT16) 30u << 3), ((UINT16) 22u << 3));
-    struct SoldierData* barbarian01_data = (struct SoldierData*) s_barbarian01->custom_data;
-    barbarian01_data->frmskip_max = 6u;
-    barbarian01_data->configured = 1;
-    barbarian01_data->reward = GLADIO;
-    
-    s_barbarian02 = SpriteManagerAdd(SpriteBarbarian, ((UINT16) 41u << 3), ((UINT16) 38u << 3));
-    struct SoldierData* barbarian02_data = (struct SoldierData*) s_barbarian02->custom_data;
-    barbarian02_data->frmskip_max = 2u;
-    barbarian02_data->configured = 2;
-    barbarian02_data->reward = LANCE;
-    
-    s_barbarian03 = SpriteManagerAdd(SpriteBarbarian, ((UINT16) 55u << 3), ((UINT16) 36u << 3));
-    struct SoldierData* barbarian03_data = (struct SoldierData*) s_barbarian03->custom_data;
-    barbarian03_data->frmskip_max = 4u;
-    barbarian03_data->configured = 2;
-    barbarian03_data->reward = HP;
-    
-    s_barbarian04 = SpriteManagerAdd(SpriteBarbarian, ((UINT16) 35u << 3), ((UINT16) 10u << 3));
-    struct SoldierData* barbarian04_data = (struct SoldierData*) s_barbarian04->custom_data;
-    barbarian04_data->frmskip_max = 6u;
-    barbarian04_data->configured = 2;
-    barbarian04_data->reward = LANCE;
 }
 
 void UPDATE(void){

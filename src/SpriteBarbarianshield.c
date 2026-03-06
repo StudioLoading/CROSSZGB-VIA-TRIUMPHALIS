@@ -14,6 +14,8 @@ const UINT8 a_barbarianshield_h[] = {2, 1,2};
 const UINT8 a_barbarianshield_u[] = {2, 3,4};
 
 extern Sprite* s_horse;
+extern Sprite* spawn_points(UINT8 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
+extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
 void START(void){
     SetSpriteAnim(THIS, a_barbarianshield_h, 8u);
@@ -48,6 +50,7 @@ void UPDATE(void){
             barbarianshield_data->vx = -1;
             barbarianshield_data->frmskip = 100u;
             SetSpriteAnim(THIS, a_barbarianshield_u, 24u);
+            SpriteManagerAdd(SpritePuff, THIS->x, THIS->y + 2u);
             barbarianshield_data->configured = 7;
         break;
         case 4://running up-right
@@ -55,6 +58,7 @@ void UPDATE(void){
             barbarianshield_data->vx = 1;
             barbarianshield_data->frmskip = 100u;
             SetSpriteAnim(THIS, a_barbarianshield_u, 24u);
+            SpriteManagerAdd(SpritePuff, THIS->x, THIS->y + 2u);
             barbarianshield_data->configured = 7;
         break;
         case 5://running down-left
@@ -62,6 +66,7 @@ void UPDATE(void){
             barbarianshield_data->vx = -1;
             barbarianshield_data->frmskip = 100u;
             SetSpriteAnim(THIS, a_barbarianshield_h, 24u);
+            SpriteManagerAdd(SpritePuff, THIS->x, THIS->y + 2u);
             barbarianshield_data->configured = 7;
         break;
         case 6://running down-right
@@ -69,6 +74,7 @@ void UPDATE(void){
             barbarianshield_data->vx = 1;
             barbarianshield_data->frmskip = 100u;
             SetSpriteAnim(THIS, a_barbarianshield_h, 24u);
+            SpriteManagerAdd(SpritePuff, THIS->x, THIS->y + 2u);
             barbarianshield_data->configured = 7;
         break;
         case 7://running
@@ -78,6 +84,15 @@ void UPDATE(void){
             if(barbarianshield_data->frmskip < 10){
                 SpriteManagerRemoveSprite(THIS);
             }
+        break;
+        case 9://die
+            struct SoldierData* soldier_data = (struct SoldierData*) THIS->custom_data;
+            if(soldier_data->reward != NOITEM){
+                item_spawn(soldier_data->reward, THIS->x + 2u, THIS->y);
+            }
+            Sprite* s_puff = SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
+            spawn_points(soldier_data->points, THIS->x, THIS->y);
+            SpriteManagerRemoveSprite(THIS);
         break;
     }
 }

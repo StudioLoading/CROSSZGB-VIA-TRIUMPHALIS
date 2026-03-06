@@ -64,11 +64,21 @@ extern UINT8 turn;
 extern INT8 world_area_map;
 extern UINT8 credit_step;
 extern INSTRUCTION instruction_given;
+extern ITEM_TYPE weapon_atk;
+extern ITEM_TYPE weapon_def;
+extern INT8 mission_completed;
+extern Sprite* s_spawning_weapon;
 
 extern void update_hp(INT8 variation) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
+extern void update_weapon(void) BANKED;
+extern void update_hp_max(void) BANKED;
+extern void update_time_max(void) BANKED;
+extern void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
+
 void consume_weapon_def(void) BANKED;
 void consume_weapon_atk(void) BANKED;
+void pickup(Sprite* s_arg_item) BANKED;
 
 void START(void){
 
@@ -255,12 +265,12 @@ void spawn_items(void) BANKED{
 			}
 		break;
 		case MISSIONALPS04:
-			item_spawn(FIRE, ((UINT16) 62u << 3), ((UINT16) 18u << 3));
+			item_spawn(FLAME, ((UINT16) 62u << 3), ((UINT16) 18u << 3));
 		break;
 		case MISSIONALPS05:
-			item_spawn(FIRE, ((UINT16) 22u << 3), ((UINT16) 10u << 3));
+			item_spawn(FLAME, ((UINT16) 22u << 3), ((UINT16) 10u << 3));
 			//item_spawn(GLADIO, ((UINT16) 26u << 3), ((UINT16) 11u << 3));
-			item_spawn(FIRE, ((UINT16) 104u << 3), ((UINT16) 20u << 3));
+			item_spawn(FLAME, ((UINT16) 104u << 3), ((UINT16) 20u << 3));
 			item_spawn(LANCE, ((UINT16) 26u << 3), ((UINT16) 41u << 3));
 			item_spawn(LANCE, ((UINT16) 79u << 3), ((UINT16) 56u << 3));
 		break;
@@ -315,11 +325,11 @@ void spawn_items(void) BANKED{
 		case MISSIONGREECE13:
 			item_spawn(TIME, ((UINT16) 36u << 3), ((UINT16) 47u << 3));
 			item_spawn(TIME, ((UINT16) 21u << 3), ((UINT16) 74u << 3));
-			item_spawn(TIME, ((UINT16) 84u << 3), ((UINT16) 58u << 3));
+			item_spawn(TIME, ((UINT16) 86u << 3), ((UINT16) 58u << 3));
 		break;
 		case MISSIONGREECE14:
-			item_spawn(FIRE, ((UINT16) 29u << 3), ((UINT16) 7u << 3) + 3u);
-			item_spawn(FIRE, ((UINT16) 130u << 3), ((UINT16) 7u << 3) + 3u);
+			item_spawn(FLAME, ((UINT16) 29u << 3), ((UINT16) 7u << 3) + 3u);
+			item_spawn(FLAME, ((UINT16) 130u << 3), ((UINT16) 7u << 3) + 3u);
 		break;
 		case MISSIONGREECE15:
 			item_spawn(GLADIO, ((UINT16) 7u << 3), ((UINT16) 6u << 3) + 3u);
@@ -439,6 +449,45 @@ void check_sgb_palette(UINT8 new_state) BANKED{
 		}
 		break;
 	}
+}
+
+void pickup(Sprite* s_arg_item) BANKED{
+    struct ItemData* item_data = (struct ItemData*) s_arg_item->custom_data;
+    switch(item_data->itemtype){
+        case GLADIO: case LANCE: case FLAME:
+            weapon_atk = item_data->itemtype;
+            update_weapon();
+        break;
+        case ELMET: case SHIELD: case CAPE:
+            weapon_def = item_data->itemtype;
+            update_weapon();
+        break;
+        case HP:
+            update_hp_max();
+        break;
+        case TIME:
+            update_time_max();
+        break;
+        case GOLDEN_ELM:
+        case GOLDEN_WHEEL:
+        case GOLDEN_WHIP:
+        case GOLDEN_REINS:
+            pickup_config(item_data->itemtype);
+        break;
+        case PAPYRUS:
+            if(current_mission == MISSIONSEA08 || current_mission == MISSIONGREECE12){
+                current_step = EXIT;
+                mission_completed = 1;
+            }
+            if(current_mission == MISSIONGREECE13){
+                current_step = SENATOR_COLLIDED;
+            }
+        break;
+    }    
+    if(item_data->flag_continuous_spawning == 1){
+        s_spawning_weapon = 0;
+    }
+    SpriteManagerRemoveSprite(s_arg_item);
 }
 
 void manage_border(UINT8 my_next_state) BANKED{

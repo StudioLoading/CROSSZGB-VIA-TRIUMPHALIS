@@ -58,6 +58,7 @@ void UPDATE(void){
             if(savage_data->reward != NOITEM){
                 item_spawn(savage_data->reward, THIS->x + 2u, THIS->y);
             }
+            SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
             SpriteManagerRemoveSprite(THIS);
             return;
         break;
@@ -98,10 +99,5 @@ void UPDATE(void){
     }
 }
 
-void DESTROY(void){    
-    struct SoldierData* savage_data = (struct SoldierData*) THIS->custom_data;
-    if(savage_data->reward != NOITEM){
-        item_spawn(savage_data->reward, THIS->x + 2u, THIS->y);
-    }
-    SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
+void DESTROY(void){
 }

@@ -6,7 +6,7 @@
 #include "SpriteManager.h"
 
 #define DELTA_X_INC_CGB 2
-#define DELTA_X_INC_DMG 2
+#define DELTA_X_INC_DMG 1
 
 INT8 delta_x_inc = 0;
 
@@ -14,6 +14,7 @@ extern Sprite* s_horse;
 extern INT8 vx;
 extern UINT8 track_ended;
 extern UINT8 flag_turn_on_tremble;
+extern UINT8 mapwidth;
 
 void START(void){
     THIS->lim_x = 1000;
@@ -32,28 +33,29 @@ void UPDATE(void){
         THIS->y = s_horse->y - 18;
     }
     INT8 delta_x = 0;
+    UINT16 final_camera_x = s_horse->x;
     if(s_horse->mirror == NO_MIRROR){
-        UINT16 final_camera_x = s_horse->x + 64;
-        UINT16 final_camera_x_min = final_camera_x - 8;
-        UINT16 final_camera_x_max = final_camera_x + 8;
+        final_camera_x = s_horse->x + 64;
+        UINT16 final_camera_x_min = final_camera_x - 4;
+        UINT16 final_camera_x_max = final_camera_x + 4;
         if(THIS->x > final_camera_x_max){delta_x = -delta_x_inc;}
         else if(THIS->x < final_camera_x_min){delta_x = +delta_x_inc;}
     }
     if(s_horse->mirror == V_MIRROR){
-        UINT16 final_camera_x = s_horse->x - 40;
-        UINT16 final_camera_x_min = final_camera_x -8;
-        UINT16 final_camera_x_max = final_camera_x +8;
+        final_camera_x = s_horse->x - 40;
+        UINT16 final_camera_x_min = final_camera_x - 4;
+        UINT16 final_camera_x_max = final_camera_x + 4;
         if(THIS->x > final_camera_x_max){delta_x=-delta_x_inc;}
         else if(THIS->x < final_camera_x_min){delta_x=+delta_x_inc;}
     }
-    if(delta_x){
-        INT16 camera_horse_delta_x = THIS->x - s_horse->x;
-        if(camera_horse_delta_x < 16 && camera_horse_delta_x > -16){
-            THIS->x += vx + vx + delta_x;
-        }else if(camera_horse_delta_x < 10 && camera_horse_delta_x > -10){
-            THIS->x += vx + delta_x;
-        }else{
+    if(delta_x && s_horse->x > 32u){
+        INT8 delta_x_multiplier = vx;
+        if(delta_x_multiplier < 0) delta_x_multiplier = -delta_x_multiplier;
+        INT16 camera_horse_delta_x = final_camera_x - s_horse->x;
+         if(camera_horse_delta_x < 4 && camera_horse_delta_x > -4){
             THIS->x += delta_x;
+        }else{
+            THIS->x += (delta_x_multiplier * delta_x);
         }
     }
 }

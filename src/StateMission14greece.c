@@ -64,7 +64,6 @@ extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy)
 extern void map_ended(void) BANKED;
 extern void night_mode(void) BANKED;
 
-void m14_spawn_greeks(void) BANKED;
 void m14_spawn_straw(void) BANKED;
 void m14_spawn_greeks2(void) BANKED;
 
@@ -90,7 +89,6 @@ void START(void){
 		INIT_HUD(hudm);
         flag_spawned_greek2 = 0u;
 		SetWindowY(104);
-        m14_spawn_greeks();
         m14_spawn_straw();
         spawn_items();
         start_common();
@@ -101,37 +99,6 @@ void m14_spawn_straw(void) BANKED{
     SpriteManagerAdd(SpriteStraw, ((UINT16) 162u << 3) , ((UINT16) 7u << 3) + 4);
 }
 
-void m14_spawn_greeks(void) BANKED{
-    s_greeksoldier00 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 33u << 3), ((UINT16) 4u << 3));
-    struct SoldierData* greeksoldier00_data = (struct SoldierData*) s_greeksoldier00->custom_data;
-    greeksoldier00_data->frmskip_max = 2u;
-    greeksoldier00_data->configured = 6;
-    greeksoldier00_data->reward = NOITEM;
-
-    s_greeksoldier01 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 40u << 3), ((UINT16) 8u << 3));
-    struct SoldierData* greeksoldier01_data = (struct SoldierData*) s_greeksoldier01->custom_data;
-    greeksoldier01_data->frmskip_max = 3u;
-    greeksoldier01_data->configured = 6;
-    greeksoldier01_data->reward = NOITEM;
-
-    s_greeksoldier02 = SpriteManagerAdd(SpriteKiller, ((UINT16) 114u << 3), ((UINT16) 5u << 3));
-    s_greeksoldier03 = SpriteManagerAdd(SpriteKiller, ((UINT16) 120u << 3), ((UINT16) 5u << 3));
-    s_greeksoldier04 = SpriteManagerAdd(SpriteKiller, ((UINT16) 132u << 3), ((UINT16) 5u << 3));
-
-    s_greeksoldier05 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 141u << 3), ((UINT16) 4u << 3));
-    struct SoldierData* greeksoldier05_data = (struct SoldierData*) s_greeksoldier05->custom_data;
-    greeksoldier05_data->frmskip_max = 2u;
-    greeksoldier05_data->configured = 6;
-    greeksoldier05_data->reward = NOITEM;
-
-    s_greeksoldier06 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 142u << 3), ((UINT16) 10u << 3));
-    struct SoldierData* greeksoldier06_data = (struct SoldierData*) s_greeksoldier06->custom_data;
-    greeksoldier06_data->frmskip_max = 2u;
-    greeksoldier06_data->configured = 6;
-    greeksoldier06_data->reward = NOITEM;
-
-}
-
 void m14_spawn_greeks2(void) BANKED{
 
     SpriteManagerAdd(SpriteStraw, ((UINT16) 169u << 3) , ((UINT16) 7u << 3) + 4);
@@ -139,7 +106,7 @@ void m14_spawn_greeks2(void) BANKED{
     s_greeksoldier01 = SpriteManagerAdd(SpriteKiller, ((UINT16) 167u << 3) + 3u, ((UINT16) 3u << 3) + 2u);
     s_greeksoldier02 = SpriteManagerAdd(SpriteKiller, ((UINT16) 187u << 3), ((UINT16) 4u << 3));
 
-    item_spawn(FIRE, ((UINT16) 199u << 3), ((UINT16) 7u << 3) + 1u);
+    item_spawn(FLAME, ((UINT16) 199u << 3), ((UINT16) 7u << 3) + 1u);
     SpriteManagerAdd(SpriteStraw, ((UINT16) 208u << 3) , ((UINT16) 7u << 3) + 4);
     s_greeksoldier03 = SpriteManagerAdd(SpriteGreeksoldier, ((UINT16) 191u << 3), ((UINT16) 4u << 3));
     struct SoldierData* greeksoldier03_data = (struct SoldierData*) s_greeksoldier03->custom_data;

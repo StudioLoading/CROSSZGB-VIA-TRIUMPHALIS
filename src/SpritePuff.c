@@ -35,7 +35,11 @@ void START(void) {
 	anim_puff_frame = anim_puff_tick = 0;
 	// load the very first animation frame for the sprite
 	set_sprite_native_banked_data(BANK(puff_anim), spriteIdxs[SpritePuff], 4, get_banked_pointer(BANK(puff_anim), puff_anim + anim_puff_frame));
-    
+
+    struct ItemData* puff_data = (struct ItemData*) THIS->custom_data;
+    puff_data->vx = 0;
+    puff_data->hp = 4;
+    puff_data->vy = -1;
 }
 
 
@@ -55,6 +59,13 @@ void UPDATE(void) {
                 anim_puff_frame = 0;
                 SpriteManagerRemoveSprite(THIS);
             } 
+        }
+    //upping
+        struct ItemData* puff_data = (struct ItemData*) THIS->custom_data;
+        puff_data->vx++;
+        if(puff_data->vx > puff_data->hp){
+            puff_data->vx = 0;
+            TranslateSprite(THIS, 0, puff_data->vy << delta_time);
         }
 }
 

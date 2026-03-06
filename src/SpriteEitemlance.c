@@ -21,7 +21,6 @@ extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
 extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
 
-extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern Sprite* spawn_points(UINT8 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
 
 void START(void){

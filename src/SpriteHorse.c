@@ -326,14 +326,14 @@ void UPDATE(void){
         UINT8 cos_idx = turn+64;
         cos = sine_wave[cos_idx];
     //SPRITE ANIMATION SPEED animation speed
-        if(stamina_current < 120){
+        if(stamina_current < 100){
             anim = ANIM_RIGHT_TROT;
             anim_horse_speed = 24u;
         }else if(stamina_current < 240){
             anim = ANIM_RIGHT_TROT;
-            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 7;
+            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
         }else{
-            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 7;
+            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
             anim = ANIM_RIGHT_RUN;  
             if(stamina_current >= (euphoria_min - 100)){
                 anim = ANIM_RIGHT_WALK;
@@ -361,7 +361,7 @@ void UPDATE(void){
                 }else if(cos > 65 && cos < 110){// tratto come se stesse andando a 33 gradi
                     vx = 2;
                     if(sin > -30 && sin <= 30){//tratto come se stesse andando orizzontale
-                        vx = 3;
+                        //vx = 3;
                     }
                 }else if(cos > 110){ // tratto come se stesse andando orizzontale destra
                     vx = 2;
@@ -374,7 +374,7 @@ void UPDATE(void){
                 }else if(cos < 0 && cos < -110){ // tratto come se stesse andando orizzontale sinistra
                     vx = -2;                    
                     if(sin > -30 && sin <= 30){//tratto come se stesse andando orizzontale
-                        vx = -3;
+                        //vx = -3;
                     }
                 }
             //VY col seno

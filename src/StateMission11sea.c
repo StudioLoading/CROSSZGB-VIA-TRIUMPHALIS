@@ -23,7 +23,6 @@ const UINT8 coll_m11_tiles[] = {15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 
 const UINT8 coll_m11_surface[] = {0u, 0};
 
 void spawn_m11_killers(void) BANKED;
-void spawn_m11_savage(void) BANKED;
 
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
@@ -94,33 +93,12 @@ void START(void){
         spawn_items();
         start_common();
         spawn_m11_killers();
-        spawn_m11_savage();
 }
 
 void spawn_m11_killers(void) BANKED{
     SpriteManagerAdd(SpriteKiller, ((UINT16) 56 << 3), ((UINT16) 3 << 3));
     SpriteManagerAdd(SpriteKiller, ((UINT16) 62 << 3), ((UINT16) 4 << 3));
     SpriteManagerAdd(SpriteKiller, ((UINT16) 85 << 3), ((UINT16) 66 << 3));
-}
-
-void spawn_m11_savage(void) BANKED{
-    Sprite* s_savage00 = SpriteManagerAdd(SpriteSavage, ((UINT16) 35 << 3), ((UINT16) 13u << 3));
-    struct SoldierData* savage00_data = (struct SoldierData*) s_savage00->custom_data;
-    savage00_data->frmskip_max = 12u;
-    savage00_data->configured = 1;
-    savage00_data->reward = HP;
-    
-    Sprite* s_savage01 = SpriteManagerAdd(SpriteSavage, ((UINT16) 60 << 3), ((UINT16) 16u << 3));
-    struct SoldierData* savage01_data = (struct SoldierData*) s_savage01->custom_data;
-    savage01_data->frmskip_max = 6u;
-    savage01_data->configured = 2;
-    savage01_data->reward = LANCE;
-
-    Sprite* s_savage02 = SpriteManagerAdd(SpriteSavage, ((UINT16) 34 << 3), ((UINT16) 39u << 3));
-    struct SoldierData* savage02_data = (struct SoldierData*) s_savage02->custom_data;
-    savage02_data->frmskip_max = 12u;
-    savage02_data->configured = 1;
-    savage02_data->reward = HP;    
 }
 
 void UPDATE(void){

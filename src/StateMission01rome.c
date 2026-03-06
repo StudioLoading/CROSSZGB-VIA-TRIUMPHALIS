@@ -84,14 +84,7 @@ void UPDATE(void){
     //LIMIT MAP LEFT
         if(s_horse->x < 40u){
             s_horse->x = 40u;
-        }
-    //CALCULATE DANGER
-        calculate_danger(s_romansoldier00);
-        calculate_danger(s_romansoldier01);
-        calculate_danger(s_romansoldier02);
-        calculate_danger(s_romansoldier03);
-        check_danger();
-        show_danger();    
+        } 
     //CONTINUOUS SPAWNING WEAPON
         if(s_spawning_weapon == 0){
             spawning_weapon_counter++;

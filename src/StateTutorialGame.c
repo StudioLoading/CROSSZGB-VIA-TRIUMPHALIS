@@ -187,7 +187,7 @@ void START(void){
 		        InitScroll(BANK(maptut00straight), &maptut00straight, coll_rome_tiles, coll_rome_surface);
             }break;
             case TUTORIAL_STAGE_12_STRAW:{
-                item_spawn(FIRE, s_horse->x + 80u, s_horse->y);
+                item_spawn(FLAME, s_horse->x + 80u, s_horse->y);
                 Sprite* s_straw = SpriteManagerAdd(SpriteStraw, s_horse->x + 200u, s_horse->y);
                 Sprite* s_straw2 = SpriteManagerAdd(SpriteStraw, s_horse->x + 224u, s_horse->y);
 		        InitScroll(BANK(maptut00straight), &maptut00straight, coll_rome_tiles, coll_rome_surface);

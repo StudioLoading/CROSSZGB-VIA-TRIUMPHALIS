@@ -45,7 +45,6 @@ typedef enum{
     FOG,
     GLADIO,
     LANCE,
-    FIRE,
     ELMET,
     SHIELD,
     CAPE,
