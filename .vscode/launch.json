@@ -16,6 +16,18 @@
             "preLaunchTask": "Debug",
         },
         {
+            "type": "cppvsdbg",
+            "request": "launch",
+            "name": "SuperGameBoy",
+            "program": "${env:ZGB_PATH}/../../env/bgb/bgb.exe",
+            "args": ["${workspaceFolder}/obj/Debug/gb/rom.gb"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "externalTerminal",
+            "preLaunchTask": "Debug",
+        },
+        {
             "type": "emulicious-debugger",
             "request": "launch",
             "name": "DebugColor",

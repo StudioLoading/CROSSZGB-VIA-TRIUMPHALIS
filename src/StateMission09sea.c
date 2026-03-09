@@ -58,7 +58,6 @@ extern void update_time(void) BANKED;
 extern void spawn_items(void) BANKED;
 extern void die(void) BANKED;
 extern void night_mode(void) BANKED;
-extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 extern void map_ended(void) BANKED;

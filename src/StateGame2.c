@@ -1,7 +1,7 @@
 #include "Banks/SetAutoBank.h"
 
 #include "BankManager.h"
-#include <gb/cgb.h>
+#include <gb/gb.h>
 #include "ZGBMain.h"
 #include "Palette.h"
 #include "Scroll.h"
@@ -68,6 +68,7 @@ extern ITEM_TYPE weapon_atk;
 extern ITEM_TYPE weapon_def;
 extern INT8 mission_completed;
 extern Sprite* s_spawning_weapon;
+extern UINT8 flag_using_atk;
 
 extern void update_hp(INT8 variation) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
@@ -76,8 +77,8 @@ extern void update_hp_max(void) BANKED;
 extern void update_time_max(void) BANKED;
 extern void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
 
-void consume_weapon_def(void) BANKED;
-void consume_weapon_atk(void) BANKED;
+extern void consume_weapon_def(void) BANKED;
+extern void consume_weapon_atk(void) BANKED;
 void pickup(Sprite* s_arg_item) BANKED;
 
 void START(void){
@@ -248,14 +249,6 @@ void spawn_items(void) BANKED{
 				whip_data->configured = 1;
 			}
 		break;
-		case MISSIONROME01:
-			item_spawn(LANCE, ((UINT16) 21u << 3), ((UINT16) 34u << 3));
-			item_spawn(LANCE, ((UINT16) 84u << 3), ((UINT16) 33u << 3));
-		break;
-		case MISSIONROME02:
-			item_spawn(HP, ((UINT16) 38u << 3), ((UINT16) 79u << 3));
-			item_spawn(HP, ((UINT16) 113u << 3), ((UINT16) 55u << 3));
-		break;
 		case MISSIONROME03:
 			if(configuration.wheel == NORMAL){
 				Sprite* s_config_wheel = SpriteManagerAdd(SpriteConfigwheel, ((UINT16)152u << 3), ((UINT16)23u << 3));
@@ -264,22 +257,7 @@ void spawn_items(void) BANKED{
 				wheel_data->configured = 1;
 			}
 		break;
-		case MISSIONALPS04:
-			item_spawn(FLAME, ((UINT16) 62u << 3), ((UINT16) 18u << 3));
-		break;
-		case MISSIONALPS05:
-			item_spawn(FLAME, ((UINT16) 22u << 3), ((UINT16) 10u << 3));
-			//item_spawn(GLADIO, ((UINT16) 26u << 3), ((UINT16) 11u << 3));
-			item_spawn(FLAME, ((UINT16) 104u << 3), ((UINT16) 20u << 3));
-			item_spawn(LANCE, ((UINT16) 26u << 3), ((UINT16) 41u << 3));
-			item_spawn(LANCE, ((UINT16) 79u << 3), ((UINT16) 56u << 3));
-		break;
 		case MISSIONALPS06:
-			item_spawn(ELMET, ((UINT16) 44u << 3), ((UINT16) 15u << 3) - 4u);
-			item_spawn(ELMET, ((UINT16) 166u << 3), ((UINT16) 14u << 3));
-			item_spawn(HP, ((UINT16) 111u << 3), ((UINT16) 19u << 3));
-			item_spawn(ELMET, ((UINT16) 128u << 3), ((UINT16) 18u << 3));
-			item_spawn(HP, ((UINT16) 155u << 3), ((UINT16) 9u << 3));
 			if(configuration.reins == NORMAL){
 				Sprite* s_config_reins = SpriteManagerAdd(SpriteConfigreins, ((UINT16)212u << 3), ((UINT16)10u << 3));
 				struct ItemData* reins_data = (struct ItemData*)s_config_reins->custom_data;
@@ -288,24 +266,9 @@ void spawn_items(void) BANKED{
 			}
 		break;
 		case MISSIONALPS07:
-			item_spawn(SHIELD, ((UINT16) 18u << 3), ((UINT16) 16u << 3));
 			SpriteManagerAdd(SpriteFlame, (UINT16) 13u << 3, (UINT16) 13u << 3);
-			item_spawn(LANCE, ((UINT16) 60u << 3), ((UINT16) 41u << 3));
-		break;
-		case MISSIONSEA08:
-			item_spawn(TIME, ((UINT16) 70u << 3), ((UINT16) 29u << 3));
-			item_spawn(TIME, ((UINT16) 44u << 3), ((UINT16) 61u << 3));
-			item_spawn(PAPYRUS, ((UINT16) 18u << 3), ((UINT16) 63u << 3));
-		break;
-		case MISSIONSEA09:
-			item_spawn(SHIELD, ((UINT16) 21u << 3), ((UINT16) 8u << 3));
-			item_spawn(SHIELD, ((UINT16) 113u << 3), ((UINT16) 10u << 3));
 		break;
 		case MISSIONSEA10:
-			item_spawn(TIME, ((UINT16) 93u << 3), ((UINT16) 9u << 3));
-			item_spawn(TIME, ((UINT16) 52u << 3), ((UINT16) 25u << 3));
-			item_spawn(TIME, ((UINT16) 39u << 3), ((UINT16) 42u << 3));
-			item_spawn(TIME, ((UINT16) 91u << 3), ((UINT16) 53u << 3));
 			if(configuration.elm == NORMAL){
 				Sprite* s_config_elm = SpriteManagerAdd(SpriteConfigelm, ((UINT16)83 << 3), ((UINT16)79u << 3));
 				struct ItemData* elm_data = (struct ItemData*)s_config_elm->custom_data;
@@ -314,22 +277,7 @@ void spawn_items(void) BANKED{
 			}
 		break;
 		case MISSIONSEA11:
-			item_spawn(LANCE, ((UINT16) 17u << 3), ((UINT16) 14u << 3));
-			item_spawn(HP, ((UINT16) 65u << 3), ((UINT16) 11u << 3));
 			SpriteManagerAdd(SpriteFlame, (UINT16) 10u << 3, (UINT16) 11u << 3);
-		break;
-		case MISSIONGREECE12:
-			item_spawn(TIME, ((UINT16) 72u << 3), ((UINT16) 20u << 3));
-			item_spawn(TIME, ((UINT16) 126u << 3), ((UINT16) 25u << 3));
-		break;
-		case MISSIONGREECE13:
-			item_spawn(TIME, ((UINT16) 36u << 3), ((UINT16) 47u << 3));
-			item_spawn(TIME, ((UINT16) 21u << 3), ((UINT16) 74u << 3));
-			item_spawn(TIME, ((UINT16) 86u << 3), ((UINT16) 58u << 3));
-		break;
-		case MISSIONGREECE14:
-			item_spawn(FLAME, ((UINT16) 29u << 3), ((UINT16) 7u << 3) + 3u);
-			item_spawn(FLAME, ((UINT16) 130u << 3), ((UINT16) 7u << 3) + 3u);
 		break;
 		case MISSIONGREECE15:
 			item_spawn(GLADIO, ((UINT16) 7u << 3), ((UINT16) 6u << 3) + 3u);
@@ -361,25 +309,6 @@ void spawn_items(void) BANKED{
 				elm_data->configured = 1;
 			}
 		break;
-		case MISSIONDESERT17:
-			item_spawn(ELMET, ((UINT16) 57u << 3), (UINT16) 10u << 3);
-			item_spawn(HP, ((UINT16) 67u << 3), (UINT16) 36u << 3);
-		break;
-		case MISSIONDESERT18:
-			item_spawn(TIME, ((UINT16) 75u << 3), ((UINT16) 6u << 3));
-			item_spawn(TIME, ((UINT16) 132u << 3), ((UINT16) 9u << 3));
-		break;
-		case MISSIONEGYPT19:
-			item_spawn(TIME, ((UINT16) 38u << 3), ((UINT16) 28u << 3));
-			item_spawn(HP, ((UINT16) 110u << 3), ((UINT16) 29u << 3));
-		break;
-		case MISSIONEGYPT20:
-			item_spawn(GLADIO, ((UINT16) 12u << 3), ((UINT16) 4u << 3));
-			item_spawn(TIME, ((UINT16) 108u << 3), ((UINT16) 8u << 3));
-			item_spawn(TIME, ((UINT16) 206u << 3), ((UINT16) 7u << 3));
-			item_spawn(TIME, ((UINT16) 176u << 3), ((UINT16) 10u << 3));
-
-		break;
 	}
 }
 
@@ -388,7 +317,7 @@ void night_mode(void) BANKED{
 		BGP_REG = PAL_DEF(2, 1, 3, 3);// NIGHT MODE
 		OBP0_REG = PAL_DEF(3, 3, 1, 3);
 	}else{
-		switch(current_area){
+ 		switch(current_area){
 			case AREA_ROME://(30,29,19), (30,25,14), (29,2,0), (13,12,1)
 				{
 					set_bkg_palette(BKGF_CGB_PAL0, 1, palette_data_rome);
@@ -455,7 +384,9 @@ void pickup(Sprite* s_arg_item) BANKED{
     struct ItemData* item_data = (struct ItemData*) s_arg_item->custom_data;
     switch(item_data->itemtype){
         case GLADIO: case LANCE: case FLAME:
+			if(flag_using_atk){ return; }
             weapon_atk = item_data->itemtype;
+			flag_using_atk = 0;
             update_weapon();
         break;
         case ELMET: case SHIELD: case CAPE:

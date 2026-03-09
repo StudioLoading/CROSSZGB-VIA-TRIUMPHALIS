@@ -236,6 +236,7 @@ struct SpawningMapRect{
     union {
         struct SoldierData soldier;
         struct KillerData killer;
+        struct ItemData item;
     } box_data;
     UINT16 spawn_x;
     UINT16 spawn_y;

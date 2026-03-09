@@ -109,7 +109,7 @@ void UPDATE(void){
             spawning_weapon_counter++;
             if(spawning_weapon_counter < 0){
                 spawning_weapon_counter = 0;
-                item_spawn_continuously(FLAME, ((UINT16) 38u << 3), ((UINT16) 68u << 3));
+                item_spawn_continuously(FLAME, ((UINT16) 45u << 3), ((UINT16) 26u << 3));
             }
         }
     //IS MISSION COMPLETED?

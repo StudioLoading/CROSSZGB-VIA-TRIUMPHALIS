@@ -50,7 +50,6 @@ extern UINT8 flag_night_mode;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
-extern void calculate_danger(Sprite* s_danger) BANKED;
 extern void check_danger(void) BANKED;
 extern void show_danger(void) BANKED;
 extern void update_time(void) BANKED;
@@ -67,7 +66,7 @@ void START(void){
         flag_golden_found = 0;
     }else if(current_step == LOOKING_FOR_SENATOR){//initial
         item_spawn(PAPYRUS, ((UINT16) 91u << 3), ((UINT16) 59u << 3) + 4);
-        item_spawn(TIME, ((UINT16) 26u << 3), ((UINT16) 60u << 3) + 2);
+        item_spawn(TIME, ((UINT16) 25u << 3), ((UINT16) 60u << 3) + 2);
         Sprite* s_greek_00 = SpriteManagerAdd(SpriteGreekphilosopher, (((UINT16) 89u) << 3) + 3u, ((UINT16) 65u) << 3);
         Sprite* s_greek_01 = SpriteManagerAdd(SpriteGreekphilosopher, (((UINT16) 91u) << 3) - 3u, ((UINT16) 65u) << 3);
         s_greek_01->mirror = V_MIRROR;

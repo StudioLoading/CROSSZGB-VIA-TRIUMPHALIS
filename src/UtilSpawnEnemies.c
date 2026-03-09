@@ -16,6 +16,7 @@ extern UINT8 spawned_greeks_flag;
 UINT8 current_enemies_total_count = 0u;
 INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down = 0;
 
+
 const struct SpawningMapRect spawning_map_mission01[4] = {
     {
         .spawn_x = ((UINT16) 84u << 3),
@@ -25,9 +26,8 @@ const struct SpawningMapRect spawning_map_mission01[4] = {
         .box_y = ((UINT16) 1u << 3),
         .box_width =  ((UINT16) 100u << 3),
         .box_height =  ((UINT16) 15u << 3),
-        .box_data.soldier = { 
-            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 0, 
-            .configured = 0, .reward = 0, .points = 0 
+        .box_data.soldier = {
+            .frmskip_max = 12u, .configured = 2, .reward = NOITEM, .points = 10u
         },
         .type = SpriteRomansoldier
     },
@@ -39,10 +39,7 @@ const struct SpawningMapRect spawning_map_mission01[4] = {
         .box_y = ((UINT16) 17u << 3),
         .box_width =  ((UINT16) 40u << 3),
         .box_height =  ((UINT16) 10u << 3),
-        .box_data.soldier = { 
-            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 0, 
-            .configured = 0, .reward = 0, .points = 0 
-        },
+        .box_data.soldier = { .frmskip_max = 12u, .configured = 2, .reward = HP, .points = 10u },
         .type = SpriteRomansoldier
     },
     {
@@ -53,10 +50,7 @@ const struct SpawningMapRect spawning_map_mission01[4] = {
         .box_y = ((UINT16) 48u << 3),
         .box_width =  ((UINT16) 40u << 3),
         .box_height =  ((UINT16) 10u << 3),
-        .box_data.soldier = { 
-            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 0, 
-            .configured = 0, .reward = 0, .points = 0 
-        },
+        .box_data.soldier = { .frmskip_max = 12u, .configured = 2, .reward = NOITEM, .points = 10u },
         .type = SpriteRomansoldier
     },
     {
@@ -67,10 +61,7 @@ const struct SpawningMapRect spawning_map_mission01[4] = {
         .box_y = ((UINT16) 41u << 3),
         .box_width =  ((UINT16) 40u << 3),
         .box_height =  ((UINT16) 20u << 3),
-        .box_data.soldier = { 
-            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 0, 
-            .configured = 0, .reward = 0, .points = 0 
-        },
+        .box_data.soldier = { .frmskip_max = 12u, .configured = 2, .reward = NOITEM, .points = 10u },
         .type = SpriteRomansoldier
     }
 };
@@ -611,7 +602,6 @@ const struct SpawningMapRect spawning_map_mission13[5] = {
         .type = SpriteGreeksoldier
     }
 };
-
 const struct SpawningMapRect spawning_map_mission14[7] = {
     {
         .spawn_x = ((UINT16) 33u << 3),
@@ -709,6 +699,22 @@ const struct SpawningMapRect spawning_map_mission14[7] = {
         .type = SpriteGreeksoldier
     }
 };
+const struct SpawningMapRect spawning_map_mission15[7] = {
+    {
+        .spawn_x = ((UINT16) 36u << 3),
+        .spawn_y = ((UINT16) 47u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 47u << 3),
+        .box_y = ((UINT16) 42u << 3),
+        .box_width =  ((UINT16) 8u << 3),
+        .box_height =  ((UINT16) 12u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 2, 
+            .configured = 6, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteGreeksoldier
+    },
+};
 
 
 #define DIE_COUNTER_MAX 80
@@ -720,6 +726,8 @@ int current_spawning_map_count = 0;
 
 void init_enemies_map(void) BANKED;
 void spawn_enemies(void) BANKED;
+void check_danger(void) BANKED;
+void show_danger(void) BANKED;
 UINT8 check_horse_in_box(UINT8 arg_index, UINT16 arg_current_horse_x, UINT16 arg_current_horse_y) BANKED;
 void calculate_danger(Sprite* s_danger) BANKED;
 
@@ -727,27 +735,10 @@ void calculate_danger(Sprite* s_danger) BANKED;
 void init_enemies_map(void) BANKED{//invoked on START of a StateMission
     switch(current_state){
         case StateMission01rome:
-            struct SoldierData romansoldier00_data = {
-                .frmskip_max = 12u, .configured = 2, .reward = NOITEM, .points = 10u
-            };
-            struct SoldierData romansoldier01_data = {
-                .frmskip_max = 12u, .configured = 2, .reward = HP, .points = 10u
-            };
-            struct SoldierData romansoldier02_data = {
-                .frmskip_max = 12u, .configured = 2, .reward = NOITEM, .points = 10u
-            };
-            struct SoldierData romansoldier03_data = {
-                .frmskip_max = 12u, .configured = 2, .reward = NOITEM, .points = 10u
-            };
             current_spawning_map[0] = spawning_map_mission01[0];
             current_spawning_map[1] = spawning_map_mission01[1];
             current_spawning_map[2] = spawning_map_mission01[2];
             current_spawning_map[3] = spawning_map_mission01[3];
-
-            current_spawning_map[0].box_data.soldier = romansoldier00_data;
-            current_spawning_map[1].box_data.soldier = romansoldier01_data;
-            current_spawning_map[2].box_data.soldier = romansoldier02_data;
-            current_spawning_map[3].box_data.soldier = romansoldier03_data;
 
             current_enemies_total_count = 4;
         break;

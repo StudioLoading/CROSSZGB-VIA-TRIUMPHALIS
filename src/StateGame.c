@@ -101,6 +101,7 @@ extern INT8 counter_danger;
 extern void die(void) BANKED;
 extern void set_bgm(void) BANKED;
 extern void init_enemies_map(void) BANKED;
+extern void init_items_map(void) BANKED;
 extern void lancia_boccetta(INT8 arg_horse_vx, INT8 arg_horse_vy) BANKED;
 
 void START(void){
@@ -139,6 +140,7 @@ void start_common(void) BANKED{
 	set_bgm();
 	BGP_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
 	init_enemies_map();
+	init_items_map();
 }
 
 void update_stamina(void) BANKED{

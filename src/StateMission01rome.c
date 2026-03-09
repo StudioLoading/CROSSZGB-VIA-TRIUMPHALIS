@@ -47,7 +47,6 @@ extern Sprite* s_spawning_weapon;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
-extern void calculate_danger(Sprite* s_danger) BANKED;
 extern void check_danger(void) BANKED;
 extern void show_danger(void) BANKED;
 extern void map_ended(void) BANKED;
@@ -70,7 +69,6 @@ void START(void){
         s_horse = SpriteManagerAdd(SpriteHorse, pos_horse_x, pos_horse_y);
         s_compass = SpriteManagerAdd(SpriteCompass, pos_horse_x, pos_horse_y);
     //COMMONS & START
-        //BGP_REG = PAL_DEF(3, 3, 1, 3);// NIGHT MODE
         InitScroll(BANK(mapmission01), &mapmission01, coll_m01_tiles, coll_m01_surface);
 		INIT_HUD(hudm);
 		SetWindowY(104);

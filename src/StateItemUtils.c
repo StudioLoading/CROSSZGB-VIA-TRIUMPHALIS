@@ -285,7 +285,7 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
                 case SpriteBarbarianshield:{
                     struct SoldierData* barbarianshield_data = (struct SoldierData*)iispr->custom_data;
                     switch(item_data->itemtype){
-                        case GLADIO:
+                        //case GLADIO:
                         case LANCE:
                             item_data->configured = 5;
                         //case FLAME:

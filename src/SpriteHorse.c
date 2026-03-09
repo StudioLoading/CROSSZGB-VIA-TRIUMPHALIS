@@ -110,6 +110,7 @@ extern void use_weapon(INT8 is_defence) BANKED;
 extern void pickup(Sprite* s_arg_item) BANKED;
 extern INT8 is_track_ended(void) BANKED;
 extern void spawn_enemies(void) BANKED;	
+extern void spawn_items_onmap(void) BANKED;	
 
 /* velocity_counter in realtà è la velocità assoluta */
 
@@ -138,9 +139,6 @@ void START(void){
         current_whip_power = GOLDEN_WHIP_POWER;
     }
     whip_power_over_stamina = current_whip_power;
-    /*if(_cpu != CGB_TYPE){
-        SPRITE_SET_PALETTE(THIS,1);
-    }*/
 }
 
 void UPDATE(void){
@@ -404,6 +402,7 @@ void UPDATE(void){
                 UINT8 horse_coll = TranslateSprite(THIS, vx << delta_time, vy << delta_time);
                 if(vx || vy){
                     spawn_enemies();
+                    spawn_items_onmap();
                 }
             //COLLISIONI TILE
                 if(horse_coll){//collido con tile ambiente di collisione
@@ -433,7 +432,7 @@ void UPDATE(void){
                             if(onfire_countdown == -1 && configuration.wheel == NORMAL){//non sta impazzendo
                                 frm_skip+=4;
                             }
-                            if(THIS->anim_frame == 1 || THIS->anim_frame == 5){
+                            if(anim_frame == 1 || anim_frame == 5){
                                 if(orme_spawned == 0){
                                     UINT16 orma_posy = THIS->y-9;
                                     orme_spawned = 1;
@@ -461,7 +460,7 @@ void UPDATE(void){
                                     }
                                 }
                             }
-                            if(THIS->anim_frame == 0 || THIS->anim_frame == 2 || THIS->anim_frame == 4){
+                            if(anim_frame == 0 || anim_frame == 2 || anim_frame == 4){
                                 if(orme_spawned == 0){
                                     orme_spawned = 1;
                                     UINT16 orma0_posx = THIS->x - 2;
@@ -479,7 +478,7 @@ void UPDATE(void){
                                 }
                             }else{orme_spawned = 0;}
                         break;
-                        case 122: case 123: case 124: case 125: // SKULL teschio!
+                        case 120: case 121: case 124: case 125: // SKULL teschio!
                             if(stamina_current > 100){
                                 stamina_current-=30;
                             }

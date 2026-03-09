@@ -107,24 +107,7 @@ void UPDATE(void){
         time_current--;
         if(time_current < 0 && !mission_completed && !track_ended){
             die();
-        }    
-    //MISSION STEP
-        /*if(current_step == SENATOR_COLLIDED){
-            pos_horse_x = s_horse->x;
-            pos_horse_y = s_horse->y;
-            turn_to_load = turn;
-            time_to_load = time_current;
-            void state_move_to_papyrus(MISSION05_SAVED_GENERAL, StateMission05alps);
-        }*/
-    //CALCULATE DANGER
-        /*calculate_danger(s_barbarianshield00);
-        calculate_danger(s_barbarianshield01);
-        calculate_danger(s_barbarianshield02);
-        calculate_danger(s_barbarianshield03);
-        calculate_danger(s_barbarianshield05);
-        calculate_danger(s_barbarianshield06);
-        check_danger();
-        show_danger();*/
+        }
      //IS MISSION COMPLETED?
         if(mission_completed && track_ended){
             track_ended_cooldown--;

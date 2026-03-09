@@ -51,7 +51,6 @@ extern void update_time(void) BANKED;
 extern void spawn_items(void) BANKED;
 extern void night_mode(void) BANKED;
 extern void die(void) BANKED;
-extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void map_ended(void) BANKED;
 
