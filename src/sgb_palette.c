@@ -1,12 +1,12 @@
 #pragma bank 10
 
-#include <gb/gb.h>
+#include <gbdk/platform.h>
 #include <gb/sgb.h>
 
 #include "sgb_palette.h"
 
 
-void set_sgb_palette_title(void) __banked {	
+void set_sgb_palette_title(void) BANKED {	
 	/*struct {
         UINT8 command;
         UINT16 pal1[4];
@@ -131,7 +131,7 @@ void set_sgb_palette_title(void) __banked {
     */
 }
 
-void reset_sgb_palette_title(void) __banked {	
+void reset_sgb_palette_title(void) BANKED {	
 	
 	struct {
         UINT8 command;
@@ -251,7 +251,7 @@ void reset_sgb_palette_title(void) __banked {
     sgb_transfer((void *)&SGB_PALETTE_SEVENTHLINE_PACKET);
 }
 
-void set_sgb_palette_statusbar(void) __banked {	
+void set_sgb_palette_statusbar(void) BANKED {	
 	struct {
         UINT8 command;
         UINT16 pal1[4];
@@ -357,7 +357,7 @@ void set_sgb_palette_statusbar(void) __banked {
     sgb_transfer((void *)&SGB_PALETTE_STATUS_PACKET_4);
 }
 
-void reset_sgb_palette_statusbar(void) __banked{	
+void reset_sgb_palette_statusbar(void) BANKED{	
 	struct {
         UINT8 command;
         UINT8 xcoo;
@@ -450,7 +450,7 @@ void reset_sgb_palette_statusbar(void) __banked{
     sgb_transfer((void *)&SGB_PALETTE_STATUS_PACKET_4);	
 }
 
-void set_sgb_palette(UINT16 c0, UINT16 c1, UINT16 c2, UINT16 c3) __banked {
+void set_sgb_palette(UINT16 c0, UINT16 c1, UINT16 c2, UINT16 c3) BANKED {
     struct {
         UINT8 command;
         UINT16 pal0[4];
@@ -466,34 +466,34 @@ void set_sgb_palette(UINT16 c0, UINT16 c1, UINT16 c2, UINT16 c3) __banked {
 }
 
 
-void set_sgb_palette_credit_studioloading(void) __banked{
+void set_sgb_palette_credit_studioloading(void) BANKED{
     set_sgb_palette(SGB_CREDIT_STUDIOLOADING_LIGHTER, SGB_CREDIT_STUDIOLOADING_LIGHT, SGB_CREDIT_STUDIOLOADING_DARK, SGB_CREDIT_STUDIOLOADING_DARKER);
 }
 
-void set_sgb_palette_tutorial(void) __banked{
+void set_sgb_palette_tutorial(void) BANKED{
     set_sgb_palette(SGB_TUTORIAL_LIGHTER, SGB_TUTORIAL_LIGHT, SGB_TUTORIAL_DARK, SGB_TUTORIAL_DARKER);
 }
 
-void set_sgb_palette_credit_viatriumphalis(void) __banked{
+void set_sgb_palette_credit_viatriumphalis(void) BANKED{
     set_sgb_palette(SGB_CREDIT_VIATRIUMPHALIS_LIGHTER, SGB_CREDIT_VIATRIUMPHALIS_LIGHT, SGB_CREDIT_VIATRIUMPHALIS_DARK, SGB_CREDIT_VIATRIUMPHALIS_DARKER);
 }
 
-void set_sgb_palette_credit_titlescreen(void) __banked{
+void set_sgb_palette_credit_titlescreen(void) BANKED{
     set_sgb_palette(SGB_CREDIT_TITLESCREEN_LIGHTER, SGB_CREDIT_TITLESCREEN_LIGHT, SGB_CREDIT_TITLESCREEN_DARK, SGB_CREDIT_TITLESCREEN_DARKER);
 }
 
-void set_sgb_palette_arearome(void) __banked{
+void set_sgb_palette_arearome(void) BANKED{
     set_sgb_palette(SGB_AREAROME_LIGHTER, SGB_AREAROME_LIGHT, SGB_AREAROME_DARK, SGB_AREAROME_DARKER);
 }
-void set_sgb_palette_areaalps(void) __banked{
+void set_sgb_palette_areaalps(void) BANKED{
     set_sgb_palette(SGB_AREAALPS_LIGHTER, SGB_AREAALPS_LIGHT, SGB_AREAALPS_DARK, SGB_AREAALPS_DARKER);
 }
-void set_sgb_palette_areasea(void) __banked{
+void set_sgb_palette_areasea(void) BANKED{
     set_sgb_palette(SGB_AREASEA_LIGHTER, SGB_AREASEA_LIGHT, SGB_AREASEA_DARK, SGB_AREASEA_DARKER);
 }
-void set_sgb_palette_areagreece(void) __banked{
+void set_sgb_palette_areagreece(void) BANKED{
     set_sgb_palette(SGB_AREAGREECE_LIGHTER, SGB_AREAGREECE_LIGHT, SGB_AREAGREECE_DARK, SGB_AREAGREECE_DARKER);
 }
-void set_sgb_palette_areadesert(void) __banked{
+void set_sgb_palette_areadesert(void) BANKED{
     set_sgb_palette(SGB_AREADESERT_LIGHTER, SGB_AREADESERT_LIGHT, SGB_AREADESERT_DARK, SGB_AREADESERT_DARKER);
 }

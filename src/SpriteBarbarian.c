@@ -1,5 +1,6 @@
 #include "Banks/SetAutoBank.h"
 
+#include <gbdk/platform.h>
 #include "ZGBMain.h"
 #include "Keys.h"
 #include "Scroll.h"

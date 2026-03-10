@@ -1,5 +1,6 @@
 #include "Banks/SetAutoBank.h"
 
+#include <gbdk/platform.h>
 #include "BankManager.h"
 #include "ZGBMain.h"
 #include "Keys.h"
@@ -11,8 +12,6 @@
 #include "Print.h"
 
 #include "custom_datas.h"
-
-#define sgb_running sgb_check()
 
 #define CREDIT_WAIT_MAX 240
 #define PRESSSTART_COUNTER_MAX 16
@@ -29,6 +28,7 @@ UINT8 pressstart_show = 0;
 UINT8 cheat_counter = 0u;
 UINT8 cheat_activated = 0u;
 AREA cheat_area = AREA_ROME;
+AREA current_area = AREA_ROME;
 
 extern AREA current_area;
 extern UINT8 stop_music_on_new_state;
@@ -40,9 +40,7 @@ extern void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
 
 
 void START(void){
-	if(sgb_running){
-		manage_border(current_state);
-	}
+    manage_border(current_state);
 	OBP0_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
 	OBP1_REG = DMG_PALETTE(DMG_WHITE, DMG_WHITE, DMG_DARK_GRAY, DMG_BLACK);
 	BGP_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
@@ -70,6 +68,11 @@ void START(void){
     switch(credit_step){
         case 1:
             PRINT(6, 10, "PRESENTS");
+            if(sgb_check){
+                PRINT(2, 12, "ON SUPER GAME BOY");
+            }else if(_cpu == CGB_TYPE){
+                PRINT(2, 12, "ON GAME BOY COLOR");
+            }
         break;
     }
 }

@@ -1,7 +1,7 @@
 #include "Banks/SetAutoBank.h"
 
+#include <gbdk/platform.h>
 #include "BankManager.h"
-#include <gb/gb.h>
 #include "ZGBMain.h"
 #include "Palette.h"
 #include "Scroll.h"
@@ -422,16 +422,18 @@ void pickup(Sprite* s_arg_item) BANKED{
 }
 
 void manage_border(UINT8 my_next_state) BANKED{
-    if(flag_border_set == 0u){
-		switch(current_area){
-			case AREA_ROME: LOAD_SGB_BORDER(border); break;
-			case AREA_ALPS: LOAD_SGB_BORDER(borderalps); break;
-			case AREA_SEA: LOAD_SGB_BORDER(bordersea); break;
-			case AREA_GREECE: LOAD_SGB_BORDER(bordergreece); break;
-			case AREA_DESERT: LOAD_SGB_BORDER(borderdesert); break; 
-			case AREA_EGYPT: LOAD_SGB_BORDER(borderegypt); break; 
+	if(sgb_check){
+		if(flag_border_set == 0u){
+			switch(current_area){
+				case AREA_ROME: LOAD_SGB_BORDER(border); break;
+				case AREA_ALPS: LOAD_SGB_BORDER(borderalps); break;
+				case AREA_SEA: LOAD_SGB_BORDER(bordersea); break;
+				case AREA_GREECE: LOAD_SGB_BORDER(bordergreece); break;
+				case AREA_DESERT: LOAD_SGB_BORDER(borderdesert); break; 
+				case AREA_EGYPT: LOAD_SGB_BORDER(borderegypt); break; 
+			}
+			flag_border_set = 1u;
 		}
-        flag_border_set = 1u;
+    	check_sgb_palette(my_next_state);
     }
-    check_sgb_palette(my_next_state);
 }

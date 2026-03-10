@@ -1,4 +1,4 @@
-#include <gb/gb.h>
+#include <gbdk/platform.h>
 
 #define myRGB(r, g, b) (((UINT16)((b) >> 3) << 10) | ((UINT16)((g) >> 3) << 5) | ((UINT16)((r) >> 3) << 0))
 
@@ -47,20 +47,20 @@
 #define SGB_AREADESERT_DARK 	  myRGB(195, 116, 0)
 #define SGB_AREADESERT_DARKER     myRGB(0, 0, 0)
 
-void set_sgb_palette_credit_studioloading(void) __banked;
-void set_sgb_palette_credit_viatriumphalis(void) __banked;
-void set_sgb_palette_credit_titlescreen(void) __banked;
-void set_sgb_palette_arearome(void) __banked;
-void set_sgb_palette_areaalps(void) __banked;
-void set_sgb_palette_areasea(void) __banked;
-void set_sgb_palette_areagreece(void) __banked;
-void set_sgb_palette_areadesert(void) __banked;
+void set_sgb_palette_credit_studioloading(void) BANKED;
+void set_sgb_palette_credit_viatriumphalis(void) BANKED;
+void set_sgb_palette_credit_titlescreen(void) BANKED;
+void set_sgb_palette_arearome(void) BANKED;
+void set_sgb_palette_areaalps(void) BANKED;
+void set_sgb_palette_areasea(void) BANKED;
+void set_sgb_palette_areagreece(void) BANKED;
+void set_sgb_palette_areadesert(void) BANKED;
 
-void set_sgb_palette_overworldsw(void) __banked;
-void set_sgb_palette_2(void) __banked;
-void set_sgb_palette_inventory(void) __banked;
+void set_sgb_palette_overworldsw(void) BANKED;
+void set_sgb_palette_2(void) BANKED;
+void set_sgb_palette_inventory(void) BANKED;
 
-void set_sgb_palette_title(void) __banked;
-void reset_sgb_palette_title(void) __banked;
-void set_sgb_palette_statusbar(void) __banked;
-void reset_sgb_palette_statusbar(void) __banked;
+void set_sgb_palette_title(void) BANKED;
+void reset_sgb_palette_title(void) BANKED;
+void set_sgb_palette_statusbar(void) BANKED;
+void reset_sgb_palette_statusbar(void) BANKED;

@@ -29,7 +29,7 @@ extern UINT8 prev_state;
 extern UINT8 flag_border_set;
 
 INT8 worldmap_counter = 0;
-AREA current_area = AREA_ROME;
+extern AREA current_area;
 MISSION current_mission = MISSIONROME00;
 INT8 world_area_map = 0;//0=worldmap, 1=areamap
 TUTORIAL_STAGE tutorial_state = TUTORIAL_STAGE_0_STRAIGHT;//TUTORIAL_STAGE_0_STRAIGHT
@@ -43,8 +43,8 @@ extern void manage_border(UINT8 my_next_state) BANKED;
 void start_game_cheat(AREA arg_cheat_area) BANKED{
     switch(arg_cheat_area){
         case AREA_ROME: current_mission = MISSIONROME00; break;
-        case AREA_ALPS: current_mission = MISSIONALPS06; break;
-        case AREA_SEA: current_mission = MISSIONSEA08; break;
+        case AREA_ALPS: current_mission = MISSIONALPS04; break;
+        case AREA_SEA: current_mission = MISSIONSEA09; break;//MISSIONSEA09 nightmode
         case AREA_GREECE: current_mission = MISSIONGREECE12; break;
         case AREA_DESERT: current_mission = MISSIONDESERT16; break;
         case AREA_EGYPT: current_mission = MISSIONEGYPT19; break;

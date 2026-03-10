@@ -14,9 +14,10 @@ extern MISSION_STEP current_step;
 extern UINT8 spawned_greeks_flag;
 
 UINT8 current_items_total_count = 0u;
-struct SpawningMapRect current_spawning_items[10];
+struct SpawningMapRect current_spawning_items[5];
 
-extern UINT8 check_horse_in_box(UINT8 arg_index, UINT16 arg_current_horse_x, UINT16 arg_current_horse_y) BANKED;
+UINT8 check_horse_in_box_items(UINT8 arg_index, UINT16 arg_current_horse_x, UINT16 arg_current_horse_y) BANKED ;
+
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
 
@@ -621,9 +622,36 @@ void spawn_items_onmap(void) BANKED {
     UINT16 current_horse_x = s_horse->x;
     UINT16 current_horse_y = s_horse->y;
     for(UINT8 i = 0u; i < current_items_total_count; i++){
-        if(check_horse_in_box(i, current_horse_x, current_horse_y) && current_spawning_items[i].box_flag_spawned == 0u){
+        if(check_horse_in_box_items(i, current_horse_x, current_horse_y) && current_spawning_items[i].box_flag_spawned == 0u){
             item_spawn(current_spawning_items[i].box_data.item.itemtype, current_spawning_items[i].spawn_x, current_spawning_items[i].spawn_y);
             current_spawning_items[i].box_flag_spawned = 1u;
         }
     }
+}
+
+
+UINT8 check_horse_in_box_items(UINT8 arg_index, UINT16 arg_current_horse_x, UINT16 arg_current_horse_y) BANKED {
+    // 1. Creiamo un puntatore locale per evitare di indicizzare l'array 100 volte (lento su GB)
+    struct SpawningMapRect* ptr = &current_spawning_items[arg_index];
+    
+    // 2. Estraiamo i valori in variabili locali UINT16
+    UINT16 rx1 = ptr->box_x;
+    UINT16 ry1 = ptr->box_y;
+    
+    // 3. Facciamo il calcolo in modo esplicito per evitare bug del compilatore
+    UINT16 rw  = ptr->box_width;
+    UINT16 rh  = ptr->box_height;
+    
+    // Controllo X
+    if (arg_current_horse_x >= rx1) {
+        if (arg_current_horse_x <= (rx1 + rw)) {
+            // Controllo Y
+            if (arg_current_horse_y >= ry1) {
+                if (arg_current_horse_y <= (ry1 + rh)) {
+                    return 1u;
+                }
+            }
+        }
+    }    
+    return 0u;
 }

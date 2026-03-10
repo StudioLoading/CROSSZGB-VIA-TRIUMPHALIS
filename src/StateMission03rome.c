@@ -26,7 +26,6 @@ extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
 extern UINT16 pos_horse_y;
 extern MISSION_STEP current_step;
-extern AREA current_area;
 
 extern Sprite* s_biga;
 extern Sprite* s_horse;
