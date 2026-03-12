@@ -68,7 +68,7 @@ void START(void){
     switch(credit_step){
         case 1:
             PRINT(6, 10, "PRESENTS");
-            if(sgb_check){
+            if(sgb_check()){
                 PRINT(2, 12, "ON SUPER GAME BOY");
             }else if(_cpu == CGB_TYPE){
                 PRINT(2, 12, "ON GAME BOY COLOR");

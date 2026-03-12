@@ -47,6 +47,8 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 mission_killed;
 extern UINT8 flag_night_mode;
+extern INT8 spawning_weapon_counter;
+extern Sprite* s_spawning_weapon;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
@@ -55,7 +57,7 @@ extern void spawn_items(void) BANKED;
 extern void map_ended(void) BANKED;
 extern void night_mode(void) BANKED;
 extern void die(void) BANKED;
-extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
+extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 
 Sprite* s_priest = 0;
 Sprite* s_shielded0 = 0;
@@ -73,12 +75,6 @@ void START(void){
         turn_to_load = 0;
         current_step = EXIT;
         s_priest = SpriteManagerAdd(SpritePriest, ((UINT16) 214u) << 3, ((UINT16) 4u) << 3);
-        struct SoldierData* priest_data = (struct SoldierData*) s_priest->custom_data;
-        priest_data->configured = 1;
-        s_shielded0 = SpriteManagerAdd(SpriteBarbarianshield, ((UINT16) 92u) << 3, (((UINT16) 9u) << 3)+3u);
-        s_shielded0->mirror = V_MIRROR;
-        struct SoldierData* shielded00_data = (struct SoldierData*) s_shielded0->custom_data;
-        shielded00_data->configured = 1;
         mission_completed = 0;
         time_factor = TIME_FACTOR_MISSION20;
         timemax_current = TIME_MAX_MISSION20;
@@ -96,6 +92,7 @@ void START(void){
         s_horse = SpriteManagerAdd(SpriteHorse, pos_horse_x, pos_horse_y);
         s_compass = SpriteManagerAdd(SpriteCompass, pos_horse_x, pos_horse_y);
     //COMMONS & START
+        night_mode();
         InitScroll(BANK(mapmission20), &mapmission20, coll_m20_tiles, coll_m20_surface);
 		INIT_HUD(hudm);
 		SetWindowY(104);
@@ -104,6 +101,11 @@ void START(void){
 }
 
 void UPDATE(void){
+    //NIGHT MODE
+        if(flag_night_mode == 0){
+            flag_night_mode = 1;
+            night_mode();
+        }
     //LIMIT MAP
         if(s_horse->x < 40u){
             s_horse->x = 40u;
@@ -113,6 +115,15 @@ void UPDATE(void){
         time_current--;
         if(time_current < 0 && !track_ended){
             die();
+        }
+    
+    //CONTINUOUS SPAWNING WEAPON
+        if(s_spawning_weapon == 0){
+            spawning_weapon_counter++;
+            if(spawning_weapon_counter < 0){
+                spawning_weapon_counter = 0;
+                item_spawn_continuously(GLADIO, ((UINT16) 223u << 3), ((UINT16) 7u << 3));
+            }
         }
     //CHECK PRIEST DIE
         if(mission_killed > 0){

@@ -352,8 +352,8 @@ void night_mode(void) BANKED{
 	}
 }
 
-void check_sgb_palette(UINT8 new_state) BANKED{
-	switch (new_state){
+void check_sgb_palette(UINT8 arg_new_state) BANKED{
+	switch(arg_new_state){
 		case StateCredit:
 		{
 			switch(credit_step){
@@ -422,7 +422,7 @@ void pickup(Sprite* s_arg_item) BANKED{
 }
 
 void manage_border(UINT8 my_next_state) BANKED{
-	if(sgb_check){
+	if(sgb_check()){
 		if(flag_border_set == 0u){
 			switch(current_area){
 				case AREA_ROME: LOAD_SGB_BORDER(border); break;

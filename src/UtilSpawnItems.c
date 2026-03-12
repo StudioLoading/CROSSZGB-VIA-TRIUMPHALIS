@@ -483,7 +483,7 @@ const struct SpawningMapRect spawning_items_mission20[4] = {
         .box_flag_spawned = 0u,
         .box_x = ((UINT16) 4u << 3),
         .box_y = ((UINT16) 2u << 3),
-        .box_width =  ((UINT16) 2u << 3),
+        .box_width =  ((UINT16) 10u << 3),
         .box_height =  ((UINT16) 6u << 3),
         .box_data.item = { .itemtype = GLADIO, .flag_continuous_spawning = 0 },
         .type = 0

@@ -88,7 +88,8 @@ INT8 flag_bouncing = 0;
 INT8 counter_bouncing = 80;
 UINT8 horse_netcatching = 0u;
 UINT8 force_updown_counter = 0u;
-
+INT8 whip_dust_countdown = 0;
+INT8 whip_dust_count = 0;
 
 void horse_hit(INT8 arg_damage) BANKED;
 void change_stamina_current(INT16 start, INT16 increase) BANKED;
@@ -110,7 +111,8 @@ extern void use_weapon(INT8 is_defence) BANKED;
 extern void pickup(Sprite* s_arg_item) BANKED;
 extern INT8 is_track_ended(void) BANKED;
 extern void spawn_enemies(void) BANKED;	
-extern void spawn_items_onmap(void) BANKED;	
+extern void spawn_items_onmap(void) BANKED;
+extern void spawn_dust(UINT8 arg_force) BANKED;
 
 /* velocity_counter in realtà è la velocità assoluta */
 
@@ -139,6 +141,8 @@ void START(void){
         current_whip_power = GOLDEN_WHIP_POWER;
     }
     whip_power_over_stamina = current_whip_power;
+    whip_dust_countdown = 0;
+    whip_dust_count = 0;
 }
 
 void UPDATE(void){
@@ -227,10 +231,10 @@ void UPDATE(void){
         }
         if(delta_stamina_euphoria > 32){
             velocity_counter = delta_stamina_euphoria >> 4;
-            if(delta_stamina_euphoria > (euphoria_max - 10) && delta_stamina_euphoria <= euphoria_max){
+            if(delta_stamina_euphoria > (euphoria_max - 10) && delta_stamina_euphoria <= euphoria_max && velocity_counter){
                 velocity_counter = 0;//cioè vai a cannone
             }
-        }else{
+        }else if(velocity_counter != 2){
             velocity_counter = 2;
         }        
     //FIRE EFFECTS
@@ -264,7 +268,25 @@ void UPDATE(void){
                 SpriteManagerRemoveSprite(s_flame);
             }
         }
-
+    //DUST ON THE GROUND
+        if(stamina_current > euphoria_max){
+            spawn_dust(0);
+        }
+        if(!KEY_PRESSED(J_WHIP)){
+            whip_dust_countdown--;
+            if(whip_dust_countdown == 0){
+                whip_dust_count = 0;
+            }
+        }
+        if(KEY_TICKED(J_WHIP)){
+            whip_dust_countdown = 10;
+            whip_dust_count++;            
+        }
+        if(KEY_PRESSED(J_WHIP)){
+            if(whip_dust_count > 2 && whip_dust_countdown > 5){
+                spawn_dust(1);
+            }
+        }
     //TURN SINGLE PRESSURE COUNTER
         if(KEY_RELEASED(J_RIGHT) || KEY_RELEASED(J_LEFT)){
             turn_samepressure_counter = 0;

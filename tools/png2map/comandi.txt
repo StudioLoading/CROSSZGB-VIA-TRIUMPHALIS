@@ -1,0 +1,9 @@
+PNG2MAP
+C:\CrossZGB\ZGB\CROSSZGB-VIA-TRIUMPHALIS\tools\png2map\png2gbtiles.exe SOD_titlescreen.png -gbm -g -pal=mypal.pal
+maypal.pal file di testo contenente solo le seguenti
+#C6D783
+#8DCD53
+#2D632F
+#11380F
+ovviamente palette del Paint.NET con cui ho fatto il png contiene gli stessi codici, senza # e con FF iniziali per azzerare opacità
+png 160x144

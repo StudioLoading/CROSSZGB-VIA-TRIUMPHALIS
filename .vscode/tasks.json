@@ -6,6 +6,7 @@
         {
             "label": "Release",
             "type": "shell",
+            "dependsOn": ["CloneFolder", "CloneBorders"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
@@ -20,6 +21,7 @@
         {
             "label": "ReleaseColor",
             "type": "shell",
+            "dependsOn": ["CloneFolder", "CloneBorders"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
@@ -37,6 +39,7 @@
         {
             "label": "Debug",
             "type": "shell",
+            "dependsOn": ["CloneFolder", "CloneBorders"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
@@ -54,7 +57,7 @@
         {
             "label": "DebugColor",
             "type": "shell",
-            "dependsOn": "CloneFolder",
+            "dependsOn": ["CloneFolder", "CloneBorders"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src" 
@@ -75,6 +78,12 @@
             "label": "CloneFolder",
             "type": "shell",
             "command": "cp -rf ${workspaceFolder}/res/metatiles/gb/. ${workspaceFolder}/res/metatiles/gbc",
+            "presentation": { "reveal": "silent" }
+        },
+        {
+            "label": "CloneBorders",
+            "type": "shell",
+            "command": "cp -rf ${workspaceFolder}/res/borders/gb/. ${workspaceFolder}/res/borders/gbc",
             "presentation": { "reveal": "silent" }
         },
         {

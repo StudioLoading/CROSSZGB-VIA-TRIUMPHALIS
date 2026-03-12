@@ -1,6 +1,5 @@
 BUG:
-- lo scrolling su SGB e DMG non è fluido
-- la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo schermo
+- priest con puff
 - spostare il Calculate Danger? al momento è nella UPDATE ed è eseguito sempre
 - sistema di punteggio highscore
     - sprite di segnalazione +100 quando si uccide qualcuno, che significa 1kill e 1.000 punti
@@ -8,6 +7,7 @@ BUG:
     - potrei calcolare anche il Tempo di Euphoria
     - punti per l'aver trovato un golden item
     - punti penalità se subisco danno
+- la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo 
 - il lancio della fiaschetta vorrei abbia la direzione della bussola e faccia una quantità X;Y proporzionale alla velocità sugli assi
 - il calcolo del danno deve essere centralizzato perché dipende dalla presenza del configuration.elm == GOLDEN
 - "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 

@@ -699,7 +699,7 @@ const struct SpawningMapRect spawning_map_mission14[7] = {
         .type = SpriteGreeksoldier
     }
 };
-const struct SpawningMapRect spawning_map_mission15[7] = {
+const struct SpawningMapRect spawning_map_mission15[1] = {
     {
         .spawn_x = ((UINT16) 36u << 3),
         .spawn_y = ((UINT16) 47u << 3),
@@ -713,9 +713,24 @@ const struct SpawningMapRect spawning_map_mission15[7] = {
             .configured = 6, .reward = NOITEM, .points = 20
         },
         .type = SpriteGreeksoldier
-    },
+    }
 };
-
+const struct SpawningMapRect spawning_map_mission20[1] = {
+    {
+        .spawn_x = ((UINT16) 92u << 3),
+        .spawn_y = ((UINT16) 9u << 3) + 3u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 79u << 3),
+        .box_y = ((UINT16) 8u << 3),
+        .box_width =  ((UINT16) 8u << 3),
+        .box_height =  ((UINT16) 8u << 3),
+        .box_data.soldier = {
+            .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 2, 
+            .configured = 1, .reward = NOITEM, .points = 20
+        },
+        .type = SpriteBarbarianshield
+    }
+};
 
 #define DIE_COUNTER_MAX 80
 #define COUNTER_DANGER_MAX 60
@@ -827,6 +842,16 @@ void init_enemies_map(void) BANKED{//invoked on START of a StateMission
                     
                 current_enemies_total_count = 7;
             }
+        break;
+        case StateMission15greece:
+            current_spawning_map[0] = spawning_map_mission15[0];
+
+            current_enemies_total_count = 1;
+        break;
+        case StateMission20egypt:
+            current_spawning_map[0] = spawning_map_mission20[0];
+
+            current_enemies_total_count = 1;
         break;
     }
 }

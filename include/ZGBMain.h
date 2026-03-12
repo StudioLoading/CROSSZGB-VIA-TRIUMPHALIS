@@ -40,7 +40,6 @@ _SPRITE(SpriteHorse, horse, FLIP_NONE)\
 _SPRITE(SpriteWeapon, weapon, FLIP_NONE)\
 _SPRITE(SpritePuff, puff, FLIP_NONE)\
 _SPRITE(SpritePoints, points, FLIP_NONE)\
-_SPRITE_DMG(SpritePlayer, player)\
 _SPRITE_DMG(SpriteStep, step)\
 _SPRITE_DMG(SpriteBiga, biga)\
 _SPRITE_DMG(SpriteCompass, compass)\
@@ -81,6 +80,7 @@ _SPRITE_DMG(SpriteMarcus, marcus)\
 _SPRITE_DMG(SpriteMarcushorse, marcushorse)\
 _SPRITE_DMG(SpriteStatue, statue)\
 _SPRITE_DMG(SpritePriest, priest)\
+_SPRITE_DMG(SpriteDust, dust)\
 SPRITE_DEF_END
 
 #include "ZGBMain_Init.h"
