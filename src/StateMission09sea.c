@@ -51,7 +51,6 @@ extern INT8 spawning_weapon_counter;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
-extern void calculate_danger(Sprite* s_danger) BANKED;
 extern void check_danger(void) BANKED;
 extern void show_danger(void) BANKED;
 extern void update_time(void) BANKED;
@@ -134,16 +133,6 @@ void UPDATE(void){
         if(mission_killed >= 3 && mission_completed == 0){
             mission_completed = 1;
         }
-    //CALCULATE DANGER
-        /*calculate_danger(s_barbarianshield00);
-        calculate_danger(s_barbarianshield01);
-        calculate_danger(s_barbarianshield02);
-        calculate_danger(s_barbarianshield03);
-        calculate_danger(s_barbarianshield05);
-        calculate_danger(s_barbarianshield06);
-        check_danger();
-        show_danger();*/
-    
     //IS MISSION COMPLETED?
         if(mission_completed && track_ended){
             track_ended_cooldown--;

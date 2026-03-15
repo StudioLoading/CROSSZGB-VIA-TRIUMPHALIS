@@ -22,14 +22,6 @@ const UINT8 coll_m05_tiles[] = {15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 27, 28, 
 
 const UINT8 coll_m05_surface[] = {0u, 0};
 
-Sprite* s_barbarianshield00 = 0;
-Sprite* s_barbarianshield01 = 0;
-Sprite* s_barbarianshield02 = 0;
-Sprite* s_barbarianshield03 = 0;
-Sprite* s_barbarianshield04 = 0;
-Sprite* s_barbarianshield05 = 0;
-Sprite* s_barbarianshield06 = 0;
-
 Sprite* s_general = 0;
 UINT8 flag_spawn_general = 0;
 

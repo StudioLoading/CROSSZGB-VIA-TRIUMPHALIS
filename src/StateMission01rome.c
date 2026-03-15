@@ -19,11 +19,6 @@ const UINT8 coll_m01_tiles[] = {15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 
 
 const UINT8 coll_m01_surface[] = {0u, 0};
 
-Sprite* s_romansoldier00 = 0;
-Sprite* s_romansoldier01 = 0;
-Sprite* s_romansoldier02 = 0;
-Sprite* s_romansoldier03 = 0;
-
 extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
 extern UINT16 pos_horse_y;

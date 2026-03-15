@@ -509,7 +509,7 @@ void UPDATE(void){
                                     flag_hit = 1;
                                     use_weapon(1);
                                 }else{
-                                    horse_hit(-4);
+                                    horse_hit(-6);
                                 }
                             }
                         break;
@@ -589,7 +589,7 @@ void UPDATE(void){
                         }else if(flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;
                             if(soldier_data->configured < 4 && flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
-                                horse_hit(-5);
+                                horse_hit(-8);
                             }
                         }
                     break;
@@ -599,7 +599,7 @@ void UPDATE(void){
                         {
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;
                             if(soldier_data->configured != 4 && soldier_data->configured != 5 && flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
-                                horse_hit(-16);
+                                horse_hit(-18);
                                 SpriteManagerAdd(SpriteExclamation, iospr->x + 4, iospr->y - 16u);
                                 soldier_data->vx = 0;
                                 soldier_data->vy = 0;
@@ -638,7 +638,7 @@ void UPDATE(void){
                             use_weapon(1);
                             SpriteManagerRemoveSprite(iospr);
                         }else if(flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
-                            horse_hit(-4);
+                            horse_hit(-6);
                         }
                     }break;
                 }
@@ -659,6 +659,9 @@ void change_stamina_current(INT16 start, INT16 increase) BANKED{
 
 void horse_hit(INT8 arg_damage) BANKED{
     if(flag_hit == 0){
+        if(configuration.elm == GOLDEN){
+            arg_damage = arg_damage >> 1;
+        }
         update_hp(arg_damage);
         flag_hit = 1;
         counter_hit = COUNTER_HIT_MAX;

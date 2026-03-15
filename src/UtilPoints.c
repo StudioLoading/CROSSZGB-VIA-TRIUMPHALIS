@@ -8,7 +8,7 @@
 UINT16 current_points = 0u; // max 65.535
 
 UINT16 add_points(INT8 arg_points) BANKED;
-UINT16 get_points() BANKED;
+UINT16 get_points(void) BANKED;
 Sprite* spawn_points(UINT8 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
 
 UINT16 add_points(INT8 arg_points) BANKED{
@@ -16,7 +16,7 @@ UINT16 add_points(INT8 arg_points) BANKED{
     return current_points;
 }
 
-UINT16 get_points() BANKED{
+UINT16 get_points(void) BANKED{
     return current_points;
 }
 

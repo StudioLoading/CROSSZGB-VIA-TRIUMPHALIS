@@ -45,9 +45,6 @@ void START(void){
     dust_data->reward = NOITEM;
     dust_data->points = 0;
     dust_spawned = 1u;
-    if(_cpu != CGB_TYPE){
-        SPRITE_SET_PALETTE(THIS,1);
-    }
 }
 
 void UPDATE(void){

@@ -8,13 +8,28 @@
 
 #include "custom_datas.h"
 
+#define DIE_COUNTER_MAX 80
+#define COUNTER_DANGER_MAX 60
+
+
 extern Sprite* s_horse;
 extern INT8 vx;
 extern MISSION_STEP current_step;
 extern UINT8 spawned_greeks_flag;
 
+INT8 die_counter = DIE_COUNTER_MAX;
+INT8 counter_danger = 0;
+struct SpawningMapRect current_spawning_map[10];
+int current_spawning_map_count = 0;
 UINT8 current_enemies_total_count = 0u;
 INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down = 0;
+
+void init_enemies_map(void) BANKED;
+void spawn_enemies(void) BANKED;
+void check_danger(void) BANKED;
+void show_danger(void) BANKED;
+UINT8 check_horse_in_box(UINT8 arg_index, UINT16 arg_current_horse_x, UINT16 arg_current_horse_y) BANKED;
+void calculate_danger(Sprite* s_danger) BANKED;
 
 
 const struct SpawningMapRect spawning_map_mission01[4] = {
@@ -602,7 +617,7 @@ const struct SpawningMapRect spawning_map_mission13[5] = {
         .type = SpriteGreeksoldier
     }
 };
-const struct SpawningMapRect spawning_map_mission14[7] = {
+const struct SpawningMapRect spawning_map_mission14[10] = {
     {
         .spawn_x = ((UINT16) 33u << 3),
         .spawn_y = ((UINT16) 4u << 3),
@@ -697,6 +712,48 @@ const struct SpawningMapRect spawning_map_mission14[7] = {
             .configured = 6, .reward = NOITEM, .points = 20
         },
         .type = SpriteGreeksoldier
+    },{
+        .spawn_x = ((UINT16) 168u << 3),
+        .spawn_y = ((UINT16) 7u << 3) + 4u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 142u << 3),
+        .box_y = ((UINT16) 6u << 3),
+        .box_width =  ((UINT16) 6u << 3),
+        .box_height =  ((UINT16) 5u << 3),
+        .box_data.killer = {
+            .configured = 0,//99: wait, 0: hidden, 1:blink, 2: visible, 3: blink&disappear
+            .timeout = 1, .time_visible = 120,
+            .time_blink = 60, .time_attack = 60
+        },
+        .type = SpriteStraw
+    },{
+        .spawn_x = ((UINT16) 187u << 3),
+        .spawn_y = ((UINT16) 4u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 170u << 3),
+        .box_y = ((UINT16) 6u << 3),
+        .box_width =  ((UINT16) 4u << 3),
+        .box_height =  ((UINT16) 5u << 3),
+        .box_data.killer = {
+            .configured = 0,//99: wait, 0: hidden, 1:blink, 2: visible, 3: blink&disappear
+            .timeout = 1, .time_visible = 120,
+            .time_blink = 60, .time_attack = 60
+        },
+        .type = SpriteKiller
+    },{
+        .spawn_x = ((UINT16) 208u << 3),
+        .spawn_y = ((UINT16) 7u << 3) + 4u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 192u << 3),
+        .box_y = ((UINT16) 6u << 3),
+        .box_width =  ((UINT16) 6u << 3),
+        .box_height =  ((UINT16) 5u << 3),
+        .box_data.killer = {
+            .configured = 0,//99: wait, 0: hidden, 1:blink, 2: visible, 3: blink&disappear
+            .timeout = 1, .time_visible = 120,
+            .time_blink = 60, .time_attack = 60
+        },
+        .type = SpriteStraw
     }
 };
 const struct SpawningMapRect spawning_map_mission15[1] = {
@@ -731,20 +788,6 @@ const struct SpawningMapRect spawning_map_mission20[1] = {
         .type = SpriteBarbarianshield
     }
 };
-
-#define DIE_COUNTER_MAX 80
-#define COUNTER_DANGER_MAX 60
-INT8 die_counter = DIE_COUNTER_MAX;
-INT8 counter_danger = 0;
-struct SpawningMapRect current_spawning_map[10];
-int current_spawning_map_count = 0;
-
-void init_enemies_map(void) BANKED;
-void spawn_enemies(void) BANKED;
-void check_danger(void) BANKED;
-void show_danger(void) BANKED;
-UINT8 check_horse_in_box(UINT8 arg_index, UINT16 arg_current_horse_x, UINT16 arg_current_horse_y) BANKED;
-void calculate_danger(Sprite* s_danger) BANKED;
 
 
 void init_enemies_map(void) BANKED{//invoked on START of a StateMission
@@ -839,8 +882,11 @@ void init_enemies_map(void) BANKED{//invoked on START of a StateMission
                 current_spawning_map[4] = spawning_map_mission14[4];
                 current_spawning_map[5] = spawning_map_mission14[5];
                 current_spawning_map[6] = spawning_map_mission14[6];
+                current_spawning_map[7] = spawning_map_mission14[7];
+                current_spawning_map[8] = spawning_map_mission14[8];
+                current_spawning_map[9] = spawning_map_mission14[9];
                     
-                current_enemies_total_count = 7;
+                current_enemies_total_count = 12;
             }
         break;
         case StateMission15greece:
@@ -865,17 +911,18 @@ void spawn_enemies(void) BANKED{
             //s_spawned_enemy->custom_data = current_spawning_map[i].box_soldierdata;
             if(current_spawning_map[i].type == SpriteKiller){
                 memcpy(s_spawned_enemy->custom_data, &current_spawning_map[i].box_data.killer, sizeof(struct KillerData));
-            }else{
+            }else if(current_spawning_map[i].type != SpriteStraw){
                 memcpy(s_spawned_enemy->custom_data, &current_spawning_map[i].box_data.soldier, sizeof(struct SoldierData));
             }
             current_spawning_map[i].box_flag_spawned = 1u;
-            calculate_danger(s_spawned_enemy);
-            check_danger();
-            show_danger();
+            if(current_spawning_map[i].type != SpriteStraw){
+                calculate_danger(s_spawned_enemy);
+                check_danger();
+                show_danger();
+            }
         }
     }
 }
-
 
 void calculate_danger(Sprite* s_danger) BANKED{
 	INT16 distance_x = s_danger->x - s_horse->x;
@@ -891,7 +938,6 @@ void calculate_danger(Sprite* s_danger) BANKED{
 		flag_danger_left = 1;
 	}
 }
-
 
 void check_danger(void) BANKED{
 	INT8 flag_danger = flag_danger_right | flag_danger_left | flag_danger_up | flag_danger_down;

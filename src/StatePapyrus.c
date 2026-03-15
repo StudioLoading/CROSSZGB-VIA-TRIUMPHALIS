@@ -38,7 +38,7 @@ extern unsigned char d10[];
 extern unsigned char d11[];
 extern unsigned char d12[];
 
-extern UINT8 flag_is_demo;
+UINT8 flag_is_demo = 0;
 extern TUTORIAL_STAGE tutorial_state;
 
 INSTRUCTION instruction_given = 0;

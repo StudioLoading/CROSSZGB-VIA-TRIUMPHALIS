@@ -302,7 +302,7 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
                     struct ItemData* weapon_data = (struct ItemData*) s_item_arg->custom_data;
                     if(weapon_data->itemtype == ENEMY_LANCE){
                         SpriteManagerRemoveSprite(s_item_arg);
-                        horse_hit(-6);
+                        horse_hit(-8);
                     }
                 }break;
             }

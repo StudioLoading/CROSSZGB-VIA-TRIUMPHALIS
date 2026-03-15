@@ -7,25 +7,25 @@
         {
             "type": "emulicious-debugger",
             "request": "launch",
-            "name": "Debug",
-            "program": "${workspaceFolder}/obj/Debug/gb/rom.gb",
+            "name": "DebugDMG",
+            "program": "${workspaceFolder}/obj/DebugColor/gbc/rom.gbc",
             "port": 58870,
             "stopOnEntry": false,
             "additionalSrcFolders": "${env:ZGB_PATH}",
             "emuliciousPath": "${env:ZGB_PATH}/../../env/emuliciousDMG/emulicious.jar",
-            "preLaunchTask": "Debug",
+            "preLaunchTask": "DebugColor"
         },
         {
             "type": "cppvsdbg",
             "request": "launch",
             "name": "SuperGameBoy",
             "program": "${env:ZGB_PATH}/../../env/bgb166/bgb64.exe",
-            "args": ["${workspaceFolder}/obj/Debug/gb/rom.gb"],
+            "args": ["${workspaceFolder}/obj/DebugColor/gbc/rom.gbc"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "console": "externalTerminal",
-            "preLaunchTask": "Debug",
+            "preLaunchTask": "DebugColor"
         },
         {
             "type": "emulicious-debugger",
@@ -36,7 +36,7 @@
             "stopOnEntry": false,
             "additionalSrcFolders": "${env:ZGB_PATH}",
             "emuliciousPath": "${env:ZGB_PATH}/../../env/emulicious/emulicious.jar",
-            "preLaunchTask": "DebugColor",
+            "preLaunchTask": "DebugColor"
         },
         {
             "type": "emulicious-debugger",
@@ -47,18 +47,18 @@
             "stopOnEntry": false,
             "additionalSrcFolders": "${env:ZGB_PATH}",
             "emuliciousPath": "${env:ZGB_PATH}/../../env/emuliciousDMG/emulicious.jar",
-            "preLaunchTask": "Release",
+            "preLaunchTask": "Release"
         },
         {
             "type": "emulicious-debugger",
             "request": "launch",
             "name": "ReleaseColor",
-            "program": "${workspaceFolder}/obj/ReleaseColor/gb/rom.gbc",
+            "program": "${workspaceFolder}/obj/ReleaseColor/gbc/rom.gbc",
             "port": 58870,
             "stopOnEntry": false,
             "additionalSrcFolders": "${env:ZGB_PATH}",
             "emuliciousPath": "${env:ZGB_PATH}/../../env/emulicious/emulicious.jar",
-            "preLaunchTask": "ReleaseColor",
+            "preLaunchTask": "ReleaseColor"
         }
     ]
 }

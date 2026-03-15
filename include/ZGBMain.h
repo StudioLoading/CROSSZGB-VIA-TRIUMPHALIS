@@ -33,6 +33,7 @@ _STATE(StateMission18desert)\
 _STATE(StateMission19egypt)\
 _STATE(StateMission20egypt)\
 _STATE(StateMission21egypt)\
+_STATE(StatePoints)\
 STATE_DEF_END
 
 #define SPRITES \

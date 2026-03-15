@@ -186,10 +186,6 @@ void UPDATE(void){
             time_to_load = time_current;
             state_move_to_papyrus(MISSION05_SAVED_GENERAL, StateMission05alps;
         }*/
-    //CALCULATE DANGER
-        /*calculate_danger(s_rollingstone);
-        check_danger();
-        show_danger();*/
     //IS MISSION COMPLETED?
         if(mission_completed && track_ended){
             track_ended_cooldown--;

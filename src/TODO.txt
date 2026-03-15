@@ -1,6 +1,4 @@
 BUG:
-- priest con puff
-- spostare il Calculate Danger? al momento è nella UPDATE ed è eseguito sempre
 - sistema di punteggio highscore
     - sprite di segnalazione +100 quando si uccide qualcuno, che significa 1kill e 1.000 punti
     - a fine livello calcolo di quanta HP gli avanza e, se crono, quanto TIME gli avanza
@@ -8,8 +6,6 @@ BUG:
     - punti per l'aver trovato un golden item
     - punti penalità se subisco danno
 - la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo 
-- il lancio della fiaschetta vorrei abbia la direzione della bussola e faccia una quantità X;Y proporzionale alla velocità sugli assi
-- il calcolo del danno deve essere centralizzato perché dipende dalla presenza del configuration.elm == GOLDEN
 - "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
 - ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
 - Normal Mode vs Hard Mode
@@ -19,13 +15,13 @@ BUG:
         non avrà il tutorial iniziale;
         non avrà il compass; (?)
         avrà il faraone finale a 7 di hp;
+- il priest forse dovrebbe avere HP=2 per propedeuticità al Faraone successivo
 - animazione cavallo a Stamina==0 che scodinzola e ogni anto abbassa la testa
 - animazione del trotto da sistemare per renderla perfetta
-- il livello dell'egypt col priest potrei fare un miniboss col prete che lancia cose contro di me e che io, per eliminarlo, devo fare una certa altra cosa.
 - test longplay DMG
 - test longplay SGB
 - test longplay CGB
-- check mappe del fisico per la posizione golden (file svg)
+- check mappe del fisico per la posizione golden (file svg) e quindi il carta-cotone corretto
 - controlla le missioni di atterraggio col cheat alla start_game_cheat()
     oppure elimina il cheat
     oppure fallo che dia solo i gold con una combo differente

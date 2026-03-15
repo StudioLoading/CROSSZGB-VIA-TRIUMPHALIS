@@ -34,7 +34,6 @@ static const palette_color_t palette_data_desert_02[] = {RGB(14,7,1),RGB(0,0,0),
 
 UINT8 flag_night_mode = 0u;
 UINT8 flag_border_set = 0u;
-UINT8 flag_is_demo = 0u;
 
 void die(void) BANKED;
 void spawn_items(void) BANKED;
@@ -43,6 +42,7 @@ void map_ended(void) BANKED;
 void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 void manage_border(UINT8 my_next_state) BANKED;
 void check_sgb_palette(UINT8 new_state) BANKED;
+void state_move_to_points(void) BANKED;
 
 extern struct CONFIGURATION configuration;
 extern AREA current_area;
@@ -89,80 +89,14 @@ void UPDATE(void){
 	
 }
 
+void state_move_to_points(void) BANKED{
+	reset_sgb_palette_statusbar();
+	SetState(StatePoints);
+}
+
 void map_ended(void) BANKED{
 	reset_sgb_palette_statusbar();
-	flag_night_mode = 0;//RESET
-	turn_to_load = turn;//missione successiva comincia nello stesso verso di dove finisce missione corrente
-	INSTRUCTION instruction_to_give = 0;
-	switch(current_mission){
-		case MISSIONROME00: instruction_to_give = MISSION00_COMPLETED; break;
-		case MISSIONROME01: 
-			if(flag_is_demo){
-				instruction_to_give = DEMO_COMPLETED; 
-			}else{
-				instruction_to_give = MISSION01_COMPLETED; 
-			}
-		break;
-		case MISSIONROME02: 
-			turn_to_load = 0;
-			instruction_to_give = MISSION02_COMPLETED;
-		break;
-		case MISSIONROME03:
-			world_area_map = 0;
-			current_area = AREA_ALPS;
-			instruction_to_give = MISSION03_COMPLETED;
-		break;
-		case MISSIONALPS04:
-			instruction_to_give = MISSION04_COMPLETED; break;
-		case MISSIONALPS05: 
-			turn_to_load = 0;
-			instruction_to_give = MISSION05_COMPLETED;
-		break;
-		case MISSIONALPS06: 
-			turn_to_load = 0;
-			instruction_to_give = MISSION06_COMPLETED;
-		break;
-		case MISSIONALPS07:
-			world_area_map = 0;
-			current_area = AREA_SEA;
-			instruction_to_give = MISSION07_COMPLETED;
-		break;
-		case MISSIONSEA08: 
-			instruction_to_give = MISSION08_COMPLETED; break;
-		case MISSIONSEA09: instruction_to_give = MISSION09_COMPLETED; break;
-		case MISSIONSEA10: instruction_to_give = MISSION10_COMPLETED; break;
-		case MISSIONSEA11: 
-			current_area = AREA_GREECE;
-			instruction_to_give = MISSION11_COMPLETED;
-		break;
-		case MISSIONGREECE12: instruction_to_give = MISSION12_COMPLETED;break;
-		case MISSIONGREECE13: instruction_to_give = MISSION13_COMPLETED;break;
-		case MISSIONGREECE14: instruction_to_give = MISSION14_COMPLETED;break;
-		case MISSIONGREECE15: 
-			current_area = AREA_DESERT;
-			instruction_to_give = MISSION15_COMPLETED;
-		break;
-		case MISSIONDESERT16: instruction_to_give = MISSION16_COMPLETED;
-		break;
-		case MISSIONDESERT17:
-			instruction_to_give = MISSION17_COMPLETED;
-		break;
-		case MISSIONDESERT18:
-			current_area = AREA_EGYPT;
-			instruction_to_give = MISSION18_COMPLETED;
-		break;
-		case MISSIONEGYPT19:instruction_to_give = MISSION19_COMPLETED;
-		break;
-		case MISSIONEGYPT20:
-			instruction_to_give = MISSION20_COMPLETED;
-		break;
-		case MISSIONEGYPT21:
-			instruction_to_give = MISSION21_COMPLETED;
-		break;
-	}
-	current_mission++;
-	current_step = LOOKING_FOR_SENATOR;
-	state_move_to_papyrus(instruction_to_give, StateWorldmap);
+	state_move_to_points();
 }
 
 void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED{

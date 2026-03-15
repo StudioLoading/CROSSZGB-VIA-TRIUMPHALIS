@@ -50,7 +50,6 @@ extern UINT8 mission_killed;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
-extern void calculate_danger(Sprite* s_danger) BANKED;
 extern void check_danger(void) BANKED;
 extern void show_danger(void) BANKED;
 extern void update_time(void) BANKED;

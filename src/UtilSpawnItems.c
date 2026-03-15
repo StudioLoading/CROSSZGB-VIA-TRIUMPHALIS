@@ -374,7 +374,7 @@ const struct SpawningMapRect spawning_items_mission13[3] = {
         .type = 0
     }
 };
-const struct SpawningMapRect spawning_items_mission14[2] = {
+const struct SpawningMapRect spawning_items_mission14[3] = {
     {
         .spawn_x = ((UINT16) 29u << 3),
         .spawn_y = ((UINT16) 7u << 3) + 3u,
@@ -390,6 +390,16 @@ const struct SpawningMapRect spawning_items_mission14[2] = {
         .spawn_y = ((UINT16) 7u << 3) + 3u,
         .box_flag_spawned = 0u,
         .box_x = ((UINT16) 112u << 3),
+        .box_y = ((UINT16) 5u << 3),
+        .box_width =  ((UINT16) 2u << 3),
+        .box_height =  ((UINT16) 6u << 3),
+        .box_data.item = { .itemtype = FLAME, .flag_continuous_spawning = 0 },
+        .type = 0
+    },{
+        .spawn_x = ((UINT16) 199u << 3),
+        .spawn_y = ((UINT16) 7u << 3) + 1u,
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 180u << 3),
         .box_y = ((UINT16) 5u << 3),
         .box_width =  ((UINT16) 2u << 3),
         .box_height =  ((UINT16) 6u << 3),
@@ -589,7 +599,8 @@ void init_items_map(void) BANKED{
         case StateMission14greece:
             current_spawning_items[0] = spawning_items_mission14[0];
             current_spawning_items[1] = spawning_items_mission14[1];
-            current_items_total_count = 2;
+            current_spawning_items[2] = spawning_items_mission14[2];
+            current_items_total_count = 3;
         break;
         case StateMission17desert:
             current_spawning_items[0] = spawning_items_mission17[0];
