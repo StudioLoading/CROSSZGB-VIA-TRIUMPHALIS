@@ -98,11 +98,13 @@ extern UINT8 turn;
 extern INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down;
 extern INT8 die_counter;
 extern INT8 counter_danger;
+extern INT8 flag_hit;
 extern void die(void) BANKED;
 extern void set_bgm(void) BANKED;
 extern void init_enemies_map(void) BANKED;
 extern void init_items_map(void) BANKED;
 extern void lancia_boccetta(INT8 arg_horse_vx, INT8 arg_horse_vy) BANKED;
+extern void hit_on_screen(void) BANKED;
 
 void START(void){
 }
@@ -532,6 +534,10 @@ void update_common(void) BANKED{
 				reset_combo_counter = 0u;
 				die();
 			}
+		}
+	//HIT ON SCREEN
+		if(flag_hit){
+			hit_on_screen();
 		}
 }
 

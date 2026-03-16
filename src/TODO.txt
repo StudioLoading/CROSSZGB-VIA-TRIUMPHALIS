@@ -104,7 +104,7 @@ LIBRETTO:
 
 PNG2MAP
 cd C:\ZGB-2023.0\tools\png2map\
-png2gbtiles.exe C:\CrossZGB\ZGB\CROSSZGB-DOCTORGAME\map.png -gbm -g -pal=mypal.pal C:\CrossZGB\ZGB\CROSSZGB-DOCTORGAME\map.gbm
+png2gbtiles.exe C:\CrossZGB\ZGB\tools\png2map\mapcredit1.png -gbm -g -pal=mypal.pal C:\CrossZGB\ZGB\tools\png2map\mapcredit1.gbm
 
 GIF TO PNG FRAMES
 ffmpeg -i C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\input.gif C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_%d.png

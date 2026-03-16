@@ -36,6 +36,9 @@ void START(void){
     if(current_state == StateMission21egypt){
         pharaosubiga_timernet_max = 500;
     }
+    if(_cpu != CGB_TYPE){
+        SPRITE_SET_PALETTE(THIS,1);
+    }
 }
 
 void UPDATE(void){

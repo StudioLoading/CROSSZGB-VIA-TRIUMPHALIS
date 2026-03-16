@@ -22,7 +22,7 @@
 #define WHIP_POWER 3
 #define GOLDEN_WHIP_POWER 5
 #define HUD_TURN_COOLDOWN_MAX 20
-#define COUNTER_HIT_MAX 80
+#define COUNTER_HIT_MAX 100
 #define FORCE_UPDOWN_MAX 60
 
 // Animation state enum
@@ -113,6 +113,8 @@ extern INT8 is_track_ended(void) BANKED;
 extern void spawn_enemies(void) BANKED;	
 extern void spawn_items_onmap(void) BANKED;
 extern void spawn_dust(UINT8 arg_force) BANKED;
+extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
+extern void start_show_hit_on_screen(void) BANKED;
 
 /* velocity_counter in realtà è la velocità assoluta */
 
@@ -269,7 +271,7 @@ void UPDATE(void){
             }
         }
     //DUST ON THE GROUND
-        if(stamina_current > euphoria_max){
+        if(stamina_current > 0 && stamina_current > euphoria_max){
             spawn_dust(0);
         }
         if(!KEY_PRESSED(J_WHIP)){
@@ -509,6 +511,7 @@ void UPDATE(void){
                                     flag_hit = 1;
                                     use_weapon(1);
                                 }else{
+                                    add_points(BY_SKULL_HIT, -50);
                                     horse_hit(-6);
                                 }
                             }
@@ -589,6 +592,7 @@ void UPDATE(void){
                         }else if(flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;
                             if(soldier_data->configured < 4 && flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
+                                add_points(BY_ENEMY_HIT, -50);
                                 horse_hit(-8);
                             }
                         }
@@ -599,7 +603,8 @@ void UPDATE(void){
                         {
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;
                             if(soldier_data->configured != 4 && soldier_data->configured != 5 && flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
-                                horse_hit(-18);
+                                add_points(BY_ENEMY_HIT, -100);
+                                horse_hit(-50);
                                 SpriteManagerAdd(SpriteExclamation, iospr->x + 4, iospr->y - 16u);
                                 soldier_data->vx = 0;
                                 soldier_data->vy = 0;
@@ -638,6 +643,7 @@ void UPDATE(void){
                             use_weapon(1);
                             SpriteManagerRemoveSprite(iospr);
                         }else if(flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
+                            add_points(BY_ENEMY_HIT, -20);
                             horse_hit(-6);
                         }
                     }break;
@@ -664,6 +670,7 @@ void horse_hit(INT8 arg_damage) BANKED{
         }
         update_hp(arg_damage);
         flag_hit = 1;
+        start_show_hit_on_screen();
         counter_hit = COUNTER_HIT_MAX;
         change_stamina_current(stamina_current, -whip_power_over_stamina);
     }

@@ -21,6 +21,9 @@ void START(void){
     SetSpriteAnim(THIS, a_pharaobiga, 8u);
     THIS->lim_x = 2000;
     THIS->lim_y = 2000;
+    if(_cpu != CGB_TYPE){
+        SPRITE_SET_PALETTE(THIS,1);
+    }
 }
 
 void UPDATE(void){

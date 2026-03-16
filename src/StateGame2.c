@@ -15,6 +15,8 @@
 #include "Dialogs.h"
 #include "sgb_palette.h"
 
+#define HITONSCREEN_MAX 80
+
 IMPORT_MAP(border);
 IMPORT_MAP(borderalps);
 IMPORT_MAP(bordersea);
@@ -34,6 +36,7 @@ static const palette_color_t palette_data_desert_02[] = {RGB(14,7,1),RGB(0,0,0),
 
 UINT8 flag_night_mode = 0u;
 UINT8 flag_border_set = 0u;
+INT16 hit_on_screen_countdown = 0u;
 
 void die(void) BANKED;
 void spawn_items(void) BANKED;
@@ -69,6 +72,7 @@ extern ITEM_TYPE weapon_def;
 extern INT8 mission_completed;
 extern Sprite* s_spawning_weapon;
 extern UINT8 flag_using_atk;
+extern INT8 flag_hit;
 
 extern void update_hp(INT8 variation) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
@@ -81,6 +85,8 @@ extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 extern void consume_weapon_def(void) BANKED;
 extern void consume_weapon_atk(void) BANKED;
 void pickup(Sprite* s_arg_item) BANKED;
+void start_show_hit_on_screen(void) BANKED;
+void hit_on_screen(void) BANKED;
 
 void START(void){
 
@@ -88,6 +94,52 @@ void START(void){
 
 void UPDATE(void){
 	
+}
+
+void start_show_hit_on_screen(void) BANKED{
+	hit_on_screen_countdown = HITONSCREEN_MAX;
+}
+
+void hit_on_screen(void) BANKED{
+	if(hit_on_screen_countdown){
+		if(flag_hit == 0){
+			if(flag_night_mode){
+				night_mode();
+			}else{
+			BGP_REG = PAL_DEF(0,1,2,3);
+			}
+			hit_on_screen_countdown = 0;
+			return;
+		}
+		hit_on_screen_countdown--;
+		switch(hit_on_screen_countdown){
+			case 80:
+			case 70:
+			case 60:
+			case 50:
+			case 40:
+			case 30:
+			case 20:
+			case 10:
+				BGP_REG = PAL_DEF(2, 1, 3, 3);
+			break;
+			case 75:
+			case 65:
+			case 55:
+			case 45:
+			case 35:
+			case 25:
+			case 15:
+				BGP_REG = PAL_DEF(2, 1, 2, 0);
+			break;
+		}
+	}else if(flag_hit){
+		if(flag_night_mode){
+			night_mode();
+		}else{
+			BGP_REG = PAL_DEF(0,1,2,3);
+		}
+	}
 }
 
 void state_move_to_points(void) BANKED{

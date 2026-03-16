@@ -58,6 +58,7 @@ extern void item_configelm_anim_blink(Sprite* s_item_arg) BANKED;
 extern void item_configelm_anim(Sprite* s_item_arg) BANKED;
 extern void item_papirus_anim(Sprite* s_item_arg) BANKED;
 extern void pharaosubiga_change_status(INT8 arg_status, Sprite* arg_s_pharaosubiga) BANKED;
+extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 
 void item_common_start(Sprite* s_item_arg) BANKED{
 	struct ItemData* item_data = (struct ItemData*) s_item_arg->custom_data;
@@ -302,6 +303,7 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
                     struct ItemData* weapon_data = (struct ItemData*) s_item_arg->custom_data;
                     if(weapon_data->itemtype == ENEMY_LANCE){
                         SpriteManagerRemoveSprite(s_item_arg);
+                        add_points(BY_ELANCE_HIT, -20);
                         horse_hit(-8);
                     }
                 }break;
