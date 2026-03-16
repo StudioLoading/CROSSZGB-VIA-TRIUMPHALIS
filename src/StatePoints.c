@@ -23,20 +23,28 @@ extern UINT8 turn;
 extern UINT8 flag_is_demo;
 extern INT8 world_area_map;
 extern AREA current_area;
+extern INT8 hp_current;
+extern INT16 time_current;
+extern INT8 mission_iscrono;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 extern UINT16 get_points(void) BANKED;
+extern void init_current_level_points(void) BANKED;
+extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 
 void move_to_mission_completed_papyrus(void) BANKED;
+void calculate_mission_points(void) BANKED;
+
 
 void START(void){
     InitScroll(BANK(mappoints), &mappoints, 0, 0);
 	SHOW_BKG;
 	INIT_FONT(font, PRINT_BKG);
-    PRINT(7, 1, "SCORE");
+    PRINT(1, 1, "SCORE");
     SetWindowY(144);
-    PRINT(1, 7, "CURRENT");
+    PRINT(1, 12, "CURRENT");
+	calculate_mission_points();
     UINT16 current_points = get_points();
-    PRINT(11, 7, "%u", current_points);
+    PRINT(1, 13, "%u", current_points);
 }
 
 void UPDATE(void){
@@ -44,6 +52,15 @@ void UPDATE(void){
     if(KEY_TICKED(J_START)){
         move_to_mission_completed_papyrus();
     }
+}
+
+void calculate_mission_points(void) BANKED{
+	//HP 
+		add_points(HP_REMAINED, (UINT16)hp_current << 3);
+	//TIME
+		if(mission_iscrono){
+			add_points(TIME_REMAINED, time_current);
+		}
 }
 
 void move_to_mission_completed_papyrus(void) BANKED{
@@ -109,5 +126,6 @@ void move_to_mission_completed_papyrus(void) BANKED{
 	}
 	current_mission++;
 	current_step = LOOKING_FOR_SENATOR;
+	init_current_level_points();
 	state_move_to_papyrus(instruction_to_give, StateWorldmap);
 }

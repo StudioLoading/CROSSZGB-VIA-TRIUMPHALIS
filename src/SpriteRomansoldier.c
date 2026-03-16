@@ -15,7 +15,7 @@ const UINT8 a_roman_u[] = {2, 3,4};
 
 extern UINT8 mission_killed;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern Sprite* spawn_points(UINT8 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
+extern Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
 
 
 void START(void){
@@ -106,5 +106,7 @@ void DESTROY(void){
         item_spawn(soldier_data->reward, THIS->x + 2u, THIS->y);
     }
     SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
-    spawn_points(soldier_data->points, THIS->x, THIS->y);
+    if(soldier_data->configured == 5){
+        spawn_points(ENEMY_KILLED, soldier_data->points, THIS->x, THIS->y);
+    }
 }

@@ -19,7 +19,6 @@ const UINT8 coll_m01_tiles[] = {15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 
 
 const UINT8 coll_m01_surface[] = {0u, 0};
 
-extern INT8 mission_iscrono;
 extern UINT16 pos_horse_x;
 extern UINT16 pos_horse_y;
 extern MISSION_STEP current_step;
@@ -39,6 +38,7 @@ extern UINT8 turn_to_load;
 extern UINT8 turn;
 extern INT8 spawning_weapon_counter;
 extern Sprite* s_spawning_weapon;
+extern INT8 mission_iscrono;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
@@ -49,6 +49,7 @@ extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UIN
 
 
 void START(void){
+    mission_iscrono = 0;  
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;
     }else{//initial

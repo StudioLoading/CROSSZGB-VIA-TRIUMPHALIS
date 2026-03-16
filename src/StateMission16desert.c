@@ -49,7 +49,6 @@ extern INT16 time_factor;
 extern INT16 time_to_load;
 extern Sprite* s_spawning_weapon;
 extern INT8 spawning_weapon_counter;
-extern INT8 hp_current;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;

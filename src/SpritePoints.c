@@ -32,7 +32,6 @@ const UINT8 * get_banked_pointer(UINT8 bank, const UINT8 * const * data);
 void set_sprite_native_banked_data(UINT8 bank, UINT8 id, UINT8 len, const UINT8 * data);
 
 void points_update_anim(Sprite* arg_s_points) BANKED;
-extern UINT16 add_points(INT16 arg_points) BANKED;
 
 void START(void){
     THIS->lim_x = 200;

@@ -196,6 +196,23 @@ struct PointsData{
     INT8 hp; 
 };
 
+typedef enum{
+    PICKUP_GOLDEN,
+    PICKUP_HP,
+    ELANCE_DODGED,
+    ENEMY_KILLED,
+    HP_REMAINED,
+    TIME_REMAINED,
+    BY_ENEMY_HIT,
+    BY_SKULL_HIT,
+    BY_ELANCE_HIT,
+}POINTS_TYPE;
+
+struct LEVEL_POINTS{
+    POINTS_TYPE points_type;
+    INT16 points;
+};
+
 struct PharaoData {
     INT8 status;//0:normal; 1:hit; 2:dead;
     INT8 hp;

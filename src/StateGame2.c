@@ -76,6 +76,7 @@ extern void update_weapon(void) BANKED;
 extern void update_hp_max(void) BANKED;
 extern void update_time_max(void) BANKED;
 extern void pickup_config(ITEM_TYPE arg_pickedup) BANKED;
+extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 
 extern void consume_weapon_def(void) BANKED;
 extern void consume_weapon_atk(void) BANKED;
@@ -328,6 +329,7 @@ void pickup(Sprite* s_arg_item) BANKED{
             update_weapon();
         break;
         case HP:
+			add_points(PICKUP_HP, -20);
             update_hp_max();
         break;
         case TIME:
@@ -337,6 +339,7 @@ void pickup(Sprite* s_arg_item) BANKED{
         case GOLDEN_WHEEL:
         case GOLDEN_WHIP:
         case GOLDEN_REINS:
+			add_points(PICKUP_GOLDEN, 50);
             pickup_config(item_data->itemtype);
         break;
         case PAPYRUS:

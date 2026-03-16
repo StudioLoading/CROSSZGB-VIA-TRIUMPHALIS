@@ -21,7 +21,7 @@ extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
 extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
 
-extern Sprite* spawn_points(UINT8 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
+extern Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
 
 void START(void){
     item_common_start(THIS);
@@ -44,6 +44,6 @@ void DESTROY(void){
     SetSpriteAnim(THIS, a_e_lance_hidden, 1u);
     SpriteManagerAdd(SpritePuff, THIS->x - 4u, THIS->y - 4u);
     if(flag_hit == 0){
-        spawn_points(10u, THIS->x, THIS->y - 12u);
+        spawn_points(ELANCE_DODGED, 10u, THIS->x, THIS->y - 12u);
     }
 }

@@ -1,10 +1,5 @@
 BUG:
 - sistema di punteggio highscore
-    - sprite di segnalazione +100 quando si uccide qualcuno, che significa 1kill e 1.000 punti
-    - a fine livello calcolo di quanta HP gli avanza e, se crono, quanto TIME gli avanza
-    - potrei calcolare anche il Tempo di Euphoria
-    - punti per l'aver trovato un golden item
-    - punti penalità se subisco danno
 - la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo 
 - "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
 - ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
