@@ -589,7 +589,7 @@ void UPDATE(void){
                         if(weapon_def == SHIELD){
                             use_weapon(1);
                             counter_hit = COUNTER_HIT_MAX;
-                        }else if(flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
+                        }else if(flag_hit == 0 && counter_hit == 0){
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;
                             if(soldier_data->configured < 4 && flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
                                 add_points(BY_ENEMY_HIT, -50);
