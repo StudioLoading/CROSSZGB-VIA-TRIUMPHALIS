@@ -47,7 +47,7 @@ void start_game_cheat(AREA arg_cheat_area) BANKED{
         case AREA_SEA: current_mission = MISSIONSEA09; break;//MISSIONSEA09 nightmode
         case AREA_GREECE: current_mission = MISSIONGREECE14; break;
         case AREA_DESERT: current_mission = MISSIONDESERT16; break;
-        case AREA_EGYPT: current_mission = MISSIONEGYPT20; break;
+        case AREA_EGYPT: current_mission = MISSIONEGYPT21; break;
     }
     SetState(StateWorldmap);
 	manage_border(current_state);
