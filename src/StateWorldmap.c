@@ -43,11 +43,11 @@ extern void manage_border(UINT8 my_next_state) BANKED;
 void start_game_cheat(AREA arg_cheat_area) BANKED{
     switch(arg_cheat_area){
         case AREA_ROME: current_mission = MISSIONROME00; break;
-        case AREA_ALPS: current_mission = MISSIONALPS06; break;
-        case AREA_SEA: current_mission = MISSIONSEA09; break;//MISSIONSEA09 nightmode
-        case AREA_GREECE: current_mission = MISSIONGREECE14; break;
+        case AREA_ALPS: current_mission = MISSIONALPS05; break;
+        case AREA_SEA: current_mission = MISSIONSEA08; break;//MISSIONSEA09 nightmode
+        case AREA_GREECE: current_mission = MISSIONGREECE12; break;
         case AREA_DESERT: current_mission = MISSIONDESERT16; break;
-        case AREA_EGYPT: current_mission = MISSIONEGYPT21; break;
+        case AREA_EGYPT: current_mission = MISSIONEGYPT20; break;
     }
     SetState(StateWorldmap);
 	manage_border(current_state);
@@ -59,19 +59,16 @@ void start_game(void) BANKED{
 }
 
 void START(void){
-    if(flag_border_set == 1){
-        //activate flag for border management
         switch(current_mission){
             case MISSIONALPS04:
             case MISSIONSEA08:
             case MISSIONGREECE12:
             case MISSIONDESERT16:
             case MISSIONEGYPT19:
-                flag_border_set = 0u;
+	            flag_border_set = 0u;
+                manage_border(current_state);
             break;
         }
-    }
-	manage_border(current_state);
     switch(world_area_map){
         case 0:
             InitScroll(BANK(worldmap), &worldmap, 0, 0);

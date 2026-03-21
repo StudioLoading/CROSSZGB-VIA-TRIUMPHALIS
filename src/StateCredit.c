@@ -18,6 +18,7 @@
 
 IMPORT_MAP(mapcredit0);
 IMPORT_MAP(mapcredit1);
+IMPORT_MAP(mapcredit2);
 IMPORT_MAP(titlescreen);
 IMPORT_MAP(maintitlemap);
 IMPORT_TILES(font);
@@ -57,10 +58,13 @@ void START(void){
             InitScroll(BANK(mapcredit1), &mapcredit1, 0, 0);
         break;
         case 3:
+            InitScroll(BANK(mapcredit2), &mapcredit2, 0, 0);
+        break;
+        case 4:
             InitScroll(BANK(maintitlemap), &maintitlemap, 0, 0);
             scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 72u);
         break;
-        case 4:
+        case 5:
             cheat_counter = 0u;
             cheat_activated = 0u;
             cheat_area = 0u;
@@ -85,18 +89,22 @@ void START(void){
             PRINT(5, 0, "POWERED BY");
             PRINT(7, 17, "ENGINE");
         break;
-        case 4:
+        case 3:
+	        INIT_FONT(fontp, PRINT_BKG);
+            PRINT(7, 0, "ART BY");
+        break;
+        case 5:
 	        INIT_FONT(font, PRINT_BKG);
         break;
     }
 }
 
 void UPDATE(void){
-    if(credit_step != 3){
+    if(credit_step != 4){
         credit_wait--;
     }
     //CHEAT
-        if(credit_step == 4){
+        if(credit_step == 5){
             if(KEY_RELEASED(J_SELECT)){
                 if(cheat_activated == 0){
                     cheat_counter++;
@@ -128,10 +136,10 @@ void UPDATE(void){
                 }
             }
         }
-    if(credit_step < 4 && (credit_wait <= 0 || KEY_TICKED(J_START))){
+    if(credit_step < 5 && (credit_wait <= 0 || KEY_TICKED(J_START))){
         credit_step++;
         SetState(StateCredit);
-    }else if(credit_step == 4 && KEY_TICKED(J_START)){
+    }else if(credit_step == 5 && KEY_TICKED(J_START)){
         if(cheat_activated){
             current_area = cheat_area;
             start_game_cheat(cheat_area);
@@ -142,14 +150,14 @@ void UPDATE(void){
     }
     //ANIMATIONS & CAMERA MOVEMENTS
         switch(credit_step){
-            case 3:
+            case 4:
                 if(scroll_target->x < (UINT16) 147u << 3){
                     scroll_target->x+=2;
                 }else{
                     credit_wait = 0;
                 }
             break;
-            case 4:
+            case 5:
                 pressstart_counter++;
                 if(pressstart_counter >= PRESSSTART_COUNTER_MAX){
                     pressstart_counter = 0;

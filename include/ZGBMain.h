@@ -61,7 +61,6 @@ _SPRITE_DMG(SpriteConfigwheel, itemconfigwheel)\
 _SPRITE_DMG(SpriteConfigelm, itemconfigelm)\
 _SPRITE_DMG(SpriteConfigreins, itemconfigreins)\
 _SPRITE_DMG(SpriteStraw, straw)\
-_SPRITE_DMG(SpriteCursor, cursor)\
 _SPRITE_DMG(SpriteRomansoldier, romansoldier)\
 _SPRITE_DMG(SpriteRomansenator, romansenator)\
 _SPRITE_DMG(SpriteExclamation, exclamation)\

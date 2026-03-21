@@ -20,8 +20,8 @@ extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy)
 
 void START(void){
     SetSpriteAnim(THIS, a_barbarianshield_h, 8u);
-    THIS->lim_x = 3000;
-    THIS->lim_y = 3000;
+    THIS->lim_x = 300;
+    THIS->lim_y = 300;
     struct SoldierData* barbarianshield_data = (struct SoldierData*) THIS->custom_data;
     barbarianshield_data->configured = 0;
     barbarianshield_data->frmskip = 0;

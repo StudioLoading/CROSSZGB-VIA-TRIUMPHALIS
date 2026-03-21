@@ -18,6 +18,7 @@
 #define HITONSCREEN_MAX 80
 
 IMPORT_MAP(border);
+IMPORT_MAP(borderrome);
 IMPORT_MAP(borderalps);
 IMPORT_MAP(bordersea);
 IMPORT_MAP(bordergreece);
@@ -106,7 +107,7 @@ void hit_on_screen(void) BANKED{
 			if(flag_night_mode){
 				night_mode();
 			}else{
-			BGP_REG = PAL_DEF(0,1,2,3);
+				BGP_REG = PAL_DEF(0,1,2,3);
 			}
 			hit_on_screen_countdown = 0;
 			return;
@@ -414,7 +415,7 @@ void manage_border(UINT8 my_next_state) BANKED{
 	if(sgb_check()){
 		if(flag_border_set == 0u){
 			switch(current_area){
-				case AREA_ROME: LOAD_SGB_BORDER(border); break;
+				case AREA_ROME: LOAD_SGB_BORDER(borderrome); break;
 				case AREA_ALPS: LOAD_SGB_BORDER(borderalps); break;
 				case AREA_SEA: LOAD_SGB_BORDER(bordersea); break;
 				case AREA_GREECE: LOAD_SGB_BORDER(bordergreece); break;

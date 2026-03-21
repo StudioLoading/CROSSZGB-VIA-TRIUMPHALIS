@@ -584,6 +584,7 @@ void UPDATE(void){
                             current_step = SENATOR_COLLIDED;
                         }
                     break;
+                    case SpriteRomansoldier:
                     case SpriteSavage:
                     case SpriteBarbarian:
                         if(weapon_def == SHIELD){
@@ -598,7 +599,6 @@ void UPDATE(void){
                         }
                     break;
                     case SpriteGreekphilosopher:
-                    case SpriteRomansoldier:
                     case SpriteGreeksoldier:
                         {
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;

@@ -1,6 +1,6 @@
 BUG:
-- alps il livello del salvare il generale è lento su DMG devo verificare lo spawning degli enemy che forse è esagerato
-in più una lancia, nell'ultimo tratto orizzontale, spunta dietro l'horse
+- nell'arena delle alps non collido coi soldati con la spada!
+- alps05 una lancia, nell'ultimo tratto orizzontale, spunta dietro l'horse
 - sistema di punteggio highscore
 - la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo 
 - "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
@@ -105,8 +105,8 @@ LIBRETTO:
 ```
 
 PNG2MAP
-cd C:\ZGB-2023.0\tools\png2map\
-png2gbtiles.exe C:\CrossZGB\ZGB\tools\png2map\mapcredit1.png -gbm -g -pal=mypal.pal C:\CrossZGB\ZGB\tools\png2map\mapcredit1.gbm
+cd C:\CrossZGB\ZGB\tools\png2map
+png2gbtiles.exe C:\CrossZGB\ZGB\tools\png2map\mapcredit2.png -gbm -g -pal=mypal.pal C:\CrossZGB\ZGB\tools\png2map\mapcredit2.gbm
 
 GIF TO PNG FRAMES
 ffmpeg -i C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\input.gif C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_%d.png

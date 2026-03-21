@@ -214,7 +214,7 @@ const struct SpawningMapRect spawning_map_mission05[7] = {
         .box_height =  ((UINT16) 15u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
-            .configured = 1, .reward = 0, .points = 10 
+            .configured = 1, .reward = FLAME, .points = 10 
         },
         .type = SpriteBarbarianshield
     },
@@ -224,11 +224,11 @@ const struct SpawningMapRect spawning_map_mission05[7] = {
         .box_flag_spawned = 0u,
         .box_x = ((UINT16) 28u << 3),
         .box_y = ((UINT16) 8u << 3),
-        .box_width =  ((UINT16) 30u << 3),
+        .box_width =  ((UINT16) 5u << 3),
         .box_height =  ((UINT16) 15u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 10, 
-            .configured = 2, .reward = 0, .points = 10 
+            .configured = 2, .reward = LANCE, .points = 10 
         },
         .type = SpriteBarbarianshield
     },

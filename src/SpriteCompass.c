@@ -31,6 +31,9 @@ void START(void){
     THIS->lim_x = 1000;
     THIS->lim_y = 1000;
     compass_counter = 0;
+    if(_cpu != CGB_TYPE){
+        SPRITE_SET_PALETTE(THIS,1);
+    }
 }
 
 void UPDATE(void){
