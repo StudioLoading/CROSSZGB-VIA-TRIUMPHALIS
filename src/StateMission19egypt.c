@@ -37,7 +37,6 @@ extern INT8 track_ended_cooldown;
 extern UINT8 turn;
 extern UINT8 prev_state;
 extern INT8 mission_completed;
-extern MISSION current_mission;
 extern INT8 flag_golden_found;
 extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
@@ -53,7 +52,6 @@ extern void update_common(void) BANKED;
 extern void update_time(void) BANKED;
 extern void spawn_items(void) BANKED;
 extern void map_ended(void) BANKED;
-extern void night_mode(void) BANKED;
 extern void die(void) BANKED;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 

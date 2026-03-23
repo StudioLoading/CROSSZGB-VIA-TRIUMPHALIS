@@ -17,13 +17,18 @@
 
 #define HITONSCREEN_MAX 80
 
-IMPORT_MAP(border);
-IMPORT_MAP(borderrome);
-IMPORT_MAP(borderalps);
-IMPORT_MAP(bordersea);
-IMPORT_MAP(bordergreece);
-IMPORT_MAP(borderdesert);
-IMPORT_MAP(borderegypt);
+IMPORT_MAP(borderrome2);
+IMPORT_MAP(borderrome2night);
+IMPORT_MAP(borderalps2);
+IMPORT_MAP(borderalps2night);
+IMPORT_MAP(bordersea2);
+IMPORT_MAP(bordersea2night);
+IMPORT_MAP(bordergreece2);
+IMPORT_MAP(bordergreece2night);
+IMPORT_MAP(borderdesert2);
+IMPORT_MAP(borderdesert2night);
+IMPORT_MAP(borderegypt2);
+IMPORT_MAP(borderegypt2night);
 
 static const palette_color_t palette_data_rome[] = {RGB(0,0,0),RGB(0,0,0),RGB(29,2,0),RGB(0,0,0)};
 static const palette_color_t palette_data_alps[] = {RGB(0,0,0),RGB(9,24,31),RGB(15,0,25),RGB(0,0,0)};
@@ -415,12 +420,48 @@ void manage_border(UINT8 my_next_state) BANKED{
 	if(sgb_check()){
 		if(flag_border_set == 0u){
 			switch(current_area){
-				case AREA_ROME: LOAD_SGB_BORDER(borderrome); break;
-				case AREA_ALPS: LOAD_SGB_BORDER(borderalps); break;
-				case AREA_SEA: LOAD_SGB_BORDER(bordersea); break;
-				case AREA_GREECE: LOAD_SGB_BORDER(bordergreece); break;
-				case AREA_DESERT: LOAD_SGB_BORDER(borderdesert); break; 
-				case AREA_EGYPT: LOAD_SGB_BORDER(borderegypt); break; 
+				case AREA_ROME:
+					if(current_mission == MISSIONROME02){
+						LOAD_SGB_BORDER(borderrome2night);
+					}else{
+						LOAD_SGB_BORDER(borderrome2);
+					}
+				break;
+				case AREA_ALPS:
+					if(current_mission == MISSIONALPS07){ 
+						LOAD_SGB_BORDER(borderalps2night);
+					}else{
+						LOAD_SGB_BORDER(borderalps2);
+					}
+				break;
+				case AREA_SEA:
+					if(current_mission == MISSIONSEA09){ 
+						LOAD_SGB_BORDER(bordersea2night);
+					}else{
+						LOAD_SGB_BORDER(bordersea2);
+					}
+				break;
+				case AREA_GREECE:
+					if(current_mission == MISSIONGREECE13){ 
+						LOAD_SGB_BORDER(bordergreece2night);
+					}else{
+						LOAD_SGB_BORDER(bordergreece2);
+					}
+				break;
+				case AREA_DESERT:
+					if(current_mission == MISSIONDESERT17){
+						LOAD_SGB_BORDER(borderdesert2night);
+					}else{
+						LOAD_SGB_BORDER(borderdesert2);
+					}
+				break; 
+				case AREA_EGYPT: 
+					if(current_mission == MISSIONEGYPT20){
+						LOAD_SGB_BORDER(borderegypt2night);
+					}else{
+						LOAD_SGB_BORDER(borderegypt2);
+					}
+				break; 
 			}
 			flag_border_set = 1u;
 		}
