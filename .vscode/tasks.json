@@ -6,7 +6,7 @@
         {
             "label": "Release",
             "type": "shell",
-            "dependsOn": ["CloneFolder", "CloneBorders"],
+            "dependsOn": ["CloneFolder", "CloneBorders", "CloneMusic"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
@@ -21,7 +21,7 @@
         {
             "label": "ReleaseColor",
             "type": "shell",
-            "dependsOn": ["CloneFolder", "CloneBorders"],
+            "dependsOn": ["CloneFolder", "CloneBorders", "CloneMusic"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
@@ -39,7 +39,7 @@
         {
             "label": "Debug",
             "type": "shell",
-            "dependsOn": ["CloneFolder", "CloneBorders"],
+            "dependsOn": ["CloneFolder", "CloneBorders", "CloneMusic"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
@@ -57,7 +57,7 @@
         {
             "label": "DebugColor",
             "type": "shell",
-            "dependsOn": ["CloneFolder", "CloneBorders"],
+            "dependsOn": ["CloneFolder", "CloneBorders", "CloneMusic"],
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src" 
@@ -84,6 +84,12 @@
             "label": "CloneBorders",
             "type": "shell",
             "command": "cp -rf ${workspaceFolder}/res/borders/gb/. ${workspaceFolder}/res/borders/gbc",
+            "presentation": { "reveal": "silent" }
+        },
+        {
+            "label": "CloneMusic",
+            "type": "shell",
+            "command": "cp -rf ${workspaceFolder}/res/music/gb/. ${workspaceFolder}/res/music/gbc",
             "presentation": { "reveal": "silent" }
         },
         {

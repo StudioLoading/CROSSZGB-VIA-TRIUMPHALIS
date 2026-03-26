@@ -16,7 +16,7 @@ DECLARE_MUSIC(tutorial47);
 DECLARE_MUSIC(tutorial813);
 DECLARE_MUSIC(stage);
 DECLARE_MUSIC(end);
-DECLARE_MUSIC(title3126idea);
+//DECLARE_MUSIC(title3126idea);
 
 
 extern MISSION current_mission;

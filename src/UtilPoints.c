@@ -52,4 +52,5 @@ Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT16 arg_x
     struct PointsData* points_data = (struct PointsData*) s_points->custom_data;
     points_data->points = arg_points;
     points_data->configured = 1u;
+    return s_points;
 }
