@@ -51,6 +51,9 @@ void START(void){
     credit_wait = CREDIT_WAIT_MAX;
     switch(credit_step){
         case 1:
+            NR52_REG = 0x80; // 1000 0000 -> Accende il chip audio
+            NR51_REG = 0xFF; // Abilita tutti e 4 i canali a sinistra e a destra
+            NR50_REG = 0x77; // Imposta il volume master al massimo
             InitScroll(BANK(mapcredit0), &mapcredit0, 0, 0);
             stop_music_on_new_state = 0u; 
         break;

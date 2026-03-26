@@ -1,5 +1,6 @@
 #include "Banks/SetAutoBank.h"
 
+#include <gbdk/platform.h>
 #include "BankManager.h"
 #include "ZGBMain.h"
 #include "Music.h"
@@ -15,24 +16,32 @@ DECLARE_MUSIC(tutorial47);
 DECLARE_MUSIC(tutorial813);
 DECLARE_MUSIC(stage);
 DECLARE_MUSIC(end);
+DECLARE_MUSIC(title3126idea);
 
 
 extern MISSION current_mission;
 extern INT8 credit_step;
 extern TUTORIAL_STAGE tutorial_state;
 
+void set_bgm(void) BANKED;
+
+
 void set_bgm(void) BANKED{
     switch(current_state){
-        case StateCredit:{
+        case StateCredit:
             switch(credit_step){
-                case 1: PlayMusic(credits, 1);      break;
-                case 3: PlayMusic(titlescreen, 1);  break;
+                case 1:
+                    PlayMusic(credits, 1);
+                break;
+                case 5:
+                    PlayMusic(titlescreen, 1);
+                break;
             }
-        }break;
-        case StateTutorialList:{
+        break;
+        case StateTutorialList:
             PlayMusic(tutoriallist, 0);
-        }break;
-        case StateTutorialGame:{
+        break;
+        case StateTutorialGame:
             if(tutorial_state < TUTORIAL_STAGE_4_TURNRIGHTLEFT){
                 PlayMusic(tutorial03, 1);
             }else if(tutorial_state < TUTORIAL_STAGE_8_GLADIO){
@@ -40,14 +49,14 @@ void set_bgm(void) BANKED{
             }else if(tutorial_state < TUTORIAL_PASSED){
                 PlayMusic(tutorial813, 1);
             }
-        }break;
+        break;
         case StateMission00rome:
-        case StateMission01rome:{
+        case StateMission01rome:
             PlayMusic(stage, 1);
-        }break;
-        case StatePapyrus:{
+        break;
+        case StatePapyrus:
             PlayMusic(end, 1);
-        }break;
+        break;
 
     }
 }

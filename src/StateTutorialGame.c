@@ -80,7 +80,6 @@ extern void show_danger(void) BANKED;
 extern void fantoccio_move(Sprite* s_fantoccio_arg) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
 extern void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
-extern void set_bgm(void) BANKED;
 
 void START(void){
     fantoccio_hit = 0;
