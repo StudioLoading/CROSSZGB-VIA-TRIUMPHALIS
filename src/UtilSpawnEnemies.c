@@ -16,6 +16,8 @@ extern Sprite* s_horse;
 extern INT8 vx;
 extern MISSION_STEP current_step;
 extern UINT8 spawned_greeks_flag;
+extern UINT8 flag_is_state_arena;
+extern UINT8 mission_killed;
 
 INT8 die_counter = DIE_COUNTER_MAX;
 INT8 counter_danger = 0;
@@ -30,6 +32,7 @@ void check_danger(void) BANKED;
 void show_danger(void) BANKED;
 UINT8 check_horse_in_box(UINT8 arg_index, UINT16 arg_current_horse_x, UINT16 arg_current_horse_y) BANKED;
 void calculate_danger(Sprite* s_danger) BANKED;
+void spawn_from_array(UINT8 arg_idx) BANKED;
 
 
 const struct SpawningMapRect spawning_map_mission01[4] = {
@@ -428,26 +431,26 @@ const struct SpawningMapRect spawning_map_mission09[4] = {
 };
 const struct SpawningMapRect spawning_map_mission11[4] = {
     {
-        .spawn_x = ((UINT16) 35u << 3),
-        .spawn_y = ((UINT16) 13u << 3),
+        .spawn_x = ((UINT16) 37u << 3),
+        .spawn_y = ((UINT16) 14u << 3),
         .box_flag_spawned = 0u,
-        .box_x = ((UINT16) 29u << 3),
-        .box_y = ((UINT16) 13u << 3),
-        .box_width =  ((UINT16) 30u << 3),
-        .box_height =  ((UINT16) 8u << 3),
+        .box_x = ((UINT16) 30u << 3),
+        .box_y = ((UINT16) 12u << 3),
+        .box_width =  ((UINT16) 10u << 3),
+        .box_height =  ((UINT16) 10u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 12, 
             .configured = 1, .reward = FLAME, .points = 20
         },
         .type = SpriteSavage
     },{
-        .spawn_x = ((UINT16) 60u << 3),
+        .spawn_x = ((UINT16) 51u << 3),
         .spawn_y = ((UINT16) 16u << 3),
         .box_flag_spawned = 0u,
-        .box_x = ((UINT16) 49u << 3),
-        .box_y = ((UINT16) 12u << 3),
+        .box_x = ((UINT16) 46u << 3),
+        .box_y = ((UINT16) 10u << 3),
         .box_width =  ((UINT16) 30u << 3),
-        .box_height =  ((UINT16) 14u << 3),
+        .box_height =  ((UINT16) 10u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 6, 
             .configured = 2, .reward = LANCE, .points = 20
@@ -457,10 +460,10 @@ const struct SpawningMapRect spawning_map_mission11[4] = {
         .spawn_x = ((UINT16) 34u << 3),
         .spawn_y = ((UINT16) 39u << 3),
         .box_flag_spawned = 0u,
-        .box_x = ((UINT16) 7u << 3),
+        .box_x = ((UINT16) 24u << 3),
         .box_y = ((UINT16) 27u << 3),
-        .box_width =  ((UINT16) 30u << 3),
-        .box_height =  ((UINT16) 20u << 3),
+        .box_width =  ((UINT16) 20u << 3),
+        .box_height =  ((UINT16) 10u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 12, 
             .configured = 1, .reward = HP, .points = 20
@@ -468,12 +471,12 @@ const struct SpawningMapRect spawning_map_mission11[4] = {
         .type = SpriteSavage
     },{
         .spawn_x = ((UINT16) 19u << 3),
-        .spawn_y = ((UINT16) 75u << 3),
+        .spawn_y = ((UINT16) 44u << 3),
         .box_flag_spawned = 0u,
-        .box_x = ((UINT16) 12u << 3),
-        .box_y = ((UINT16) 63u << 3),
-        .box_width =  ((UINT16) 34u << 3),
-        .box_height =  ((UINT16) 20u << 3),
+        .box_x = ((UINT16) 10u << 3),
+        .box_y = ((UINT16) 30u << 3),
+        .box_width =  ((UINT16) 20u << 3),
+        .box_height =  ((UINT16) 14u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 14, 
             .configured = 1, .reward = FLAME, .points = 20
@@ -903,24 +906,34 @@ void init_enemies_map(void) BANKED{//invoked on START of a StateMission
 }
 
 void spawn_enemies(void) BANKED{
+    if(flag_is_state_arena){
+        if(mission_killed < current_enemies_total_count && current_spawning_map[mission_killed].box_flag_spawned == 0u){
+            spawn_from_array(mission_killed);
+        }
+        return;   
+    }
     UINT16 current_horse_x = s_horse->x;
     UINT16 current_horse_y = s_horse->y;
     for(UINT8 i = 0u; i < current_enemies_total_count; i++){
         if(check_horse_in_box(i, current_horse_x, current_horse_y) && current_spawning_map[i].box_flag_spawned == 0u){
-            Sprite* s_spawned_enemy = SpriteManagerAdd(current_spawning_map[i].type, current_spawning_map[i].spawn_x, current_spawning_map[i].spawn_y);
-            //s_spawned_enemy->custom_data = current_spawning_map[i].box_soldierdata;
-            if(current_spawning_map[i].type == SpriteKiller){
-                memcpy(s_spawned_enemy->custom_data, &current_spawning_map[i].box_data.killer, sizeof(struct KillerData));
-            }else if(current_spawning_map[i].type != SpriteStraw){
-                memcpy(s_spawned_enemy->custom_data, &current_spawning_map[i].box_data.soldier, sizeof(struct SoldierData));
-            }
-            current_spawning_map[i].box_flag_spawned = 1u;
-            if(current_spawning_map[i].type != SpriteStraw){
-                calculate_danger(s_spawned_enemy);
-                check_danger();
-                show_danger();
-            }
+            spawn_from_array(i);
         }
+    }    
+}
+
+void spawn_from_array(UINT8 arg_idx) BANKED{
+    Sprite* s_spawned_enemy = SpriteManagerAdd(current_spawning_map[arg_idx].type, current_spawning_map[arg_idx].spawn_x, current_spawning_map[arg_idx].spawn_y);
+    //s_spawned_enemy->custom_data = current_spawning_map[i].box_soldierdata;
+    if(current_spawning_map[arg_idx].type == SpriteKiller){
+        memcpy(s_spawned_enemy->custom_data, &current_spawning_map[arg_idx].box_data.killer, sizeof(struct KillerData));
+    }else if(current_spawning_map[arg_idx].type != SpriteStraw){
+        memcpy(s_spawned_enemy->custom_data, &current_spawning_map[arg_idx].box_data.soldier, sizeof(struct SoldierData));
+    }
+    current_spawning_map[arg_idx].box_flag_spawned = 1u;
+    if(current_spawning_map[arg_idx].type != SpriteStraw){
+        calculate_danger(s_spawned_enemy);
+        check_danger();
+        show_danger();
     }
 }
 

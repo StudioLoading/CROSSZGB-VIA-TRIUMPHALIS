@@ -577,7 +577,8 @@ void UPDATE(void){
                         if(item_data->configured == 2){
                             pickup(iospr);
                         }
-                    }break;
+                    }
+                    break;
                     case SpriteRomansenator:
                     case SpriteStatue:
                         if(current_step != SENATOR_COLLIDED){

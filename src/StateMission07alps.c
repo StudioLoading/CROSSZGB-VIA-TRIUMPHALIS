@@ -43,6 +43,7 @@ extern INT16 timemax_current;
 extern INT16 time_factor;
 extern INT16 time_to_load;
 extern UINT8 mission_killed;
+extern UINT8 current_enemies_total_count;
 
 extern void start_common(void) BANKED;
 extern void update_common(void) BANKED;
@@ -99,7 +100,7 @@ void UPDATE(void){
     //COMMON UPDATE
         update_common();
     //MISSION STEP
-        if(mission_killed >= 4 && mission_completed == 0){
+        if(mission_killed >= current_enemies_total_count && mission_completed == 0){
             mission_completed = 1;
         }
     //IS MISSION COMPLETED?

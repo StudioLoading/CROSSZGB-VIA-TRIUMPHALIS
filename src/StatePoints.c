@@ -31,9 +31,14 @@ extern UINT16 get_points(void) BANKED;
 extern void init_current_level_points(void) BANKED;
 extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 
+extern struct LEVEL_POINTS current_level_points[];
+
 void move_to_mission_completed_papyrus(void) BANKED;
 void calculate_mission_points(void) BANKED;
 
+INT16 current_offset = 60;
+INT8 current_point_idx = -1;
+UINT8 showing_points = 1u;
 
 void START(void){
     InitScroll(BANK(mappoints), &mappoints, 0, 0);
@@ -43,15 +48,52 @@ void START(void){
     SetWindowY(144);
     PRINT(1, 12, "CURRENT");
 	calculate_mission_points();
-    UINT16 current_points = get_points();
-    PRINT(1, 13, "%u", current_points);
+	current_offset = 60;
+	current_point_idx = -1;
+	showing_points = 1u;
 }
 
 void UPDATE(void){
-
-    if(KEY_TICKED(J_START)){
-        move_to_mission_completed_papyrus();
-    }
+	if(showing_points){
+		switch(current_point_idx){
+			case -1:
+				current_offset--;
+				if(current_offset < 0){
+					current_point_idx = 0;
+					current_offset = 0;
+					PRINT(1, 1, "PICKUP GOLDEN");
+				}
+			break;
+			default:
+				if(current_offset <= current_level_points[current_point_idx].points){
+					PRINT(16, current_point_idx+1, "%u", current_offset);
+					current_offset++;
+				}else{
+					switch(current_point_idx){
+						case 0: PRINT(1, 2, "PICKUP HP"); break;
+						case 1: PRINT(1, 3, "LANCE DODGE"); break;
+						case 2: PRINT(1, 4, "KILLINGS"); break;
+						case 3: PRINT(1, 5, "LIFE"); break;
+						case 4: PRINT(1, 6, "TIME"); break;
+						case 5: PRINT(1, 7, "HIT"); break;
+						case 6: PRINT(1, 8, "HIT SKULL"); break;
+						case 7: PRINT(1, 9, "HIT LANCE"); break;
+					}
+					current_point_idx++;
+					current_offset = 0;
+				}
+			break;
+			case 9:
+				UINT16 current_points = get_points();
+				PRINT(1, 13, "%u", current_points);
+				showing_points = 0u;
+			break;
+		}
+	}else{
+		if(KEY_TICKED(J_START)){
+			move_to_mission_completed_papyrus();
+		}
+	}
 }
 
 void calculate_mission_points(void) BANKED{

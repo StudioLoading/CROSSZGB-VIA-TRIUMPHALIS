@@ -42,7 +42,7 @@
             "type": "emulicious-debugger",
             "request": "launch",
             "name": "Release",
-            "program": "${workspaceFolder}/obj/Release/gb/rom.gb",
+            "program": "${workspaceFolder}/obj/Release/gbc/rom.gbc",
             "port": 58870,
             "stopOnEntry": false,
             "additionalSrcFolders": "${env:ZGB_PATH}",

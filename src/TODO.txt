@@ -1,5 +1,6 @@
 BUG:
-- nell'arena delle alps non collido coi soldati con la spada!
+- testare con ALPS: devo rivedere le arene: che ci sia un solo nemico alla volta su schermo e politiche di spawning.
+- testare con ALPS: dettagli dei punti 
 - alps05 una lancia, nell'ultimo tratto orizzontale, spunta dietro l'horse
 - sistema di punteggio highscore
 - la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo 
@@ -13,6 +14,7 @@ BUG:
         non avrà il compass; (?)
         avrà il faraone finale a 7 di hp;
 - il priest forse dovrebbe avere HP=2 per propedeuticità al Faraone successivo
+    è un po' statichello - penso che dovrebbe fare qualcosa tipo lanciare fiammelle alzando le mani
 - animazione cavallo a Stamina==0 che scodinzola e ogni anto abbassa la testa
 - animazione del trotto da sistemare per renderla perfetta
 - test longplay DMG
@@ -116,7 +118,7 @@ GENERAZIONE QR CODE DA POWERSHELL
 New-QRCodeURI -URI 'https://www.kickstarter.com/projects/studioloading/flying-arrows-2-gameboy-game-save-bolognanerd' -Width 16 -OutPath 'C:\Users\checc\GB\ARROWS1\QR-kickstarter.png'
 New-QRCodeURI -URI 'https://www.notion.so/leandromacrini/28-06-2025-209ac641edda807c83eefd7ca5caecb2' -Width 15 -OutPath 'C:\Users\checc\BN\QR-riunione.png'
 New-QRCodeURI -URI 'https://www.eventbrite.it/e/biglietti-global-game-jam-2026-bologna-nerd-jam-site-1976138239671' -Width 15 -OutPath 'C:\Users\checc\BN\GGJ\QR-eventbrite.png'
-New-QRCodeURI -URI 'https://globalgamejam.org/jam-sites/2026/bologna-nerd' -Width 15 -OutPath 'C:\Users\checc\BN\GGJ\QR-jamsite.png'
+New-QRCodeURI -URI 'https://www.kickstarter.com/profile/studioloading/created' -Width 15 -OutPath 'C:\Users\checc\GB\FIERE\QR-SL-kickstarter.png'
 
 PDF TO PNG
 magick -density 300 input.pdf -resize 50% output.png

@@ -57,6 +57,7 @@ INT8 spawning_weapon_counter;
 UINT8 reset_combo_counter = 0u;
 UINT8 flag_using_atk = 0u;
 UINT8 end_game = 0u;
+UINT8 flag_is_state_arena = 0u;
 
 #define DIE_COUNTER_MAX 80
 
@@ -139,6 +140,13 @@ void start_common(void) BANKED{
 	spawning_weapon_counter = 0;
 	reset_combo_counter = 0u;
 	flag_using_atk = 0u;
+	flag_is_state_arena = 0u;
+	switch(current_mission){
+		case MISSIONALPS07:
+		case MISSIONSEA11:
+			flag_is_state_arena = 1u;
+		break;
+	}
 	set_bgm();
 	BGP_REG = DMG_PALETTE(DMG_WHITE, DMG_LITE_GRAY, DMG_DARK_GRAY, DMG_BLACK);
 	init_enemies_map();
