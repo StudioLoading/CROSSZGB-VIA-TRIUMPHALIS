@@ -28,13 +28,11 @@ extern Sprite* s_horse;
 extern Sprite* s_compass;
 extern UINT8 track_ended;
 extern INT8 track_ended_cooldown;
-extern UINT8 turn;
 extern UINT8 prev_state;
 extern INT8 mission_completed;
 extern INT8 flag_golden_found;
 extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
-extern UINT8 turn;
 extern UINT8 flag_night_mode;
 extern INT8 mission_iscrono;
 

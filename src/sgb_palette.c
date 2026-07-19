@@ -1,4 +1,4 @@
-#pragma bank 10
+#include "Banks/SetAutoBank.h"
 
 #include <gbdk/platform.h>
 #include <gb/sgb.h>
@@ -464,7 +464,6 @@ void set_sgb_palette(UINT16 c0, UINT16 c1, UINT16 c2, UINT16 c3) BANKED {
     };
     sgb_transfer((void *)&SGB_PALETTE_PACKET);
 }
-
 
 void set_sgb_palette_credit_studioloading(void) BANKED{
     set_sgb_palette(SGB_CREDIT_STUDIOLOADING_LIGHTER, SGB_CREDIT_STUDIOLOADING_LIGHT, SGB_CREDIT_STUDIOLOADING_DARK, SGB_CREDIT_STUDIOLOADING_DARKER);

@@ -21,7 +21,7 @@ unsigned char d9[15];
 unsigned char d10[15];
 unsigned char d11[15];
 unsigned char d12[15];
-unsigned char EMPTY_STRING_14[15] = "              ";
+const unsigned char EMPTY_STRING_14[15] = "              ";
 
 
 void GetLocalizedDialog_EN(INSTRUCTION arg_instruction) BANKED{

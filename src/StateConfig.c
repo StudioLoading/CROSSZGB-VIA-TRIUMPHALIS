@@ -48,7 +48,7 @@ extern MirrorMode mirror_horse;
 extern MISSION_STEP current_step;
 extern UINT8 turn_to_load;
 extern INT16 time_to_load;
-extern UINT8 turn;
+extern UINT8 horse_turn;
 extern INT16 time_current;
 extern MISSION current_mission;
 
@@ -228,7 +228,7 @@ void pickup_config(ITEM_TYPE arg_pickedup) BANKED{
             pos_horse_y = scroll_target->y;
             mirror_horse = scroll_target->mirror;
         }
-        turn_to_load = turn;
+        turn_to_load = horse_turn;
         state_move_to_papyrus(instruction_to_give, 0);
     }
 }

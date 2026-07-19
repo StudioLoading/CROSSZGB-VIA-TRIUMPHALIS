@@ -124,7 +124,6 @@ void item_common_update(Sprite* s_item_arg) BANKED{
         case 3://using the weapon!
             switch(item_data->itemtype){
                 case GLADIO:
-                    //item_gladio_anim_inuse(s_item_arg);
                     weapon_update_anim(s_item_arg);
                     item_data->hp = 80;
                     if(vx > 0){ item_data->vx = 1;}

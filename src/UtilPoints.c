@@ -31,6 +31,8 @@ void init_current_level_points(void) BANKED{
     current_level_points[PICKUP_HP].points =  0;
     current_level_points[ELANCE_DODGED].points =  0;
     current_level_points[ENEMY_KILLED].points =  0;
+    current_level_points[HP_REMAINED].points =  0;
+    current_level_points[TIME_REMAINED].points =  0;
     current_level_points[BY_ENEMY_HIT].points =  0;
     current_level_points[BY_SKULL_HIT].points =  0;
     current_level_points[BY_ELANCE_HIT].points =  0;
@@ -38,7 +40,7 @@ void init_current_level_points(void) BANKED{
 
 UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED{
     current_level_points[arg_points_type].points += arg_points;
-    current_points = current_points + arg_points;
+    //current_points = current_points + arg_points;
     return current_points;
 }
 

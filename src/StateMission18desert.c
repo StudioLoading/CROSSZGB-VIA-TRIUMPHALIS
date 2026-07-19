@@ -32,13 +32,13 @@ extern Sprite* s_horse;
 extern Sprite* s_compass;
 extern UINT8 track_ended;
 extern INT8 track_ended_cooldown;
-extern UINT8 turn;
+extern UINT8 horse_turn;
 extern UINT8 prev_state;
 extern INT8 mission_completed;
 extern INT8 flag_golden_found;
 extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
-extern UINT8 turn;
+extern UINT8 horse_turn;
 extern INT16 time_current;
 extern INT16 timemax_current;
 extern INT16 time_factor;
@@ -109,7 +109,7 @@ void UPDATE(void){
         if(current_step == SENATOR_COLLIDED){
             pos_horse_x = s_horse->x;
             pos_horse_y = s_horse->y;
-            turn_to_load = turn;
+            turn_to_load = horse_turn;
             state_move_to_papyrus(MISSION18_BEDUIN_MESSAGE, StateMission18desert);
         }
     //COMMON UPDATE

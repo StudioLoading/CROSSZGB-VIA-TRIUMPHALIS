@@ -9,7 +9,6 @@
 #include "string.h"
 #include "Print.h"
 
-#include "CircleMath.h"
 #include "custom_datas.h"
 
 const UINT8 a_flame[] = {4, 0,1,2,3};

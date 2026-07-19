@@ -1,4 +1,4 @@
-#pragma bank 255
+#include "Banks/SetAutoBank.h"
 
 #include <stdint.h>
 #include <gbdk/platform.h>

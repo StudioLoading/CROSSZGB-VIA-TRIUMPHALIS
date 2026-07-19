@@ -1,4 +1,5 @@
 BUG:
+- la turn ha iniziato ad andare a CANNONE dopo che ho spostato l'array di sine_wave - secondo me sta leggendo dati a caso e non ha riferimenti corretti, da controllare anche da Gemini e i suggerimenti del toxa;
 - testare con ALPS: devo rivedere le arene: che ci sia un solo nemico alla volta su schermo e politiche di spawning.
 - testare con ALPS: dettagli dei punti 
 - alps05 una lancia, nell'ultimo tratto orizzontale, spunta dietro l'horse

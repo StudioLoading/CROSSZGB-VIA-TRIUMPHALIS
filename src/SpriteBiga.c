@@ -28,7 +28,6 @@ extern UINT16 euphoria_max;
 extern INT8 flag_die;
 extern MISSION current_mission;
 extern MISSION_STEP current_step;
-extern UINT8 turn;
 
 extern void pickup(Sprite* s_arg_item) BANKED;
 

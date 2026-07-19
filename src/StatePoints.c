@@ -19,7 +19,7 @@ extern UINT8 flag_night_mode;
 extern UINT8 turn_to_load;
 extern MISSION current_mission;
 extern MISSION_STEP current_step;
-extern UINT8 turn;
+extern UINT8 horse_turn;
 extern UINT8 flag_is_demo;
 extern INT8 world_area_map;
 extern AREA current_area;
@@ -32,6 +32,7 @@ extern void init_current_level_points(void) BANKED;
 extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 
 extern struct LEVEL_POINTS current_level_points[];
+extern UINT16 current_points;
 
 void move_to_mission_completed_papyrus(void) BANKED;
 void calculate_mission_points(void) BANKED;
@@ -62,30 +63,40 @@ void UPDATE(void){
 					current_point_idx = 0;
 					current_offset = 0;
 					PRINT(1, 1, "PICKUP GOLDEN");
+					PRINT(15, 1, "0000");
 				}
 			break;
 			default:
-				if(current_offset <= current_level_points[current_point_idx].points){
-					PRINT(16, current_point_idx+1, "%u", current_offset);
+				if(current_level_points[current_point_idx].points && current_offset < current_level_points[current_point_idx].points){
 					current_offset++;
+					UINT8 points_offset = 3;
+					if(KEY_TICKED(J_A) || KEY_TICKED(J_B)){
+						current_offset = current_level_points[current_point_idx].points;
+					}
+					if(current_offset > 999){ points_offset = 0;}
+					else if(current_offset > 99){ points_offset = 1;}
+					else if(current_offset > 9){ points_offset = 2;}
+					PRINT(15+points_offset, current_point_idx+1, "%u", current_offset);
 				}else{
 					switch(current_point_idx){
-						case 0: PRINT(1, 2, "PICKUP HP"); break;
+						case 0: PRINT(1, 2, "PICKUP HP    -"); break;
 						case 1: PRINT(1, 3, "LANCE DODGE"); break;
 						case 2: PRINT(1, 4, "KILLINGS"); break;
 						case 3: PRINT(1, 5, "LIFE"); break;
 						case 4: PRINT(1, 6, "TIME"); break;
-						case 5: PRINT(1, 7, "HIT"); break;
-						case 6: PRINT(1, 8, "HIT SKULL"); break;
-						case 7: PRINT(1, 9, "HIT LANCE"); break;
+						case 5: PRINT(1, 7, "HIT          -"); break;
+						case 6: PRINT(1, 8, "HIT BY SKULL -"); break;
+						case 7: PRINT(1, 9, "HIT BY LANCE -"); break;
 					}
+					PRINT(15, current_point_idx+2, "0000");
+					current_points += current_offset;
 					current_point_idx++;
 					current_offset = 0;
 				}
 			break;
-			case 9:
-				UINT16 current_points = get_points();
-				PRINT(1, 13, "%u", current_points);
+			case 8:
+				UINT16 current_points_to_show = get_points();
+				PRINT(1, 13, "%u", current_points_to_show);
 				showing_points = 0u;
 			break;
 		}
@@ -107,7 +118,7 @@ void calculate_mission_points(void) BANKED{
 
 void move_to_mission_completed_papyrus(void) BANKED{
 	flag_night_mode = 0;//RESET
-	turn_to_load = turn;//missione successiva comincia nello stesso verso di dove finisce missione corrente
+	turn_to_load = horse_turn;//missione successiva comincia nello stesso verso di dove finisce missione corrente
 	INSTRUCTION instruction_to_give = 0;
 	switch(current_mission){
 		case MISSIONROME00: instruction_to_give = MISSION00_COMPLETED; break;

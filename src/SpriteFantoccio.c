@@ -8,7 +8,6 @@
 #include "string.h"
 #include "Print.h"
 
-#include "CircleMath.h"
 #include "custom_datas.h"
 
 extern INT8 fantoccio_counter;

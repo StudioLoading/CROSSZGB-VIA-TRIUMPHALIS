@@ -69,7 +69,6 @@ extern MISSION_STEP current_step;
 extern MISSION current_mission;
 extern UINT8 prev_state;
 extern UINT8 turn_to_load;
-extern UINT8 turn;
 extern INT8 world_area_map;
 extern UINT8 credit_step;
 extern INSTRUCTION instruction_given;

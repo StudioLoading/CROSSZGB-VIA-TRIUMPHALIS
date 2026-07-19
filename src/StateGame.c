@@ -95,7 +95,7 @@ extern MISSION current_mission;
 extern UINT8 prev_state;
 extern UINT8 turn_to_load;
 extern INT16 time_to_load;
-extern UINT8 turn;
+extern UINT8 horse_turn;
 extern INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down;
 extern INT8 die_counter;
 extern INT8 counter_danger;
@@ -133,8 +133,8 @@ void start_common(void) BANKED{
 	counter_danger = 0;
 	flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_down = 0;
 	s_horse->mirror = mirror_horse;
-    turn = turn_to_load;
-	if(turn >= 127){ s_horse->mirror = V_MIRROR; }
+    horse_turn = turn_to_load;
+	if(horse_turn >= 127){ s_horse->mirror = V_MIRROR; }
 	mission_killed = 0u;
 	s_spawning_weapon = 0;
 	spawning_weapon_counter = 0;

@@ -60,7 +60,6 @@ extern INT8 track_ended_cooldown;
 extern UINT8 hud_initialized;
 extern INT8 onwater_countdown; 
 extern INT8 velocity;
-extern UINT8 turn;
 extern UINT16 pos_horse_x;
 extern UINT16 pos_horse_y;
 extern UINT8 turn_to_load;

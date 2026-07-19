@@ -3,11 +3,11 @@
 #include <gbdk/platform.h>
 #include "BankManager.h"
 #include "ZGBMain.h"
-// #include "Music.h"
+#include "Music.h"
 
 #include "custom_datas.h"
 
-/*
+
 DECLARE_MUSIC(titlescreen);
 DECLARE_MUSIC(credits);
 DECLARE_MUSIC(tutoriallist);
@@ -17,7 +17,6 @@ DECLARE_MUSIC(tutorial813);
 DECLARE_MUSIC(stage);
 DECLARE_MUSIC(end);
 DECLARE_MUSIC(title3126ideaht4);
-*/
 
 extern MISSION current_mission;
 extern INT8 credit_step;
@@ -27,7 +26,6 @@ void set_bgm(void) BANKED;
 
 
 void set_bgm(void) BANKED{
-    /*
     switch(current_state){
         case StateCredit:
             switch(credit_step){
@@ -59,5 +57,4 @@ void set_bgm(void) BANKED{
             PlayMusic(end, 1);
         break;
     }
-    */
 }

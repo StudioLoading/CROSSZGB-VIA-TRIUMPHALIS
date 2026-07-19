@@ -10,7 +10,6 @@
 #include "Print.h"
 #include "ZGBMain.h"
 
-#include "CircleMath.h"
 #include "custom_datas.h"
 #include "horse_anim.h"
 
@@ -24,6 +23,12 @@
 #define HUD_TURN_COOLDOWN_MAX 20
 #define COUNTER_HIT_MAX 100
 #define FORCE_UPDOWN_MAX 60
+
+
+static const INT8 sine_wave[256] = {
+    3, 6, 9, 12, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 51, 54, 57, 60, 63, 65, 68, 71, 73, 76, 78, 81, 83, 85, 88, 90, 92, 94, 96, 98, 100, 102, 104, 106, 107, 109, 111, 112, 113, 115, 116, 117, 118, 120, 121, 122, 122, 123, 124, 125, 125, 126, 126, 126, 127, 127, 127, 127, 
+    127, 127, 127, 126, 126, 126, 125, 125, 124, 123, 122, 122, 121, 120, 118, 117, 116, 115, 113, 112, 111, 109, 107, 106, 104, 102, 100, 98, 96, 94, 92, 90, 88, 85, 83, 81, 78, 76, 73, 71, 68, 65, 63, 60, 57, 54, 51, 49, 46, 43, 40, 37, 34, 31, 28, 25, 22, 19, 16, 12, 9, 6, 3, 0, -3, -6, -9, -12, -16, -19, -22, -25, -28, -31, -34, -37, -40, -43, -46, -49, -51, -54, -57, -60, -63, -65, -68, -71, -73, -76, -78, -81, -83, -85, -88, -90, -92, -94, -96, -98, -100, -102, -104, -106, -107, -109, -111, -112, -113, -115, -116, -117, -118, -120, -121, -122, -122, -123, -124, -125, -125, -126, -126, -126, -127, -127, -127, -127, -127, -127, -127, -126, -126, -126, -125, -125, -124, -123, -122, -122, -121, -120, -118, -117, -116, -115, -113, -112, -111, -109, -107, -106, -104, -102, -100, -98, -96, -94, -92, -90, -88, -85, -83, -81, -78, -76, -73, -71, -68, -65, -63, -60, -57, -54, -51, -49, -46, -43, -40, -37, -34, -31, -28, -25, -22, -19, -16, -12, -9, -6, -3, 0
+};
 
 // Animation state enum
 typedef enum {
@@ -72,7 +77,7 @@ INT8 stamina_verso = 0;
 INT8 no_whip_counter = 0;
 INT8 no_whip_over_stamina = -8;
 INT8 no_whip_counter_max = 10;
-UINT8 turn = 0;
+UINT8 horse_turn = 0;
 INT8 sin = 0;
 INT8 cos = 0;
 INT8 turn_samepressure_counter = 0;
@@ -297,25 +302,25 @@ void UPDATE(void){
     //TURN
         if(KEY_PRESSED(J_RIGHT)){
             turn_verse = CLOCK;
-            turn--;
+            horse_turn--;
             if(configuration.reins == GOLDEN){
-                turn -= 2;
+                horse_turn--;
             }
             turn_samepressure_counter++;
             if(turn_samepressure_counter >= 40 && ((sin > 30 && sin < 78) || (sin < -30 && sin > -78))){
                 turn_samepressure_counter = 40;
-                turn-=2;
+                horse_turn-=2;
             }
         }else if(KEY_PRESSED(J_LEFT)){
             turn_verse = COUNTERCLOCK;
-            turn += 2;
+            horse_turn++;
             if(configuration.reins == GOLDEN){
-                turn += 2;
+                horse_turn++;
             }
             turn_samepressure_counter++;
             if(turn_samepressure_counter > 40){
                 turn_samepressure_counter = 40;
-                turn += 1;
+                horse_turn+=2;
             }
         }else{
             turn_verse = NONE; 
@@ -330,7 +335,7 @@ void UPDATE(void){
             if(force_updown_counter == 0){
                 force_updown_counter = 1;
             }else if(force_updown_counter < FORCE_UPDOWN_MAX){
-                turn = 64;
+                horse_turn = 64;
                 force_updown_counter = 0u;
                 turn_samepressure_counter = 0;
             }
@@ -339,13 +344,13 @@ void UPDATE(void){
             if(force_updown_counter == 0){
                 force_updown_counter = 1;
             }else if(force_updown_counter < FORCE_UPDOWN_MAX){
-                turn = 192;
+                horse_turn = 192;
                 force_updown_counter = 0;
                 turn_samepressure_counter = 0;
             }
         }
-        sin = sine_wave[turn];
-        UINT8 cos_idx = turn+64;
+        sin = sine_wave[horse_turn];
+        UINT8 cos_idx = horse_turn+64;
         cos = sine_wave[cos_idx];
     //SPRITE ANIMATION SPEED animation speed
         if(stamina_current < 100){
@@ -632,7 +637,7 @@ void UPDATE(void){
                             }else if(flag_bouncing == 0){//rimbalza
                                 if(stamina_current < 200){ stamina_current = 200;}
                                 else{stamina_current -= 200;}
-                                turn = (turn + 128u) % 254;
+                                horse_turn = (horse_turn + 128u) % 254;
                                 flag_bouncing = 1;
                                 counter_bouncing = 80;
                                 //turn + 128 modulo 256, IL MODULO lo fa da solo perché é unsigned
