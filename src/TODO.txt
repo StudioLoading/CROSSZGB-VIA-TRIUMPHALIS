@@ -1,13 +1,11 @@
 BUG:
-- la turn ha iniziato ad andare a CANNONE dopo che ho spostato l'array di sine_wave - secondo me sta leggendo dati a caso e non ha riferimenti corretti, da controllare anche da Gemini e i suggerimenti del toxa;
-- testare con ALPS: devo rivedere le arene: che ci sia un solo nemico alla volta su schermo e politiche di spawning.
-- testare con ALPS: dettagli dei punti 
-- alps05 una lancia, nell'ultimo tratto orizzontale, spunta dietro l'horse
-- sistema di punteggio highscore
-- la distanza della camera dall'horse sull'asse x dovrebbe diventare proporzionale rispetto alla stamina dell'horse: così posso spostare il gladio a fianco della biga e quando vado piano sono in mezzo allo 
-- "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
+- reset dei punti in caso di morte. direi di fare 1000 * area in cui mi trovo. 0 Roma, 1000 Apli, 2000 Sea, 3000 Greece, 4000 Desert, 4000 (?) Egypt
+- screen di Tutorial o Gioco!
+   
 - ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
-- Normal Mode vs Hard Mode
+- "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
+
+- Normal Mode vs Hard Mode (Hard Mode attivato in automatico dopo la prima RUN del gioco per visionare la true-ending?)
     normal mode
         rendere il tutorial opzionale Yes/No
     hard mode 

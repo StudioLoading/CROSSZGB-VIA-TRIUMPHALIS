@@ -10,17 +10,18 @@
 
 // Animation state enum
 typedef enum {
-    ANIM_GLADIO_DOWN = 0,
-    ANIM_GLADIO_HIDDEN,
+    ANIM_GLADIO_HIDDEN = 0,
+    ANIM_GLADIO_DOWN,
 	ANIM_GLADIO_UP,
 	ANIM_LANCE,
 	ANIM_FIRE,
+    ANIM_ENEMY_LANCE,
 	N_ANIMS
 } animation_weapon;
 
 // define the animation speed constant
-#define ANIMATION_WEAPON_SPEED      6
-#define ANIMATION_WEAPON_FRAMES     5
+#define ANIMATION_WEAPON_SPEED      10
+#define ANIMATION_WEAPON_FRAMES     4
 static animation_weapon old_anim_weapon, anim_weapon; 
 static UINT8 anim_weapon_frame, anim_weapon_tick;
 static UINT8 anim_weapon_speed;
@@ -35,6 +36,10 @@ extern UINT8 flag_using_atk;
 extern void item_common_start(Sprite* s_item_arg) BANKED;
 extern void item_common_update(Sprite* s_item_arg) BANKED;
 extern void item_common_spritescollision(Sprite* s_item_arg) BANKED;
+extern void item_e_lance_anim(Sprite* s_item_arg) BANKED;
+extern void consume_weapon_atk(void) BANKED;
+extern Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
+
 
 typedef struct {
     UINT8 active;
@@ -54,6 +59,7 @@ Projectile boccetta = {0};
 
 extern INT8 vx;
 extern INT8 vy;
+extern INT8 flag_hit;
 
 void update_boccetta(Sprite* arg_s_boccetta) BANKED;
 void lancia_boccetta(INT8 arg_horse_vx, INT8 arg_horse_vy) BANKED;
@@ -98,13 +104,19 @@ void weapon_update_anim(Sprite* arg_s_weapon) BANKED{
             anim_weapon = ANIM_FIRE;
             arg_s_weapon->mirror = s_horse->mirror;
         break;
+        case ENEMY_LANCE:
+            anim_weapon_tick = 0;
+            anim_weapon = ANIM_ENEMY_LANCE;
+        break;
     }
 }
 
 void UPDATE(void) {
     UINT8 one_cycle_anim_completed = 0u;
     struct ItemData* item_data = (struct ItemData*) THIS->custom_data;
-
+    if(item_data && item_data->configured < 3){
+        return;
+    }
     //CROSSZGB
         // save old animation state, animation state to idle (will be overwritten, if keys are pressed)
         old_anim_weapon = anim_weapon;
@@ -120,23 +132,85 @@ void UPDATE(void) {
             } 
         }
 
-    item_common_update(THIS);
+    //item_common_update(THIS);
     item_common_spritescollision(THIS);
     
     switch(item_data->configured){
+        case 3://using the weapon!
+            switch(item_data->itemtype){
+                case GLADIO:
+                    anim_weapon_frame = 0;
+                    weapon_update_anim(THIS);
+                    item_data->hp = 80;
+                    if(vx > 0){ item_data->vx = 1;}
+                    else if(vx < 0) {item_data->vx = -1;}
+                    item_data->vy = 0;
+                break;
+                case FLAME:
+                    weapon_update_anim(THIS);
+                break;
+                case LANCE:
+                    weapon_update_anim(THIS);
+                    item_data->vx = vx;
+                    if(vx == 0){
+                        if(s_horse->mirror == NO_MIRROR){
+                            item_data->vx = 1;
+                        }else{
+                            item_data->vx = -1;
+                        }
+                    }
+                    item_data->vy = 0;
+                break;
+                case ENEMY_LANCE:
+                    weapon_update_anim(THIS);
+                break;
+            }
+            item_data->configured = 4;
         case 4: //in use
+            switch(item_data->itemtype){
+                case GLADIO:{
+                    if(one_cycle_anim_completed){
+                        flag_using_atk = 0u;
+                        SpriteManagerRemoveSprite(THIS);
+                    }
+                    UINT16 attack_x = s_horse->x + 8;
+                    UINT16 attack_y = s_horse->y + 8;
+                    if(s_horse->mirror == V_MIRROR){
+                        attack_y = s_horse->y - 20;
+                        attack_x = s_horse->x - 4;
+                    }
+                    THIS->x = attack_x;
+                    THIS->y = attack_y;
+                }break;
+                case FLAME:
+                    update_boccetta(THIS);
+                break;
+                case LANCE:
+                case ENEMY_LANCE:{
+                    UINT8 lance_tile_coll = TranslateSprite(THIS, item_data->vx << delta_time, item_data->vy << delta_time);
+                    if(lance_tile_coll){
+                        item_data->configured = 5;
+                    }
+                }break;
+            }
+        break;
+        case 5:
             switch(item_data->itemtype){
                 case GLADIO:
                     if(one_cycle_anim_completed){
                         flag_using_atk = 0u;
                         SpriteManagerRemoveSprite(THIS);
                     }
+                    consume_weapon_atk();
                 break;
-                case FLAME:
-                    update_boccetta(THIS);
+                case LANCE:
+                    consume_weapon_atk();
+                break;
+                case ENEMY_LANCE:
+                    SpriteManagerRemoveSprite(THIS);
                 break;
             }
-        break;
+            item_data->configured = 6;
         case 6:
             switch(item_data->itemtype){
                 case GLADIO:
@@ -144,6 +218,10 @@ void UPDATE(void) {
                         flag_using_atk = 0u;
                         SpriteManagerRemoveSprite(THIS);
                     }
+                break;
+                case LANCE:
+                case ENEMY_LANCE:
+                    SpriteManagerRemoveSprite(THIS);
                 break;
             }
         break;
@@ -225,6 +303,12 @@ void DESTROY(void) {
             struct FlameData* fire_data = (struct FlameData*) s_fire->custom_data;
             fire_data->hp = 100;
             fire_data->dropped = 1;
+        break;
+        case ENEMY_LANCE:
+            SpriteManagerAdd(SpritePuff, THIS->x - 4u, THIS->y - 4u);
+            if(flag_hit == 0){
+                spawn_points(ELANCE_DODGED, 10u, THIS->x, THIS->y - 12u);
+            }
         break;
     }
 }

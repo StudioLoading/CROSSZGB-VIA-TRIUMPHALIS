@@ -110,6 +110,7 @@ extern MISSION_STEP current_step;
 extern struct CONFIGURATION configuration;
 extern INT8 flag_die;
 extern INT16 pharanonet_caught_timer;
+extern INT8 pickedup_use_cooldown;
 
 extern void update_hp(INT8 variation) BANKED;
 extern void use_weapon(INT8 is_defence) BANKED;
@@ -120,6 +121,7 @@ extern void spawn_items_onmap(void) BANKED;
 extern void spawn_dust(UINT8 arg_force) BANKED;
 extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 extern void start_show_hit_on_screen(void) BANKED;
+extern Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
 
 /* velocity_counter in realtà è la velocità assoluta */
 
@@ -166,6 +168,9 @@ void UPDATE(void){
         }
 
     //ATTACK
+        if(pickedup_use_cooldown > 0){
+            pickedup_use_cooldown--;
+        }
         if(KEY_TICKED(J_ATK)){
             if(weapon_atk != NONE){
                 use_weapon(0);
@@ -439,17 +444,17 @@ void UPDATE(void){
                         track_ended = is_track_ended();
                         if(current_state == StateTutorialGame){
                             track_ended = 1u;
-                        }
-                    }else{
-                        past_coll_tile = horse_coll;
-                        INT8 vxbounce = vx * (-1); 
-                        INT8 vybounce = vy * (-1);
-                        if(vx < 2){
-                            TranslateSprite(THIS, vxbounce << delta_time, 0);
                         }else{
-                            TranslateSprite(THIS, 0, vybounce << delta_time);
+                            past_coll_tile = horse_coll;
+                            INT8 vxbounce = vx * (-1); 
+                            INT8 vybounce = vy * (-1);
+                            if(vx < 2){
+                                TranslateSprite(THIS, vxbounce << delta_time, 0);
+                            }else{
+                                TranslateSprite(THIS, 0, vybounce << delta_time);
+                            }
                         }
-                    }
+                    }   
             //OVER TILE
                 }else{//non collido, cerco cosa sto calpestando
                     UINT8 tile_over = GetScrollTile((THIS->x + 4) >> 3, (THIS->y+4) >> 3);
@@ -596,9 +601,9 @@ void UPDATE(void){
                         if(weapon_def == SHIELD){
                             use_weapon(1);
                             counter_hit = COUNTER_HIT_MAX;
-                        }else if(flag_hit == 0 && counter_hit == 0){
+                        }else if(flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;
-                            if(soldier_data->configured < 4 && flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
+                            if(soldier_data->configured < 4){
                                 add_points(BY_ENEMY_HIT, -50);
                                 horse_hit(-8);
                             }
@@ -633,6 +638,7 @@ void UPDATE(void){
                                         case 2: barbarianshield_data->configured = 5; break;
                                     }
                                 }
+                                spawn_points(ENEMY_KILLED, 50u, iospr->x, iospr->y);
                                 stamina_current -= 140;
                             }else if(flag_bouncing == 0){//rimbalza
                                 if(stamina_current < 200){ stamina_current = 200;}

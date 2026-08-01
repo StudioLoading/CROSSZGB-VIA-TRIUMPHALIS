@@ -108,12 +108,13 @@ void UPDATE(void){
             s_horse->x = 40u;
         }
     //UPDATE TIME
-        update_time();
-        time_current--;
-        if(time_current < 0 && !track_ended){
-            die();
-        }
-    
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
+        }    
     //CONTINUOUS SPAWNING WEAPON
         if(s_spawning_weapon == 0){
             spawning_weapon_counter++;

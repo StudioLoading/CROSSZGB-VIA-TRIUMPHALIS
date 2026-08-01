@@ -12,13 +12,13 @@
 #include "Dialogs.h"
 #include "custom_datas.h"
 
-#define TIME_MAX_MISSIONSEE08 960 //32 fattore 1, 320 fattore 10, 640 fattore 20, ...
-#define TIME_FACTOR_MISSIONSEE08 30
+#define TIME_MAX_MISSIONSEE08 1280 //32 fattore 1, 320 fattore 10, 640 fattore 20, ...
+#define TIME_FACTOR_MISSIONSEE08 40
 
 IMPORT_MAP(hudm);
 IMPORT_MAP(mapmission08);
 
-const UINT8 coll_m08_tiles[] = {15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 63, 64, 68, 69, 70, 75, 76, 77, 78, 79, 80, 81, 82, 85, 86, 90, 91, 93, 95, 96, 97, 98, 99, 102, 103, 104, 105, 106, 114, 118, 119, 121, 0};
+const UINT8 coll_m08_tiles[] = {15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 63, 64, 68, 69, 70, 75, 76, 77, 78, 79, 80, 81, 82, 85, 86, 90, 91, 93, 95, 96, 97, 98, 99, 102, 103, 104, 105, 106, 114, 118, 119, 120, 121, 0};
 
 const UINT8 coll_m08_surface[] = {0u, 0};
 
@@ -99,10 +99,12 @@ void UPDATE(void){
             s_horse->x = 24u;
         }
     //UPDATE TIME
-        update_time();
-        time_current--;
-        if(time_current < 0 && !mission_completed && !track_ended){
-            die();
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
         }
      //IS MISSION COMPLETED?
         if(mission_completed && track_ended){

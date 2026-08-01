@@ -100,10 +100,12 @@ void UPDATE(void){
         if(s_horse->y < ((UINT16) 1u << 3)){ s_horse->y = ((UINT16) 1u << 3); }
         if(s_horse->y > ((UINT16) 22u << 3)){ s_horse->y = ((UINT16) 22u << 3); }
     //UPDATE TIME
-        update_time();
-        time_current--;
-        if(time_current < 0 && !mission_completed && !track_ended){
-            die();
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
         }
     //MISSION STEP
         if(current_step == SENATOR_COLLIDED){

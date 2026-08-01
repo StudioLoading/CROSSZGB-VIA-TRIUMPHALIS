@@ -95,10 +95,12 @@ void UPDATE(void){
             spawned_greeks_flag = 1u;
         }
     //UPDATE TIME
-        update_time();
-        time_current--;
-        if(time_current < 0 && !(mission_completed && track_ended)){
-            die();
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
         }
     //IS MISSION COMPLETED?
         if(mission_completed && track_ended){

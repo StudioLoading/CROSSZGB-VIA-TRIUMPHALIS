@@ -12,8 +12,8 @@
 #include "Dialogs.h"
 #include "custom_datas.h"
 
-#define TIME_MAX_MISSION13 960 //32 fattore 1, 320 fattore 10, 640 fattore 20, ...
-#define TIME_FACTOR_MISSION13 30
+#define TIME_MAX_MISSION13 1088 //32 fattore 1, 320 fattore 10, 640 fattore 20, ...
+#define TIME_FACTOR_MISSION13 34
 
 IMPORT_MAP(hudm);
 IMPORT_MAP(mapmission13);
@@ -86,7 +86,6 @@ void START(void){
         s_horse = SpriteManagerAdd(SpriteHorse, pos_horse_x, pos_horse_y);
         s_compass = SpriteManagerAdd(SpriteCompass, pos_horse_x, pos_horse_y);
     //COMMONS & START
-        flag_night_mode = 0;
         night_mode();
         InitScroll(BANK(mapmission13), &mapmission13, coll_m13_tiles, coll_m13_surface);
 		INIT_HUD(hudm);
@@ -109,10 +108,12 @@ void UPDATE(void){
             m13_spawned_greeks_flag = 1u;
         }
     //UPDATE TIME
-        update_time();
-        time_current--;
-        if(time_current < 0 && !(mission_completed && track_ended)){
-            die();
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
         }
     //MISSION STEPS
         if(current_step == SENATOR_COLLIDED){

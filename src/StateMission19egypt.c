@@ -105,10 +105,12 @@ void UPDATE(void){
             s_horse->x = 40u;
         }
     //UPDATE TIME
-        update_time();
-        time_current--;
-        if(time_current < 0 && !track_ended){
-            die();
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
         }
     //MISSION STEP
         if(current_step == SENATOR_COLLIDED){

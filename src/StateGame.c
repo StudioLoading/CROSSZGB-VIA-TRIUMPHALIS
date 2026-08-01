@@ -100,6 +100,8 @@ extern INT8 flag_danger_right, flag_danger_left, flag_danger_up, flag_danger_dow
 extern INT8 die_counter;
 extern INT8 counter_danger;
 extern INT8 flag_hit;
+extern UINT8 flag_night_mode;
+
 extern void die(void) BANKED;
 extern void set_bgm(void) BANKED;
 extern void init_enemies_map(void) BANKED;
@@ -117,7 +119,8 @@ void start_common(void) BANKED{
 	euphoria_max_current = euphoria_max;
 	hud_turn_cooldown = 0;
 	update_euphoria();
-	track_ended = 0;
+	track_ended = 0u;
+	flag_night_mode = 0;
 	track_ended_cooldown = ENDED_TRACK_COOLDOWN;
 	if(mission_iscrono){
 		time_current = time_to_load;

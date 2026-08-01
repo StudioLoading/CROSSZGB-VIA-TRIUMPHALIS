@@ -130,7 +130,7 @@ void UPDATE(void){
                         }
                     }break;
                     case SpriteMarcushorse:
-                        track_ended = 1;
+                        track_ended = 1u;
                         mission_completed = 1;
                     break;
                 }

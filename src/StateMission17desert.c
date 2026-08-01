@@ -34,7 +34,6 @@ extern INT8 mission_completed;
 extern INT8 flag_golden_found;
 extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
-extern INT16 time_current;
 extern INT16 timemax_current;
 extern INT16 time_factor;
 extern INT16 time_to_load;

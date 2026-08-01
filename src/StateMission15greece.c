@@ -94,10 +94,13 @@ void UPDATE(void){
     //COMMON UPDATE
         update_common();    
     //UPDATE TIME
-        /*update_time();
-        time_current--;
-        if(time_current < 0 && !mission_completed && !track_ended){
-            die();
+        /*
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
         }*/
     //CONTINUOUS SPAWNING WEAPON
         /*if(s_spawning_weapon == 0){

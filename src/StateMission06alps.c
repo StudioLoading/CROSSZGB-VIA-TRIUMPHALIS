@@ -23,7 +23,7 @@
 IMPORT_MAP(hudm);
 IMPORT_MAP(mapmission06);
 
-const UINT8 coll_m06_tiles[] = {15, 16, 17, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 102, 103, 104, 105, 106, 114, 118, 119, 121, 0};
+const UINT8 coll_m06_tiles[] = {15, 16, 17, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 102, 103, 104, 105, 106, 114, 118, 119, 120, 121, 0};
 
 const UINT8 coll_m06_surface[] = {0u, 0};
 
@@ -56,7 +56,6 @@ extern INT8 mission_completed;
 extern INT8 flag_golden_found;
 extern MirrorMode mirror_horse;
 extern UINT8 turn_to_load;
-extern INT16 time_current;
 extern INT16 timemax_current;
 extern INT16 time_factor;
 extern INT16 time_to_load;
@@ -170,10 +169,13 @@ void UPDATE(void){
             }
         }
     //UPDATE TIME
-        /*update_time();
-        time_current--;
-        if(time_current < 0 && !mission_completed && !track_ended){
-            die();
+        /*
+        if(!track_ended){
+            update_time();
+            time_current--;
+            if(time_current < 0){
+                die();
+            }
         }*/   
     //MISSION STEP
         /*if(current_step == SENATOR_COLLIDED){

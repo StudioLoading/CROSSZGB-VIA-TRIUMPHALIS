@@ -26,7 +26,6 @@ void item_spawn_continuously(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg
 extern void weapon_update_anim(Sprite* arg_s_weapon) BANKED;
 
 extern void hit_fantoccio(Sprite* s_fantoccio_arg) BANKED;
-extern void consume_weapon_atk(void) BANKED;
 extern void consume_weapon_def(void) BANKED;
 extern void horse_hit(INT8 arg_damage) BANKED;
 
@@ -62,7 +61,6 @@ extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
 
 void item_common_start(Sprite* s_item_arg) BANKED{
 	struct ItemData* item_data = (struct ItemData*) s_item_arg->custom_data;
-    item_data->configured = 0;
     s_item_arg->lim_x = 6000;
     s_item_arg->lim_y = 4000;
     if(_cpu != CGB_TYPE){
@@ -123,28 +121,6 @@ void item_common_update(Sprite* s_item_arg) BANKED{
         break;
         case 3://using the weapon!
             switch(item_data->itemtype){
-                case GLADIO:
-                    weapon_update_anim(s_item_arg);
-                    item_data->hp = 80;
-                    if(vx > 0){ item_data->vx = 1;}
-                    else if(vx < 0) {item_data->vx = -1;}
-                    item_data->vy = 0;
-                break;
-                case LANCE:
-                    weapon_update_anim(s_item_arg);
-                    item_data->vx = vx;
-                    if(vx == 0){
-                        if(s_horse->mirror == NO_MIRROR){
-                            item_data->vx = 1;
-                        }else{
-                            item_data->vx = -1;
-                        }
-                    }
-                    item_data->vy = 0;
-                break;
-                case FLAME:
-                    weapon_update_anim(s_item_arg);
-                break;
                 case ELMET:
                     item_elmet_anim_blink(s_item_arg);
                     item_data->hp = 80;
@@ -156,12 +132,6 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                 case CAPE:
                     item_cape_anim_blink(s_item_arg);
                     item_data->hp = 80;
-                break;
-                case ENEMY_LANCE:
-                    item_e_lance_anim(s_item_arg);
-                    if(item_data->vy < 0){
-                        s_item_arg->mirror = H_MIRROR;
-                    }
                 break;
             }
             item_data->configured = 4;
@@ -179,50 +149,13 @@ void item_common_update(Sprite* s_item_arg) BANKED{
                         SpriteManagerRemoveSprite(s_item_arg);
                     }
                 break;
-                case LANCE:
-                case ENEMY_LANCE:{
-                    UINT8 lance_tile_coll = TranslateSprite(s_item_arg, item_data->vx << delta_time, item_data->vy << delta_time);
-                    if(lance_tile_coll){
-                        item_data->configured = 5;
-                    }
-                }break;
-                case GLADIO:{
-                    UINT16 attack_x = s_horse->x + 8;
-                    UINT16 attack_y = s_horse->y + 8;
-                    if(s_horse->mirror == V_MIRROR){
-                        attack_y = s_horse->y - 20;
-                        attack_x = s_horse->x - 4;
-                    }
-                    s_item_arg->x = attack_x;
-                    s_item_arg->y = attack_y;
-                }break;
             }
         break;
         case 5://weapon start dieing
-            switch(item_data->itemtype){
-                case GLADIO:
-                    consume_weapon_atk();
-                break;
-                case LANCE:
-                    consume_weapon_atk();
-                break;
-                case ENEMY_LANCE:
-                    SpriteManagerRemoveSprite(s_item_arg);
-                break;
-            }
-            //item_data->hp = 20;
             item_data->configured = 6;
-        break;
         case 6://weapon dieing
             if(item_data->flag_continuous_spawning == 1){
                 s_spawning_weapon = 0;
-            }
-            switch(item_data->itemtype){
-                //case GLADIO: deleted in SpriteWeapon UPDATE() CROSSZGB block
-                case LANCE:
-                case ENEMY_LANCE:
-                    SpriteManagerRemoveSprite(s_item_arg);
-                break;
             }
         break;
     }
@@ -302,7 +235,7 @@ void item_common_spritescollision(Sprite* s_item_arg) BANKED{
                     struct ItemData* weapon_data = (struct ItemData*) s_item_arg->custom_data;
                     if(weapon_data->itemtype == ENEMY_LANCE){
                         SpriteManagerRemoveSprite(s_item_arg);
-                        add_points(BY_ELANCE_HIT, -20);
+                        add_points(BY_ELANCE_HIT, -50);
                         horse_hit(-8);
                     }
                 }break;

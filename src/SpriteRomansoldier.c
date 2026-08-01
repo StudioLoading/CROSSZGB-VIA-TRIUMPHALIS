@@ -102,11 +102,11 @@ void UPDATE(void){
 
 void DESTROY(void){
     struct SoldierData* soldier_data = (struct SoldierData*) THIS->custom_data;
-    if(soldier_data->reward != NOITEM){
-        item_spawn(soldier_data->reward, THIS->x + 2u, THIS->y);
-    }
-    SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
     if(soldier_data->configured == 5){
+        if(soldier_data->reward != NOITEM){
+            item_spawn(soldier_data->reward, THIS->x + 2u, THIS->y);
+        }
+        SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
         spawn_points(ENEMY_KILLED, soldier_data->points, THIS->x, THIS->y);
     }
 }

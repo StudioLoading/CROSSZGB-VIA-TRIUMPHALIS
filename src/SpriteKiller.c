@@ -37,7 +37,7 @@ void UPDATE(void){
             if(killer_data->timeout <= 0){
                 killer_data->timeout = killer_data->time_visible;
                 SetSpriteAnim(THIS, a_killer_v, 32u);
-                Sprite* s_killer_weapon = SpriteManagerAdd(SpriteEitemlance, THIS->x, THIS->y + 14);
+                Sprite* s_killer_weapon = SpriteManagerAdd(SpriteWeapon, THIS->x, THIS->y + 14);
                 struct ItemData* killer_weapon_data = (struct ItemData*) s_killer_weapon->custom_data;
                 killer_weapon_data->itemtype = ENEMY_LANCE;
                 killer_weapon_data->vx = 0;

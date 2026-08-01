@@ -43,6 +43,7 @@ static const palette_color_t palette_data_desert_02[] = {RGB(14,7,1),RGB(0,0,0),
 UINT8 flag_night_mode = 0u;
 UINT8 flag_border_set = 0u;
 INT16 hit_on_screen_countdown = 0u;
+INT8 pickedup_use_cooldown = 30u;
 
 void die(void) BANKED;
 void spawn_items(void) BANKED;
@@ -379,6 +380,7 @@ void pickup(Sprite* s_arg_item) BANKED{
 			if(flag_using_atk){ return; }
             weapon_atk = item_data->itemtype;
 			flag_using_atk = 0;
+			pickedup_use_cooldown = 30u;
             update_weapon();
         break;
         case ELMET: case SHIELD: case CAPE:

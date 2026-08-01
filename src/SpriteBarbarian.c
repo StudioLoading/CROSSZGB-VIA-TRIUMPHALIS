@@ -15,6 +15,7 @@ const UINT8 a_barbarian_u[] = {2, 3,4};
 
 extern UINT8 mission_killed;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
+extern Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
 
 void START(void){
     SetSpriteAnim(THIS, a_barbarian_h, 8u);
@@ -104,8 +105,11 @@ void UPDATE(void){
 
 void DESTROY(void){    
     struct SoldierData* barbarian_data = (struct SoldierData*) THIS->custom_data;
-    if(barbarian_data->reward != NOITEM){
-        item_spawn(barbarian_data->reward, THIS->x + 2u, THIS->y);
+    if(barbarian_data->configured == 5){
+        if(barbarian_data->reward != NOITEM){
+            item_spawn(barbarian_data->reward, THIS->x + 2u, THIS->y);
+        }
+        SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
+        spawn_points(ENEMY_KILLED, barbarian_data->points, THIS->x, THIS->y);
     }
-    SpriteManagerAdd(SpritePuff, THIS->x, THIS->y);
 }

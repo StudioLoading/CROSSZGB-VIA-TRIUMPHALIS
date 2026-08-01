@@ -36,6 +36,7 @@ extern UINT16 current_points;
 
 void move_to_mission_completed_papyrus(void) BANKED;
 void calculate_mission_points(void) BANKED;
+void write_current_points() BANKED;
 
 INT16 current_offset = 60;
 INT8 current_point_idx = -1;
@@ -51,6 +52,7 @@ void START(void){
 	calculate_mission_points();
 	current_offset = 60;
 	current_point_idx = -1;
+	write_current_points();
 	showing_points = 1u;
 }
 
@@ -67,16 +69,21 @@ void UPDATE(void){
 				}
 			break;
 			default:
-				if(current_level_points[current_point_idx].points && current_offset < current_level_points[current_point_idx].points){
-					current_offset++;
+				if(current_level_points[current_point_idx].points && current_offset != current_level_points[current_point_idx].points){
+					if(current_level_points[current_point_idx].points > 0 && current_offset < current_level_points[current_point_idx].points){
+						current_offset++;
+					}else if(current_level_points[current_point_idx].points < 0 && current_offset > current_level_points[current_point_idx].points){
+						current_offset--;
+					}
 					UINT8 points_offset = 3;
 					if(KEY_TICKED(J_A) || KEY_TICKED(J_B)){
 						current_offset = current_level_points[current_point_idx].points;
 					}
-					if(current_offset > 999){ points_offset = 0;}
-					else if(current_offset > 99){ points_offset = 1;}
-					else if(current_offset > 9){ points_offset = 2;}
-					PRINT(15+points_offset, current_point_idx+1, "%u", current_offset);
+					INT16 showing_offset = current_offset < 0 ? -current_offset : current_offset;
+					if(showing_offset > 999){ points_offset = 0;}
+					else if(showing_offset > 99){ points_offset = 1;}
+					else if(showing_offset > 9){ points_offset = 2;}
+					PRINT(15+points_offset, current_point_idx+1, "%u", showing_offset);
 				}else{
 					switch(current_point_idx){
 						case 0: PRINT(1, 2, "PICKUP HP    -"); break;
@@ -89,14 +96,18 @@ void UPDATE(void){
 						case 7: PRINT(1, 9, "HIT BY LANCE -"); break;
 					}
 					PRINT(15, current_point_idx+2, "0000");
-					current_points += current_offset;
 					current_point_idx++;
 					current_offset = 0;
 				}
 			break;
 			case 8:
-				UINT16 current_points_to_show = get_points();
-				PRINT(1, 13, "%u", current_points_to_show);
+				for(INT8 idx=0; idx < 8;idx++){
+					current_points += current_level_points[idx].points;
+					if(current_points < 0){
+						current_points = 0;
+					}
+				}
+				write_current_points();
 				showing_points = 0u;
 			break;
 		}
@@ -105,6 +116,27 @@ void UPDATE(void){
 			move_to_mission_completed_papyrus();
 		}
 	}
+}
+
+void write_current_points() BANKED{
+	INT8 points_x = 1;
+	if(current_points > 99999){
+		PRINT(1, 13, "0");
+		points_x = 2;
+	}else if(current_points > 9999){
+		PRINT(1, 13, "00");
+		points_x = 3;
+	}else if(current_points > 999){
+		PRINT(1, 13, "000");
+		points_x = 4;
+	}else if(current_points > 99){
+		PRINT(1, 13, "0000");
+		points_x = 5;
+	}else{
+		PRINT(1, 13, "0000000");
+		points_x = 6;
+	}
+	PRINT(points_x, 13, "%u", current_points);
 }
 
 void calculate_mission_points(void) BANKED{
@@ -117,7 +149,6 @@ void calculate_mission_points(void) BANKED{
 }
 
 void move_to_mission_completed_papyrus(void) BANKED{
-	flag_night_mode = 0;//RESET
 	turn_to_load = horse_turn;//missione successiva comincia nello stesso verso di dove finisce missione corrente
 	INSTRUCTION instruction_to_give = 0;
 	switch(current_mission){
