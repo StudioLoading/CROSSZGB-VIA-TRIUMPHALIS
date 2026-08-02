@@ -512,7 +512,7 @@ void UPDATE(void){
                                 }
                             }else{orme_spawned = 0;}
                         break;
-                        case 120: case 121: case 124: case 125: // SKULL teschio!
+                        case 122: case 123: case 124: case 125: // SKULL teschio!
                             if(stamina_current > 100){
                                 stamina_current-=30;
                             }

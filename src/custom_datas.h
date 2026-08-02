@@ -206,6 +206,7 @@ typedef enum{
     BY_ENEMY_HIT,
     BY_SKULL_HIT,
     BY_ELANCE_HIT,
+    LAST_AREA
 }POINTS_TYPE;
 
 struct LEVEL_POINTS{

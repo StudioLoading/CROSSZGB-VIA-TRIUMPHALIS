@@ -34,7 +34,7 @@ MISSION current_mission = MISSIONROME00;
 INT8 world_area_map = 0;//0=worldmap, 1=areamap
 TUTORIAL_STAGE tutorial_state = TUTORIAL_STAGE_0_STRAIGHT;//TUTORIAL_STAGE_0_STRAIGHT
 
-void start_game(void) BANKED;
+void start_game(UINT8 arg_game_or_tutorial) BANKED;
 void start_game_cheat(AREA arg_cheat_area) BANKED;
 
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
@@ -52,9 +52,13 @@ void start_game_cheat(AREA arg_cheat_area) BANKED{
     SetState(StateWorldmap);
 }
 
-void start_game(void) BANKED{
-    SetState(StateTutorialList);
-	manage_border(current_state);
+void start_game(UINT8 arg_game_or_tutorial) BANKED{
+    if(arg_game_or_tutorial == 1){
+        SetState(StateTutorialList);
+    }else{
+        SetState(StateWorldmap);
+    }
+    manage_border(current_state);
 }
 
 void START(void){

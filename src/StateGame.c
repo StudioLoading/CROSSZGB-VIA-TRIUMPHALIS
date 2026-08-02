@@ -448,7 +448,11 @@ void use_weapon(INT8 is_defence) BANKED{
 		}
 		switch(weapon_atk){
 			case FLAME:
-				lancia_boccetta(vx, vy);
+				if(stamina_current > euphoria_min && stamina_current < euphoria_max){
+					lancia_boccetta(vx, vy);
+				}else{
+					lancia_boccetta(0, vy);
+				}
 			case LANCE:
 				consume_weapon_atk();
 			break;

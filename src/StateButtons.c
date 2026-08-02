@@ -19,7 +19,7 @@
 IMPORT_MAP(buttonmap);
 IMPORT_TILES(font);
 
-extern void start_game(void) BANKED;
+extern void start_game(UINT8 arg_game_or_tutorial) BANKED;
 extern void start_game_cheat(AREA arg_cheat_area) BANKED;
 
 UINT8 pressed_up_down = 0u;
@@ -29,7 +29,7 @@ UINT8 pressed_a = 0u;
 UINT8 pressed_b = 0u;
 UINT8 press_start = 0u;
 INT8 press_start_counter = 0;
-
+UINT8 game_or_tutorial = 0u;
 
 extern UINT8 cheat_activated;
 extern AREA cheat_area;
@@ -101,7 +101,7 @@ void UPDATE(void){
     }
     if(KEY_TICKED(J_START)){
         if(press_start){
-            start_game();
+            start_game(game_or_tutorial);
         }
         if(cheat_activated){
             start_game_cheat(cheat_area);

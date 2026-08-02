@@ -36,6 +36,7 @@ AREA current_area = AREA_ROME;
 extern AREA current_area;
 extern UINT8 stop_music_on_new_state;
 extern TUTORIAL_STAGE tutorial_state;
+extern UINT8 game_or_tutorial;
 
 extern void manage_border(UINT8 my_next_state) BANKED;
 extern void set_bgm(void) BANKED;
@@ -72,6 +73,7 @@ void START(void){
             cheat_activated = 0u;
             cheat_area = 0u;
             InitScroll(BANK(titlescreen), &titlescreen, 0, 0);
+            scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 72u);
         break;
     }
     set_bgm();
@@ -139,18 +141,40 @@ void UPDATE(void){
                 }
             }
         }
-    if(credit_step < 5 && (credit_wait <= 0 || KEY_TICKED(J_START))){
-        credit_step++;
-        SetState(StateCredit);
-    }else if(credit_step == 5 && KEY_TICKED(J_START)){
-        if(cheat_activated){
-            current_area = cheat_area;
-            start_game_cheat(cheat_area);
-            return;
-        }else{
-            SetState(StateButtons);
+        if(credit_step < 5 && (credit_wait <= 0 || KEY_TICKED(J_START))){
+            credit_step++;
+            SetState(StateCredit);
+        }else if(credit_step == 5 && KEY_TICKED(J_START)){
+            if(cheat_activated){
+                current_area = cheat_area;
+                start_game_cheat(cheat_area);
+                return;
+            }else{
+                credit_step = 6;
+            }
+        }else if(credit_step == 6){
+            if(scroll_target->x < 240u){
+                scroll_target->x += 4;
+            }else{
+                scroll_target->x = 240u;
+                INT8 shift_x = 20;
+                PRINT(shift_x+1,  4, "PRESS   BEGIN");
+                PRINT(shift_x+1,  5, "START   YOUR ");
+                PRINT(shift_x+1,  6, "        ADVENTURE");
+                PRINT(shift_x+1, 10, "PRESS   LEARN");
+                PRINT(shift_x+1, 11, "SELECT  HOW TO");
+                PRINT(shift_x+1, 12, "        DRIVE");
+                credit_step = 7;
+            }
+        }else if(credit_step == 7){
+            if(KEY_TICKED(J_START)){
+                game_or_tutorial = 0;
+                SetState(StateButtons);
+            }else if(KEY_TICKED(J_SELECT)){
+                game_or_tutorial = 1;
+                SetState(StateButtons);            
+            }
         }
-    }
     //ANIMATIONS & CAMERA MOVEMENTS
         switch(credit_step){
             case 4:

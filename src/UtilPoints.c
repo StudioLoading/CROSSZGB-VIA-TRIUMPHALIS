@@ -12,7 +12,7 @@ UINT16 get_points(void) BANKED;
 Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT16 arg_x, UINT16 arg_y) BANKED;
 void init_current_level_points(void) BANKED;
 
-#define NUM_POINTS_TYPES 9
+#define NUM_POINTS_TYPES 10
 
 struct LEVEL_POINTS current_level_points[NUM_POINTS_TYPES] = {
     {PICKUP_GOLDEN,   0},
@@ -23,7 +23,8 @@ struct LEVEL_POINTS current_level_points[NUM_POINTS_TYPES] = {
     {TIME_REMAINED,   0},
     {BY_ENEMY_HIT,    0},
     {BY_SKULL_HIT,    0},
-    {BY_ELANCE_HIT,   0}
+    {BY_ELANCE_HIT,   0},
+    {LAST_AREA,       0}
 };
 
 void init_current_level_points(void) BANKED{
@@ -40,7 +41,6 @@ void init_current_level_points(void) BANKED{
 
 UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED{
     current_level_points[arg_points_type].points += arg_points;
-    //current_points = current_points + arg_points;
     return current_points;
 }
 

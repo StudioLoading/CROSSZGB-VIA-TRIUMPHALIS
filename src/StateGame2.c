@@ -79,6 +79,8 @@ extern INT8 mission_completed;
 extern Sprite* s_spawning_weapon;
 extern UINT8 flag_using_atk;
 extern INT8 flag_hit;
+extern UINT16 current_points;
+extern struct LEVEL_POINTS current_level_points[];
 
 extern void update_hp(INT8 variation) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
@@ -223,6 +225,7 @@ void die(void) BANKED{
 			current_mission = MISSIONEGYPT19; 
 		break;
 	}
+	current_points = current_level_points[LAST_AREA].points;
 	world_area_map = 0;
 	flag_night_mode = 0;//RESET
 	update_hp(16);
@@ -398,7 +401,7 @@ void pickup(Sprite* s_arg_item) BANKED{
         case GOLDEN_WHEEL:
         case GOLDEN_WHIP:
         case GOLDEN_REINS:
-			add_points(PICKUP_GOLDEN, 50);
+			add_points(PICKUP_GOLDEN, 500);
             pickup_config(item_data->itemtype);
         break;
         case PAPYRUS:

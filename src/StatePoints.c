@@ -101,12 +101,18 @@ void UPDATE(void){
 				}
 			break;
 			case 8:
+				INT16 partial_counter = 0;
 				for(INT8 idx=0; idx < 8;idx++){
-					current_points += current_level_points[idx].points;
-					if(current_points < 0){
-						current_points = 0;
-					}
+					partial_counter += current_level_points[idx].points;
 				}
+				if(partial_counter < 0){
+					INT16 current_signed = (INT16)current_points;
+					current_signed += partial_counter;
+					if(current_signed < 0){//il ris finale sarebbe minore di zero!
+						partial_counter = 0;
+					} 	
+				}
+				current_points += partial_counter;
 				write_current_points();
 				showing_points = 0u;
 			break;
@@ -166,6 +172,7 @@ void move_to_mission_completed_papyrus(void) BANKED{
 		break;
 		case MISSIONROME03:
 			world_area_map = 0;
+			current_level_points[LAST_AREA].points = current_points;
 			current_area = AREA_ALPS;
 			instruction_to_give = MISSION03_COMPLETED;
 		break;
@@ -182,6 +189,7 @@ void move_to_mission_completed_papyrus(void) BANKED{
 		case MISSIONALPS07:
 			world_area_map = 0;
 			current_area = AREA_SEA;
+			current_level_points[LAST_AREA].points = current_points;
 			instruction_to_give = MISSION07_COMPLETED;
 		break;
 		case MISSIONSEA08: instruction_to_give = MISSION08_COMPLETED; break;
@@ -189,6 +197,7 @@ void move_to_mission_completed_papyrus(void) BANKED{
 		case MISSIONSEA10: instruction_to_give = MISSION10_COMPLETED; break;
 		case MISSIONSEA11: 
 			current_area = AREA_GREECE;
+			current_level_points[LAST_AREA].points = current_points;
 			instruction_to_give = MISSION11_COMPLETED;
 		break;
 		case MISSIONGREECE12: instruction_to_give = MISSION12_COMPLETED;break;
@@ -196,6 +205,7 @@ void move_to_mission_completed_papyrus(void) BANKED{
 		case MISSIONGREECE14: instruction_to_give = MISSION14_COMPLETED;break;
 		case MISSIONGREECE15: 
 			current_area = AREA_DESERT;
+			current_level_points[LAST_AREA].points = current_points;
 			instruction_to_give = MISSION15_COMPLETED;
 		break;
 		case MISSIONDESERT16: instruction_to_give = MISSION16_COMPLETED; break;
