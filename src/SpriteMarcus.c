@@ -94,19 +94,18 @@ void UPDATE(void){
                 if(marcus_coll){//collido con tile ambiente di collisione
                 
                 }else{
-            //OVERTILE
-                    UINT8 tile_over = GetScrollTile((THIS->x + 4) >> 3, (THIS->y+4) >> 3);
-                    if(vx < 0){
-                        tile_over = GetScrollTile((THIS->x + 4) >> 3, (THIS->y+4) >> 3);
-                    }
-                    switch(tile_over){
-                        case 8u: case 9u: case 10u: case 11u:
-                        case 12u: case 13u:
-                            update_hp_max();
-                        break;
-                    }
+                    //OVERTILE
+                        UINT8 tile_over = GetScrollTile((THIS->x + 4) >> 3, (THIS->y+4) >> 3);
+                        if(vx < 0){
+                            tile_over = GetScrollTile((THIS->x + 4) >> 3, (THIS->y+4) >> 3);
+                        }
+                        switch(tile_over){
+                            case 8u: case 9u: case 10u: case 11u:
+                            case 12u: case 13u:
+                                update_hp_max();
+                            break;
+                        }
                 }
-
         }
     //SPRITE MIRROR
         if(vx > 0){

@@ -91,7 +91,7 @@ void UPDATE(void){
         if(CheckCollision(THIS, phnetspr)) {
             switch(phnetspr->type){
                 case SpriteHorse:
-                    if(flag_using_atk && pharaonet_collided_flag == 0u){
+                    if(flag_using_atk == 0 && pharaonet_collided_flag == 0u){
                         pharaonet_collided_flag = 1u;
                     }
                 break;

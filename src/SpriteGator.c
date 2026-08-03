@@ -95,7 +95,7 @@ void UPDATE(void){
             gator_frmskip_max = GATOR_FRMSKIP_LOW;
         }
         if(pharao_data->status > 0){
-            return;
+            //return;
         }
     //SPEED ANIMATION ACCORDING TO gator_frmskip_max
         gator_frmskip_current++;

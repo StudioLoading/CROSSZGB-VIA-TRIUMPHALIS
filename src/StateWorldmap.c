@@ -40,7 +40,7 @@ void start_game_cheat(AREA arg_cheat_area) BANKED;
 extern void state_move_to_papyrus(INSTRUCTION arg_instruction_to_show, UINT8 arg_prev_state) BANKED;
 extern void manage_border(UINT8 my_next_state) BANKED;
 
-void start_game_cheat(AREA arg_cheat_area) BANKED{
+void start_game_cheat(AREA arg_cheat_area) BANKED{ //TODO fixme per versione finale
     switch(arg_cheat_area){
         case AREA_ROME: current_mission = MISSIONROME00; break;
         case AREA_ALPS: current_mission = MISSIONALPS04; break;

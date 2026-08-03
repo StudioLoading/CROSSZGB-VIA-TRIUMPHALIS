@@ -12,7 +12,7 @@
 #include "Dialogs.h"
 #include "custom_datas.h"
 
-#define TIME_MAX_MISSIONSEA16 120
+#define TIME_MAX_HIT_BY_WALK 160
 
 IMPORT_MAP(hudm);
 IMPORT_MAP(mapmission16);
@@ -60,7 +60,7 @@ extern void update_hp(INT8 variation) BANKED;
 
 void START(void){
     mission_iscrono = 0;
-    timemax_current = TIME_MAX_MISSIONSEA16;
+    timemax_current = TIME_MAX_HIT_BY_WALK;
     time_current = timemax_current;
     if(flag_golden_found == 1){//uso pos_horse_x per come l'ho salvata
         flag_golden_found = 0;

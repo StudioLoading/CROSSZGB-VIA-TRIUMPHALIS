@@ -1,7 +1,6 @@
 BUG:
-- reset dei punti in caso di morte. direi di fare 1000 * area in cui mi trovo. 0 Roma, 1000 Apli, 2000 Sea, 3000 Greece, 4000 Desert, 4000 (?) Egypt
-- screen di Tutorial o Gioco!
-   
+- greece15: problemi col boss che mi uccice. è come bloccato.
+
 - ultimo livello, boss finale del faraone, la scroll_target ogni tanto diventa la rete che il faraone lancia!
 - "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
 

@@ -70,6 +70,29 @@ const struct SpawningMapRect spawning_items_mission02[2] = {
         .type = 0
     }
 };
+const struct SpawningMapRect spawning_items_mission03[2] = {
+    {
+        .spawn_x = ((UINT16) 100u << 3),
+        .spawn_y = ((UINT16) 34u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 70u << 3),
+        .box_y = ((UINT16) 30u << 3),
+        .box_width =  ((UINT16) 20u << 3),
+        .box_height =  ((UINT16) 12u << 3),
+        .box_data.item = { .itemtype = TIME, .flag_continuous_spawning = 0 },
+        .type = 0
+    },{
+        .spawn_x = ((UINT16) 46u << 3),
+        .spawn_y = ((UINT16) 7u << 3),
+        .box_flag_spawned = 0u,
+        .box_x = ((UINT16) 49u << 3),
+        .box_y = ((UINT16) 4u << 3),
+        .box_width =  ((UINT16) 20u << 3),
+        .box_height =  ((UINT16) 10u << 3),
+        .box_data.item = { .itemtype = TIME, .flag_continuous_spawning = 0 },
+        .type = 0
+    }
+};
 const struct SpawningMapRect spawning_items_mission05[4] = {
     {
         .spawn_x = ((UINT16) 22u << 3),
@@ -542,6 +565,11 @@ void init_items_map(void) BANKED{
             current_spawning_items[1] = spawning_items_mission02[1];
             current_items_total_count = 2;
         break;
+        case StateMission03rome:
+            current_spawning_items[0] = spawning_items_mission03[0];
+            current_spawning_items[1] = spawning_items_mission03[1];
+            current_items_total_count = 2;
+        break;
         case StateMission05alps:
             current_spawning_items[0] = spawning_items_mission05[0];
             current_spawning_items[1] = spawning_items_mission05[1];
@@ -627,7 +655,6 @@ void init_items_map(void) BANKED{
         break;
     }
 }
-
 
 void spawn_items_onmap(void) BANKED {
     UINT16 current_horse_x = s_horse->x;
