@@ -31,7 +31,6 @@ void UPDATE(void){
     if(s_gator->mirror == V_MIRROR){
         dest_x = (INT16)s_gator->x + 28u;
     }
-    INT8 dest_y = (INT16)s_gator->y - 1u;
     if((INT16)THIS->x < dest_x){
         THIS->x++;
         if(_cpu != CGB_TYPE){
@@ -43,6 +42,7 @@ void UPDATE(void){
             THIS->x--;
         }
     }
+    INT16 dest_y = (INT16)s_gator->y - 1;
     if((INT16)THIS->y < dest_y){
         THIS->y++;
     }else if((INT16)THIS->y > dest_y){

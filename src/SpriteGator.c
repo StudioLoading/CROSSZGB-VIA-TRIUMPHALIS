@@ -11,22 +11,12 @@
 
 #define GATOR_FRMSKIP_LOW 4
 #define GATOR_FRMSKIP_MID 2
+#define GATOR_FRMSKIP_MAX 1
 #define SPEED 1
 
-typedef enum{
-    GATOR_STATUS_NONE,
-    GATOR_STATUS_WAIT,
-    GATOR_STATUS_WALK_TO_WAYPOINT,
-    GATOR_STATUS_WALK_TO_HORSE,
-    GATOR_STATUS_BITE
-}GATOR_STATUS;
-
-
-struct GatorStatus{
-    GATOR_STATUS status; 
-};
 
 const UINT8 a_gator_idle[] = {1, 3};
+const UINT8 a_gator_blink[] = {2, 0,1};
 const UINT8 a_gator_walk[] = {4, 1,2,3,2};
 const UINT8 a_gator_bite[] = {2, 1,4};
 
@@ -91,11 +81,36 @@ void START(void){
 void UPDATE(void){
     // CHECK PHARAO HP
         struct PharaoData* pharao_data = (struct PharaoData*) s_pharaosubiga->custom_data;
-        if(pharao_data->hp <= 2 && gator_frmskip_max != GATOR_FRMSKIP_LOW){
-            gator_frmskip_max = GATOR_FRMSKIP_LOW;
+        switch(pharao_data->hp){
+            case 5:
+            case 4:
+                if(gator_frmskip_max != GATOR_FRMSKIP_LOW){
+                    gator_frmskip_max = GATOR_FRMSKIP_LOW;
+                }
+            break;
+            case 3:
+            case 2:
+                if(gator_frmskip_max != GATOR_FRMSKIP_MID){
+                    gator_frmskip_max = GATOR_FRMSKIP_MID;
+                }
+            break;
+            case 1:
+                if(gator_frmskip_max != GATOR_FRMSKIP_LOW){
+                    gator_frmskip_max = GATOR_FRMSKIP_LOW;
+                }
+            break;
         }
-        if(pharao_data->status > 0){
-            //return;
+        if(pharao_data->status == 1){//HIT
+            return;    
+        }
+        if(pharao_data->hp == 0){
+            gator_timer_current++;
+            if(gator_timer_current > gator_timer_max){
+                gator_timer_current = 0;
+                SpriteManagerAdd(SpritePuff, THIS-> x + 4u, THIS->y - 8u);
+            }
+            SetSpriteAnim(THIS, a_gator_blink, 16u);
+            return;
         }
     //SPEED ANIMATION ACCORDING TO gator_frmskip_max
         gator_frmskip_current++;
@@ -180,6 +195,11 @@ void UPDATE(void){
             break;
             case GATOR_STATUS_WALK_TO_HORSE:
                 {
+                    gator_timer_current++;
+                    if(gator_timer_current > gator_timer_max || pharaonet_collided_flag == 0){//insegui - non per sempre!
+                        SetSpriteAnim(THIS, a_gator_walk, 16u);
+                        gator_status.status = GATOR_STATUS_WALK_TO_WAYPOINT;
+                    }
                     //if(gator_frmskip_current == 0){
                     gator_vx = 1 * delta_walking_delta_x_verse;
                     gator_vy = 1 * delta_walking_delta_y_verse;
@@ -215,15 +235,16 @@ void UPDATE(void){
                         }if(gator_horse_delta_y < 0){
                             gator_horse_delta_y = -gator_horse_delta_y;
                         }
-                        if(gator_horse_delta_x < 10 && gator_horse_delta_y <= 16){
-                                gator_timer_current = 0;
-                                SetSpriteAnim(THIS, a_gator_bite, 12u);
-                                gator_status.status = GATOR_STATUS_BITE;
+                        if(gator_horse_delta_x < 10 && gator_horse_delta_y <= 12){
+                            gator_timer_current = 0;
+                            THIS->y = s_horse->y;
+                            gator_status.status = GATOR_STATUS_BITE;
                         }
                     }
                 }
             break;
             case GATOR_STATUS_BITE:
+                SetSpriteAnim(THIS, a_gator_bite, 12u);
                 gator_timer_current++;
                 if(THIS->anim_frame == 1){
                     horse_hit(-12);
@@ -243,6 +264,8 @@ void UPDATE(void){
                 if(THIS->mirror == V_MIRROR && (s_horse->x + 16u) > THIS->x){
                     gator_turn();
                 }
+                gator_timer_max = 120;
+                gator_timer_current = 0;
                 gator_status.status = GATOR_STATUS_WALK_TO_HORSE;
             }
         }

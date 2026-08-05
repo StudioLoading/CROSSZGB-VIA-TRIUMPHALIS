@@ -62,6 +62,7 @@ void UPDATE(void){
         UINT8 pharaonet_coll_tile = TranslateSprite(THIS, pharaonet_vx << delta_time, 0);
         if(pharaonet_coll_tile){
             SpriteManagerRemoveSprite(THIS);
+            return;
         }
     }
 
@@ -73,6 +74,7 @@ void UPDATE(void){
         UINT8 pharaonet_coll_tile = TranslateSprite(THIS, 0, pharaonet_vy << delta_time);
         if(pharaonet_coll_tile){
             SpriteManagerRemoveSprite(THIS);
+            return;
         }
     }
 

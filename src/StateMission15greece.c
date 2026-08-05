@@ -69,7 +69,6 @@ void START(void){
         time_to_load = timemax_current;
     }     
     //SPRITES
-        SpriteManagerAdd(SpritePharaonet, 0,0);
         scroll_target = SpriteManagerAdd(SpriteCamera, pos_horse_x + 8, pos_horse_y - 16);
         //s_biga = SpriteManagerAdd(SpriteBiga, pos_horse_x - 14, pos_horse_y + 9);
         s_horse = SpriteManagerAdd(SpriteHorse, pos_horse_x, pos_horse_y);

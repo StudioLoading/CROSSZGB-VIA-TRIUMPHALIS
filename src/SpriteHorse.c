@@ -111,6 +111,8 @@ extern struct CONFIGURATION configuration;
 extern INT8 flag_die;
 extern INT16 pharanonet_caught_timer;
 extern INT8 pickedup_use_cooldown;
+extern UINT8 end_game;
+extern struct GatorStatus gator_status;
 
 extern void update_hp(INT8 variation) BANKED;
 extern void use_weapon(INT8 is_defence) BANKED;
@@ -166,7 +168,11 @@ void UPDATE(void){
             anim_tick = 0;
             if (++anim_frame == ANIM_HORSE_FRAMES) anim_frame = 0;
         }
-
+    //END GAME
+        if(end_game){
+            return;
+        }
+    
     //ATTACK
         if(pickedup_use_cooldown > 0){
             pickedup_use_cooldown--;
@@ -595,6 +601,8 @@ void UPDATE(void){
                             current_step = SENATOR_COLLIDED;
                         }
                     break;
+                    case SpriteGator:                    
+                        gator_status.status = GATOR_STATUS_BITE;
                     case SpriteRomansoldier:
                     case SpriteSavage:
                     case SpriteBarbarian:
@@ -677,6 +685,7 @@ void change_stamina_current(INT16 start, INT16 increase) BANKED{
 
 void horse_hit(INT8 arg_damage) BANKED{
     if(flag_hit == 0){
+        SpriteManagerAdd(SpritePuff, THIS->x + 12, THIS->y - 8);
         if(configuration.elm == GOLDEN){
             arg_damage = arg_damage >> 1;
         }

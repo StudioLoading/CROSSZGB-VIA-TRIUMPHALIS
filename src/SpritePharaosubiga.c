@@ -29,6 +29,8 @@ extern UINT8 end_game;
 void pharaosubiga_throw_net(void) BANKED;
 void pharaosubiga_change_status(INT8 arg_status, Sprite* arg_s_pharaosubiga) BANKED;
 
+extern UINT16 add_points(POINTS_TYPE arg_points_type, INT16 arg_points) BANKED;
+
 void START(void){
     SetSpriteAnim(THIS, a_pharaosubiga_down, 8u);
     THIS->lim_x = 2000;
@@ -47,6 +49,8 @@ void UPDATE(void){
         if(pharao_data->hp == 0){
             pharaosubiga_change_status(2, THIS);
         }
+        THIS->x = s_pharaobiga->x - 3u;
+        THIS->y = s_pharaobiga->y - 20u;
         switch(pharao_data->status){
             case 0: //NORMAL
                 if(s_horse->x < THIS->x){
@@ -54,8 +58,6 @@ void UPDATE(void){
                 }else{
                     THIS->mirror = NO_MIRROR;
                 }
-                THIS->x = s_pharaobiga->x - 3u;
-                THIS->y = s_pharaobiga->y - 20u;
                 //NET
                     pharaosubiga_timernet_current++;
                     if(pharaosubiga_timernet_current == pharaosubiga_timernet_max){
@@ -90,20 +92,22 @@ void pharaosubiga_change_status(INT8 arg_status, Sprite* arg_s_pharaosubiga) BAN
         break;
         case 1: // HIT
             if(pharao_data->status != 1){
-                if(pharao_data->hp > 0){
-                    pharao_data->hp--;
-                }else{
+                pharao_data->hp--;
+                if(pharao_data->hp <= 0){
                     pharao_data->hp = 0;
+                    end_game = 1;
                 }
+                SpriteManagerAdd(SpritePuff, arg_s_pharaosubiga->x + 4u, arg_s_pharaosubiga->y - 4u);
                 SetSpriteAnim(arg_s_pharaosubiga, a_pharaosubiga_down_blink, 12u);
             }
         break;
         case 2: // DEAD
             pharao_data->hp = 0;
+            end_game = 1;
             SetSpriteAnim(arg_s_pharaosubiga, a_pharaosubiga_down_blink, 64u);
         break;
         case 3: //END GAME
-            end_game = 1u;
+            add_points(ENEMY_KILLED, 9000);
         break;
     }
     pharao_data->status = arg_status;

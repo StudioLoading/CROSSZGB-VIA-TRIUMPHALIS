@@ -27,7 +27,7 @@ void START(void){
 }
 
 void UPDATE(void){
-    if(track_ended == 1){
+    if(current_state == StateCredit || track_ended == 1){
         return;
     }
     if(flag_turn_on_tremble == 0){

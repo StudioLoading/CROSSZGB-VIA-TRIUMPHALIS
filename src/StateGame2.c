@@ -222,7 +222,10 @@ void die(void) BANKED{
 		case MISSIONEGYPT21:
 			turn_to_load = 0;
 			current_step = LOOKING_FOR_SENATOR; 
-			current_mission = MISSIONEGYPT19; 
+			current_mission = MISSIONDESERT16;
+			/*turn_to_load = 0;
+			current_step = LOOKING_FOR_SENATOR; 
+			current_mission = MISSIONEGYPT19; */
 		break;
 	}
 	current_points = current_level_points[LAST_AREA].points;

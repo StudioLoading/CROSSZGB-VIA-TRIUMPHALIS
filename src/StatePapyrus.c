@@ -40,6 +40,8 @@ extern unsigned char d12[];
 
 UINT8 flag_is_demo = 0;
 extern TUTORIAL_STAGE tutorial_state;
+extern UINT8 end_game;
+extern UINT8 credit_step;
 
 INSTRUCTION instruction_given = 0;
 
@@ -72,6 +74,13 @@ void UPDATE(void){
             return;
         }
         if(scroll_step > 3){
+            if(end_game){
+                if(KEY_RELEASED(J_START) || KEY_RELEASED(J_A) || KEY_RELEASED(J_B)){
+                    credit_step = 8;
+                    SetState(StateCredit);
+                }
+                return;
+            }
             if(KEY_RELEASED(J_START) || KEY_RELEASED(J_A) || KEY_RELEASED(J_B)){
                 trigger_unscroll = 1;
             }

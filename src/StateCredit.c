@@ -21,6 +21,7 @@ IMPORT_MAP(mapcredit1);
 IMPORT_MAP(mapcredit2);
 IMPORT_MAP(titlescreen);
 IMPORT_MAP(maintitlemap);
+IMPORT_MAP(mapthankyou);
 IMPORT_TILES(font);
 IMPORT_TILES(fontp);
 
@@ -32,11 +33,15 @@ UINT8 cheat_counter = 0u;
 UINT8 cheat_activated = 0u;
 AREA cheat_area = AREA_ROME;
 AREA current_area = AREA_ROME;
+INT8 game_over = 0u;
+
+void format_score_row(const unsigned char *label, UINT16 score, unsigned char *dest) BANKED;
 
 extern AREA current_area;
 extern UINT8 stop_music_on_new_state;
 extern TUTORIAL_STAGE tutorial_state;
 extern UINT8 game_or_tutorial;
+extern UINT16 current_points;
 
 extern void manage_border(UINT8 my_next_state) BANKED;
 extern void set_bgm(void) BANKED;
@@ -66,7 +71,7 @@ void START(void){
         break;
         case 4:
             InitScroll(BANK(maintitlemap), &maintitlemap, 0, 0);
-            scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 72u);
+            scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 40u);
         break;
         case 5:
             cheat_counter = 0u;
@@ -74,6 +79,10 @@ void START(void){
             cheat_area = 0u;
             InitScroll(BANK(titlescreen), &titlescreen, 0, 0);
             scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 72u);
+        break;
+        case 8:
+            InitScroll(BANK(mapthankyou), &mapthankyou, 0, 0);
+            scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 40u);
         break;
     }
     set_bgm();
@@ -101,11 +110,14 @@ void START(void){
         case 5:
 	        INIT_FONT(font, PRINT_BKG);
         break;
+        case 8:
+            INIT_FONT(font, PRINT_BKG);
+        break;
     }
 }
 
 void UPDATE(void){
-    if(credit_step != 4){
+    if(credit_step != 4 && credit_step != 8){
         credit_wait--;
     }
     //CHEAT
@@ -178,7 +190,7 @@ void UPDATE(void){
     //ANIMATIONS & CAMERA MOVEMENTS
         switch(credit_step){
             case 4:
-                if(scroll_target->x < (UINT16) 147u << 3){
+                if(scroll_target->x < ((UINT16) 147u << 3)){
                     scroll_target->x+=2;
                 }else{
                     credit_wait = 0;
@@ -199,5 +211,100 @@ void UPDATE(void){
                     }
                 }
             break;
+            case 8:
+                UINT8 player_y = 0u;
+                if(scroll_target->x < ((UINT16) 147u << 3)){
+                    scroll_target->x++;
+                    if(KEY_PRESSED(J_A) || KEY_PRESSED(J_B)){
+                        scroll_target->x++;
+                    }
+                }else if(game_over == 0){
+                    game_over = 1u;
+                    credit_wait = 0;
+                    // Definiamo una struttura di comodo per ordinare la classifica
+                    typedef struct {
+                        const char *label; // "FIR", "SEC", "THI", "FOR", "FIF" o "YOU"
+                        UINT32 score;
+                    } ScoreEntry;
+                    // Inseriamo tutti i partecipanti (inclusi i fissi e il giocatore)
+                    ScoreEntry entries[5] = {
+                        {"FIR", 50000},
+                        {"SEC", 45000},
+                        {"THI", 23000},
+                        {"FOR", 10000},
+                        {"YOU", current_points} // Il tuo punteggio dinamico
+                    };
+                    for (UINT8 i = 0; i < 4; i++) {
+                        for (UINT8 j = 0; j < 4 - i; j++) {
+                            if (entries[j].score > entries[j + 1].score) {
+                                ScoreEntry temp = entries[j];
+                                entries[j] = entries[j + 1];
+                                entries[j + 1] = temp;
+                            }
+                        }
+                    }
+                    PRINT(130, 3, "    LEADERBOARD:    ");
+                    unsigned char line_buffer[21];
+                    UINT8 start_y = 5;
+                    for (UINT8 i = 0; i < 5; i++) {
+                        format_score_row(entries[i].label, entries[i].score, line_buffer);
+                        UINT8 current_y = 5 + (i * 2);                        
+                        PRINT(130, current_y, line_buffer);
+                        if (entries[i].label[0] == 'Y' && entries[i].label[1] == 'O' && entries[i].label[2] == 'U') {
+                            player_y = current_y;
+                        }
+                    }
+                }else if(game_over == 1){
+                    credit_wait++;
+                    if(credit_wait > 40){
+                        credit_wait = 0; // Reset del timer per la fase successiva
+                        game_over = 2;
+                    }
+                }else if(game_over == 2){
+                    PRINT(130, player_y, "                     ");
+                    game_over = 3;
+                }else if(game_over == 3){
+                    credit_wait++;
+                    if(credit_wait > 40){ // Durata dello "spento"
+                        credit_wait = 0;
+                        game_over = 4;
+                    }
+                }else if(game_over == 4){
+                    unsigned char player_line[21];
+                    format_score_row("YOU", current_points, player_line);
+                    PRINT(130, player_y, player_line);
+                    credit_wait = 0;
+                    game_over = 1; // Ricomincia il ciclo di lampeggio
+                }
+            break;
         }
+}
+
+void format_score_row(const unsigned char *label, UINT16 score, unsigned char *dest) BANKED{
+    // Copia l'etichetta di 3 caratteri (es. "YOU", "FIR", ecc.) e gli spazi di formattazione
+    dest[0] = ' ';
+    dest[1] = ' ';
+    dest[2] = label[0];
+    dest[3] = label[1];
+    dest[4] = label[2];
+    dest[5] = ' ';
+    dest[6] = ' ';
+    dest[7] = ' ';
+    dest[8] = ' ';
+
+    // Riempiamo le 8 posizioni dello score con gli zeri ('0')
+    for (UINT8 i = 0; i < 8; i++) {
+        dest[9 + i] = '0';
+    }
+    dest[20] = '\0'; // Terminatore di sicurezza
+
+    // Inseriamo le cifre partendo dall'ultima posizione utile verso sinistra
+    INT8 pos = 16; 
+    if (score > 0) {
+        while (score > 0 && pos >= 9) {
+            dest[pos] = '0' + (score % 10);
+            score /= 10;
+            pos--;
+        }
+    }
 }

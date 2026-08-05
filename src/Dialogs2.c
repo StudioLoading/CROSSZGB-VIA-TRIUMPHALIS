@@ -4,6 +4,7 @@
 #include "Scroll.h"
 #include "SpriteManager.h"
 #include "string.h"
+#include <stdio.h>
 
 #include "Dialogs.h"
 
@@ -21,6 +22,7 @@ extern unsigned char d10[15];
 extern unsigned char d11[15];
 extern unsigned char d12[15];
 
+extern UINT16 current_points;
 
 void GetLocalizedDialog2_EN(INSTRUCTION arg_instruction) BANKED{
     switch(arg_instruction){
@@ -429,13 +431,60 @@ void GetLocalizedDialog2_EN(INSTRUCTION arg_instruction) BANKED{
             memcpy(d7, "HIM WITH EVERY", 15);
             memcpy(d8, "WEAPON YOU GET", 15);
             memcpy(d9, "              ", 15);
-            memcpy(d10, "LET'S GET SOME", 15);
-            memcpy(d11, "RETRIBUTION!  ", 15);
-            memcpy(d12, "              " , 15);
+            memcpy(d10, "IT'S TIME FOR", 15);
+            memcpy(d11, "RETRIBUTION! ", 15);
+            memcpy(d12, "             " , 15);
         break;
-        case MISSION21_COMPLETED:
-            //TODO END GAME FINAL PAPER
-            //MAYBE THE HIGHSCORE 
-        break;
+        case MISSION21_COMPLETED:{
+            memcpy(d0, "AVE CONQUEROR", 15);
+            memcpy(d1, "             ", 15);
+            memcpy(d2, "     VIA     ", 15);
+            memcpy(d3, " TRIUMPHALIS ", 15);
+            memcpy(d4, "             ", 15);
+            memcpy(d5, "IS SECURED BY", 15);
+            memcpy(d6, "YOUR GLADIO! ", 15);
+            memcpy(d7, "             ", 15);
+            memcpy(d8, "             ", 15);
+            memcpy(d9, "FINAL        ", 15);            
+            unsigned char d10_loc[15];
+            d10_loc[0] = 'S';
+            d10_loc[1] = 'C';
+            d10_loc[2] = 'O';
+            d10_loc[3] = 'R';
+            d10_loc[4] = 'E';
+            d10_loc[5] = ':';
+            d10_loc[6] = ' ';
+            // 2. Convertiamo il numero in cifre (gestione padding a sinistra/spazi vuoti o conversione standard)
+            // Qui estraiamo le cifre da sinistra a destra o riempiamo con gli spazi per il formato %-8u
+            unsigned char num_buf[8];
+            INT8 idx = 7;
+            INT8 len = 0;
+            UINT16 temp_score = current_points;
+            UINT8 i;
+            // Gestione dello 0 esplicito
+            if (temp_score == 0) {
+                num_buf[0] = '0';
+                len = 1;
+            } else {
+                while (temp_score > 0 && len < 8) {
+                    num_buf[7 - len] = '0' + (temp_score % 10);
+                    temp_score /= 10;
+                    len++;
+                }
+            }
+            // 3. Copiamo le cifre e riempiamo con gli spazi a destra (per simulare il flag '-' di formattazione)
+            for (i = 0; i < 8; i++) {
+                if (i < len) {
+                    d10_loc[7 + i] = num_buf[8 - len + i];
+                } else {
+                    d10_loc[7 + i] = ' '; // Spazi di riempimento a destra
+                }
+            }
+            d10_loc[14] = '\0'; // Terminatore di stringa
+            // 4. Copia finale con memcpy sul tuo buffer di destinazione
+            memcpy(d10, d10_loc, 15);
+            memcpy(d11, "             ", 15);
+            memcpy(d12, "  !VICTORY!  ", 15);
+        }break;
     }
 }

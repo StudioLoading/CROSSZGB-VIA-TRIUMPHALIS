@@ -261,5 +261,16 @@ struct SpawningMapRect{
     SPRITE_TYPE type;
 };
 
+typedef enum{
+    GATOR_STATUS_NONE,
+    GATOR_STATUS_WAIT,
+    GATOR_STATUS_WALK_TO_WAYPOINT,
+    GATOR_STATUS_WALK_TO_HORSE,
+    GATOR_STATUS_BITE
+}GATOR_STATUS;
+
+struct GatorStatus{
+    GATOR_STATUS status; 
+};
 
 #endif

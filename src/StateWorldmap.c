@@ -47,7 +47,7 @@ void start_game_cheat(AREA arg_cheat_area) BANKED{ //TODO fixme per versione fin
         case AREA_SEA: current_mission = MISSIONSEA08; break;
         case AREA_GREECE: current_mission = MISSIONGREECE15; break;
         case AREA_DESERT: current_mission = MISSIONDESERT16; break;
-        case AREA_EGYPT: current_mission = MISSIONEGYPT19; break;
+        case AREA_EGYPT: current_mission = MISSIONEGYPT21; break;
     }
     SetState(StateWorldmap);
 }
