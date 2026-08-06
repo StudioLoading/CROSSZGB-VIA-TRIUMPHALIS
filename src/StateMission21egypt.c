@@ -79,6 +79,7 @@ void START(void){
 		SetWindowY(104);
         spawn_items();
         start_common();
+	    track_ended_cooldown = 200;
         s_gator = SpriteManagerAdd(SpriteGator, ((UINT16) 20u << 3), ((UINT16) 10u << 3));
         s_pharaobiga = SpriteManagerAdd(SpritePharaobiga, s_gator->x + 18u, s_gator->y);
         s_pharaosubiga = SpriteManagerAdd(SpritePharaosubiga, s_pharaobiga->x, s_pharaobiga->y - 15u);
@@ -106,9 +107,12 @@ void UPDATE(void){
         }*/
     //IS MISSION COMPLETED?
         if(end_game){
-            track_ended_cooldown--;
-            if(track_ended_cooldown <= 0){//cambia stato
-                map_ended();
+            struct PharaoData* pharao_data = (struct PharaoData*) s_pharaosubiga->custom_data;
+            if(pharao_data->status == 3){
+                track_ended_cooldown--;
+                if(track_ended_cooldown <= 0){//cambia stato
+                    map_ended();
+                }
             }
         }
 }

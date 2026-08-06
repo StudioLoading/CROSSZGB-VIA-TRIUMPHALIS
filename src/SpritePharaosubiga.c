@@ -46,7 +46,7 @@ void START(void){
 void UPDATE(void){
     //STATUS
         struct PharaoData* pharao_data = (struct PharaoData*) THIS->custom_data;
-        if(pharao_data->hp == 0){
+        if(pharao_data->hp == 0 && pharao_data->status < 2){
             pharaosubiga_change_status(2, THIS);
         }
         THIS->x = s_pharaobiga->x - 3u;
@@ -95,7 +95,6 @@ void pharaosubiga_change_status(INT8 arg_status, Sprite* arg_s_pharaosubiga) BAN
                 pharao_data->hp--;
                 if(pharao_data->hp <= 0){
                     pharao_data->hp = 0;
-                    end_game = 1;
                 }
                 SpriteManagerAdd(SpritePuff, arg_s_pharaosubiga->x + 4u, arg_s_pharaosubiga->y - 4u);
                 SetSpriteAnim(arg_s_pharaosubiga, a_pharaosubiga_down_blink, 12u);

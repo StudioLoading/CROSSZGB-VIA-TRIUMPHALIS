@@ -246,7 +246,7 @@ void UPDATE(void){
             case GATOR_STATUS_BITE:
                 SetSpriteAnim(THIS, a_gator_bite, 12u);
                 gator_timer_current++;
-                if(THIS->anim_frame == 1){
+                if(THIS->anim_frame == 1 && CheckCollision(THIS, s_horse)){
                     horse_hit(-12);
                 }
                 if(gator_timer_current >= gator_timer_max){

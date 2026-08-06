@@ -236,7 +236,7 @@ void UPDATE(void){
                     };
                     for (UINT8 i = 0; i < 4; i++) {
                         for (UINT8 j = 0; j < 4 - i; j++) {
-                            if (entries[j].score > entries[j + 1].score) {
+                            if (entries[j].score < entries[j + 1].score) {
                                 ScoreEntry temp = entries[j];
                                 entries[j] = entries[j + 1];
                                 entries[j + 1] = temp;
@@ -296,7 +296,7 @@ void format_score_row(const unsigned char *label, UINT16 score, unsigned char *d
     for (UINT8 i = 0; i < 8; i++) {
         dest[9 + i] = '0';
     }
-    dest[20] = '\0'; // Terminatore di sicurezza
+    dest[17] = '\0'; // Terminatore di sicurezza
 
     // Inseriamo le cifre partendo dall'ultima posizione utile verso sinistra
     INT8 pos = 16; 
