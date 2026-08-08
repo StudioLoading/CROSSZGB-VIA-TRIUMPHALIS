@@ -91,7 +91,7 @@ void START(void){
 		SetWindowY(104);
         spawn_items();
         start_common();
-        spawn_m11_killers();
+        //spawn_m11_killers();
 }
 
 void spawn_m11_killers(void) BANKED{

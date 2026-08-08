@@ -85,7 +85,7 @@ void START(void){
         s_pharaosubiga = SpriteManagerAdd(SpritePharaosubiga, s_pharaobiga->x, s_pharaobiga->y - 15u);
         struct PharaoData* pharao_data = (struct PharaoData*) s_pharaosubiga->custom_data;
         pharao_data->status = 0;
-        pharao_data->hp = 1;
+        pharao_data->hp = 5;
         pharao_data->counter = 127;
 }
 

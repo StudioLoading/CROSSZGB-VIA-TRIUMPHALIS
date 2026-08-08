@@ -106,7 +106,7 @@ void pharaosubiga_change_status(INT8 arg_status, Sprite* arg_s_pharaosubiga) BAN
             SetSpriteAnim(arg_s_pharaosubiga, a_pharaosubiga_down_blink, 64u);
         break;
         case 3: //END GAME
-            add_points(ENEMY_KILLED, 9000);
+            add_points(ENEMY_KILLED, 3000);
         break;
     }
     pharao_data->status = arg_status;

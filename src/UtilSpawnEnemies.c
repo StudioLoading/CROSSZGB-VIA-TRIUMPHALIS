@@ -466,7 +466,7 @@ const struct SpawningMapRect spawning_map_mission11[4] = {
         .box_height =  ((UINT16) 10u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 12, 
-            .configured = 1, .reward = HP, .points = 20
+            .configured = 1, .reward = FLAME, .points = 20
         },
         .type = SpriteSavage
     },{
@@ -479,7 +479,7 @@ const struct SpawningMapRect spawning_map_mission11[4] = {
         .box_height =  ((UINT16) 14u << 3),
         .box_data.soldier = {
             .vx = 0, .vy = 0, .frmskip = 0, .frmskip_max = 14, 
-            .configured = 1, .reward = FLAME, .points = 20
+            .configured = 1, .reward = HP, .points = 20
         },
         .type = SpriteSavage
     }

@@ -1,18 +1,5 @@
 BUG:
 
-- boss finale del faraone
-    alla cattura il morso fa danno anche se non siamo in collisione
-- "Lettera finale con punteggio" ne farei in 3 versioni, troppo sotto un certo punteggio, medio, eccellente 
-
-- Normal Mode vs Hard Mode (Hard Mode attivato in automatico dopo la prima RUN del gioco per visionare la true-ending?)
-    normal mode
-        rendere il tutorial opzionale Yes/No
-    hard mode 
-        non avrà il tutorial iniziale;
-        non avrà il compass; (?)
-        avrà il faraone finale a 7 di hp;
-- il priest forse dovrebbe avere HP=2 per propedeuticità al Faraone successivo
-    è un po' statichello - penso che dovrebbe fare qualcosa tipo lanciare fiammelle alzando le mani
 - animazione cavallo a Stamina==0 che scodinzola e ogni anto abbassa la testa
 - animazione del trotto da sistemare per renderla perfetta
 - test longplay DMG

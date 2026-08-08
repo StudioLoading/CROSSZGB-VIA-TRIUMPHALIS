@@ -40,6 +40,10 @@ typedef enum {
 	ANIM_RIGHT_RUN,
     ANIM_LEFT_IDLE,
     ANIM_LEFT_HIT_IDLE,
+    ANIM_IDLE_1_RIGHT,
+    ANIM_IDLE_2_RIGHT,
+    ANIM_IDLE_1_LEFT,
+    ANIM_IDLE_2_LEFT,
 	N_ANIMS
 } anim_horse_e;
 // define the animation speed conatsnt
@@ -95,6 +99,7 @@ UINT8 horse_netcatching = 0u;
 UINT8 force_updown_counter = 0u;
 INT8 whip_dust_countdown = 0;
 INT8 whip_dust_count = 0;
+INT8 activate_idle_anim = 120;
 
 void horse_hit(INT8 arg_damage) BANKED;
 void change_stamina_current(INT16 start, INT16 increase) BANKED;
@@ -154,10 +159,12 @@ void START(void){
     whip_power_over_stamina = current_whip_power;
     whip_dust_countdown = 0;
     whip_dust_count = 0;
+    activate_idle_anim = 120;
 }
 
 void UPDATE(void){
     //CROSSZGB
+        UINT8 flag_animation_ended = 0u;
         // save old animation state, animation state to idle (will be overwritten, if keys are pressed)
         old_horse_anim = anim;
         // if animation state variable changed, then set the new animation for the horse sprite
@@ -166,7 +173,10 @@ void UPDATE(void){
         if (++anim_tick >= anim_horse_speed) {
             set_sprite_native_banked_data(BANK(horse_anim), spriteIdxs[SpriteHorse], 8, get_banked_pointer(BANK(horse_anim), horse_anim + (anim << 3) + anim_frame));
             anim_tick = 0;
-            if (++anim_frame == ANIM_HORSE_FRAMES) anim_frame = 0;
+            if (++anim_frame == ANIM_HORSE_FRAMES){
+                flag_animation_ended = 1u;
+                anim_frame = 0;
+            }
         }
     //END GAME
         if(end_game){
@@ -236,7 +246,8 @@ void UPDATE(void){
             if(no_whip_counter > 0){
                 no_whip_counter--;
                 if(no_whip_counter == 0){
-                    change_stamina_current(stamina_current, no_whip_over_stamina);no_whip_counter = no_whip_counter_max;
+                    change_stamina_current(stamina_current, no_whip_over_stamina);
+                    no_whip_counter = no_whip_counter_max;
                 }
             }
         }    
@@ -364,17 +375,39 @@ void UPDATE(void){
         UINT8 cos_idx = horse_turn+64;
         cos = sine_wave[cos_idx];
     //SPRITE ANIMATION SPEED animation speed
-        if(stamina_current < 100){
-            anim = ANIM_RIGHT_TROT;
-            anim_horse_speed = 24u;
-        }else if(stamina_current < 240){
-            anim = ANIM_RIGHT_TROT;
-            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
-        }else{
-            anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
-            anim = ANIM_RIGHT_RUN;  
-            if(stamina_current >= (euphoria_min - 100)){
-                anim = ANIM_RIGHT_WALK;
+        if(stamina_current == 0){
+            if(activate_idle_anim > 0){
+                activate_idle_anim--;
+                if(activate_idle_anim <= 0 && anim != ANIM_IDLE_1_RIGHT && anim != ANIM_IDLE_2_RIGHT){
+                    anim = ANIM_IDLE_1_RIGHT;
+                    anim_frame = 0;
+                    anim_horse_speed = 16u;
+                    activate_idle_anim = 0;
+                }
+            }
+            if(activate_idle_anim == 0){
+                if(anim == ANIM_IDLE_1_RIGHT && flag_animation_ended){
+                    anim = ANIM_IDLE_2_RIGHT;
+                    anim_horse_speed = 16u;
+                }
+            }
+        }
+        if(stamina_current > 0 && activate_idle_anim != 120){
+            activate_idle_anim = 120;
+        }
+        if(stamina_current > 0){
+            if(stamina_current < 100){
+                anim = ANIM_RIGHT_TROT;
+                anim_horse_speed = 24u;
+            }else if(stamina_current < 240){
+                anim = ANIM_RIGHT_TROT;
+                anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
+            }else{
+                anim_horse_speed = (STAMINA_MAX - stamina_current) >> 6;
+                anim = ANIM_RIGHT_RUN;  
+                if(stamina_current >= (euphoria_min - 100)){
+                    anim = ANIM_RIGHT_WALK;
+                }
             }
         }
     
@@ -546,12 +579,6 @@ void UPDATE(void){
             THIS->mirror = NO_MIRROR;
         }else if (vx < 0){
             THIS->mirror = V_MIRROR;
-            /*switch(anim){
-                case ANIM_RIGHT_HIT: anim = ANIM_LEFT_HIT; break;
-                case ANIM_RIGHT_HIT_IDLE: anim = ANIM_LEFT_HIT_IDLE; break;
-                case ANIM_RIGHT_IDLE: anim = ANIM_LEFT_IDLE; break;
-                case ANIM_RIGHT_WALK: anim = ANIM_LEFT_WALK; break;
-            }*/
         }
     
     //SPRITE COLLISION
