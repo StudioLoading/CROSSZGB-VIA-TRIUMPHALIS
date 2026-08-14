@@ -650,7 +650,7 @@ void UPDATE(void){
                             struct SoldierData* soldier_data = (struct SoldierData*)iospr->custom_data;
                             if(soldier_data->configured != 4 && soldier_data->configured != 5 && flag_hit == 0 && counter_hit == COUNTER_HIT_MAX){
                                 add_points(BY_ENEMY_HIT, -100);
-                                horse_hit(-50);
+                                horse_hit(-40);
                                 SpriteManagerAdd(SpriteExclamation, iospr->x + 4, iospr->y - 16u);
                                 soldier_data->vx = 0;
                                 soldier_data->vy = 0;

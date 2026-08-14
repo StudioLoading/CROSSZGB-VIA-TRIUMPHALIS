@@ -81,6 +81,7 @@ extern UINT8 flag_using_atk;
 extern INT8 flag_hit;
 extern UINT16 current_points;
 extern struct LEVEL_POINTS current_level_points[];
+extern UINT8 end_game;
 
 extern void update_hp(INT8 variation) BANKED;
 extern void item_spawn(ITEM_TYPE arg_itemtype, UINT16 arg_posx, UINT16 arg_posy) BANKED;
@@ -465,6 +466,8 @@ void manage_border(UINT8 my_next_state) BANKED{
 				case AREA_EGYPT: 
 					if(current_mission == MISSIONEGYPT20){
 						LOAD_SGB_BORDER(borderegypt2night);
+					}else if(end_game){
+						LOAD_SGB_BORDER(borderrome2);
 					}else{
 						LOAD_SGB_BORDER(borderegypt2);
 					}

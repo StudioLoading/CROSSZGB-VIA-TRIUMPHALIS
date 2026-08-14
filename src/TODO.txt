@@ -1,14 +1,10 @@
 BUG:
 
-- animazione cavallo a Stamina==0 che scodinzola e ogni anto abbassa la testa
-- animazione del trotto da sistemare per renderla perfetta
 - test longplay DMG
 - test longplay SGB
 - test longplay CGB
 - check mappe del fisico per la posizione golden (file svg) e quindi il carta-cotone corretto
-- controlla le missioni di atterraggio col cheat alla start_game_cheat()
-    oppure elimina il cheat
-    oppure fallo che dia solo i gold con una combo differente
+- audio
 
 ----------------------------------------------------------------------------
 
@@ -100,10 +96,7 @@ ffmpeg -i C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\input.gif C:\ZGB-2023.0\ZGB-VIA
 ffmpeg -framerate 10 -i C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_%01d.png -vf format=gray C:\ZGB-2023.0\ZGB-VIATRIUMPHALIS\other\output_grayscale.gif
 
 GENERAZIONE QR CODE DA POWERSHELL
-New-QRCodeURI -URI 'https://www.kickstarter.com/projects/studioloading/flying-arrows-2-gameboy-game-save-bolognanerd' -Width 16 -OutPath 'C:\Users\checc\GB\ARROWS1\QR-kickstarter.png'
-New-QRCodeURI -URI 'https://www.notion.so/leandromacrini/28-06-2025-209ac641edda807c83eefd7ca5caecb2' -Width 15 -OutPath 'C:\Users\checc\BN\QR-riunione.png'
-New-QRCodeURI -URI 'https://www.eventbrite.it/e/biglietti-global-game-jam-2026-bologna-nerd-jam-site-1976138239671' -Width 15 -OutPath 'C:\Users\checc\BN\GGJ\QR-eventbrite.png'
-New-QRCodeURI -URI 'https://www.kickstarter.com/profile/studioloading/created' -Width 15 -OutPath 'C:\Users\checc\GB\FIERE\QR-SL-kickstarter.png'
+New-QRCodeURI -URI 'https://www.kickstarter.com/projects/studioloading/via-triumphalis-retro-game-boy-cartridge-adventure-make100/' -Width 16 -OutPath 'C:\CrossZGB\ZGB\CROSSZGB-VIA-TRIUMPHALIS\other\QR-kickstarter.png'
 
 PDF TO PNG
 magick -density 300 input.pdf -resize 50% output.png

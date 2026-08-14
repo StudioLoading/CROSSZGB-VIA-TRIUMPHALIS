@@ -14,6 +14,7 @@
 
 #define PIXEL_STAMINA 96
 #define ENDED_TRACK_COOLDOWN 80
+#define HP_MAX 16
 
 IMPORT_MAP(hudm);
 IMPORT_MAP(map);
@@ -31,7 +32,7 @@ UINT16 euphoria_min_current = 0u;
 UINT16 euphoria_max_current = 0u;
 HORSE_DIRECTION horse_direction = EEE;
 HORSE_DIRECTION horse_direction_old = EEE;
-INT8 hp_current = 16;
+INT8 hp_current = HP_MAX;
 INT8 hud_turn_cooldown = 0;
 INT16 timemax_current = 0;
 INT16 time_current = 0;
@@ -285,8 +286,8 @@ void update_turning(void) BANKED{
 }
 
 void update_hp_max(void) BANKED{
-	hp_current = 16;
-	update_hp(16);
+	hp_current = HP_MAX;
+	update_hp(HP_MAX);
 }
 
 void update_hp(INT8 variation) BANKED{
@@ -294,9 +295,10 @@ void update_hp(INT8 variation) BANKED{
 	if(hp_current <= 0){
 		flag_die = 1;
 		die_counter = DIE_COUNTER_MAX;
+		hp_current = 0;
 		//return;
-	}else if(hp_current > 16){
-		hp_current = 16;
+	}else if(hp_current > HP_MAX){
+		hp_current = HP_MAX;
 	}
 	INT8 hp_intero = hp_current / 8;
 	INT8 hp_resto = hp_current % 8;
