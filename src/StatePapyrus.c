@@ -59,9 +59,7 @@ void START(void){
     scroll_counter = 0;
     trigger_unscroll = 0;
     PauseMusic;
-    if(instruction_given == DEMO_COMPLETED){//tutorial_state != TUTORIAL_PASSED
-        set_bgm();
-    }
+    set_bgm();
 }
 
 void UPDATE(void){

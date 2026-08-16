@@ -223,7 +223,7 @@ void UPDATE(void){
             }
         }
     }
-    if(KEY_TICKED(J_START)){
+    if(KEY_TICKED(J_START) || KEY_TICKED(J_A) || KEY_TICKED(J_B)){
         world_area_map++;
         if(world_area_map > 1){
             world_area_map = 1;

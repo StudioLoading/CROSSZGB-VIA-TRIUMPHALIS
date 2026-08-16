@@ -134,7 +134,7 @@ extern Sprite* spawn_points(POINTS_TYPE arg_points_type, INT16 arg_points, UINT1
 
 void START(void){
 	// initialize the animation state
-	old_horse_anim = anim = ANIM_RIGHT_WALK;
+	old_horse_anim = anim = ANIM_IDLE_1_RIGHT;
 	anim_horse_speed = ANIM_HORSE_SPEED;
 	// animation frame and animation tick is zero
 	anim_frame = anim_tick = 0;
