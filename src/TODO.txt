@@ -1,10 +1,10 @@
 BUG:
-
+- credit di sloopygoop
+- check mappe del fisico per la posizione golden (file svg) e quindi il carta-cotone corretto
 - test longplay DMG
 - test longplay SGB
 - test longplay CGB
-- check mappe del fisico per la posizione golden (file svg) e quindi il carta-cotone corretto
-- audio
+
 
 ----------------------------------------------------------------------------
 

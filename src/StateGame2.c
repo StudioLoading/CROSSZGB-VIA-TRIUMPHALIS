@@ -360,6 +360,8 @@ void check_sgb_palette(UINT8 arg_new_state) BANKED{
 				case 1: set_sgb_palette_credit_studioloading();break;
 				case 2: set_sgb_palette_credit_viatriumphalis();break;
 				case 3: set_sgb_palette_credit_titlescreen();break;		
+				case 4: set_sgb_palette_credit_sloopygoop();break;		
+				case 5: set_sgb_palette_credit_titlescreen();break;		
 			}
 		}
 		break;
@@ -372,8 +374,8 @@ void check_sgb_palette(UINT8 arg_new_state) BANKED{
 				case AREA_ALPS: set_sgb_palette_areaalps(); break;
 				case AREA_SEA:  set_sgb_palette_areasea(); break;
 				case AREA_GREECE: set_sgb_palette_areagreece(); break;
-				case AREA_DESERT: set_sgb_palette_areadesert(); break;
-				case AREA_EGYPT:  break;
+				case AREA_DESERT:
+				case AREA_EGYPT: set_sgb_palette_areadesert(); break;
 			}
 		}
 		break;

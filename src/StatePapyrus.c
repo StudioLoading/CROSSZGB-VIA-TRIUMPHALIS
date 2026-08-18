@@ -74,7 +74,7 @@ void UPDATE(void){
         if(scroll_step > 3){
             if(end_game){
                 if(KEY_RELEASED(J_START) || KEY_RELEASED(J_A) || KEY_RELEASED(J_B)){
-                    credit_step = 8;
+                    credit_step = 9;
                     SetState(StateCredit);
                 }
                 return;

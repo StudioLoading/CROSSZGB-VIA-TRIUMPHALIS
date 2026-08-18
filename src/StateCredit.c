@@ -19,6 +19,7 @@
 IMPORT_MAP(mapcredit0);
 IMPORT_MAP(mapcredit1);
 IMPORT_MAP(mapcredit2);
+IMPORT_MAP(mapcredit3);
 IMPORT_MAP(titlescreen);
 IMPORT_MAP(maintitlemap);
 IMPORT_MAP(mapthankyou);
@@ -70,17 +71,20 @@ void START(void){
             InitScroll(BANK(mapcredit2), &mapcredit2, 0, 0);
         break;
         case 4:
+            InitScroll(BANK(mapcredit3), &mapcredit3, 0, 0);
+        break;
+        case 5:
             InitScroll(BANK(maintitlemap), &maintitlemap, 0, 0);
             scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 40u);
         break;
-        case 5:
+        case 6:
             cheat_counter = 0u;
             cheat_activated = 0u;
             cheat_area = 0u;
             InitScroll(BANK(titlescreen), &titlescreen, 0, 0);
             scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 72u);
         break;
-        case 8:
+        case 9:
             InitScroll(BANK(mapthankyou), &mapthankyou, 0, 0);
             scroll_target = SpriteManagerAdd(SpriteCamera, 80u, 40u);
         break;
@@ -107,21 +111,21 @@ void START(void){
 	        INIT_FONT(fontp, PRINT_BKG);
             PRINT(7, 0, "ART BY");
         break;
-        case 5:
+        case 6:
 	        INIT_FONT(font, PRINT_BKG);
         break;
-        case 8:
+        case 9:
             INIT_FONT(font, PRINT_BKG);
         break;
     }
 }
 
 void UPDATE(void){
-    if(credit_step != 4 && credit_step != 8){
+    if(credit_step != 5 && credit_step != 9){
         credit_wait--;
     }
     //CHEAT
-        if(credit_step == 5){
+        if(credit_step == 6){
             if(KEY_RELEASED(J_SELECT)){
                 if(cheat_activated == 0){
                     cheat_counter++;
@@ -153,18 +157,18 @@ void UPDATE(void){
                 }
             }
         }
-        if(credit_step < 5 && (credit_wait <= 0 || KEY_TICKED(J_START))){
+        if(credit_step < 6 && (credit_wait <= 0 || KEY_TICKED(J_START))){
             credit_step++;
             SetState(StateCredit);
-        }else if(credit_step == 5 && KEY_TICKED(J_START)){
+        }else if(credit_step == 6 && KEY_TICKED(J_START)){
             if(cheat_activated){
                 current_area = cheat_area;
                 start_game_cheat(cheat_area);
                 return;
             }else{
-                credit_step = 6;
+                credit_step = 7;
             }
-        }else if(credit_step == 6){
+        }else if(credit_step == 7){
             if(scroll_target->x < 240u){
                 scroll_target->x += 4;
             }else{
@@ -176,9 +180,9 @@ void UPDATE(void){
                 PRINT(shift_x+1, 10, "PRESS   LEARN");
                 PRINT(shift_x+1, 11, "SELECT  HOW TO");
                 PRINT(shift_x+1, 12, "        DRIVE");
-                credit_step = 7;
+                credit_step = 8;
             }
-        }else if(credit_step == 7){
+        }else if(credit_step == 8){
             if(KEY_TICKED(J_START)){
                 game_or_tutorial = 0;
                 SetState(StateButtons);
@@ -189,14 +193,14 @@ void UPDATE(void){
         }
     //ANIMATIONS & CAMERA MOVEMENTS
         switch(credit_step){
-            case 4:
+            case 5:
                 if(scroll_target->x < ((UINT16) 147u << 3)){
                     scroll_target->x+=2;
                 }else{
                     credit_wait = 0;
                 }
             break;
-            case 5:
+            case 6:
                 pressstart_counter++;
                 if(pressstart_counter >= PRESSSTART_COUNTER_MAX){
                     pressstart_counter = 0;
@@ -211,7 +215,7 @@ void UPDATE(void){
                     }
                 }
             break;
-            case 8:
+            case 9:
                 UINT8 player_y = 0u;
                 if(scroll_target->x < ((UINT16) 147u << 3)){
                     scroll_target->x++;

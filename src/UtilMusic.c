@@ -37,11 +37,13 @@ void set_bgm(void) BANKED{
                     PlayMusic(J1, 1);
                 break;
                 case 5:
+                case 8:
                     PlayMusic(J3, 1);
                 break;
             }
         break;
         case StateTutorialList:
+        case StateWorldmap:
             PlayMusic(J3, 0);
         break;
         case StateTutorialGame:

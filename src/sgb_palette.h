@@ -17,6 +17,9 @@
 #define SGB_CREDIT_TITLESCREEN_DARK 	      myRGB(168, 0, 16)
 #define SGB_CREDIT_TITLESCREEN_DARKER 	      myRGB(0, 0, 0)
 
+#define SGB_CREDIT_SLOOPYGOOP_LIGHT           myRGB(48, 248, 160)
+#define SGB_CREDIT_SLOOPYGOOP_DARK 	          myRGB(240, 280, 128)
+
 #define SGB_TUTORIAL_LIGHTER                    myRGB(250, 250, 250)
 #define SGB_TUTORIAL_LIGHT                    myRGB(255, 255, 168)
 #define SGB_TUTORIAL_DARK                    myRGB(255, 168, 0)
@@ -50,6 +53,7 @@
 void set_sgb_palette_credit_studioloading(void) BANKED;
 void set_sgb_palette_credit_viatriumphalis(void) BANKED;
 void set_sgb_palette_credit_titlescreen(void) BANKED;
+void set_sgb_palette_credit_sloopygoop(void) BANKED;
 void set_sgb_palette_arearome(void) BANKED;
 void set_sgb_palette_areaalps(void) BANKED;
 void set_sgb_palette_areasea(void) BANKED;
