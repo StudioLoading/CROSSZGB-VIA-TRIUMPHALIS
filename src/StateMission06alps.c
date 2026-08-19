@@ -149,7 +149,7 @@ void UPDATE(void){
             if(timer_rollingstone < 10u){//rolling stone
                 if(s_horse->x < ((UINT16) 70u << 3)){
                     roll_stone(-1, 10);
-                    roll_stone(1, 6);
+                    //roll_stone(1, 6);
                     flag_turn_on_tremble = 0u;
                     delay_tremble = 0;
                     timer_rollingstone = TIME_ROLLINGSTONE_MAX;
@@ -165,6 +165,8 @@ void UPDATE(void){
                     flag_turn_on_tremble = 0u;
                     delay_tremble = 0;
                     timer_rollingstone = TIME_ROLLINGSTONE_MIN;
+                }else{
+                    flag_turn_on_tremble = 0u;
                 }
             }
         }

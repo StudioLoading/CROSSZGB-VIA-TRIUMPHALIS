@@ -12,7 +12,7 @@
 #include "custom_datas.h"
 
 
-const UINT8 a_rollingstone_idle[] = {8, 0,1,0,2,0,3,0,4};
+const UINT8 a_rollingstone_idle[] = {6, 1,2,0,3,4,0};
 
 
 void START(void){

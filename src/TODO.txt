@@ -1,9 +1,9 @@
 BUG:
-- credit di sloopygoop
 - check mappe del fisico per la posizione golden (file svg) e quindi il carta-cotone corretto
 - test longplay DMG
 - test longplay SGB
 - test longplay CGB
+- gli score dei due tipi a cui l'ho mandata in anteprima da mettere nella leaderboard
 
 
 ----------------------------------------------------------------------------
